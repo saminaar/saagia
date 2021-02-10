@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images"/>
+    <qresource prefix="/">
+        <file>images/chart_example.gif</file>
+        <file>images/single-line-chart.png</file>
+    </qresource>
+</RCC>
