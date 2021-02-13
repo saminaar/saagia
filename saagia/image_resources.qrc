@@ -3,5 +3,6 @@
     <qresource prefix="/">
         <file>images/chart_example.gif</file>
         <file>images/single-line-chart.png</file>
+        <file>images/lighting.png</file>
     </qresource>
 </RCC>

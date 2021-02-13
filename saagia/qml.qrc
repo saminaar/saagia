@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Energy_type_button.qml</file>
+        <file>Text_input_bar.qml</file>
     </qresource>
 </RCC>
