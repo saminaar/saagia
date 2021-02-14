@@ -1,5 +1,6 @@
 import QtQuick 2.1
 import QtQuick.Window 2.1
+import QtGraphicalEffects 1.0
 
 Window {
     width: 1000
@@ -28,16 +29,16 @@ Window {
 
             Column {
                 id: right_column
-                x: 474
-                y: 16
+                x: 432
+                y: 15
                 spacing: 20
-                width: 456
+                width: 503
                 height: 624
 
                 AnimatedImage {
                     id: animatedImage
-                    width: 450
-                    height: 300
+                    width: 500
+                    height: 350
                     source:"qrc:/images/chart_example.gif"
                 }
 
@@ -48,50 +49,13 @@ Window {
                     height: 60
                     spacing: 20
 
-                    Rectangle {
+                    Energy_type_button {
                         id: button_1
                         x: 0
                         y: 0
-                        width: 60
-                        height: 60
-                        color: "#f2f2f2"
+
                     }
 
-                    Rectangle {
-                        id: button_2
-                        x: 0
-                        y: 0
-                        width: 60
-                        height: 60
-                        color: "#f2f2f2"
-                    }
-
-                    Rectangle {
-                        id: button_3
-                        x: 0
-                        y: 0
-                        width: 60
-                        height: 60
-                        color: "#f2f2f2"
-                    }
-
-                    Rectangle {
-                        id: button_4
-                        x: 0
-                        y: 0
-                        width: 60
-                        height: 60
-                        color: "#f2f2f2"
-                    }
-
-                    Rectangle {
-                        id: button_5
-                        x: 0
-                        y: 0
-                        width: 60
-                        height: 60
-                        color: "#f2f2f2"
-                    }
                 }
             }
 
@@ -99,16 +63,35 @@ Window {
                 id: left_column_background
                 x: 17
                 y: 16
-                width: 429
-                height: 612
+                width: 384
+                height: 599
                 color: "#2e2c3a"
 
                 Column {
                     id: left_column
                     x: 8
                     y: 8
-                    width: 413
+                    width: 368
                     height: 587
+                }
+
+                Text_input_bar {
+                    id: text_input_bar
+                    x: 684
+                    y: -88
+                    width: 247
+                    height: 52
+                }
+
+                Text {
+                    id: sub_title
+                    x: 16
+                    y: 22
+                    width: 291
+                    height: 54
+                    color: "#ffffff"
+                    text: qsTr("TO DO")
+                    font.pixelSize: 40
                 }
             }
         }
@@ -121,7 +104,7 @@ Window {
             height: 92
 
             Text {
-                x: 841
+                x: 569
                 y: 35
                 id: load_button_text
                 color: "#ffffff"
@@ -130,7 +113,7 @@ Window {
             }
 
             Text {
-                x: 633
+                x: 416
                 y: 35
                 id: save_button_text
                 color: "#ffffff"
@@ -154,3 +137,9 @@ Window {
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}
+}
+##^##*/
