@@ -10,8 +10,12 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        database_handler.cpp \
         datareader.cpp \
-        main.cpp
+        main.cpp \
+        saagia_controller.cpp \
+        saagia_model.cpp \
+        saagia_view.cpp
 
 RESOURCES += qml.qrc \
     image_resources.qrc
@@ -37,4 +41,8 @@ DISTFILES += \
     energy_type_button.qml
 
 HEADERS += \
-    datareader.h
+    database_handler.h \
+    datareader.h \
+    saagia_controller.h \
+    saagia_model.h \
+    saagia_view.h
