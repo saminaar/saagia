@@ -46,3 +46,4 @@ HEADERS += \
     saagia_controller.h \
     saagia_model.h \
     saagia_view.h
+    data_reader_test.hh
