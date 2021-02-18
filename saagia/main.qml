@@ -35,11 +35,10 @@ Window {
                 width: 503
                 height: 624
 
-                AnimatedImage {
-                    id: animatedImage
+                Chart_base_beta {
+                    id: chart_base_beta
                     width: 500
                     height: 350
-                    source:"qrc:/images/chart_example.gif"
                 }
 
                 Row {
@@ -51,6 +50,31 @@ Window {
 
                     Energy_type_button {
                         id: button_1
+                        x: 0
+                        y: 0
+
+
+                    }
+                    Energy_type_button {
+                        id: button_2
+                        x: 0
+                        y: 0
+
+                    }
+                    Energy_type_button {
+                        id: button_3
+                        x: 0
+                        y: 0
+
+                    }
+                    Energy_type_button {
+                        id: button_4
+                        x: 0
+                        y: 0
+
+                    }
+                    Energy_type_button {
+                        id: button_5
                         x: 0
                         y: 0
 
@@ -94,6 +118,8 @@ Window {
                     font.pixelSize: 40
                 }
             }
+
+
         }
 
         Item {

@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Energy_type_button.qml</file>
         <file>Text_input_bar.qml</file>
+        <file>Chart_base_beta.qml</file>
     </qresource>
 </RCC>

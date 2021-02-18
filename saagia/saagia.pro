@@ -31,6 +31,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     ../../../chart_example.gif \
     ../../../single-line-chart.png \
+    Chart_base_beta.qml \
     Energy_type_button.qml \
     Text_input_bar.qml \
     energy_type_button.qml
