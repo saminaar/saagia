@@ -6,9 +6,10 @@
 ehthumbs.db
 Thumbs.db
 
-build/*
+build*
+*/build*
 
-*.user
+*.pro.user
 *.com
 *.class
 *.dll
