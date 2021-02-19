@@ -8,5 +8,6 @@
         <file>Load_data_button.qml</file>
         <file>Save_data_button.qml</file>
         <file>Output_area.qml</file>
+        <file>Title_text.qml</file>
     </qresource>
 </RCC>

@@ -2,8 +2,8 @@ import QtQuick 2.14
 
 Rectangle {
     id: load_button
-
-    width: 120
+    color: "#090426"
+    width: 130
     height: 40
 
     Text {

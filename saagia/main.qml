@@ -128,17 +128,12 @@ Window {
                 anchors.verticalCenter: parent.verticalCenter
                 id: load_data_button
             }
-
-            Text {
-                id: title_text
-                x: 36
-                y: 24
-                width: 247
-                height: 45
-                color: "#ffffff"
-                text: "SAAGIA"
-                font.pixelSize: 40
+            Title_text{
+                x: 25
+                y: 26
             }
+
+
         }
     }
 

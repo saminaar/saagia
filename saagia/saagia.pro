@@ -42,6 +42,7 @@ DISTFILES += \
     Load_data_button.qml \
     Save_data_button.qml \
     Text_input_bar.qml \
+    Title_text.qml \
     energy_type_button.qml \
     Output_area.qml
 

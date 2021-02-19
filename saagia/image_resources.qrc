@@ -11,5 +11,6 @@
         <file>images/nuclear-energy.png</file>
         <file>images/hydro-power.png</file>
         <file>main.qml</file>
+        <file>images/application_name.png</file>
     </qresource>
 </RCC>
