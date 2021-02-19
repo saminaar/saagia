@@ -1,0 +1,23 @@
+# Ignore Mac system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore build files
+build*
+*/build*
+
+# Ignore pro.user file
+*.pro.user
+
+# Ignore other stuff
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so

@@ -8,7 +8,7 @@ The app follows the instructions given in the group task
 
 ## Requirements
 
-This application is run with Qt Creator. With version 5.15.2 the app should run fine
+This application is run with Qt Creator. With version 5.15.2 the app should run fine.
 App requires QtCharts in order to work properly
 
 ## Versions
