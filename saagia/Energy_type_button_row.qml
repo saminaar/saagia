@@ -37,6 +37,7 @@ Rectangle {
         }
         Energy_type_button {
             id: button_4
+            buttonIcon: "electricity"
             x: 0
             y: 0
 
