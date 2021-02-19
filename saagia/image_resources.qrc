@@ -4,5 +4,12 @@
         <file>images/chart_example.gif</file>
         <file>images/single-line-chart.png</file>
         <file>images/lighting.png</file>
+        <file>images/wind-turbine.png</file>
+        <file>images/wind-power.png</file>
+        <file>images/search_icon.png</file>
+        <file>images/atomic-energy.png</file>
+        <file>images/nuclear-energy.png</file>
+        <file>images/hydro-power.png</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>

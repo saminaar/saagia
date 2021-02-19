@@ -5,7 +5,7 @@ import QtCharts 2.3
 Rectangle {
     width: 500
     height: 400
-    color: "orange"
+    color: "#090426"
 
     ChartView {
         id: chartView

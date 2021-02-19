@@ -42,7 +42,8 @@ DISTFILES += \
     Load_data_button.qml \
     Save_data_button.qml \
     Text_input_bar.qml \
-    energy_type_button.qml
+    energy_type_button.qml \
+    Output_area.qml
 
 HEADERS += \
     data_calculations.h \

@@ -7,5 +7,6 @@
         <file>Energy_type_button_row.qml</file>
         <file>Load_data_button.qml</file>
         <file>Save_data_button.qml</file>
+        <file>Output_area.qml</file>
     </qresource>
 </RCC>

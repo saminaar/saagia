@@ -81,6 +81,12 @@ Window {
                     text: qsTr("TO DO")
                     font.pixelSize: 40
                 }
+
+                Output_area {
+                    id: output_area
+                    x: 20
+                    y: 149
+                }
             }
 
 
