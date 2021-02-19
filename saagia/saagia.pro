@@ -39,6 +39,7 @@ DISTFILES += \
     ../../../single-line-chart.png \
     Chart_base_beta.qml \
     Energy_type_button.qml \
+    Energy_type_button_row.qml \
     Text_input_bar.qml \
     energy_type_button.qml
 

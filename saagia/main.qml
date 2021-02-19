@@ -1,5 +1,5 @@
-import QtQuick 2.1
-import QtQuick.Window 2.1
+import QtQuick 2.14
+import QtQuick.Window 2.2
 import QtGraphicalEffects 1.0
 
 Window {
@@ -41,46 +41,10 @@ Window {
                     height: 350
                 }
 
-                Row {
-                    id: row
-                    x: 35
-                    width: 380
-                    height: 60
-                    spacing: 20
+               Energy_type_button_row{
+                   id: button_row
 
-                    Energy_type_button {
-                        id: button_1
-                        x: 0
-                        y: 0
-
-
-                    }
-                    Energy_type_button {
-                        id: button_2
-                        x: 0
-                        y: 0
-
-                    }
-                    Energy_type_button {
-                        id: button_3
-                        x: 0
-                        y: 0
-
-                    }
-                    Energy_type_button {
-                        id: button_4
-                        x: 0
-                        y: 0
-
-                    }
-                    Energy_type_button {
-                        id: button_5
-                        x: 0
-                        y: 0
-
-                    }
-
-                }
+               }
             }
 
             Rectangle {
