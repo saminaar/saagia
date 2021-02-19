@@ -41,10 +41,10 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-           console.info("image clicked!")
+            saagia_controller.energy_form_1_selected()
+            //console.info("image clicked!")
         }
     }
-
 
 }
 

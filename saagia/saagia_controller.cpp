@@ -18,5 +18,10 @@ void Saagia_controller::save_data()
     model_->save_data();
 }
 
+void Saagia_controller::energy_form_1_selected()
+{
+    model_->energy_form_1_selected();
+}
+
 // NOTE: no nullptr checks for model_ at all here!
 
