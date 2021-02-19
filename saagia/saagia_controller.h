@@ -16,6 +16,7 @@ public:
 
     Q_INVOKABLE void load_data();
     Q_INVOKABLE void save_data();
+    Q_INVOKABLE void energy_form_1_selected();
 
 private:
     std::shared_ptr<Saagia_model> model_;

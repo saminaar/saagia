@@ -71,8 +71,9 @@ Rectangle {
             else{
                 console.log("Disabled")
             }
+            saagia_controller.energy_form_1_selected()
+            //console.info("image clicked!")
         }
-
 
 }
     states: [
