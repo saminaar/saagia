@@ -41,10 +41,10 @@ Window {
                     height: 350
                 }
 
-               Energy_type_button_row{
+                Energy_type_button_row{
                    id: button_row
 
-               }
+                }
             }
 
             Rectangle {
@@ -93,7 +93,7 @@ Window {
             width: 1000
             height: 92
 
-            Text {
+            /*Text {
                 x: 569
                 y: 35
                 id: load_button_text
@@ -109,6 +109,18 @@ Window {
                 color: "#ffffff"
                 text: qsTr("SAVE DATA")
                 font.pixelSize: 20
+            }*/
+
+            Save_data_button{
+                x: 416
+                anchors.verticalCenter: parent.verticalCenter
+                id: save_data_button
+            }
+
+            Load_data_button{
+                x: 569
+                anchors.verticalCenter: parent.verticalCenter
+                id: load_data_button
             }
 
             Text {

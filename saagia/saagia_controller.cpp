@@ -8,5 +8,15 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 {
 }
 
+void Saagia_controller::load_data()
+{
+    model_->load_data();
+}
+
+void Saagia_controller::save_data()
+{
+    model_->save_data();
+}
+
 // NOTE: no nullptr checks for model_ at all here!
 
