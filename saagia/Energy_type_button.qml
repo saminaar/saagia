@@ -48,17 +48,18 @@ Rectangle {
 
             switch (buttonIcon) {
                 case "wind":
-                      console.log("Clicked > windy wind button!")
+                    console.log("Clicked > windy wind button!")
+                    saagia_controller.energy_form_1_selected()
                     break;
                 case "nuclear":
                     console.log("Clicked > nuclear button")
                     break;
                 case "hydro":
-                     console.log("Clicked > water button")
+                    console.log("Clicked > water button")
                     break;
                 case "electricity":
                     console.log("Clicked > lightning button")
-                   break;
+                    break;
                 default:
                     // Default, if no other is used
                     console.log("Button not specified")
@@ -71,8 +72,7 @@ Rectangle {
             else{
                 console.log("Disabled")
             }
-            saagia_controller.energy_form_1_selected()
-            //console.info("image clicked!")
+
         }
 
 }
