@@ -21,6 +21,7 @@ public:
 
 private:
     std::shared_ptr<Saagia_view> view_;
+    QString print_data_;
 
 };
 

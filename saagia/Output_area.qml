@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 
 Rectangle {
-    id: energy_button
+    id: text_output
 
     color: "white"
     border.color: "#1d1b29"
@@ -14,7 +14,9 @@ Rectangle {
         id: textEdit
         width: 10
         height: 70
-        text: qsTr("The program will print out stuff here. . .")
+        //text: qsTr("The program will print out stuff here. . .")
+        //text: cardView.cardValue
+        text: saagia_view.print_data
         font.pixelSize: 13
     }
 
