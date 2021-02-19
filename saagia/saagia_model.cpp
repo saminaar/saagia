@@ -47,3 +47,43 @@ void Saagia_model::energy_form_1_selected()
     }
 
 }
+
+void Saagia_model::energy_form_2_selected()
+{
+    qDebug() << "Energiamuoto 2 valittu";
+
+    print_data_ = "Energiamuoto 2 valittu";
+
+    if (view_ != nullptr)
+    {
+        view_->setPrintData(print_data_);
+    }
+
+}
+
+void Saagia_model::energy_form_3_selected()
+{
+    qDebug() << "Energiamuoto 3 valittu";
+
+    print_data_ = "Energiamuoto 3 valittu";
+
+    if (view_ != nullptr)
+    {
+        view_->setPrintData(print_data_);
+    }
+
+}
+
+void Saagia_model::energy_form_4_selected()
+{
+    qDebug() << "Energiamuoto 4 valittu";
+
+    print_data_ = "Energiamuoto 4 valittu";
+
+    if (view_ != nullptr)
+    {
+        view_->setPrintData(print_data_);
+    }
+
+}
+

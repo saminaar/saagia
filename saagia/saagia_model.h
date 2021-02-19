@@ -18,6 +18,9 @@ public:
     void load_data();
     void save_data();
     void energy_form_1_selected();
+    void energy_form_2_selected();
+    void energy_form_3_selected();
+    void energy_form_4_selected();
 
 private:
     std::shared_ptr<Saagia_view> view_;

@@ -23,5 +23,20 @@ void Saagia_controller::energy_form_1_selected()
     model_->energy_form_1_selected();
 }
 
+void Saagia_controller::energy_form_2_selected()
+{
+    model_->energy_form_2_selected();
+}
+
+void Saagia_controller::energy_form_3_selected()
+{
+    model_->energy_form_3_selected();
+}
+
+void Saagia_controller::energy_form_4_selected()
+{
+    model_->energy_form_4_selected();
+}
+
 // NOTE: no nullptr checks for model_ at all here!
 
