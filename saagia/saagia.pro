@@ -14,7 +14,6 @@ SOURCES += \
         database_handler.cpp \
         datareader.cpp \
         main.cpp \
-        new_qobject_class.cpp \
         saagia_controller.cpp \
         saagia_model.cpp \
         saagia_view.cpp
@@ -47,7 +46,6 @@ HEADERS += \
     data_calculations.h \
     database_handler.h \
     datareader.h \
-    new_qobject_class.h \
     saagia_controller.h \
     saagia_model.h \
     saagia_view.h

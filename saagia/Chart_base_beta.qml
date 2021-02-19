@@ -7,123 +7,108 @@ Rectangle {
     height: 400
     color: "orange"
 
-    //![1]
     ChartView {
         id: chartView
-        title: "Weather forecast"
-    //![1]
-        height: parent.height
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        legend.alignment: Qt.AlignTop
+        anchors.fill: parent
         antialiasing: true
-
-    //![2]
-
-        ValueAxis{
-            id: valueAxisY2
-            min: 0
-            max: 10
-            titleText: "Rainfall [mm]"
-        }
-
-        ValueAxis {
-            id: valueAxisX
-            // Hide the value axis; it is only used to map the line series to bar categories axis
-            visible: false
-            min: 0
-            max: 5
-        }
 
         ValueAxis{
             id: valueAxisY
+            max: 10
+            titleText: "Energy"
+        }
+
+        ValueAxis{
+            id: valueAxisX
             min: 0
             max: 15
-            titleText: "Temperature [&deg;C]"
+            visible: false
+        }
+
+        BarCategoryAxis {
+            id: barCategoriesAxis
+            titleText: "Time"
+            categories: ["00:00", "01:00", "02:00", "03:00"]
+
         }
 
         LineSeries {
-            id: maxTempSeries
-            axisX: valueAxisX
-            axisY: valueAxisY
-            name: "Max. temperature"
-        }
 
-        LineSeries {
-            id: minTempSeries
-            axisX: valueAxisX
-            axisY: valueAxisY
-            name: "Min. temperature"
-        }
-
-        BarSeries {
-            id: myBarSeries
+            id: energy_consumption
             axisX: barCategoriesAxis
-            axisYRight: valueAxisY2
-            BarSet {
-                id: rainfallSet
-                label: "Rainfall"
-            }
+            axisY: valueAxisY
+            name: "Energy consumption in Finland"
+
         }
-    //![2]
     }
 
-    /*
     // A timer to refresh the forecast every 5 minutes
     Timer {
         interval: 300000
         repeat: true
         triggeredOnStart: true
         running: true
+
         onTriggered: {
-            if (weatherAppKey != "") {
+
+            //
                 //![3]
                 // Make HTTP GET request and parse the result
                 var xhr = new XMLHttpRequest;
                 xhr.open("GET",
-                         "http://free.worldweatheronline.com/feed/weather.ashx?q=Jyv%c3%a4skyl%c3%a4,Finland&format=json&num_of_days=5&key="
-                         + weatherAppKey);
+                         "https://api.fingrid.fi/v1/variable/124/events/json?start_time=2021-01-01T00%3A00%3A00Z&end_time=2021-01-01T23%3A00%3A00Z"
+                         , true);
+
+                xhr.setRequestHeader("x-api-key","YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP");
+                xhr.send();
                 xhr.onreadystatechange = function() {
-                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+
                         var a = JSON.parse(xhr.responseText);
-                        parseWeatherData(a);
+                        parseReceivedData(a);
+
                     }
                 }
-                xhr.send();
                 //![3]
-            } else {
-                // No app key for worldweatheronline.com given by the user -> use dummy static data
-                var responseText = "{ \"data\": { \"current_condition\": [ {\"cloudcover\": \"10\", \"humidity\": \"61\", \"observation_time\": \"06:26 AM\", \"precipMM\": \"0.0\", \"pressure\": \"1022\", \"temp_C\": \"6\", \"temp_F\": \"43\", \"visibility\": \"10\", \"weatherCode\": \"113\",  \"weatherDesc\": [ {\"value\": \"Sunny\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0001_sunny.png\" } ], \"winddir16Point\": \"SE\", \"winddirDegree\": \"140\", \"windspeedKmph\": \"7\", \"windspeedMiles\": \"4\" } ],  \"request\": [ {\"query\": \"Jyvaskyla, Finland\", \"type\": \"City\" } ],  \"weather\": [ {\"date\": \"2012-05-09\", \"precipMM\": \"0.4\", \"tempMaxC\": \"14\", \"tempMaxF\": \"57\", \"tempMinC\": \"7\", \"tempMinF\": \"45\", \"weatherCode\": \"116\",  \"weatherDesc\": [ {\"value\": \"Partly Cloudy\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png\" } ], \"winddir16Point\": \"S\", \"winddirDegree\": \"179\", \"winddirection\": \"S\", \"windspeedKmph\": \"20\", \"windspeedMiles\": \"12\" }, {\"date\": \"2012-05-10\", \"precipMM\": \"2.4\", \"tempMaxC\": \"13\", \"tempMaxF\": \"55\", \"tempMinC\": \"8\", \"tempMinF\": \"46\", \"weatherCode\": \"266\",  \"weatherDesc\": [ {\"value\": \"Light drizzle\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0017_cloudy_with_light_rain.png\" } ], \"winddir16Point\": \"SW\", \"winddirDegree\": \"219\", \"winddirection\": \"SW\", \"windspeedKmph\": \"21\", \"windspeedMiles\": \"13\" }, {\"date\": \"2012-05-11\", \"precipMM\": \"11.1\", \"tempMaxC\": \"15\", \"tempMaxF\": \"59\", \"tempMinC\": \"7\", \"tempMinF\": \"44\", \"weatherCode\": \"266\",  \"weatherDesc\": [ {\"value\": \"Light drizzle\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0017_cloudy_with_light_rain.png\" } ], \"winddir16Point\": \"SSW\", \"winddirDegree\": \"200\", \"winddirection\": \"SSW\", \"windspeedKmph\": \"20\", \"windspeedMiles\": \"12\" }, {\"date\": \"2012-05-12\", \"precipMM\": \"2.8\", \"tempMaxC\": \"7\", \"tempMaxF\": \"44\", \"tempMinC\": \"2\", \"tempMinF\": \"35\", \"weatherCode\": \"317\",  \"weatherDesc\": [ {\"value\": \"Light sleet\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0021_cloudy_with_sleet.png\" } ], \"winddir16Point\": \"NW\", \"winddirDegree\": \"311\", \"winddirection\": \"NW\", \"windspeedKmph\": \"24\", \"windspeedMiles\": \"15\" }, {\"date\": \"2012-05-13\", \"precipMM\": \"0.4\", \"tempMaxC\": \"6\", \"tempMaxF\": \"42\", \"tempMinC\": \"2\", \"tempMinF\": \"35\", \"weatherCode\": \"116\",  \"weatherDesc\": [ {\"value\": \"Partly Cloudy\" } ],  \"weatherIconUrl\": [ {\"value\": \"http:\/\/www.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png\" } ], \"winddir16Point\": \"WNW\", \"winddirDegree\": \"281\", \"winddirection\": \"WNW\", \"windspeedKmph\": \"21\", \"windspeedMiles\": \"13\" } ] }}";
-                var a = JSON.parse(responseText);
-                parseWeatherData(a);
-            }
         }
     }
-    */
 
-    Row {
-        id: weatherImageRow
-        anchors.top: chartView.bottom
-        anchors.topMargin: 5
-        anchors.bottom: poweredByText.top
-        anchors.bottomMargin: 5
-        anchors.horizontalCenter: parent.horizontalCenter
-        height: parent.height - chartView.height - anchors.topMargin
+    function parseReceivedData(energy_data) {
 
-        ListModel {
-            id: weatherImageModel
-        }
+        // Clear previous values
+        energy_consumption.clear();
 
-        Repeater {
-            id: repeater
-            model: weatherImageModel
-            delegate: Image {
-                source: imageSource
-                width: weatherImageRow.height
-                height: width
-                fillMode: Image.PreserveAspectCrop
-            }
+        var values = [];
+
+        for (var i in energy_data){
+
+
+            var energy_value = energy_data[i]["value"];
+            values.push(energy_value);
+            var start_time = energy_data[i]["start_time"];
+            var end_time = energy_data[i]["end_time"];
+
+            var parsed = energy_data[i]["start_time"].split('T');
+            var time_hh_mm = parsed[1].slice(0,5);
+
+
+            energy_consumption.append(Number(i), energy_value);
+
+            //var highest_value = energy_consumption.max();
+
+            // Set the min and max values of the axises
+            valueAxisX.min = 0;
+            valueAxisX.max = Number(i) + 1;
+
+            valueAxisY.max = Math.max.apply(Math, values)
+            valueAxisY.min =  Math.min.apply(Math, values) - 500
+
+            // Set the x-axis labels to the dates of the forecast
+            barCategoriesAxis.categories.push(time_hh_mm);
+
+
         }
     }
+
 }
+
