@@ -23,14 +23,14 @@ Rectangle {
         }
         Energy_type_button {
             id: button_2
-            buttonIcon: "hydro"
+            buttonIcon: "nuclear"
             x: 0
             y: 0
 
         }
         Energy_type_button {
             id: button_3
-            buttonIcon: "nuclear"
+            buttonIcon: "hydro"
             x: 0
             y: 0
 
