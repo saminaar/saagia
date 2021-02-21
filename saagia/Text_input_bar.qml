@@ -25,13 +25,23 @@ RowLayout {
         id: searchButton
         height: searchText.height
         width: height
-        color: "white"
+        color: "#090426"
         border.width: 2
-        border.color: "orange"
+        border.color: "white"
         // iconSource: ".."
         //onClicked: doSearch(searchText.text)
         //Also clears the textfield
 
+
+        Image {
+            id: search_button_image
+            width: 20
+            height: 20
+            anchors.centerIn: parent
+            fillMode: Image.Stretch
+            source: "qrc:/images/search_icon.png"
+
+    }
     }
 }
 

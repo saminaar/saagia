@@ -39,8 +39,12 @@ DISTFILES += \
     Chart_base_beta.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
+    Load_data_button.qml \
+    Save_data_button.qml \
     Text_input_bar.qml \
-    energy_type_button.qml
+    Title_text.qml \
+    energy_type_button.qml \
+    Output_area.qml
 
 HEADERS += \
     data_calculations.h \

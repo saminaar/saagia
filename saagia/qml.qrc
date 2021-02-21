@@ -5,5 +5,9 @@
         <file>Text_input_bar.qml</file>
         <file>Chart_base_beta.qml</file>
         <file>Energy_type_button_row.qml</file>
+        <file>Load_data_button.qml</file>
+        <file>Save_data_button.qml</file>
+        <file>Output_area.qml</file>
+        <file>Title_text.qml</file>
     </qresource>
 </RCC>

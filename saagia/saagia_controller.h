@@ -14,6 +14,12 @@ public:
     explicit Saagia_controller(std::shared_ptr<Saagia_model> model,
                                QObject *parent = nullptr);
 
+    Q_INVOKABLE void load_data();
+    Q_INVOKABLE void save_data();
+    Q_INVOKABLE void energy_form_1_selected();
+    Q_INVOKABLE void energy_form_2_selected();
+    Q_INVOKABLE void energy_form_3_selected();
+    Q_INVOKABLE void energy_form_4_selected();
 
 private:
     std::shared_ptr<Saagia_model> model_;

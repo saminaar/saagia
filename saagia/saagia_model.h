@@ -2,23 +2,29 @@
 #define SAAGIA_MODEL_H
 
 #include <memory>
-#include <QObject>
+#include <QDebug>
 
 class Saagia_view;
-class data_calculations;
-class database_handler;
-class datareader;
+class Data_calculations;
+class Database_handler;
+class Datareader;
 
-class Saagia_model : public QObject
+class Saagia_model
 {
-    Q_OBJECT
+
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-
+    void load_data();
+    void save_data();
+    void energy_form_1_selected();
+    void energy_form_2_selected();
+    void energy_form_3_selected();
+    void energy_form_4_selected();
 
 private:
     std::shared_ptr<Saagia_view> view_;
+    QString print_data_;
 
 };
 
