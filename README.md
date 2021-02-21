@@ -12,6 +12,6 @@ This application is run with Qt Creator. With version 5.15.2 the app should run 
 App requires QtCharts in order to work properly
 
 ## Versions
-21.2: First prototype, shows the basic layout of the UI and some information read from the pages visualized
+21.2: First prototype, shows the basic layout of the UI and a chart made from data fetched from Fingrid.
 
  
