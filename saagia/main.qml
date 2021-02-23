@@ -12,7 +12,7 @@ Window {
     Rectangle {
         id: main_container
         x: 0
-        y: 14
+        y: 0
         width: 1000
         height: 780
         opacity: 0.9
@@ -35,10 +35,14 @@ Window {
                 width: 503
                 height: 624
 
-                Chart_base_beta {
-                    id: chart_base_beta
-                    width: 500
-                    height: 350
+                Currently_showing_box{
+                   id: show_case
+
+                }
+
+
+                Chart_base_test {
+                    id: chart_base_test_real
                 }
 
                 Energy_type_button_row{
@@ -87,6 +91,7 @@ Window {
                     x: 20
                     y: 149
                 }
+
             }
 
 

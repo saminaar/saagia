@@ -9,5 +9,7 @@
         <file>Save_data_button.qml</file>
         <file>Output_area.qml</file>
         <file>Title_text.qml</file>
+        <file>Chart_base_test.qml</file>
+        <file>Currently_showing_box.qml</file>
     </qresource>
 </RCC>

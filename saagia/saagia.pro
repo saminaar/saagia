@@ -37,6 +37,8 @@ DISTFILES += \
     ../../../chart_example.gif \
     ../../../single-line-chart.png \
     Chart_base_beta.qml \
+    Chart_base_test.qml \
+    Currently_showing_box.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Load_data_button.qml \

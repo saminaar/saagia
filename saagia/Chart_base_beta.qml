@@ -10,6 +10,7 @@ Rectangle {
 
     ChartView {
         id: chartView
+
         anchors.fill: parent
         antialiasing: true
         legend.visible: false
@@ -21,6 +22,12 @@ Rectangle {
 
         x: 10
         y: 20
+
+        // Fancy shmanchy stuff
+        //backgroundColor: "black"
+        //plotAreaColor: "white"
+        animationOptions: ChartView.GridAxisAnimations
+
 
         ValueAxis{
             id: valueAxisY
@@ -54,8 +61,8 @@ Rectangle {
 
     // Timer refreshes the chart in 5 minutes
     Timer {
-        interval: 300000
-        repeat: true
+        //interval: 300000
+        repeat: false
         triggeredOnStart: true
         running: true
 
