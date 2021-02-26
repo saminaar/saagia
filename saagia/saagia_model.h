@@ -22,6 +22,8 @@ public:
     void energy_form_3_selected();
     void energy_form_4_selected();
 
+    void save_graph_as_image();
+
 private:
     std::shared_ptr<Saagia_view> view_;
     QString print_data_;

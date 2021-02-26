@@ -87,3 +87,9 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
+void Saagia_model::save_graph_as_image()
+{
+    qDebug() << "Correct function";
+
+}
+

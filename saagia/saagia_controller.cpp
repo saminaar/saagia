@@ -38,5 +38,9 @@ void Saagia_controller::energy_form_4_selected()
     model_->energy_form_4_selected();
 }
 
+void Saagia_controller::save_chart_image()
+{
+    model_->save_graph_as_image();
+}
 // NOTE: no nullptr checks for model_ at all here!
 

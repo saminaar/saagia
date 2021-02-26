@@ -1,13 +1,125 @@
 import QtQuick 2.14
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Styles 1.4
 
-Window {
+ApplicationWindow {
     width: 1000
     height: 780
     visible: true
     color: "transparent"
     title: qsTr("Saagia - application for weather and energy analyzing")
+
+    menuBar: MenuBar {
+        id: menu_bar
+        height: 32
+
+        // Style for the menu bar itself (not Menu-items)
+        background: Rectangle {
+            implicitHeight: 30
+            implicitWidth: 1000
+            color: "#16141f"
+
+            Rectangle {
+                width: parent.width
+                height: 1
+                anchors.bottom: parent.bottom
+                color: "transparent"
+                border.color: "orange"
+            }
+        }
+
+        Menu {
+            title: qsTr("File")
+            Action { text: qsTr("Save data...") }
+            Action { text: qsTr("Load data...") }
+
+            // Menu item dropdown style
+            delegate: MenuItem {
+                    id: menuItem
+                    implicitWidth: 100
+                    implicitHeight: 30
+
+                    contentItem: Text {
+                        leftPadding: menuItem.indicator.width
+                        rightPadding: menuItem.arrow.width
+                        text: menuItem.text
+                        font: menuItem.font
+                        opacity: enabled ? 1.0 : 0.3
+                        color: menuItem.highlighted ? "#000000" : "#ffffff"
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                    }
+
+                    background: Rectangle {
+                        implicitWidth: 100
+                        implicitHeight: 30
+                        opacity: enabled ? 1 : 0.3
+                        color: menuItem.highlighted ? "orange" : "#2c283e"
+                    }
+        }
+        }
+
+        Menu {
+            title: qsTr("Help")
+            Action { text: qsTr("About...") }
+
+            // Menu item dropdown style
+            delegate: MenuItem {
+                    id: menuItem_2
+                    implicitWidth: 100
+                    implicitHeight: 30
+
+                    contentItem: Text {
+                        leftPadding: menuItem_2.indicator.width
+                        rightPadding: menuItem_2.arrow.width
+                        text: menuItem_2.text
+                        font: menuItem_2.font
+                        opacity: enabled ? 1.0 : 0.3
+                        color: menuItem_2.highlighted ? "#000000" : "#ffffff"
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                    }
+
+                    background: Rectangle {
+                        implicitWidth: 100
+                        implicitHeight: 30
+                        opacity: enabled ? 1 : 0.3
+                        color: menuItem_2.highlighted ? "orange" : "#2c283e"
+                    }
+        }
+        }
+
+        ///
+
+
+        // Style for the menu bar item (not the dropdown)
+        delegate: MenuBarItem {
+                id: menuBarItem
+                padding: 5
+
+                contentItem: Text {
+                    text: menuBarItem.text
+                    font: menuBarItem.font
+                    opacity: enabled ? 1.0 : 0.3
+                    color: menuBarItem.highlighted ? "orange" : "#ffffff"
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+
+                background: Rectangle {
+                    implicitWidth: 30
+                    implicitHeight: 30
+                    opacity: enabled ? 1 : 0.3
+                    color: menuBarItem.highlighted ? "#2c283e" : "#16141f"
+                }
+        }
+
+    }
 
     Rectangle {
         id: main_container
@@ -123,19 +235,32 @@ Window {
             }*/
 
             Save_data_button{
-                x: 416
+                x: 219
+                width: 116
+                height: 40
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: 445
                 id: save_data_button
             }
 
             Load_data_button{
-                x: 569
+                x: 67
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: 445
                 id: load_data_button
             }
             Title_text{
                 x: 25
                 y: 26
+            }
+
+            Text {
+                id: city
+                x: 431
+                y: 37
+                text: qsTr("Current city/region: Tampere")
+                font.pixelSize: 20
+                color: "#ffffff"
             }
 
 

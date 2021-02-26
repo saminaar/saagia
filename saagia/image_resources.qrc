@@ -12,5 +12,6 @@
         <file>images/hydro-power.png</file>
         <file>main.qml</file>
         <file>images/application_name.png</file>
+        <file>images/save_icon.png</file>
     </qresource>
 </RCC>

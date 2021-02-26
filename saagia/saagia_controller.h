@@ -21,6 +21,8 @@ public:
     Q_INVOKABLE void energy_form_3_selected();
     Q_INVOKABLE void energy_form_4_selected();
 
+    Q_INVOKABLE void save_chart_image();
+
 private:
     std::shared_ptr<Saagia_model> model_;
 

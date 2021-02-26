@@ -14,7 +14,7 @@ Rectangle {
 
         legend.visible: false
         theme: ChartView.ChartThemeDark
-        animationOptions: ChartView.GridAxisAnimations
+        //animationOptions: ChartView.GridAxisAnimations
 
         margins.top: 0
         margins.bottom: 0
@@ -55,12 +55,16 @@ Rectangle {
     }
 
     Timer {
-        interval: 300000
+        interval: 100000
         repeat: true
         triggeredOnStart: true
         running: true
 
         onTriggered: {
+
+            console.log("triggered")
+
+            //var date_request = "2021-01-01T00%3A00%3A00Z&end_time=2021-01-01T23%3A00%3A00Z"
 
             fetch_data("https://api.fingrid.fi/v1/variable/124/events/json?start_time=2021-01-01T00%3A00%3A00Z&end_time=2021-01-01T23%3A00%3A00Z")
 
