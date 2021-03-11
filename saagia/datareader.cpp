@@ -1,32 +1,107 @@
 #include "datareader.h"
+#include "saagia_model.h"
 
-DataReader::DataReader()
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QStringList>
+#include <QNetworkReply>
+#include <QVariant>
+#include <QByteArray>
+#include <QDebug>
+
+Data_reader::Data_reader(std::shared_ptr<Saagia_model> model, QObject *parent) :
+    QObject( parent ),
+    network_{ new QNetworkAccessManager(this) },
+    currentUrl_( "" ),
+    currentStatuscode_{ 0 },
+    currentContent_{ "" },
+    model_{ model }
 {
-
+    // connect the "finished" signal from the network to the requestCompleted function
+    connect(network_, &QNetworkAccessManager::finished, this, &Data_reader::requestCompleted);
 }
 
-QString DataReader::getData()
+Data_reader::~Data_reader()
 {
-    readData();
-    return data_;
+    delete network_;
 }
 
-void DataReader::readData()
+QUrl Data_reader::getCurrentUrl() const
 {
-    QNetworkAccessManager *man = new QNetworkAccessManager(this);
-    connect(man, &QNetworkAccessManager::finished, this, &DataReader::finish);
-    const QUrl url = QUrl(myURL);
-    QNetworkRequest request;
-    request.setRawHeader("x-api-key", myAPIKey);
-    man->get(request);
-
-   // finish(man->get(requ));
+    return currentUrl_;
 }
 
-void DataReader::finish(QNetworkReply *reply)
+int Data_reader::getCurrentStatuscode() const
 {
-    data_ = reply->readAll(); //Downloaded content is stored in this variable for the time being
-    qDebug() << "Tietojen haku onnistui";
+    return currentStatuscode_;
 }
 
+QString Data_reader::getCurrentContent() const
+{
+    return currentContent_;
+}
 
+void Data_reader::requestUrl(const QString &url, const QString &header)
+{
+    if (url == "")
+    {
+        return;
+    }
+
+    QNetworkRequest request{ url };
+
+    // the header parameter is assumed to be in format "<header_name>:<header_value>"
+    if (header != "")
+    {
+        QStringList headerParts{ header.split(":") };
+        if (headerParts.length() == 2)
+        {
+            QString headerName{ headerParts[0] };
+            QString headerValue{ headerParts[1] };
+            if (headerName != "" && headerValue != "")
+            {
+                // set the header and its value to the request
+                request.setRawHeader(headerName.toUtf8(), headerValue.toUtf8());
+            }
+        }
+    }
+
+    // connect a network error signal to the requestError function
+    QNetworkReply* networkReply{ network_->get(request) };
+    connect(
+        networkReply,
+        #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+            QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::errorOccurred),
+        #else
+            QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
+        #endif
+        this,
+        &Data_reader::requestError
+    );
+
+    qDebug() << "Request:" << request.url() << "headers:" << request.rawHeaderList();
+}
+
+void Data_reader::requestCompleted(QNetworkReply *networkReply)
+{
+    currentUrl_ = networkReply->url();
+    emit currentUrlChanged();
+
+    QVariant statuscodeVariant{ networkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute) };
+    currentStatuscode_ = statuscodeVariant.toInt();
+    emit currentStatuscodeChanged();
+
+    QByteArray responseContent{ networkReply->readAll() };
+    currentContent_ = QString(responseContent);
+    // normally the parsing of the response would be done here, in this case just show the raw content
+    //emit currentContentChanged();
+    model_->set_new_data_content(currentContent_);
+
+    qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
+}
+
+void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+    qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
+}

@@ -1,8 +1,10 @@
 #include "saagia_model.h"
 #include "saagia_view.h"
+#include "datareader.h"
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
-    view_{ view }
+    view_{ view },
+    dataReader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) }
 {
 
 }
@@ -11,6 +13,13 @@ void Saagia_model::load_data()
 {
     // tähän kutsu datareaderille
 
+    QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
+    // tähän start time
+    // tähän end time
+    // rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
+
+    dataReader_->requestUrl("https://api.fingrid.fi/v1/variable/124/events/json?start_time=2021-01-01T00:00:00Z&end_time=2021-01-01T23:00:00Z", header);
+
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
@@ -18,6 +27,14 @@ void Saagia_model::load_data()
     if (view_ != nullptr)
     {
         view_->setPrintData(print_data_);
+    }
+}
+
+void Saagia_model::set_new_data_content(QString new_content)
+{
+    if (view_ != nullptr)
+    {
+        view_->setPrintData(new_content);
     }
 }
 

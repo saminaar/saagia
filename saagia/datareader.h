@@ -1,32 +1,48 @@
 #ifndef DATAREADER_H
 #define DATAREADER_H
 
-#include <QMainWindow>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QDebug>
+#include <QObject>
+#include <QString>
+#include <QUrl>
 
-class DataReader: public QMainWindow
+class QNetworkAccessManager;
+class Saagia_model;
+
+class Data_reader: public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QUrl currentUrl READ getCurrentUrl NOTIFY currentUrlChanged)
+    Q_PROPERTY(int currentStatuscode READ getCurrentStatuscode NOTIFY currentStatuscodeChanged)
+    Q_PROPERTY(QString currentContent READ getCurrentContent NOTIFY currentContentChanged)
+
 public:
-    DataReader();
-    QString getData();
-public slots:
-    void readData();
+    explicit Data_reader(std::shared_ptr<Saagia_model> model, QObject* parent = nullptr);
+    ~Data_reader();
+
+    QUrl getCurrentUrl() const;
+    int getCurrentStatuscode() const;
+    QString getCurrentContent() const;
+
+    // HTTP request can contain multiple custom headers but support just one in this case
+    Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
+
+private Q_SLOTS:
+    void requestCompleted(QNetworkReply* networkReply);
+    void requestError(QNetworkReply::NetworkError errorCode);
+
+signals:
+    void currentUrlChanged();
+    void currentStatuscodeChanged();
+    void currentContentChanged();
 
 private:
-    QString myURL =
-            "http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=describeStoredQueries"; //Page containig FMI API-info in xml
-    QNetworkRequest::KnownHeaders header;
-    QByteArray myAPIKey = "stwnenddFW4GqId8Hr9Hx8dfRV70APsuaW2LCWq3";
-    QString data_;
-
-private slots:
-    void finish(QNetworkReply*);
-
-
+    QNetworkAccessManager* network_;
+    QUrl currentUrl_;
+    int currentStatuscode_;
+    QString currentContent_;
+    std::shared_ptr<Saagia_model> model_;
 };
 
 #endif // DATAREADER_H

@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     auto saagia_model{ std::make_shared<Saagia_model>(saagia_view) };
     auto saagia_controller{ std::make_shared<Saagia_controller>(saagia_model) };
 
-    // give the QML side acces to the view and controller components
+    // give the QML side access to the view and controller components
     auto context{ engine.rootContext() };
     context->setContextProperty("saagia_view", saagia_view.get());
     context->setContextProperty("saagia_controller", saagia_controller.get());

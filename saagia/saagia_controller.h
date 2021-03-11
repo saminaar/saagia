@@ -25,7 +25,6 @@ public:
 
 private:
     std::shared_ptr<Saagia_model> model_;
-
 };
 
 #endif // SAAGIA_CONTROLLER_H
