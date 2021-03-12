@@ -15,7 +15,7 @@ class Saagia_model
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-    void load_data();
+    void load_data(QString web_address_1, QString start_time, QString end_time);
     void set_new_data_content(QString);
     void save_data();
     void energy_form_1_selected();

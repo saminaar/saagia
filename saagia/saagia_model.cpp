@@ -9,16 +9,14 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 
 }
 
-void Saagia_model::load_data()
+void Saagia_model::load_data(QString web_address_1, QString start_time, QString end_time)
 {
-    // tähän kutsu datareaderille
+    // rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
+    QString web_address = (web_address_1 + start_time + "&" + end_time);
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
-    // tähän start time
-    // tähän end time
-    // rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
 
-    dataReader_->requestUrl("https://api.fingrid.fi/v1/variable/124/events/json?start_time=2021-01-01T00:00:00Z&end_time=2021-01-01T23:00:00Z", header);
+    dataReader_->requestUrl(web_address, header);
 
     qDebug() << "Tietojen haku onnistui";
 

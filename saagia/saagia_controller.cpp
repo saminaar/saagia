@@ -10,7 +10,16 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 
 void Saagia_controller::load_data()
 {
-    model_->load_data();
+    // tähän haettavan datapaketin osoite
+    QString web_address_1 = "https://api.fingrid.fi/v1/variable/124/events/json?";
+
+    // tähän start_time
+    QString start_time = "start_time=2021-01-01T00:00:00Z";
+
+    // tähän end_time
+    QString end_time = "end_time=2021-01-01T23:00:00Z";
+
+    model_->load_data(web_address_1, start_time, end_time);
 }
 
 void Saagia_controller::save_data()
