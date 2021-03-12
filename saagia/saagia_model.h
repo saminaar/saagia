@@ -26,7 +26,7 @@ public:
 
     bool set_chart_data();
 
-    void save_tomap(QString value, QString stime, QString etime);
+    void save_to_map(QString value, QString stime, QString etime);
 
     void save_graph_as_image();
 

@@ -8,18 +8,39 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 {
 }
 
-void Saagia_controller::load_data()
+void Saagia_controller::load_data(QString start_time, QString end_time, int variable)
 {
-    // tähän haettavan datapaketin osoite
-    QString web_address_1 = "https://api.fingrid.fi/v1/variable/124/events/json?";
+    QString web_address = "";
+
+    switch(variable) {
+        case 0 :
+            // tähän haettavan datapaketin osoite 1
+            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
+            break;
+        case 1 :
+            // tähän haettavan datapaketin osoite 2
+            web_address = "https://opendata.fmi.fi/wfs?"
+                          "request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple"
+                          "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man";
+            break;
+        case 2 :
+            // Optional
+            break;
+        case 3 :
+            // Optional
+            break;
+        default :
+            // Optional
+            break;
+    }
 
     // tähän start_time
-    QString start_time = "start_time=2021-01-01T00:00:00Z";
+    start_time = "start_time=2021-01-01T00:00:00Z";
 
     // tähän end_time
-    QString end_time = "end_time=2021-01-01T23:00:00Z";
+    end_time = "end_time=2021-01-01T23:00:00Z";
 
-    model_->load_data(web_address_1, start_time, end_time);
+    model_->load_data(web_address, start_time, end_time);
 }
 
 void Saagia_controller::save_data()

@@ -23,7 +23,7 @@ Rectangle {
             target: mouseArea
             onClicked:
                 function pressed_button() {
-                    saagia_controller.load_data()
+                    saagia_controller.load_data("","",0)
                 }
         }
     }
