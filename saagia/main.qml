@@ -202,6 +202,14 @@ ApplicationWindow {
                     id: output_area
                     x: 20
                     y: 149
+
+
+                }
+
+                New_data_load_popup {
+                    id: new_data_load_popup
+                    x: 211
+                    y: 49
                 }
 
             }

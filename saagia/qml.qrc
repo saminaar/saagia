@@ -12,5 +12,6 @@
         <file>Chart_base_test.qml</file>
         <file>Currently_showing_box.qml</file>
         <file>Window_bar_menu.qml</file>
+        <file>New_data_load_popup.qml</file>
     </qresource>
 </RCC>

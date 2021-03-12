@@ -105,8 +105,9 @@ void Saagia_model::energy_form_4_selected()
 }
 
 void Saagia_model::save_tomap(QString value, QString stime, QString etime){
+    /*
     set_new_data_content(value +" " + stime + " " + etime);
-    //times.insert(std::pair<QString, QString>(stime,etime));
+    //times.insert(std::pair<QString, QString>(stime,etime));*/
 }
 
 void Saagia_model::save_graph_as_image()
@@ -147,7 +148,7 @@ bool Saagia_model::set_chart_data() {
         var month = date[1]
         var day = date[2]
 
-        // Before parsing: "01:00:00+0000"
+       // Before parsing: "01:00:00+0000"
         var time_hh_mm_ms = parsed_time[1].split('+')[0].split(':')
 
         var hours = time_hh_mm_ms[0]

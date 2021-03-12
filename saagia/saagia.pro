@@ -42,6 +42,7 @@ DISTFILES += \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Load_data_button.qml \
+    New_data_load_popup.qml \
     Save_data_button.qml \
     Text_input_bar.qml \
     Title_text.qml \
