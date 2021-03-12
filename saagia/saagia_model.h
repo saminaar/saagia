@@ -24,6 +24,8 @@ public:
     void energy_form_3_selected();
     void energy_form_4_selected();
 
+    bool set_chart_data();
+
     void save_tomap(QString value, QString stime, QString etime);
 
     void save_graph_as_image();
