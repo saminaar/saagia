@@ -104,8 +104,7 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
-void Saagia_model::save_tomap(QString value, QString stime, QString etime){
-    /*
+void Saagia_model::save_to_map(QString value, QString stime, QString etime){
     set_new_data_content(value +" " + stime + " " + etime);
     //times.insert(std::pair<QString, QString>(stime,etime));*/
 }
