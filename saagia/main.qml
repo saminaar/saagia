@@ -11,6 +11,7 @@ ApplicationWindow {
     color: "transparent"
     title: qsTr("Saagia - application for weather and energy analyzing")
 
+
     menuBar: MenuBar {
         id: menu_bar
         height: 32

@@ -212,12 +212,35 @@ Button {
             y: 120
             placeholderText: qsTr("")
             background: Rectangle {
+                id: start_time_rect
                 implicitWidth: 100
                 implicitHeight: 10
                 color: start_time.enabled ? "#fff" : "#fff"
                 border.color: start_time.enabled ? "#222" : "orange"
             }
-        }
+
+            MouseArea {
+
+                anchors.fill: start_time_rect
+                onClicked: calendarobject_2.open()
+            }
+            Popup{
+
+                    id: calendarobject_2
+
+                    Calendar_model{
+
+                        onClicked: {
+                            console.log("Clicked")
+                            console.log(date)
+                            calendarobject_2.close()
+
+                        }
+
+                    }
+                }
+            }
+
 
         Text {
             x: 200
@@ -232,11 +255,36 @@ Button {
             y: 120
             placeholderText: qsTr("")
             background: Rectangle {
+                id: end_time_rect
                 implicitWidth: 100
                 implicitHeight: 10
                 color: start_time.enabled ? "#fff" : "#fff"
                 border.color: start_time.enabled ? "#222" : "orange"
             }
+
+            MouseArea {
+
+                anchors.fill: end_time_rect
+
+                onClicked: calendarobject.open()
+            }
+            Popup{
+
+                    id: calendarobject
+
+                    Calendar_model{
+
+                        onClicked: {
+                            console.log("Clicked")
+                            console.log(date)
+                            calendarobject.close()
+
+                        }
+
+                    }
+                }
+
+
         }
 
         Button {
@@ -265,21 +313,6 @@ Button {
                 border.width: 1
                 radius: 2
             }
-        }
-
-        Popup{
-
-            id: calendarobject
-            /*
-
-            TODO:
-
-            Calendar {
-                id: calendarobject_2
-                minimumDate: new Date(2017, 0, 1)
-                maximumDate: new Date(2018, 0, 1)
-            }*/
-
         }
 
 

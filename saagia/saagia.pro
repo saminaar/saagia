@@ -36,6 +36,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     ../../../chart_example.gif \
     ../../../single-line-chart.png \
+    Calendar_model.qml \
     Chart_base_beta.qml \
     Chart_base_test.qml \
     Currently_showing_box.qml \

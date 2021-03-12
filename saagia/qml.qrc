@@ -13,5 +13,6 @@
         <file>Currently_showing_box.qml</file>
         <file>Window_bar_menu.qml</file>
         <file>New_data_load_popup.qml</file>
+        <file>Calendar_model.qml</file>
     </qresource>
 </RCC>
