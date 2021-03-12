@@ -28,6 +28,8 @@ public:
     // HTTP request can contain multiple custom headers but support just one in this case
     Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
 
+    void parseJson(QString content);
+
 private Q_SLOTS:
     void requestCompleted(QNetworkReply* networkReply);
     void requestError(QNetworkReply::NetworkError errorCode);
@@ -43,6 +45,7 @@ private:
     int currentStatuscode_;
     QString currentContent_;
     std::shared_ptr<Saagia_model> model_;
+
 };
 
 #endif // DATAREADER_H

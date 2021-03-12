@@ -8,6 +8,9 @@
 #include <QVariant>
 #include <QByteArray>
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 Data_reader::Data_reader(std::shared_ptr<Saagia_model> model, QObject *parent) :
     QObject( parent ),
@@ -96,12 +99,31 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
     model_->set_new_data_content(currentContent_);
-
+    parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
+
 }
+
 
 void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
     qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
 }
+
+void Data_reader::parseJson(QString content){
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
+    QJsonArray jsonArray = jsonResponse.array();
+    foreach (const QJsonValue & value, jsonArray) {
+        QJsonObject obj = value.toObject();
+        QString kvalue = (obj["value"].toString());
+        QString start_time = (obj["start_time"].toString());
+        QString end_time = (obj["end_time"].toString());
+        model_->save_tomap(kvalue, start_time, end_time);
+    }
+
+
+}
+
+
+

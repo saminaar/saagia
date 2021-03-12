@@ -22,6 +22,7 @@ void Saagia_model::load_data(QString web_address_1, QString start_time, QString 
 
     print_data_ = "Tietojen haku onnistui";
 
+
     if (view_ != nullptr)
     {
         view_->setPrintData(print_data_);
@@ -35,6 +36,7 @@ void Saagia_model::set_new_data_content(QString new_content)
         view_->setPrintData(new_content);
     }
 }
+
 
 void Saagia_model::save_data()
 {
@@ -100,6 +102,11 @@ void Saagia_model::energy_form_4_selected()
         view_->setPrintData(print_data_);
     }
 
+}
+
+void Saagia_model::save_tomap(QString value, QString stime, QString etime){
+    set_new_data_content(value +" " + stime + " " + etime);
+    //times.insert(std::pair<QString, QString>(stime,etime));
 }
 
 void Saagia_model::save_graph_as_image()
