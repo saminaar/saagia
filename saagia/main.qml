@@ -172,6 +172,19 @@ ApplicationWindow {
                 height: 599
                 color: "#2e2c3a"
 
+                Button {
+
+                    y: 450
+                    x: 30
+                    id: buttoni
+                    text: "Try me"
+                    onClicked:   {
+                               var component = Qt.createComponent("New_data_load_popup.qml")
+                               var object = component.createObject(left_column_background);
+                               object.open()
+                                       }
+                }
+
                 Column {
                     id: left_column
                     x: 8

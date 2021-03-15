@@ -13,5 +13,8 @@
         <file>main.qml</file>
         <file>images/application_name.png</file>
         <file>images/save_icon.png</file>
+        <file>images/right-arrow.png</file>
+        <file>images/left-arrow.png</file>
+        <file>images/cancel.png</file>
     </qresource>
 </RCC>

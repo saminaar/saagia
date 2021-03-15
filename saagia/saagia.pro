@@ -39,13 +39,16 @@ DISTFILES += \
     Calendar_model.qml \
     Chart_base_beta.qml \
     Chart_base_test.qml \
+    Checkbox_column.qml \
     Currently_showing_box.qml \
+    Date_input.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
     Save_data_button.qml \
     Text_input_bar.qml \
+    Time_input.qml \
     Title_text.qml \
     Window_bar_menu.qml \
     energy_type_button.qml \

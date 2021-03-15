@@ -2,20 +2,29 @@ import QtQuick 2.12
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.12
 
-Button {
-    text: "Open"
-    onClicked: popup.open()
+Popup {
 
-    Popup {
+        property color background_level_0: "#16141f"
+        property color background_level_1: "#302c40"
+        property color background_level_2: "#dbd6f9"
+        property color accent_color: "#ffa500" // orange
+        property color text_color: "#cdcdcd" // grey-ish
+
+        property string title_text: qsTr("Update shown data")
+        property string subtitle_text: qsTr("Energy type(s) to show..")
+
         id: popup
 
+        property date start_date;
+        property date end_date;
+
         background: Rectangle {
-            color: "#ddd"
+            color: background_level_0
             opacity: 0.9
-            implicitWidth: 200
-            implicitHeight: 200
-            border.color: "orange"
-            border.width: 2
+            implicitWidth: 400
+            implicitHeight: 300
+            border.color: "grey"
+            border.width: 1
         }
 
         width: 400
@@ -32,260 +41,68 @@ Button {
         }
 
         Text {
-            id: name
+            id: window_title_text
             x: 10
-            y: 5
-            color: "#333"
-            text: qsTr("Update data")
+            y: 4
+            color: accent_color
+            font.bold: true
+            font.pixelSize: 15
+            text: title_text
         }
 
-        Rectangle{
+        Image {
+            id: exit_window
+            width: 15
+            height: 15
+            anchors.right: parent.right
+            source: "qrc:/images/cancel.png"
 
-            color: "#ddd"
+            MouseArea {
+
+                anchors.fill: parent
+                onClicked: {
+                    popup.close()
+                }
+            }
+        }
+
+        Rectangle {
+
+            color: background_level_1
             width: parent.width - 20
             height: parent.height - 40
             x: 10
             y: 30
 
         Text {
-            id: energy_type
+            id: window_subtitle_text
             x: 10
             y: 5
-            text: qsTr("Energy type(s) to show")
+            color: text_color
+            font.pixelSize: 13
+            text: subtitle_text
+
         }
 
+        Checkbox_column {
 
-        CheckBox {
-            id: control
-            x: 30
+            x: 10
             y: 40
-            text: qsTr("Electricity")
-            checked: false
-
-            indicator: Rectangle {
-                    id: indicator
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 0
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-
-                    Rectangle {
-                        visible: control.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-            }
-
-            contentItem: Text {
-                text: control.text
-                font: control.font
-                opacity: enabled ? 1.0 : 0.3
-                color: control.down ? "#17a81a" : "#000"
-
-                leftPadding: 15
-                topPadding: -9
-            }
         }
 
-        CheckBox {
-            id: wind_check
-            x: 30
-            y: 65
-            text: qsTr("Wind")
-            checked: false
+        Date_input {
 
-            indicator: Rectangle {
-                    id: indicator_2
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 0
-                    border.color: wind_check.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-
-                    Rectangle {
-                        visible: wind_check.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-            }
-
-            contentItem: Text {
-                text: wind_check.text
-                font: wind_check.font
-                opacity: enabled ? 1.0 : 0.3
-                color: wind_check.down ? "#17a81a" : "#000"
-
-                leftPadding: 15
-                topPadding: -9
-            }
-        }
-
-        CheckBox {
-            id: nuclear_check
-            x: 200
-            y: 65
-            text: qsTr("Nuclear")
-            checked: false
-
-            indicator: Rectangle {
-                    id: indicator_3
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 0
-                    border.color: nuclear_check.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-
-                    Rectangle {
-                        visible: nuclear_check.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-            }
-
-            contentItem: Text {
-                text: nuclear_check.text
-                font: nuclear_check.font
-                opacity: enabled ? 1.0 : 0.3
-                color: nuclear_check.down ? "#17a81a" : "#000"
-
-                leftPadding: 15
-                topPadding: -9
-            }
-        }
-
-        CheckBox {
-            id: hydro_check
-            x: 200
-            y: 40
-            text: qsTr("Hydro")
-            checked: false
-
-            indicator: Rectangle {
-                    id: indicator_4
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 0
-                    border.color: hydro_check.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-
-                    Rectangle {
-                        visible: hydro_check.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-            }
-
-            contentItem: Text {
-                text: hydro_check.text
-                font: hydro_check.font
-                opacity: enabled ? 1.0 : 0.3
-                color: hydro_check.down ? "#17a81a" : "#000"
-
-                leftPadding: 15
-                topPadding: -9
-            }
-        }
-
-        Text {
             x: 10
             y: 100
-            text: qsTr("Start time")
+
         }
 
-
-        TextField {
-            id: start_time
+        Time_input {
             x: 10
-            y: 120
-            placeholderText: qsTr("")
-            background: Rectangle {
-                id: start_time_rect
-                implicitWidth: 100
-                implicitHeight: 10
-                color: start_time.enabled ? "#fff" : "#fff"
-                border.color: start_time.enabled ? "#222" : "orange"
-            }
-
-            MouseArea {
-
-                anchors.fill: start_time_rect
-                onClicked: calendarobject_2.open()
-            }
-            Popup{
-
-                    id: calendarobject_2
-
-                    Calendar_model{
-
-                        onClicked: {
-                            console.log("Clicked")
-                            console.log(date)
-                            calendarobject_2.close()
-
-                        }
-
-                    }
-                }
-            }
-
-
-        Text {
-            x: 200
-            y: 100
-            text: qsTr("End time")
-        }
-
-
-        TextField {
-            id: end_time
-            x: 200
-            y: 120
-            placeholderText: qsTr("")
-            background: Rectangle {
-                id: end_time_rect
-                implicitWidth: 100
-                implicitHeight: 10
-                color: start_time.enabled ? "#fff" : "#fff"
-                border.color: start_time.enabled ? "#222" : "orange"
-            }
-
-            MouseArea {
-
-                anchors.fill: end_time_rect
-
-                onClicked: calendarobject.open()
-            }
-            Popup{
-
-                    id: calendarobject
-
-                    Calendar_model{
-
-                        onClicked: {
-                            console.log("Clicked")
-                            console.log(date)
-                            calendarobject.close()
-
-                        }
-
-                    }
-                }
-
+            y: 164
 
         }
+
 
         Button {
             id: updatebutton
@@ -298,7 +115,7 @@ Button {
                 text: updatebutton.text
                 font: updatebutton.font
                 opacity: enabled ? 1.0 : 0.3
-                color: updatebutton.down ? "orange" : "black"
+                color: updatebutton.down ? "orange" : "orange"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
@@ -308,10 +125,14 @@ Button {
                 implicitWidth: 80
                 implicitHeight: 20
                 opacity: enabled ? 1 : 0.3
-                color: "#ccc"
-                border.color: updatebutton.down ? "orange" : "black"
+                color: updatebutton.down ? "#201d2d" : "#16141f"
+                border.color: updatebutton.down ? "orange" : "#ccc"
                 border.width: 1
                 radius: 2
+            }
+
+            onClicked: {
+                popup.close()
             }
         }
 
@@ -319,4 +140,4 @@ Button {
     }
 }
 
-}
+

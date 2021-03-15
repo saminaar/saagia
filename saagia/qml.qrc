@@ -14,5 +14,8 @@
         <file>Window_bar_menu.qml</file>
         <file>New_data_load_popup.qml</file>
         <file>Calendar_model.qml</file>
+        <file>Checkbox_column.qml</file>
+        <file>Date_input.qml</file>
+        <file>Time_input.qml</file>
     </qresource>
 </RCC>
