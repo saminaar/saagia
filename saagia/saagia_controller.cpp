@@ -36,21 +36,25 @@ void Saagia_controller::load_data(QString starttime, QString endtime, int variab
     }
 
     // tähän start_time
-    //start_time = "start_time=2021-01-01T00:00:00Z";
+    //starttime = "start_time=2021-01-01T00:00:00Z";
     starttime= "start_time=" + start_time;
 
     // tähän end_time
-    //end_time = "end_time=2021-01-01T23:00:00Z";
+    //endtime = "end_time=2021-01-01T23:00:00Z";
     endtime = "end_time=" + end_time;
     model_->load_data(web_address, starttime, endtime);
 }
 
 void Saagia_controller::change_startdate(QString date){
-start_time = date.mid(1, date.length()-4) + "Z";
+start_time = date.mid(1, date.length()-7) + "Z";
+start_time.replace(":", "\%3A");
+qDebug() << start_time;
 }
 
 void Saagia_controller::change_enddate(QString date){
-end_time = date.mid(1, date.length()-4) + "Z";
+end_time = date.mid(1, date.length()-7) + "Z";
+end_time.replace(":", "\%3A");
+qDebug() << end_time;
 }
 
 void Saagia_controller::save_data()
