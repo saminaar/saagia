@@ -1,5 +1,6 @@
 #include "saagia_controller.h"
 #include "saagia_model.h"
+#include <QDebug>
 
 Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
                                      QObject *parent) :
@@ -8,7 +9,7 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 {
 }
 
-void Saagia_controller::load_data(QString start_time, QString end_time, int variable)
+void Saagia_controller::load_data(QString starttime, QString endtime, int variable)
 {
     QString web_address = "";
 
@@ -35,12 +36,21 @@ void Saagia_controller::load_data(QString start_time, QString end_time, int vari
     }
 
     // tähän start_time
-    start_time = "start_time=2021-01-01T00:00:00Z";
+    //start_time = "start_time=2021-01-01T00:00:00Z";
+    starttime= "start_time=" + start_time;
 
     // tähän end_time
-    end_time = "end_time=2021-01-01T23:00:00Z";
+    //end_time = "end_time=2021-01-01T23:00:00Z";
+    endtime = "end_time=" + end_time;
+    model_->load_data(web_address, starttime, endtime);
+}
 
-    model_->load_data(web_address, start_time, end_time);
+void Saagia_controller::change_startdate(QString date){
+start_time = date.mid(1, date.length()-4) + "Z";
+}
+
+void Saagia_controller::change_enddate(QString date){
+end_time = date.mid(1, date.length()-4) + "Z";
 }
 
 void Saagia_controller::save_data()
