@@ -58,6 +58,8 @@ Rectangle {
                     onClicked: {
                         console.log("Clicked")
                         console.log(date)
+                        const json = JSON.stringify(date);
+                        saagia_controller.change_startdate(json);
                         calendarobject_2.close()
 
                         start_time.text = Qt.formatDateTime(date, "dd/MM/yyyy")
@@ -117,6 +119,8 @@ Rectangle {
                     onClicked: {
                         console.log("Clicked")
                         console.log(date)
+                        const json = JSON.stringify(date);
+                        saagia_controller.change_enddate(json);
                         calendarobject_1.close()
 
 

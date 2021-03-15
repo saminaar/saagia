@@ -38,10 +38,13 @@ void Saagia_controller::load_data(QString starttime, QString endtime, int variab
     // tähän start_time
     //starttime = "start_time=2021-01-01T00:00:00Z";
     starttime= "start_time=" + start_time;
+    qDebug() << start_time;
 
     // tähän end_time
     //endtime = "end_time=2021-01-01T23:00:00Z";
     endtime = "end_time=" + end_time;
+    qDebug() << end_time;
+
     model_->load_data(web_address, starttime, endtime);
 }
 
