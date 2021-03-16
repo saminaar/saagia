@@ -9,14 +9,38 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 
 }
 
-void Saagia_model::load_data(QString web_address_1, QString start_time, QString end_time)
+void Saagia_model::load_data(QString start_time, QString end_time, int variable)
 {
+    QString web_address = "";
+
+    switch(variable) {
+        case 0 :
+            // tähän haettavan datapaketin osoite 1
+            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
+            break;
+        case 1 :
+            // tähän haettavan datapaketin osoite 2
+            web_address = "https://opendata.fmi.fi/wfs?"
+                          "request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple"
+                          "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man";
+            break;
+        case 2 :
+            // Optional
+            break;
+        case 3 :
+            // Optional
+            break;
+        default :
+            // Optional
+            break;
+    }
+
     // rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
-    QString web_address = (web_address_1 + start_time + "&" + end_time);
+    QString full_web_address = (web_address + start_time + "&" + end_time);
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
-    dataReader_->requestUrl(web_address, header);
+    dataReader_->requestUrl(full_web_address, header);
 
     qDebug() << "Tietojen haku onnistui";
 
