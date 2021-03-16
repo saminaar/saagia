@@ -11,6 +11,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QXmlStreamReader>
 
 Data_reader::Data_reader(std::shared_ptr<Saagia_model> model, QObject *parent) :
     QObject( parent ),
@@ -123,6 +124,51 @@ void Data_reader::parseJson(QString content){
     }
 
 
+}
+
+void Data_reader::parseXML(QString content)
+{
+    QXmlStreamReader reader(content);
+    std::vector<std::pair<QString, std::vector<QString>>> vectors;
+    std::vector<std::pair<QString, std::vector<QString>>>::iterator ptr;
+    bool type_exists;
+    QString latest_type;
+
+    while (!reader.atEnd()) {
+        if (reader.name() == "ParameterName"){
+            QString str = reader.readElementText();
+            ptr = vectors.begin();
+            type_exists = false;
+            for (std::pair<QString, std::vector<QString>>& v : vectors){
+                if  (v.first == str) {
+                   type_exists = true;
+                }
+                ptr++;
+               }
+            if (type_exists == false) {
+                std::vector<QString> v = {};
+                vectors.push_back(std::make_pair(str, v));
+            }
+            latest_type = str;
+        }
+        if (reader.name() == "ParameterValue"){
+            ptr = vectors.begin();
+            for (std::pair<QString, std::vector<QString>>& v : vectors) {
+                if (v.first == latest_type) {
+                    QString value = reader.readElementText();
+                    v.second.push_back(value);
+                }
+            }
+        }
+        reader.readNext();
+    }
+    for (std::pair<QString, std::vector<QString>>& i: vectors){
+        qDebug() << "type: " << i.first;
+        qDebug() << "Koko: " << i.second.size();
+        for (QString& value :i.second) {
+            qDebug() << "value: " << value;
+        }
+    }
 }
 
 

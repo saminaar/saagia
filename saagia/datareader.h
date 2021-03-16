@@ -40,6 +40,8 @@ signals:
     void currentContentChanged();
 
 private:
+    void parseXML(QString content);
+
     QNetworkAccessManager* network_;
     QUrl currentUrl_;
     int currentStatuscode_;
