@@ -51,6 +51,10 @@ Grid {
             leftPadding: 15
             topPadding: -9
         }
+
+        onToggled: {
+            saagia_controller.set_energy_type(0)
+        }
     }
 
     CheckBox {
@@ -87,6 +91,10 @@ Grid {
             leftPadding: 15
             topPadding: -9
         }
+
+        onToggled: {
+            saagia_controller.set_energy_type(1)
+        }
     }
 
     CheckBox {
@@ -120,6 +128,10 @@ Grid {
 
             leftPadding: 15
             topPadding: -9
+        }
+
+        onToggled: {
+            saagia_controller.set_energy_type(0)
         }
     }
 
@@ -155,6 +167,10 @@ Grid {
 
             leftPadding: 15
             topPadding: -9
+        }
+
+        onToggled: {
+            saagia_controller.set_energy_type(0)
         }
     }
 

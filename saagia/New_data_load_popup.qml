@@ -132,7 +132,7 @@ Popup {
             }
 
             onClicked: {
-                saagia_controller.load_data("","",0)
+                saagia_controller.load_data("","")
                 popup.close()
             }
         }

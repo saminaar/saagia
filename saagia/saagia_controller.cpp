@@ -5,11 +5,19 @@
 Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
                                      QObject *parent) :
     QObject{parent},
-    model_{ model }
+    model_{ model },
+    start_time( "" ),
+    end_time( "" ),
+    energy_type( 0 )
 {
 }
 
-void Saagia_controller::load_data(QString starttime, QString endtime, int variable)
+void Saagia_controller::set_energy_type(int variable)
+{
+    energy_type = variable;
+}
+
+void Saagia_controller::load_data(QString starttime, QString endtime)
 {
     // tähän start_time
     //starttime = "start_time=2021-01-01T00:00:00Z";
@@ -21,7 +29,7 @@ void Saagia_controller::load_data(QString starttime, QString endtime, int variab
     endtime = "end_time=" + end_time;
     qDebug() << end_time;
 
-    model_->load_data(starttime, endtime, variable);
+    model_->load_data(starttime, endtime, energy_type);
 }
 
 void Saagia_controller::change_startdate(QString date){

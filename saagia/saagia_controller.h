@@ -14,7 +14,8 @@ public:
     explicit Saagia_controller(std::shared_ptr<Saagia_model> model,
                                QObject *parent = nullptr);
 
-    Q_INVOKABLE void load_data(QString start_time, QString end_time, int variable);
+    Q_INVOKABLE void set_energy_type(int variable);
+    Q_INVOKABLE void load_data(QString start_time, QString end_time);
     Q_INVOKABLE void save_data();
     Q_INVOKABLE void change_startdate(QString date);
     Q_INVOKABLE void change_enddate(QString date);
@@ -29,7 +30,7 @@ private:
     std::shared_ptr<Saagia_model> model_;
     QString start_time;
     QString end_time;
-
+    int energy_type;
 };
 
 #endif // SAAGIA_CONTROLLER_H
