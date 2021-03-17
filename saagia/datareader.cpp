@@ -12,6 +12,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QXmlStreamReader>
+#include <map>
 
 Data_reader::Data_reader(std::shared_ptr<Saagia_model> model, QObject *parent) :
     QObject( parent ),
@@ -129,44 +130,45 @@ void Data_reader::parseJson(QString content){
 void Data_reader::parseXML(QString content)
 {
     QXmlStreamReader reader(content);
-    std::vector<std::pair<QString, std::vector<QString>>> vectors;
-    std::vector<std::pair<QString, std::vector<QString>>>::iterator ptr;
+    std::vector<std::pair<QString, std::map<QString, QString>>> datas;
     bool type_exists;
     QString latest_type;
+    QString time;
 
     while (!reader.atEnd()) {
+        if (reader.name() == "Time"){
+            time = reader.readElementText();
+        }
         if (reader.name() == "ParameterName"){
             QString str = reader.readElementText();
-            ptr = vectors.begin();
             type_exists = false;
-            for (std::pair<QString, std::vector<QString>>& v : vectors){
+            for (std::pair<QString, std::map<QString, QString>>& v : datas){
                 if  (v.first == str) {
                    type_exists = true;
                 }
-                ptr++;
                }
             if (type_exists == false) {
-                std::vector<QString> v = {};
-                vectors.push_back(std::make_pair(str, v));
+                std::map<QString, QString> m = {};
+                datas.push_back(std::make_pair(str, m));
             }
             latest_type = str;
         }
-        if (reader.name() == "ParameterValue"){
-            ptr = vectors.begin();
-            for (std::pair<QString, std::vector<QString>>& v : vectors) {
+        else if (reader.name() == "ParameterValue"){
+            for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {
                     QString value = reader.readElementText();
-                    v.second.push_back(value);
+                    v.second.insert(std::pair<QString, QString> (time, value));
                 }
             }
         }
         reader.readNext();
     }
-    for (std::pair<QString, std::vector<QString>>& i: vectors){
+    for (std::pair<QString, std::map<QString, QString>>& i: datas){
         qDebug() << "type: " << i.first;
         qDebug() << "Koko: " << i.second.size();
-        for (QString& value :i.second) {
-            qDebug() << "value: " << value;
+        std::map<QString, QString>::iterator it;
+        for (it = i.second.begin(); it != i.second.end(); it++) {
+            qDebug() << "value: " << it->second;
         }
     }
 }
