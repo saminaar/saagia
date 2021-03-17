@@ -27,7 +27,7 @@ public:
 
     bool set_chart_data();
 
-    void save_to_map(QString value, QString stime, QString etime);
+    void save_to_map(int value, QString stime, QString etime);
 
     void save_graph_as_image();
 
@@ -35,7 +35,7 @@ private:
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_reader> dataReader_;
     QString print_data_;
-    std::map<QString, QString> times;
+    std::map<QString, int> times_;
 
 
 };
