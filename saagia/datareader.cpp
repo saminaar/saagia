@@ -99,7 +99,7 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     currentContent_ = QString(responseContent);
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
-    model_->set_new_data_content(currentContent_);
+    //model_->set_new_data_content(currentContent_);
     parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 

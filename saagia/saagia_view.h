@@ -16,9 +16,13 @@ public:
 
     void setPrintData(const QString& newValue);
 
+    QString getChartData() const;
+
+    void setChartData(int value, QString stime, QString etime);
 
 signals:
     void printDataChanged();
+    void chartDataChanged();
 
 
 private:
@@ -26,6 +30,7 @@ private:
     // must have the actual values (because the view has no information about the model),
     // so they are also stored here
     QString print_data_;
+    QString chart_data_;
 
 };
 
