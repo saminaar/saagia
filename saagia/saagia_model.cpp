@@ -10,6 +10,22 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 {
 }
 
+/*
+
+  fingrid variable id:t
+
+Suomen sähkön kulutus: tunneittain: 124, 3min välein: 193
+o   Suomen sähköntuotanto:  74, päivit. tunneittain
+o   Tulevan vuorokauden sähkönkulutusennuste: 166, päivitetään tunneittain
+o   Tulevan vuorokauden sähköntuotanto ennuste: 242, päivit. tunneittain
+o   Tuulienergian tuotantoennuste seur. 36h, 245 (päivitetään tunneittain)
+o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
+    -	vesivoiman tuotanto:  3min välein, 191
+    -	tuulivoiman tuotanto:  3min välein, 181
+    - 	ydinvoiman tuotanto:  3min välein, 188
+
+*/
+
 void Saagia_model::load_data(QString starttime, QString endtime, int variable)
 {
     QString web_address = "";
