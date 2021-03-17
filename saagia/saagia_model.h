@@ -9,16 +9,14 @@ class Data_calculations;
 class Database_handler;
 class Data_reader;
 
-
 class Saagia_model
 {
 
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-
     void load_data(QString start_time, QString end_time, int variable);
-    void set_new_data_content(QString);
+    void set_new_data_content(int value, QString stime, QString etime);
     void save_data();
     void energy_form_1_selected();
     void energy_form_2_selected();
@@ -27,7 +25,7 @@ public:
 
     bool set_chart_data();
 
-    void save_to_map(QString value, QString stime, QString etime);
+    void save_to_map(int value, QString stime, QString etime);
 
     void save_graph_as_image();
 
@@ -35,8 +33,7 @@ private:
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_reader> dataReader_;
     QString print_data_;
-    std::map<QString, QString> times;
-
+    std::map<QString, int> times_;
 
 };
 

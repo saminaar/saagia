@@ -4,9 +4,10 @@
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
-    dataReader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) }
+    dataReader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
+    print_data_{},
+    times_{}
 {
-
 }
 
 void Saagia_model::load_data(QString starttime, QString endtime, int variable)
@@ -74,11 +75,11 @@ void Saagia_model::load_data(QString starttime, QString endtime, int variable)
     }
 }
 
-void Saagia_model::set_new_data_content(QString new_content)
+void Saagia_model::set_new_data_content(int value, QString stime, QString etime)
 {
     if (view_ != nullptr)
     {
-        view_->setPrintData(new_content);
+        view_->setChartData(value, stime, etime);
     }
 }
 
@@ -149,9 +150,24 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
-void Saagia_model::save_to_map(QString value, QString stime, QString etime){
-    set_new_data_content(value +" " + stime + " " + etime);
-    //times.insert(std::pair<QString, QString>(stime,etime));*/
+void Saagia_model::save_to_map(int value, QString stime, QString etime){
+
+    qDebug() << "Function called";
+    set_new_data_content(value, stime, etime);
+
+    times_[stime] = value;
+
+    std::map<QString, int>::iterator it;
+
+
+    qDebug() << "Mapin pyöritys:";
+    for (it = times_.begin(); it != times_.end(); it++)
+    {
+        qDebug() << it->first + " Key";
+        qDebug() << it->second;
+
+    }
+
 }
 
 void Saagia_model::save_graph_as_image()

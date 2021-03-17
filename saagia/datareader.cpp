@@ -100,7 +100,7 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     currentContent_ = QString(responseContent);
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
-    model_->set_new_data_content(currentContent_);
+    //model_->set_new_data_content(currentContent_);
     parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 
@@ -114,11 +114,19 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 }
 
 void Data_reader::parseJson(QString content){
+
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
+
+    qDebug() << jsonResponse;
+
     QJsonArray jsonArray = jsonResponse.array();
+
+
     foreach (const QJsonValue & value, jsonArray) {
+
         QJsonObject obj = value.toObject();
-        QString kvalue = (obj["value"].toString());
+        int kvalue = (obj["value"].toInt());
+
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
         model_->save_to_map(kvalue, start_time, end_time);
