@@ -3,7 +3,7 @@
 Saagia_view::Saagia_view(QObject *parent) :
     QObject{ parent },
     print_data_{ "The program will print out stuff here. . ." },
-    chart_data_{ "" }
+    chart_data_{}
 {
 }
 
@@ -23,8 +23,8 @@ QString Saagia_view::getChartData() const
     return chart_data_;
 }
 
-void Saagia_view::setChartData(int value, QString stime, QString etime)
+void Saagia_view::setChartData(QString stime, int value)
 {
-    chart_data_ = (value, stime, etime);
-    emit chartDataChanged();
+    print_data_ = (stime, value);
+    emit printDataChanged();
 }

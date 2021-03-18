@@ -113,8 +113,8 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
     qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
 }
 
-void Data_reader::parseJson(QString content){
-
+void Data_reader::parseJson(QString content)
+{
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
 
     qDebug() << jsonResponse;
@@ -129,10 +129,8 @@ void Data_reader::parseJson(QString content){
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
-        model_->save_to_map(kvalue, start_time, end_time);
+        model_->save_to_map(start_time, end_time, kvalue);
     }
-
-
 }
 
 void Data_reader::parseXML(QString content)

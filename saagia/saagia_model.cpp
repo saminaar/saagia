@@ -137,7 +137,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
-
+    //set_chart_data();
 
     if (view_ != nullptr)
     {
@@ -145,24 +145,89 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     }
 }
 
-void Saagia_model::set_new_data_content(int value, QString stime, QString etime)
+void Saagia_model::save_to_map(QString stime, QString etime, int value)
 {
-    if (view_ != nullptr)
-    {
-        view_->setChartData(value, stime, etime);
-    }
+    qDebug() << "Function save_to_map called";
+    times_[stime] = value;
+
 }
 
-void Saagia_model::save_data()
+void Saagia_model::set_chart_data()
 {
-    qDebug() << "Tietojen tallennus onnistui";
-    //view_->display_saved_data
+    // Function for changing the displayed chart data
 
-    print_data_ = "Tietojen tallennus onnistui";
+    qDebug() << "Mapin pyöritys:";
+    std::map<QString, int>::iterator it;
 
+    for (it = times_.begin(); it != times_.end(); it++)
+    {
+        qDebug() << it->first + " Key";
+        qDebug() << it->second;
+        set_new_data_content(it->first, it->second);
+    }
+
+    // return false;
+
+    /*
+    // Parses the raw data into usable formats
+
+    // Both lists are for getting the min and max value
+    // of each type (needed for the graph axises)
+    var date_objects = [];
+    var energy_values = [];
+
+    // To make sure there aren't any values set yet
+    energy_series.clear()
+
+    // Messy parser.. does it's job
+    for (var i in energy_data){
+
+        var energy_value = energy_data[i]["value"];
+
+        // Before parsing: "2021-01-01T01:00:00+0000"
+        var parsed_time = energy_data[i]["start_time"].split('T');
+
+        // Before parsing: "2021-01-01"
+        var date = parsed_time[0].split('-')
+
+        var year = date[0]
+        var month = date[1]
+        var day = date[2]
+
+       // Before parsing: "01:00:00+0000"
+        var time_hh_mm_ms = parsed_time[1].split('+')[0].split(':')
+
+        var hours = time_hh_mm_ms[0]
+        var mins = time_hh_mm_ms[1]
+        var ms = time_hh_mm_ms[2]
+
+        // Create a new datetime for the X-axis
+        var new_date = new Date(year, month, day, hours, mins, ms)
+
+        date_objects.push(new_date)
+        energy_values.push(energy_value)
+
+        var msecs = new_date.getTime();
+
+        // Add the X,Y point to the chart
+        energy_series.append(msecs, energy_value);
+
+        // Set the min and max values for both axes.
+        axisX.min = date_objects[0]
+        axisX.max = date_objects[date_objects.length - 1]
+
+        axisY.max = Math.max.apply(Math, energy_values)
+        axisY.min =  Math.min.apply(Math, energy_values) - 500
+
+    }
+    */
+}
+
+void Saagia_model::set_new_data_content(QString stime, int value)
+{
     if (view_ != nullptr)
     {
-        view_->setPrintData(print_data_);
+        view_->setChartData(stime, value);
     }
 }
 
@@ -219,24 +284,17 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
-void Saagia_model::save_to_map(int value, QString stime, QString etime){
+void Saagia_model::save_data()
+{
+    qDebug() << "Tietojen tallennus onnistui";
+    //view_->display_saved_data
 
-    qDebug() << "Function called";
-    set_new_data_content(value, stime, etime);
+    print_data_ = "Tietojen tallennus onnistui";
 
-    times_[stime] = value;
-
-    std::map<QString, int>::iterator it;
-
-    /*
-    qDebug() << "Mapin pyöritys:";
-    for (it = times_.begin(); it != times_.end(); it++)
+    if (view_ != nullptr)
     {
-        qDebug() << it->first + " Key";
-        qDebug() << it->second;
-
+        view_->setPrintData(print_data_);
     }
-    */
 }
 
 void Saagia_model::save_graph_as_image()
@@ -244,68 +302,3 @@ void Saagia_model::save_graph_as_image()
     qDebug() << "Correct function";
 
 }
-
-
-bool Saagia_model::set_chart_data() {
-
-    // Function for changing the displayed chart data
-    return false;
-
-    /*
-    // Parses the raw data into usable formats
-
-    // Both lists are for getting the min and max value
-    // of each type (needed for the graph axises)
-    var date_objects = [];
-    var energy_values = [];
-
-    // To make sure there aren't any values set yet
-    energy_series.clear()
-
-    // Messy parser.. does it's job
-    for (var i in energy_data){
-
-        var energy_value = energy_data[i]["value"];
-
-        // Before parsing: "2021-01-01T01:00:00+0000"
-        var parsed_time = energy_data[i]["start_time"].split('T');
-
-        // Before parsing: "2021-01-01"
-        var date = parsed_time[0].split('-')
-
-        var year = date[0]
-        var month = date[1]
-        var day = date[2]
-
-       // Before parsing: "01:00:00+0000"
-        var time_hh_mm_ms = parsed_time[1].split('+')[0].split(':')
-
-        var hours = time_hh_mm_ms[0]
-        var mins = time_hh_mm_ms[1]
-        var ms = time_hh_mm_ms[2]
-
-        // Create a new datetime for the X-axis
-        var new_date = new Date(year, month, day, hours, mins, ms)
-
-        date_objects.push(new_date)
-        energy_values.push(energy_value)
-
-        var msecs = new_date.getTime();
-
-        // Add the X,Y point to the chart
-        energy_series.append(msecs, energy_value);
-
-        // Set the min and max values for both axes.
-        axisX.min = date_objects[0]
-        axisX.max = date_objects[date_objects.length - 1]
-
-        axisY.max = Math.max.apply(Math, energy_values)
-        axisY.min =  Math.min.apply(Math, energy_values) - 500
-
-    }
-}
-*/
-}
-
-
-
