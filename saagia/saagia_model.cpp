@@ -12,7 +12,7 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 
 /*
 
-  fingrid variable id:t
+    Fingrid variable id:t
 
 Suomen sähkön kulutus: tunneittain: 124, 3min välein: 193
 o   Suomen sähköntuotanto:  74, päivit. tunneittain
@@ -26,7 +26,7 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 
 */
 
-void Saagia_model::load_data(QString starttime, QString endtime, int variable)
+void Saagia_model::load_data(QString stime, QString etime, int variable)
 {
     QString web_address = "";
     QString start_time = "";
@@ -34,46 +34,100 @@ void Saagia_model::load_data(QString starttime, QString endtime, int variable)
 
     switch(variable) {
         case 0 :
-            // tähän haettavan datapaketin osoite 1
-            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
-            // tähän start_time
-            //starttime = "start_time=2021-01-01T00:00:00Z";
-            start_time = "start_time=" + starttime;
-            qDebug() << starttime;
-            qDebug() << variable;
-
-            // tähän end_time
-            //endtime = "end_time=2021-01-01T23:00:00Z";
-            end_time = "end_time=" + endtime;
-            qDebug() << end_time;
             break;
+
         case 1 :
-            // tähän haettavan datapaketin osoite 2
+            // Energy consumption in Finland (hourly)
+            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
+            qDebug() << variable;
+            qDebug() << "Energy consumption in Finland selected";
+
+            // Start time is spelled "start_time"
+            start_time = "start_time=" + stime;
+            qDebug() << start_time;
+
+            // End time is spelled "end_time"
+            end_time = "end_time=" + etime;
+            qDebug() << end_time;
+
+            break;
+
+        case 2 :
+            // Wind data from FMI
             web_address = "https://opendata.fmi.fi/wfs?"
                           "request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple"
                           "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man&";
-            // tähän start_time
-            //starttime = "starttime=2021-01-01T00:00:00Z";
-            start_time = "starttime=" + starttime;
+            qDebug() << variable;
+            qDebug() << "Wind data from FMI selected";
+
+            // Start time is spelled "starttime"
+            start_time = "starttime=" + stime;
             qDebug() << start_time;
 
-            // tähän end_time
-            //endtime = "endtime=2021-01-01T23:00:00Z";
-            end_time = "endtime=" + endtime;
+            // End time is spelled "endtime"
+            end_time = "endtime=" + etime;
             qDebug() << end_time;
+
             break;
-        case 2 :
-            // Optional
-            break;
+
         case 3 :
-            // Optional
+            // Nuclear energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
+            qDebug() << variable;
+            qDebug() << "Nuclear energy selected";
+
+            // Start time is spelled "start_time"
+            start_time = "start_time=" + stime;
+            qDebug() << start_time;
+
+            // End time is spelled "end_time"
+            end_time = "end_time=" + etime;
+            qDebug() << end_time;
+
             break;
-        default :
+
+        case 4 :
+            // Hydro energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
+            qDebug() << variable;
+            qDebug() << "Hydro energy selected";
+
+            // Start time is spelled "start_time"
+            start_time = "start_time=" + stime;
+            qDebug() << start_time;
+
+            // End time is spelled "end_time"
+            end_time = "end_time=" + etime;
+            qDebug() << end_time;
+
+            break;
+
+        case 5 :
             // Optional
+
+            break;
+
+        default :
             break;
     }
 
-    // rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
+    if ( variable == 0 ){
+        // If energy type was not selected, do nothing
+        return;
+    }
+
+    if ( stime == "" ){
+        // If start time was not selected, do nothing
+        return;
+    }
+
+    if ( etime == "" ){
+        // If end time was not selected, do nothing
+        return;
+    }
+
+    // Rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
+    // Build the complete web address and use it for fetching data
     QString full_web_address = (web_address + start_time + "&" + end_time);
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
@@ -98,7 +152,6 @@ void Saagia_model::set_new_data_content(int value, QString stime, QString etime)
         view_->setChartData(value, stime, etime);
     }
 }
-
 
 void Saagia_model::save_data()
 {
@@ -175,7 +228,7 @@ void Saagia_model::save_to_map(int value, QString stime, QString etime){
 
     std::map<QString, int>::iterator it;
 
-
+    /*
     qDebug() << "Mapin pyöritys:";
     for (it = times_.begin(); it != times_.end(); it++)
     {
@@ -183,7 +236,7 @@ void Saagia_model::save_to_map(int value, QString stime, QString etime){
         qDebug() << it->second;
 
     }
-
+    */
 }
 
 void Saagia_model::save_graph_as_image()

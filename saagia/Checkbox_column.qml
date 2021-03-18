@@ -53,7 +53,7 @@ Grid {
         }
 
         onToggled: {
-            saagia_controller.set_energy_type(0)
+            saagia_controller.set_energy_type(1)
         }
     }
 
@@ -93,7 +93,7 @@ Grid {
         }
 
         onToggled: {
-            saagia_controller.set_energy_type(1)
+            saagia_controller.set_energy_type(2)
         }
     }
 
@@ -131,7 +131,7 @@ Grid {
         }
 
         onToggled: {
-            saagia_controller.set_energy_type(0)
+            saagia_controller.set_energy_type(3)
         }
     }
 
@@ -170,7 +170,7 @@ Grid {
         }
 
         onToggled: {
-            saagia_controller.set_energy_type(0)
+            saagia_controller.set_energy_type(4)
         }
     }
 
