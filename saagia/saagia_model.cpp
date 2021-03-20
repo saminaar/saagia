@@ -162,6 +162,7 @@ void Saagia_model::set_chart_data()
     for (it = times_.begin(); it != times_.end(); it++)
     {
         qDebug() << it->first + " Key";
+
         qDebug() << it->second;
         set_new_data_content(it->first, it->second);
     }
@@ -299,6 +300,73 @@ void Saagia_model::save_data()
 
 void Saagia_model::save_graph_as_image()
 {
-    qDebug() << "Correct function";
+    qDebug() << "Save graph as image.. to be implemented";
 
 }
+void Saagia_model::set_visible_date(QString stime, QString etime)
+{
+
+    QString start_date = stime.mid(0, stime.length()-14);
+    QString year = start_date.mid(0,4);
+    QString month = start_date.mid(5,2);
+    QString day = start_date.mid(8, 2);
+    QString start_time = stime.mid(11,stime.length()-17).replace("\%3A", ":");
+
+    QString end_date = etime.mid(0, etime.length()-14);
+    QString eyear = end_date.mid(0,4);
+    QString emonth = end_date.mid(5,2);
+    QString eday = end_date.mid(8, 2);
+    QString end_time = etime.mid(11,etime.length()-17).replace("\%3A", ":");
+
+    QString starting = "Timeframe: " + day + "." + month + "." + year + ", " + start_time + " - " + eday + "." + emonth + "." + eyear + ", " + end_time;
+
+    if(view_ != nullptr )
+    {
+        view_->set_the_visible_date(starting);
+    }
+
+}
+
+void Saagia_model::set_currently_shown_text(int type)
+{
+
+    // ELE: 1
+    // WIND: 2
+    // NUC: 3
+    // HYD: 4
+
+    QString default_text = "Currently being displayed: ";
+    QString energy = "";
+
+    switch(type) {
+        case 1 :
+            energy = "Electricity consumption in Finland (MWh/h)";
+
+            break;
+
+        case 2 :
+            energy = "Wind consumption in Finland (MWh/h)";
+            break;
+
+        case 3 :
+            energy = "Nuclear consumption in Finland (MWh/h)";
+
+            break;
+
+        case 4 :
+            energy = "Hydro consumption in Finland (MWh/h)";
+
+            break;
+
+        default :
+            energy = "";
+            break;
+    }
+
+    QString currently_showing = default_text + energy;
+
+    view_->set_the_type_data(currently_showing);
+
+}
+
+

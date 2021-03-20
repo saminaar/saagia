@@ -47,8 +47,9 @@ Rectangle {
         width: 291
         height: 54
         color: "#ffffff"
-        text: qsTr("Timeframe: 01.01.2021 00:00 - 01.01.2021 23:00")
+        text: saagia_view.active_data
         font.pixelSize: 15
+
     }
     Text {
         id: energy_type
@@ -57,10 +58,9 @@ Rectangle {
         width: 291
         height: 54
         color: "#66ff99"
-        text: qsTr("Electricity consumption in Finland (MWh/h)")
+        text: saagia_view.current_text
         font.pixelSize: 15
     }
-
 
 
 }

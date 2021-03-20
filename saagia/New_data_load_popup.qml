@@ -4,6 +4,8 @@ import QtQuick.Controls 2.12
 
 Popup {
 
+        signal dateChange(string start, string end)
+
         property color background_level_0: "#16141f"
         property color background_level_1: "#302c40"
         property color background_level_2: "#dbd6f9"
@@ -12,6 +14,8 @@ Popup {
 
         property string title_text: qsTr("Update shown data")
         property string subtitle_text: qsTr("Energy type(s) to show..")
+
+        property Currently_showing_box show_case
 
         id: popup
 
@@ -133,6 +137,8 @@ Popup {
 
             onClicked: {
                 saagia_controller.load_data("","")
+                saagia_controller.set_the_visible_date()
+                saagia_controller.set_the_currently_shown_type()
                 popup.close()
             }
         }

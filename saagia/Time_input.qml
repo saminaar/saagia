@@ -8,6 +8,8 @@ Rectangle {
     width: 205
     height: 70
     color: "transparent"
+    property string start_field
+    property string end_field
 
     Text {
 
@@ -25,12 +27,12 @@ Rectangle {
 
     TextField {
 
+        id: start_field
         x: 8
         y: 28
         width: 60
         height: 27
-        id: start_time
-        text : "00:00"
+        text : "12:00"
         font.letterSpacing: 0
         horizontalAlignment: Text.AlignLeft
         leftPadding: 8
@@ -40,6 +42,7 @@ Rectangle {
         font.bold: false
         inputMask: "99:99"
         inputMethodHints: Qt.ImhDigitsOnly
+
 
     }
 
@@ -59,11 +62,11 @@ Rectangle {
 
     TextField {
 
+        id: end_field
         x: 133
         y: 28
         width: 60
         height: 27
-        id: end_time
         text : "00:00"
         font.letterSpacing: 0
         horizontalAlignment: Text.AlignLeft

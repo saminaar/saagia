@@ -9,6 +9,8 @@ class Saagia_view : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString print_data READ getPrintData WRITE setPrintData NOTIFY printDataChanged)
+    Q_PROPERTY(QString active_data READ getActiveDate WRITE set_the_visible_date NOTIFY dateChanged)
+    Q_PROPERTY(QString current_text READ getTypeData WRITE set_the_type_data NOTIFY currentlyShownChanged)
     //Q_PROPERTY(QString chart_data READ getChartData WRITE setChartData NOTIFY chartDataChanged)
 public:
     explicit Saagia_view(QObject *parent = nullptr);
@@ -21,9 +23,19 @@ public:
 
     void setChartData(QString stime, int value);
 
+    void set_the_visible_date(const QString& stime);
+
+    void set_the_type_data(const QString& energy_type);
+
+    QString getTypeData() const;
+
+    QString getActiveDate() const;
+
 signals:
     void printDataChanged();
     void chartDataChanged();
+    void dateChanged();
+    void currentlyShownChanged();
 
 
 private:
@@ -32,6 +44,8 @@ private:
     // so they are also stored here
     QString print_data_;
     QString chart_data_;
+    QString active_date_;
+    QString title_of_shown_data_;
 
 };
 

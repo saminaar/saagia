@@ -217,6 +217,8 @@ ApplicationWindow {
                     id: output_area
                     x: 20
                     y: 149
+                    width: 345
+                    height: 258
 
 
                 }
@@ -225,6 +227,7 @@ ApplicationWindow {
                     id: new_data_load_popup
                     x: 211
                     y: 49
+
                 }
 
             }
@@ -256,22 +259,6 @@ ApplicationWindow {
                 text: qsTr("SAVE DATA")
                 font.pixelSize: 20
             }*/
-
-            Save_data_button{
-                x: 219
-                width: 116
-                height: 40
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: 445
-                id: save_data_button
-            }
-
-            Load_data_button{
-                x: 67
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: 445
-                id: load_data_button
-            }
             Title_text{
                 x: 25
                 y: 26

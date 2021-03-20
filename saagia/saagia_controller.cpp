@@ -63,6 +63,16 @@ void Saagia_controller::energy_form_4_selected()
     model_->energy_form_4_selected();
 }
 
+void Saagia_controller::set_the_visible_date()
+{
+    model_->set_visible_date(start_time, end_time);
+}
+
+void Saagia_controller::set_the_currently_shown_type()
+{
+    model_->set_currently_shown_text(energy_type);
+}
+
 void Saagia_controller::save_chart_image()
 {
     model_->save_graph_as_image();
