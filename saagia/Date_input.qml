@@ -58,8 +58,17 @@ Rectangle {
                     onClicked: {
                         console.log("Clicked")
                         console.log(date)
-                        const json = JSON.stringify(date);
-                        saagia_controller.change_startdate(json);
+
+                        // Send the selected date to controller->model
+                        // Send the time selected separately to controller->model
+                        // Combine the two in model and send it forward
+                        // Profit???
+
+                        //console.log(Qt.formatDateTime(date, "dd/MM/yyyy hh:mm:ss"))
+                        //const json = JSON.stringify(date);
+
+                        //Send forward 2021-02-11 form
+                        saagia_controller.set_the_selected_date(0, Qt.formatDateTime(date, "yyyy-MM-dd"))
                         calendarobject_2.close()
 
                         start_time.text = Qt.formatDateTime(date, "dd/MM/yyyy")
@@ -117,12 +126,11 @@ Rectangle {
                     maximumDate: new Date()
 
                     onClicked: {
-                        console.log("Clicked")
-                        console.log(date, "This guy")
-                        console.log("^")
-                        const json = JSON.stringify(date);
 
-                        saagia_controller.change_enddate(json);
+                        //const json = JSON.stringify(date);
+
+                        saagia_controller.set_the_selected_date(1, Qt.formatDateTime(date, "yyyy-MM-dd"))
+                        //saagia_controller.change_enddate(json);
                         calendarobject_1.close()
 
                         end_time.text = Qt.formatDateTime(date, "dd/MM/yyyy")

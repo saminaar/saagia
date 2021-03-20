@@ -32,7 +32,7 @@ Rectangle {
         y: 28
         width: 60
         height: 27
-        text : "12:00"
+        text : "00:00"
         font.letterSpacing: 0
         horizontalAlignment: Text.AlignLeft
         leftPadding: 8
@@ -42,6 +42,12 @@ Rectangle {
         font.bold: false
         inputMask: "99:99"
         inputMethodHints: Qt.ImhDigitsOnly
+
+        onEditingFinished: {
+
+            saagia_controller.set_the_selected_time(0, start_field.text + ":00")
+
+        }
 
 
     }
@@ -77,6 +83,14 @@ Rectangle {
         font.bold: false
         inputMask: "99:99"
         inputMethodHints: Qt.ImhDigitsOnly
+
+        onEditingFinished: {
+
+            console.log("End time editing finished")
+            console.log("Time: " + end_field.text)
+            saagia_controller.set_the_selected_time(1, end_field.text + ":00")
+
+        }
 
     }
 

@@ -28,7 +28,7 @@ public:
 
     void save_data();
     void save_graph_as_image();
-    void set_visible_date(QString stime, QString etime);
+    void set_visible_date(QString stime, QString etime, QString shours, QString ehours);
     void set_currently_shown_text(int type);
 
 private:

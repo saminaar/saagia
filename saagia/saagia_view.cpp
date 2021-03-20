@@ -6,7 +6,7 @@ Saagia_view::Saagia_view(QObject *parent) :
     print_data_{ "The program will print out stuff here. . ." },
     chart_data_{},
     active_date_{"Timeframe: "},
-    title_of_shown_data_{"Currently being displayed: "}
+    title_of_shown_data_{"Currently displayed: "}
 {
 }
 

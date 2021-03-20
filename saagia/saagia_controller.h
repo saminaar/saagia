@@ -15,10 +15,9 @@ public:
                                QObject *parent = nullptr);
 
     Q_INVOKABLE void set_energy_type(int variable);
-    Q_INVOKABLE void load_data(QString start_time, QString end_time);
+    Q_INVOKABLE void load_data();
     Q_INVOKABLE void save_data();
-    Q_INVOKABLE void change_startdate(QString date);
-    Q_INVOKABLE void change_enddate(QString date);
+    Q_INVOKABLE void set_the_selected_date(int type, QString date);
     Q_INVOKABLE void energy_form_1_selected();
     Q_INVOKABLE void energy_form_2_selected();
     Q_INVOKABLE void energy_form_3_selected();
@@ -26,13 +25,19 @@ public:
 
     Q_INVOKABLE void set_the_visible_date();
     Q_INVOKABLE void set_the_currently_shown_type();
+    Q_INVOKABLE void set_the_selected_time(int type, QString time);
 
     Q_INVOKABLE void save_chart_image();
 
 private:
     std::shared_ptr<Saagia_model> model_;
+
     QString start_time;
     QString end_time;
+
+    QString start_hours_min;
+    QString end_hours_min;
+
     int energy_type;
 };
 

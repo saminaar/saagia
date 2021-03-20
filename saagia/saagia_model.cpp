@@ -303,22 +303,20 @@ void Saagia_model::save_graph_as_image()
     qDebug() << "Save graph as image.. to be implemented";
 
 }
-void Saagia_model::set_visible_date(QString stime, QString etime)
+void Saagia_model::set_visible_date(QString stime, QString etime, QString shours, QString ehours)
 {
 
     QString start_date = stime.mid(0, stime.length()-14);
     QString year = start_date.mid(0,4);
     QString month = start_date.mid(5,2);
     QString day = start_date.mid(8, 2);
-    QString start_time = stime.mid(11,stime.length()-17).replace("\%3A", ":");
 
     QString end_date = etime.mid(0, etime.length()-14);
     QString eyear = end_date.mid(0,4);
     QString emonth = end_date.mid(5,2);
     QString eday = end_date.mid(8, 2);
-    QString end_time = etime.mid(11,etime.length()-17).replace("\%3A", ":");
 
-    QString starting = "Timeframe: " + day + "." + month + "." + year + ", " + start_time + " - " + eday + "." + emonth + "." + eyear + ", " + end_time;
+    QString starting = "Timeframe: " + day + "." + month + "." + year + ", " + shours.replace("\%3A", ":") + " - " + eday + "." + emonth + "." + eyear + ", " + ehours.replace("\%3A", ":");
 
     if(view_ != nullptr )
     {
@@ -335,7 +333,7 @@ void Saagia_model::set_currently_shown_text(int type)
     // NUC: 3
     // HYD: 4
 
-    QString default_text = "Currently being displayed: ";
+    QString default_text = "Currently displayed: ";
     QString energy = "";
 
     switch(type) {
