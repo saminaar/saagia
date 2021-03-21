@@ -304,16 +304,16 @@ void Saagia_model::set_currently_shown_text(int type)
             break;
 
         case 2 :
-            energy = "Wind consumption in Finland (MWh/h)";
+            energy = "Wind data from FMI";
             break;
 
         case 3 :
-            energy = "Nuclear consumption in Finland (MWh/h)";
+            energy = "Nuclear energy production in Finland (MWh/h)";
 
             break;
 
         case 4 :
-            energy = "Hydro consumption in Finland (MWh/h)";
+            energy = "Hydro energy production in Finland (MWh/h)";
 
             break;
 

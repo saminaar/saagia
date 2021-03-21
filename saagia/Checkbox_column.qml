@@ -21,7 +21,7 @@ Grid {
 
     CheckBox {
         id: control
-        text: qsTr("Electricity")
+        text: qsTr("Electricity consumption")
         checked: false
 
         indicator: Rectangle {
@@ -59,7 +59,7 @@ Grid {
 
     CheckBox {
         id: wind_check
-        text: qsTr("Wind")
+        text: qsTr("Wind data")
         font.letterSpacing: 0
         display: AbstractButton.TextBesideIcon
         checked: false
@@ -99,7 +99,7 @@ Grid {
 
     CheckBox {
         id: nuclear_check
-        text: qsTr("Nuclear")
+        text: qsTr("Nuclear production")
         checked: false
 
         indicator: Rectangle {
@@ -137,7 +137,7 @@ Grid {
 
     CheckBox {
         id: hydro_check
-        text: qsTr("Hydro")
+        text: qsTr("Hydro production")
         spacing: 11
         checked: false
 
