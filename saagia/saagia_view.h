@@ -21,7 +21,7 @@ public:
 
     QString getChartData() const;
 
-    void setChartData(QString stime, int value);
+    void setChartData(int value, QString date, int type);
 
     void set_the_visible_date(const QString& stime);
 
@@ -31,11 +31,18 @@ public:
 
     QString getActiveDate() const;
 
+    void clear_chart_data();
+
+
 signals:
     void printDataChanged();
     void chartDataChanged();
     void dateChanged();
     void currentlyShownChanged();
+
+    void sendChartData(int value, QString date, int type);
+
+    void clearChartData();
 
 
 private:

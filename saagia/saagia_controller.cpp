@@ -17,6 +17,7 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 void Saagia_controller::set_energy_type(int variable)
 {
     energy_type = variable;
+    model_->set_energy_type(variable);
 }
 
 void Saagia_controller::load_data()
@@ -53,10 +54,7 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
             break;
 
     }
-    /*
-    start_time = date.mid(1, date.length()-7) + "Z";
-    start_time.replace(":", "\%3A");
-    qDebug() << start_time;*/
+
 }
 
 void Saagia_controller::save_data()

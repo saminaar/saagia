@@ -3,14 +3,14 @@ import QtQuick.Controls 2.14
 
 Rectangle {
     id: energy_button
-
-    width: 500
-    height: 70
+    height: 60
     color: "#1d1b29"
 
     Row {
         id: row
         x: 35
+        anchors.verticalCenterOffset: 2
+        anchors.horizontalCenterOffset: 156
         spacing: 20
         anchors.centerIn: parent
 

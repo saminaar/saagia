@@ -38,29 +38,29 @@ ApplicationWindow {
 
             // Menu item dropdown style
             delegate: MenuItem {
-                    id: menuItem
+                id: menuItem
+                implicitWidth: 100
+                implicitHeight: 30
+
+                contentItem: Text {
+                    leftPadding: menuItem.indicator.width
+                    rightPadding: menuItem.arrow.width
+                    text: menuItem.text
+                    font: menuItem.font
+                    opacity: enabled ? 1.0 : 0.3
+                    color: menuItem.highlighted ? "#000000" : "#ffffff"
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+
+                background: Rectangle {
                     implicitWidth: 100
                     implicitHeight: 30
-
-                    contentItem: Text {
-                        leftPadding: menuItem.indicator.width
-                        rightPadding: menuItem.arrow.width
-                        text: menuItem.text
-                        font: menuItem.font
-                        opacity: enabled ? 1.0 : 0.3
-                        color: menuItem.highlighted ? "#000000" : "#ffffff"
-                        horizontalAlignment: Text.AlignLeft
-                        verticalAlignment: Text.AlignVCenter
-                        elide: Text.ElideRight
-                    }
-
-                    background: Rectangle {
-                        implicitWidth: 100
-                        implicitHeight: 30
-                        opacity: enabled ? 1 : 0.3
-                        color: menuItem.highlighted ? "orange" : "#2c283e"
-                    }
-        }
+                    opacity: enabled ? 1 : 0.3
+                    color: menuItem.highlighted ? "orange" : "#2c283e"
+                }
+            }
         }
 
         Menu {
@@ -69,29 +69,29 @@ ApplicationWindow {
 
             // Menu item dropdown style
             delegate: MenuItem {
-                    id: menuItem_2
+                id: menuItem_2
+                implicitWidth: 100
+                implicitHeight: 30
+
+                contentItem: Text {
+                    leftPadding: menuItem_2.indicator.width
+                    rightPadding: menuItem_2.arrow.width
+                    text: menuItem_2.text
+                    font: menuItem_2.font
+                    opacity: enabled ? 1.0 : 0.3
+                    color: menuItem_2.highlighted ? "#000000" : "#ffffff"
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+
+                background: Rectangle {
                     implicitWidth: 100
                     implicitHeight: 30
-
-                    contentItem: Text {
-                        leftPadding: menuItem_2.indicator.width
-                        rightPadding: menuItem_2.arrow.width
-                        text: menuItem_2.text
-                        font: menuItem_2.font
-                        opacity: enabled ? 1.0 : 0.3
-                        color: menuItem_2.highlighted ? "#000000" : "#ffffff"
-                        horizontalAlignment: Text.AlignLeft
-                        verticalAlignment: Text.AlignVCenter
-                        elide: Text.ElideRight
-                    }
-
-                    background: Rectangle {
-                        implicitWidth: 100
-                        implicitHeight: 30
-                        opacity: enabled ? 1 : 0.3
-                        color: menuItem_2.highlighted ? "orange" : "#2c283e"
-                    }
-        }
+                    opacity: enabled ? 1 : 0.3
+                    color: menuItem_2.highlighted ? "orange" : "#2c283e"
+                }
+            }
         }
 
         ///
@@ -99,25 +99,25 @@ ApplicationWindow {
 
         // Style for the menu bar item (not the dropdown)
         delegate: MenuBarItem {
-                id: menuBarItem
-                padding: 5
+            id: menuBarItem
+            padding: 5
 
-                contentItem: Text {
-                    text: menuBarItem.text
-                    font: menuBarItem.font
-                    opacity: enabled ? 1.0 : 0.3
-                    color: menuBarItem.highlighted ? "orange" : "#ffffff"
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
-                }
+            contentItem: Text {
+                text: menuBarItem.text
+                font: menuBarItem.font
+                opacity: enabled ? 1.0 : 0.3
+                color: menuBarItem.highlighted ? "orange" : "#ffffff"
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+            }
 
-                background: Rectangle {
-                    implicitWidth: 30
-                    implicitHeight: 30
-                    opacity: enabled ? 1 : 0.3
-                    color: menuBarItem.highlighted ? "#2c283e" : "#16141f"
-                }
+            background: Rectangle {
+                implicitWidth: 30
+                implicitHeight: 30
+                opacity: enabled ? 1 : 0.3
+                color: menuBarItem.highlighted ? "#2c283e" : "#16141f"
+            }
         }
 
     }
@@ -142,16 +142,11 @@ ApplicationWindow {
 
             Column {
                 id: right_column
-                x: 432
-                y: 15
+                x: 344
+                y: 96
                 spacing: 20
-                width: 503
-                height: 624
-
-                Currently_showing_box{
-                   id: show_case
-
-                }
+                width: 571
+                height: 531
 
 
                 Chart_base_test {
@@ -159,7 +154,8 @@ ApplicationWindow {
                 }
 
                 Energy_type_button_row{
-                   id: button_row
+                    id: button_row
+                    width: right_column.width
 
                 }
             }
@@ -167,57 +163,36 @@ ApplicationWindow {
             Rectangle {
                 id: left_column_background
                 x: 17
-                y: 16
-                width: 384
-                height: 599
-                color: "#2e2c3a"
-
-                Button {
-
-                    y: 450
-                    x: 30
-                    id: buttoni
-                    text: "Try me"
-                    onClicked: {
-                        saagia_controller.set_energy_type(0)
-                        var component = Qt.createComponent("New_data_load_popup.qml")
-                        var object = component.createObject(left_column_background);
-                        object.open()
-                    }
-                }
+                y: 96
+                width: 314
+                height: 531
+                color: "#1d1b29"
 
                 Column {
                     id: left_column
-                    x: 8
+                    x: 9
                     y: 8
-                    width: 368
-                    height: 587
-                }
-
-                Text_input_bar {
-                    id: text_input_bar
-                    x: 684
-                    y: -88
-                    width: 247
-                    height: 52
+                    width: 297
+                    height: 515
                 }
 
                 Text {
                     id: sub_title
-                    x: 16
-                    y: 22
-                    width: 291
-                    height: 54
+                    x: 29
+                    y: 220
+                    width: 196
+                    height: 25
                     color: "#ffffff"
-                    text: qsTr("TO DO")
-                    font.pixelSize: 40
+                    text: qsTr("Debug console")
+                    font.pixelSize: 15
+                    font.italic: true
                 }
 
                 Output_area {
                     id: output_area
-                    x: 20
-                    y: 149
-                    width: 345
+                    x: 24
+                    y: 251
+                    width: 268
                     height: 258
 
 
@@ -228,6 +203,31 @@ ApplicationWindow {
                     x: 211
                     y: 49
 
+                }
+
+            }
+
+            Currently_showing_box{
+                id: show_case
+                x: 15
+                y: 15
+                width: 900
+
+                Fetch_data_button {
+
+                    y: 25
+                    anchors.left: parent.right
+                    anchors.right: parent.right
+                    anchors.leftMargin: -213
+                    anchors.rightMargin: 64
+                    hoverEnabled: false
+                    id: retrieve_button
+                    onClicked: {
+                        saagia_controller.set_energy_type(0)
+                        var component = Qt.createComponent("New_data_load_popup.qml")
+                        var object = component.createObject(left_column_background);
+                        object.open()
+                    }
                 }
 
             }
@@ -267,10 +267,18 @@ ApplicationWindow {
             Text {
                 id: city
                 x: 431
-                y: 37
+                y: 35
                 text: qsTr("Current city/region: Tampere")
                 font.pixelSize: 20
                 color: "#ffffff"
+            }
+
+            Text_input_bar {
+                id: text_input_bar
+                x: 727
+                y: 25
+                width: 247
+                height: 52
             }
 
 
@@ -283,6 +291,6 @@ ApplicationWindow {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}
+    D{i:0;formeditorZoom:0.66}D{i:29}
 }
 ##^##*/

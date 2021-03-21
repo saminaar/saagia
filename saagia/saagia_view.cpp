@@ -26,11 +26,15 @@ QString Saagia_view::getChartData() const
     return chart_data_;
 }
 
-void Saagia_view::setChartData(QString stime, int value)
+void Saagia_view::setChartData(int value, QString date, int type)
 {
-    print_data_ = (stime, value);
-    emit printDataChanged();
+
+    emit sendChartData(value, date, type);
+
 }
+
+
+
 
 void Saagia_view::set_the_visible_date(const QString &stime)
 {
@@ -56,3 +60,9 @@ QString Saagia_view::getActiveDate() const
 {
     return active_date_;
 }
+
+void Saagia_view::clear_chart_data()
+{
+     emit clearChartData();
+}
+

@@ -12,7 +12,7 @@ Rectangle {
         id: save_image_button
         anchors.right: parent.right
         anchors.rightMargin: 13
-        anchors.leftMargin: 452
+        anchors.leftMargin: parent.width - 50
         y: 25
         width: 35
         height: 35

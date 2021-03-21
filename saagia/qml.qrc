@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>Energy_type_button.qml</file>
         <file>Text_input_bar.qml</file>
-        <file>Chart_base_beta.qml</file>
         <file>Energy_type_button_row.qml</file>
         <file>Load_data_button.qml</file>
         <file>Save_data_button.qml</file>
@@ -17,5 +16,6 @@
         <file>Checkbox_column.qml</file>
         <file>Date_input.qml</file>
         <file>Time_input.qml</file>
+        <file>Fetch_data_button.qml</file>
     </qresource>
 </RCC>

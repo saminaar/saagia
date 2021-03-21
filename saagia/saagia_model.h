@@ -19,7 +19,11 @@ public:
     void save_to_map(QString stime, QString etime,int value);
 
     void set_chart_data();
-    void set_new_data_content(QString stime, int value);
+
+    void set_energy_type(int type);
+
+    void clear_database();
+    void set_new_data_content(int value, QString date, int type);
 
     void energy_form_1_selected();
     void energy_form_2_selected();
@@ -36,6 +40,7 @@ private:
     std::shared_ptr<Data_reader> dataReader_;
     QString print_data_;
     std::map<QString, int> times_;
+    int energy_type_;
 
 };
 

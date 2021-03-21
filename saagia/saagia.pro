@@ -44,6 +44,7 @@ DISTFILES += \
     Date_input.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
+    Fetch_data_button.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
     Save_data_button.qml \

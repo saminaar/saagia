@@ -12,7 +12,7 @@ Popup {
         property color accent_color: "#ffa500" // orange
         property color text_color: "#cdcdcd" // grey-ish
 
-        property string title_text: qsTr("Update shown data")
+        property string title_text: qsTr("Retrieve new datasets")
         property string subtitle_text: qsTr("Energy type(s) to show..")
 
         property Currently_showing_box show_case
@@ -48,7 +48,7 @@ Popup {
             id: window_title_text
             x: 10
             y: 4
-            color: accent_color
+            color: text_color
             font.bold: true
             font.pixelSize: 15
             text: title_text
@@ -112,7 +112,7 @@ Popup {
             id: updatebutton
             x: 260
             y: 190
-            text: qsTr("Update")
+            text: qsTr("Retrieve")
 
 
             contentItem: Text {

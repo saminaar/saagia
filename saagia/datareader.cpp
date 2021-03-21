@@ -115,6 +115,8 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 
 void Data_reader::parseJson(QString content)
 {
+    model_->clear_database();
+
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
 
     qDebug() << jsonResponse;
@@ -131,6 +133,9 @@ void Data_reader::parseJson(QString content)
         QString end_time = (obj["end_time"].toString());
         model_->save_to_map(start_time, end_time, kvalue);
     }
+
+
+    model_->set_chart_data();
 }
 
 void Data_reader::parseXML(QString content)

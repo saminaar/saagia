@@ -3,17 +3,17 @@ import QtQuick 2.14
 Rectangle {
     id: energy_button
 
-    width: 50
-    height: 50
+    width: 40
+    height: 40
     color: "#090426"
-    border.width: 3
+    border.width: 2
     border.color: "white"
     property string buttonIcon: "default"
 
     Image {
         id: button_image
-        width: 30
-        height:30
+        width: 25
+        height: 25
         anchors.centerIn: parent
         fillMode: Image.Stretch
         source: {
