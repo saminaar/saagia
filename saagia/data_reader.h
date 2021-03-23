@@ -1,5 +1,5 @@
-#ifndef DATAREADER_H
-#define DATAREADER_H
+#ifndef DATA_READER_H
+#define DATA_READER_H
 
 #include <QNetworkReply>
 #include <QObject>
@@ -50,4 +50,4 @@ private:
 
 };
 
-#endif // DATAREADER_H
+#endif // DATA_READER_H

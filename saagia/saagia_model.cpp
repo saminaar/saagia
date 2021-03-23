@@ -1,10 +1,10 @@
 #include "saagia_model.h"
 #include "saagia_view.h"
-#include "datareader.h"
+#include "data_reader.h"
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
-    dataReader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
+    data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
     print_data_{},
     times_{},
     energy_type_{0}
@@ -140,7 +140,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
-    dataReader_->requestUrl(full_web_address, header);
+    data_reader_->requestUrl(full_web_address, header);
 
     QString currently_showing = default_text + energy_info;
 

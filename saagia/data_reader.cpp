@@ -1,4 +1,4 @@
-#include "datareader.h"
+#include "data_reader.h"
 #include "saagia_model.h"
 
 #include <QNetworkAccessManager>

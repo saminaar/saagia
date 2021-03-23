@@ -36,7 +36,7 @@ public:
 
 private:
     std::shared_ptr<Saagia_view> view_;
-    std::shared_ptr<Data_reader> dataReader_;
+    std::shared_ptr<Data_reader> data_reader_;
     QString print_data_;
     std::map<QString, int> times_;
     int energy_type_;
