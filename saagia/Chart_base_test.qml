@@ -144,10 +144,10 @@ Rectangle {
 
     Connections {
         target: saagia_view
-        onSendChartData: {
+        function onSendChartData(value, date, type) {
             parseReceivedData(value, date, type)
         }
-        onClearChartData: {
+        function onClearChartData() {
             clear_previous_data()
         }
     }

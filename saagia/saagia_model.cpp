@@ -32,6 +32,8 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     QString web_address = "";
     QString start_time = "";
     QString end_time = "";
+    QString default_text = "Currently displayed: ";
+    QString energy_info = "";
 
     switch(variable) {
         case 0 :
@@ -42,6 +44,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             qDebug() << variable;
             qDebug() << "Energy consumption in Finland selected";
+            energy_info = "Electricity consumption in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -60,6 +63,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
                           "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man&";
             qDebug() << variable;
             qDebug() << "Wind data from FMI selected";
+            energy_info = "Wind data from FMI";
 
             // Start time is spelled "starttime"
             start_time = "starttime=" + stime;
@@ -76,6 +80,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
             qDebug() << variable;
             qDebug() << "Nuclear energy selected";
+            energy_info = "Nuclear energy production in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -92,6 +97,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
             qDebug() << variable;
             qDebug() << "Hydro energy selected";
+            energy_info = "Hydro energy production in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -109,6 +115,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             break;
 
         default :
+            energy_info = "";
             break;
     }
 
@@ -135,6 +142,11 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     dataReader_->requestUrl(full_web_address, header);
 
+    QString currently_showing = default_text + energy_info;
+
+    view_->set_the_type_data(currently_showing);
+
+    /*
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
@@ -144,6 +156,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     {
         view_->setPrintData(print_data_);
     }
+    */
 }
 
 void Saagia_model::save_to_map(QString stime, QString etime, int value)
@@ -169,7 +182,6 @@ void Saagia_model::set_chart_data()
         qDebug() << it->second;
         set_new_data_content(it->second, it->first, energy_type_);
     }
-
 
 }
 
@@ -285,47 +297,4 @@ void Saagia_model::set_visible_date(QString stime, QString etime, QString shours
     }
 
 }
-
-void Saagia_model::set_currently_shown_text(int type)
-{
-
-    // ELE: 1
-    // WIND: 2
-    // NUC: 3
-    // HYD: 4
-
-    QString default_text = "Currently displayed: ";
-    QString energy = "";
-
-    switch(type) {
-        case 1 :
-            energy = "Electricity consumption in Finland (MWh/h)";
-
-            break;
-
-        case 2 :
-            energy = "Wind data from FMI";
-            break;
-
-        case 3 :
-            energy = "Nuclear energy production in Finland (MWh/h)";
-
-            break;
-
-        case 4 :
-            energy = "Hydro energy production in Finland (MWh/h)";
-
-            break;
-
-        default :
-            energy = "";
-            break;
-    }
-
-    QString currently_showing = default_text + energy;
-
-    view_->set_the_type_data(currently_showing);
-
-}
-
 

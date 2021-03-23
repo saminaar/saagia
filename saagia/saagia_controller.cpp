@@ -88,11 +88,6 @@ void Saagia_controller::set_the_visible_date()
     model_->set_visible_date(start_time, end_time, start_hours_min, end_hours_min);
 }
 
-void Saagia_controller::set_the_currently_shown_type()
-{
-    model_->set_currently_shown_text(energy_type);
-}
-
 void Saagia_controller::set_the_selected_time(int type, QString time)
 {
 
@@ -109,7 +104,6 @@ void Saagia_controller::set_the_selected_time(int type, QString time)
             start_hours_min = "00:00:00";
             end_hours_min = "00:00:00";
             break;
-
     }
 
 }

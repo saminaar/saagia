@@ -138,7 +138,7 @@ Popup {
             onClicked: {
                 saagia_controller.load_data("","")
                 saagia_controller.set_the_visible_date()
-                saagia_controller.set_the_currently_shown_type()
+
                 popup.close()
             }
         }
