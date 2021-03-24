@@ -140,6 +140,8 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
+    QString fmi_test_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::hourly::simple&place=Tampere&starttime=2021-01-19T09:00:00Z&endtime=2021-01-19T14:00:00Z&parameters=TA_PT1H_AVG,TA_PT1H_MAX,TA_PT1H_MIN";
+   // data_reader_->requestUrl(fmi_test_address, "");
     data_reader_->requestUrl(full_web_address, header);
 
     QString currently_showing = default_text + energy_info;
@@ -159,10 +161,22 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     */
 }
 
-void Saagia_model::save_to_map(QString stime, QString etime, int value)
+void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, QString value)
 {
-    qDebug() << "Function save_to_map called";
-    times_[stime] = value;
+    std::map<QString, std::map<QString, QString>>::iterator iter = datastorage_.begin();
+    while (iter != datastorage_.end()) {
+        if (iter->first == data_type) {
+            iter->second.insert(std::make_pair(stime, value));
+            qDebug() << "data saved: " << data_type << " " << stime << " " << value;
+            return;
+        }
+        iter++;
+    }
+    std::map<QString, QString> new_data = {};
+    datastorage_.insert(std::make_pair(data_type, new_data));
+
+   // qDebug() << "Function save_to_map called";
+   // times_[stime] = value;
 
 }
 
