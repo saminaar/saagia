@@ -129,7 +129,7 @@ void Data_reader::parseJson(QString content)
     foreach (const QJsonValue & value, jsonArray) {
 
         QJsonObject obj = value.toObject();
-        QString kvalue = (obj["value"].toString());
+        int kvalue = (obj["value"].toInt());
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
@@ -171,7 +171,7 @@ void Data_reader::parseXML(QString content)
             latest_type = str;
         }
         else if (reader.name() == "ParameterValue"){
-            model_->save_to_map(latest_type, time, 0, reader.readElementText());
+            model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
             /*
             for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {
@@ -183,16 +183,6 @@ void Data_reader::parseXML(QString content)
         }
         reader.readNext();
     }
-   /*
-    for (std::pair<QString, std::map<QString, QString>>& i: datas){
-        qDebug() << "type: " << i.first;
-        qDebug() << "Koko: " << i.second.size();
-        std::map<QString, QString>::iterator it;
-        for (it = i.second.begin(); it != i.second.end(); it++) {
-            qDebug() << "value: " << it->second;
-        }
-    }
-    */
 }
 
 

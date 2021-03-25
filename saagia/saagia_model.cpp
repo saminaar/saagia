@@ -161,9 +161,10 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     */
 }
 
-void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, QString value)
+void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, int value)
 {
-    std::map<QString, std::map<QString, QString>>::iterator iter = datastorage_.begin();
+    times_[stime] = value;
+    std::map<QString, std::map<QString, int>>::iterator iter = datastorage_.begin();
     while (iter != datastorage_.end()) {
         if (iter->first == data_type) {
             iter->second.insert(std::make_pair(stime, value));
@@ -172,11 +173,11 @@ void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, 
         }
         iter++;
     }
-    std::map<QString, QString> new_data = {};
+    std::map<QString, int> new_data = {};
     datastorage_.insert(std::make_pair(data_type, new_data));
 
    // qDebug() << "Function save_to_map called";
-   // times_[stime] = value;
+
 
 }
 
