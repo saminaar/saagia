@@ -11,5 +11,5 @@ This application is made with Qt Creator version 5.12. Older versions might have
 
 ## Versions
 21.2: First prototype of the app, made to present basic layout of the UI as well as some basic functionality the end product will have. This version also includes a chart made from data fetched from Fingrid.
-
+21.3: Mid-term submission of the app. Some of the functions implemented and working properly, rest of the application planned.
  

@@ -1,10 +1,10 @@
 #include "saagia_model.h"
 #include "saagia_view.h"
-#include "datareader.h"
+#include "data_reader.h"
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
-    dataReader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
+    data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
     print_data_{},
     times_{},
     energy_type_{0}
@@ -32,6 +32,8 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     QString web_address = "";
     QString start_time = "";
     QString end_time = "";
+    QString default_text = "Currently displayed: ";
+    QString energy_info = "";
 
     switch(variable) {
         case 0 :
@@ -42,6 +44,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             qDebug() << variable;
             qDebug() << "Energy consumption in Finland selected";
+            energy_info = "Electricity consumption in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -60,6 +63,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
                           "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man&";
             qDebug() << variable;
             qDebug() << "Wind data from FMI selected";
+            energy_info = "Wind data from FMI";
 
             // Start time is spelled "starttime"
             start_time = "starttime=" + stime;
@@ -76,6 +80,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
             qDebug() << variable;
             qDebug() << "Nuclear energy selected";
+            energy_info = "Nuclear energy production in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -92,6 +97,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
             qDebug() << variable;
             qDebug() << "Hydro energy selected";
+            energy_info = "Hydro energy production in Finland (MWh/h)";
 
             // Start time is spelled "start_time"
             start_time = "start_time=" + stime;
@@ -109,6 +115,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             break;
 
         default :
+            energy_info = "";
             break;
     }
 
@@ -133,8 +140,15 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
-    dataReader_->requestUrl(full_web_address, header);
+    QString fmi_test_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::hourly::simple&place=Tampere&starttime=2021-01-19T09:00:00Z&endtime=2021-01-19T14:00:00Z&parameters=TA_PT1H_AVG,TA_PT1H_MAX,TA_PT1H_MIN";
+   // data_reader_->requestUrl(fmi_test_address, "");
+    data_reader_->requestUrl(full_web_address, header);
 
+    QString currently_showing = default_text + energy_info;
+
+    view_->set_the_type_data(currently_showing);
+
+    /*
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
@@ -144,8 +158,10 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     {
         view_->setPrintData(print_data_);
     }
+    */
 }
 
+<<<<<<< HEAD
 void Saagia_model::save_to_map(QString stime, int value)
 {
     std::map<int, std::map<QString, int>>::iterator itr = times_.find(energy_type_);
@@ -167,6 +183,25 @@ void Saagia_model::save_to_map(QString stime, int value)
         times_[energy_type_] = new_map;
 
     }
+=======
+void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, int value)
+{
+    times_[stime] = value;
+    std::map<QString, std::map<QString, int>>::iterator iter = datastorage_.begin();
+    while (iter != datastorage_.end()) {
+        if (iter->first == data_type) {
+            iter->second.insert(std::make_pair(stime, value));
+            qDebug() << "data saved: " << data_type << " " << stime << " " << value;
+            return;
+        }
+        iter++;
+    }
+    std::map<QString, int> new_data = {};
+    datastorage_.insert(std::make_pair(data_type, new_data));
+
+   // qDebug() << "Function save_to_map called";
+
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
 
 }
 
@@ -209,6 +244,7 @@ void Saagia_model::set_chart_data()
 
     }
 
+<<<<<<< HEAD
     else{
 
         for (auto energy_type : times_)
@@ -221,6 +257,8 @@ void Saagia_model::set_chart_data()
         }
     }
 
+=======
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
 }
 
 void Saagia_model::set_energy_type(int type)
@@ -347,47 +385,4 @@ void Saagia_model::set_visible_date(QString stime, QString etime, QString shours
     }
 
 }
-
-void Saagia_model::set_currently_shown_text(int type)
-{
-
-    // ELE: 1
-    // WIND: 2
-    // NUC: 3
-    // HYD: 4
-
-    QString default_text = "Currently displayed: ";
-    QString energy = "";
-
-    switch(type) {
-        case 1 :
-            energy = "Electricity consumption in Finland (MWh/h)";
-
-            break;
-
-        case 2 :
-            energy = "Wind consumption in Finland (MWh/h)";
-            break;
-
-        case 3 :
-            energy = "Nuclear consumption in Finland (MWh/h)";
-
-            break;
-
-        case 4 :
-            energy = "Hydro consumption in Finland (MWh/h)";
-
-            break;
-
-        default :
-            energy = "";
-            break;
-    }
-
-    QString currently_showing = default_text + energy;
-
-    view_->set_the_type_data(currently_showing);
-
-}
-
 

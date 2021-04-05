@@ -163,8 +163,15 @@ Popup {
             }
 
             onClicked: {
+<<<<<<< HEAD
 
                  check_input()
+=======
+                saagia_controller.load_data("","")
+                saagia_controller.set_the_visible_date()
+
+                popup.close()
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
             }
 
         }

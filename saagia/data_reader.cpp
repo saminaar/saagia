@@ -1,4 +1,4 @@
-#include "datareader.h"
+#include "data_reader.h"
 #include "saagia_model.h"
 
 #include <QNetworkAccessManager>
@@ -101,6 +101,8 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
     //model_->set_new_data_content(currentContent_);
+
+   // parseXML(currentContent_);
     parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 
@@ -131,7 +133,11 @@ void Data_reader::parseJson(QString content)
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
+<<<<<<< HEAD:saagia/datareader.cpp
         model_->save_to_map(start_time, kvalue);
+=======
+        model_->save_to_map("energy", start_time, end_time, kvalue);
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7:saagia/data_reader.cpp
     }
 
 
@@ -141,7 +147,8 @@ void Data_reader::parseJson(QString content)
 void Data_reader::parseXML(QString content)
 {
     QXmlStreamReader reader(content);
-    std::vector<std::pair<QString, std::map<QString, QString>>> datas;
+  //  std::vector<std::pair<QString, std::map<QString, QString>>> datas;
+    std::map<QString, std::map<QString, QString>> datatypes;
     bool type_exists;
     QString latest_type;
     QString time;
@@ -152,35 +159,33 @@ void Data_reader::parseXML(QString content)
         }
         if (reader.name() == "ParameterName"){
             QString str = reader.readElementText();
+           /*
             type_exists = false;
             for (std::pair<QString, std::map<QString, QString>>& v : datas){
                 if  (v.first == str) {
                    type_exists = true;
                 }
                }
+
             if (type_exists == false) {
                 std::map<QString, QString> m = {};
                 datas.push_back(std::make_pair(str, m));
             }
+            */
             latest_type = str;
         }
         else if (reader.name() == "ParameterValue"){
+            model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
+            /*
             for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {
                     QString value = reader.readElementText();
                     v.second.insert(std::pair<QString, QString> (time, value));
                 }
             }
+            */
         }
         reader.readNext();
-    }
-    for (std::pair<QString, std::map<QString, QString>>& i: datas){
-        qDebug() << "type: " << i.first;
-        qDebug() << "Koko: " << i.second.size();
-        std::map<QString, QString>::iterator it;
-        for (it = i.second.begin(); it != i.second.end(); it++) {
-            qDebug() << "value: " << it->second;
-        }
     }
 }
 

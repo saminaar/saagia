@@ -16,7 +16,11 @@ public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
     void load_data(QString start_time, QString end_time, int variable);
+<<<<<<< HEAD
     void save_to_map(QString stime, int value);
+=======
+    void save_to_map(QString data_type, QString stime, QString etime,int value);
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
 
     void set_chart_data();
 
@@ -35,13 +39,17 @@ public:
     void save_data();
     void save_graph_as_image();
     void set_visible_date(QString stime, QString etime, QString shours, QString ehours);
-    void set_currently_shown_text(int type);
 
 private:
     std::shared_ptr<Saagia_view> view_;
-    std::shared_ptr<Data_reader> dataReader_;
+    std::shared_ptr<Data_reader> data_reader_;
     QString print_data_;
+<<<<<<< HEAD
     std::map<int, std::map<QString, int>> times_;
+=======
+    std::map<QString, int> times_;
+    std::map<QString, std::map<QString, int>> datastorage_;
+>>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
     int energy_type_;
 
 };
