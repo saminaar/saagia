@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.15
+
 
 Popup {
 
@@ -14,6 +15,7 @@ Popup {
 
         property string title_text: qsTr("Retrieve new datasets")
         property string subtitle_text: qsTr("Energy type(s) to show..")
+        property string error_msg: qsTr("Error: check your input and try again!")
 
         property Currently_showing_box show_case
 
@@ -23,6 +25,7 @@ Popup {
         property date end_date;
 
         background: Rectangle {
+            height: 310
             color: background_level_0
             opacity: 0.9
             implicitWidth: 400
@@ -107,6 +110,30 @@ Popup {
 
         }
 
+        Text {
+            id: error_message
+            x: 0
+            y: 240
+            visible: false
+            color: accent_color
+            font.pixelSize: 13
+            minimumPointSize: 10
+            minimumPixelSize: 10
+            text: error_msg
+
+
+            PropertyAnimation {
+                id: error_animation
+                running: false
+                target: error_message
+                property: 'visible'
+                to: false
+                duration: 4000
+            }
+
+        }
+
+
 
         Button {
             id: updatebutton
@@ -136,15 +163,42 @@ Popup {
             }
 
             onClicked: {
-                saagia_controller.load_data("","")
-                saagia_controller.set_the_visible_date()
-                saagia_controller.set_the_currently_shown_type()
-                popup.close()
+
+                 check_input()
             }
+
         }
 
 
     }
+
+        function check_input(){
+
+            saagia_controller.check_input()
+
+        }
+
+        function send_request(){
+
+            saagia_controller.load_data("","")
+            saagia_controller.set_the_visible_date()
+            saagia_controller.set_the_currently_shown_type()
+            popup.close()
+        }
+
+        Connections {
+            target: saagia_view
+            onInputCheckOk: {
+                send_request()
+            }
+            onInputCheckNotOk: {
+
+                error_message.visible = true;
+                error_animation.running = true;
+
+
+            }
+        }
 }
 
 

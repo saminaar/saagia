@@ -23,6 +23,8 @@ public:
     Q_INVOKABLE void energy_form_3_selected();
     Q_INVOKABLE void energy_form_4_selected();
 
+    Q_INVOKABLE void check_input();
+
     Q_INVOKABLE void set_the_visible_date();
     Q_INVOKABLE void set_the_currently_shown_type();
     Q_INVOKABLE void set_the_selected_time(int type, QString time);

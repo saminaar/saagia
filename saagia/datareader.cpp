@@ -131,7 +131,7 @@ void Data_reader::parseJson(QString content)
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
-        model_->save_to_map(start_time, end_time, kvalue);
+        model_->save_to_map(start_time, kvalue);
     }
 
 

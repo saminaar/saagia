@@ -17,6 +17,7 @@ Rectangle {
 
         property var dates: []
         property var energy_values: []
+        property var electricity_values: []
 
         legend.visible: false
         theme: ChartView.ChartThemeDark
@@ -31,6 +32,7 @@ Rectangle {
         LineSeries {
             axisX: axisX
             axisY: axisY
+
         }
 
         // The Y-axis of the chart
@@ -73,64 +75,107 @@ Rectangle {
         }
     }*/
 
-    function clear_previous_data(){
+    function clear_previous_data(type){
 
-        chart.removeAllSeries()
-        chart.dates = []
-        chart.energy_values = []
+        //chart.removeAllSeries()
+        //chart.dates = []
+        //chart.energy_values = []
 
-        var energy_series = chart.createSeries(ChartView.SeriesTypeLine, "electricity", axisX, axisY )
+        console.log("Created a new type! ", type)
+        add_a_new_line(type)
+
+    }
+
+    function add_a_new_line(type)
+    {
+
+        var line = chart.createSeries(ChartView.SeriesTypeLine, type.toString(), axisX, axisY);
+
+    }
+
+    function set_min_and_max(){
+
+        e1 = chart.series("1").visible;
+        h1 = chart.series("2").visible;
+        w1 = chart.series("3").visible;
+        n1 = chart.series("4").visible;
+
+        // Kaikki on visible
+        if (e1 && h1 && w1 && n1){
+
+        }
+        // Vain electricity
+        else if(e1 && !h1 && !w1 && !n1){
+
+            axisY.max = Math.max.apply(Math, chart.electricity_values) + 500
+            axisY.min =  Math.min.apply(Math, chart.electricity_values)
+
+        }
+
+
+    }
+
+    function set_visibility(line)
+    {
+
+        if(chart.series(line.toString())){
+
+            if( chart.series(line.toString()).visible)
+            {
+
+                chart.series(line.toString()).visible = false;
+
+            }
+
+            else{
+
+                chart.series(line.toString()).visible = true;
+            }
+        }
+
+        // Work in progress:
+        //set_min_and_max()
 
     }
 
     function parseReceivedData(value, start_time, type) {
 
-            // Before parsing: "2021-01-01T01:00:00+0000"
-            var parsed_time = start_time.split('T');
+        // Before parsing: "2021-01-01T01:00:00+0000"
+        var parsed_time = start_time.split('T');
 
-            console.log("Ok houston: " + parsed_time)
-            // Before parsing: "2021-01-01"
-            var date = parsed_time[0].split('-')
-            console.log("Ok houston: " + date)
+        // Before parsing: "2021-01-01"
+        var date = parsed_time[0].split('-')
 
-            var year = date[0]
-            var month = date[1]
-            var day = date[2]
+        var year = date[0]
+        var month = date[1]
+        var day = date[2]
 
 
-            // Before parsing: "01:00:00+0000"
-            var time_hh_mm_ms = parsed_time[1].split('+')[0].split(':')
+        // Before parsing: "01:00:00+0000"
+        var time_hh_mm_ms = parsed_time[1].split('+')[0].split(':')
 
-            var hours = time_hh_mm_ms[0]
-            var mins = time_hh_mm_ms[1]
-            var ms = time_hh_mm_ms[2]
+        var hours = time_hh_mm_ms[0]
+        var mins = time_hh_mm_ms[1]
+        var ms = time_hh_mm_ms[2]
 
-            // Create a new datetime for the X-axis
-            var new_date = new Date(year, month, day, hours, mins, ms)
-            chart.dates.push(new_date)
-            chart.energy_values.push(value)
+        // Create a new datetime for the X-axis
+        var new_date = new Date(year, month, day, hours, mins, ms)
+        chart.dates.push(new_date)
+        chart.energy_values.push(value)
 
-            chart.series("electricity").append(toMsecsSinceEpoch(new_date), value);
-            // Add the X,Y point to the chart
-            /*switch(type) {
-                case 0:
-                    chart.series("electricity").append(toMsecsSinceEpoch(new_date), value);
-                    break;
-                case 2:
-                    chart.series("wind").append(toMsecsSinceEpoch(new_date), value);
-                    break;
-                default:
-                    break;
-            }*/
+        if (type === 1){
+            chart.electricity_values.push(value)
+        }
 
+        // Add the X,Y point to the chart
+        chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value);
 
+        // Set the min and max values for both axes.
+        axisX.min = chart.dates[0]
+        axisX.max = chart.dates[chart.dates.length - 1]
 
-            // Set the min and max values for both axes.
-            axisX.min = chart.dates[0]
-            axisX.max = chart.dates[chart.dates.length - 1]
-
-            axisY.max = Math.max.apply(Math, chart.energy_values)
-            axisY.min =  Math.min.apply(Math, chart.energy_values) - 500
+        axisY.max = Math.max.apply(Math, chart.energy_values) + 500
+        axisY.min =  Math.min.apply(Math, chart.energy_values)
 
 
     }
@@ -148,7 +193,10 @@ Rectangle {
             parseReceivedData(value, date, type)
         }
         onClearChartData: {
-            clear_previous_data()
+            clear_previous_data(type)
+        }
+        onSetLineVisibility: {
+            set_visibility(type)
         }
     }
 

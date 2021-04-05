@@ -19,6 +19,8 @@ public:
 
     void setPrintData(const QString& newValue);
 
+    void setVisibility(int type);
+
     QString getChartData() const;
 
     void setChartData(int value, QString date, int type);
@@ -31,7 +33,9 @@ public:
 
     QString getActiveDate() const;
 
-    void clear_chart_data();
+    void clear_chart_data(int type);
+
+    void input_checked(bool status);
 
 
 signals:
@@ -40,9 +44,15 @@ signals:
     void dateChanged();
     void currentlyShownChanged();
 
+    void setLineVisibility(int type);
+
     void sendChartData(int value, QString date, int type);
 
-    void clearChartData();
+    void clearChartData(int type);
+
+    void inputCheckOk();
+
+    void inputCheckNotOk();
 
 
 private:

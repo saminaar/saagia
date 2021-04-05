@@ -21,6 +21,13 @@ void Saagia_view::setPrintData(const QString &newValue)
     emit printDataChanged();
 }
 
+void Saagia_view::setVisibility(int type)
+{
+
+    emit setLineVisibility(type);
+
+}
+
 QString Saagia_view::getChartData() const
 {
     return chart_data_;
@@ -32,8 +39,6 @@ void Saagia_view::setChartData(int value, QString date, int type)
     emit sendChartData(value, date, type);
 
 }
-
-
 
 
 void Saagia_view::set_the_visible_date(const QString &stime)
@@ -61,8 +66,19 @@ QString Saagia_view::getActiveDate() const
     return active_date_;
 }
 
-void Saagia_view::clear_chart_data()
+void Saagia_view::clear_chart_data(int type)
 {
-     emit clearChartData();
+    emit clearChartData(type);
+}
+
+void Saagia_view::input_checked(bool status)
+{
+    if(status){
+        emit inputCheckOk();
+    }
+    else{
+        emit inputCheckNotOk();
+    }
+
 }
 
