@@ -189,19 +189,15 @@ Rectangle {
 
     Connections {
         target: saagia_view
-        function onSendChartData(value, date, type) {
+        onSendChartData:  {
             parseReceivedData(value, date, type)
         }
-<<<<<<< HEAD
         onClearChartData: {
             clear_previous_data(type)
         }
         onSetLineVisibility: {
             set_visibility(type)
-=======
-        function onClearChartData() {
-            clear_previous_data()
->>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
+
         }
     }
 

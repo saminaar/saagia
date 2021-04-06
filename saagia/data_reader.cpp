@@ -133,13 +133,10 @@ void Data_reader::parseJson(QString content)
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
-<<<<<<< HEAD:saagia/datareader.cpp
-        model_->save_to_map(start_time, kvalue);
-=======
-        model_->save_to_map("energy", start_time, end_time, kvalue);
->>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7:saagia/data_reader.cpp
-    }
 
+        model_->save_to_map(start_time, kvalue);
+
+    }
 
     model_->set_chart_data();
 }
@@ -149,7 +146,7 @@ void Data_reader::parseXML(QString content)
     QXmlStreamReader reader(content);
   //  std::vector<std::pair<QString, std::map<QString, QString>>> datas;
     std::map<QString, std::map<QString, QString>> datatypes;
-    bool type_exists;
+    // bool type_exists;
     QString latest_type;
     QString time;
 
@@ -175,7 +172,7 @@ void Data_reader::parseXML(QString content)
             latest_type = str;
         }
         else if (reader.name() == "ParameterValue"){
-            model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
+           // model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
             /*
             for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {

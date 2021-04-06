@@ -119,20 +119,6 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
             break;
     }
 
-    if ( variable == 0 ){
-        // If energy type was not selected, do nothing
-        return;
-    }
-
-    if ( stime == "" ){
-        // If start time was not selected, do nothing
-        return;
-    }
-
-    if ( etime == "" ){
-        // If end time was not selected, do nothing
-        return;
-    }
 
     // Rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
     // Build the complete web address and use it for fetching data
@@ -161,9 +147,9 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     */
 }
 
-<<<<<<< HEAD
 void Saagia_model::save_to_map(QString stime, int value)
 {
+
     std::map<int, std::map<QString, int>>::iterator itr = times_.find(energy_type_);
 
     // Check if the energy type is already in the database
@@ -181,27 +167,7 @@ void Saagia_model::save_to_map(QString stime, int value)
         new_map[stime] = value;
 
         times_[energy_type_] = new_map;
-
     }
-=======
-void Saagia_model::save_to_map(QString data_type, QString stime, QString etime, int value)
-{
-    times_[stime] = value;
-    std::map<QString, std::map<QString, int>>::iterator iter = datastorage_.begin();
-    while (iter != datastorage_.end()) {
-        if (iter->first == data_type) {
-            iter->second.insert(std::make_pair(stime, value));
-            qDebug() << "data saved: " << data_type << " " << stime << " " << value;
-            return;
-        }
-        iter++;
-    }
-    std::map<QString, int> new_data = {};
-    datastorage_.insert(std::make_pair(data_type, new_data));
-
-   // qDebug() << "Function save_to_map called";
-
->>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
 
 }
 
@@ -209,6 +175,7 @@ void Saagia_model::set_chart_data()
 {
     // Function for changing the displayed chart data
 
+    qDebug() << "CALLED THIS";
     view_->clear_chart_data(energy_type_);
 
     std::map<int, std::map<QString, int>>::iterator it;
@@ -227,8 +194,6 @@ void Saagia_model::set_chart_data()
 
                 if (i == 20){
 
-                    qDebug() << "Added value to chart " + key_value.first;
-
                     set_new_data_content(key_value.second, key_value.first, energy_type_);
                     i = 0;
                 }
@@ -240,11 +205,9 @@ void Saagia_model::set_chart_data()
             }
 
         }
-        qDebug() << "energy_type wasnt 1";
 
     }
 
-<<<<<<< HEAD
     else{
 
         for (auto energy_type : times_)
@@ -257,8 +220,6 @@ void Saagia_model::set_chart_data()
         }
     }
 
-=======
->>>>>>> c7c27dc9cd249823dc02ab76c81f4ec8a7d516a7
 }
 
 void Saagia_model::set_energy_type(int type)

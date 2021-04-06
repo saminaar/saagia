@@ -110,6 +110,7 @@ void Saagia_controller::set_the_visible_date()
 {
 
     model_->set_visible_date(start_time, end_time, start_hours_min, end_hours_min);
+
 }
 
 void Saagia_controller::set_the_selected_time(int type, QString time)
