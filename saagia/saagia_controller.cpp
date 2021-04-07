@@ -92,6 +92,16 @@ void Saagia_controller::check_input()
         status = false;
     }
 
+    if (start_time > end_time){
+        qDebug() << "Start time later than end time!";
+        status = false;
+    }
+
+    if (start_time == end_time && start_hours_min > end_hours_min){
+        qDebug() << "Start time later than end time!";
+        status = false;
+    }
+
     if(energy_type == 0){
         qDebug() << "Energy type not set";
         status = false;
