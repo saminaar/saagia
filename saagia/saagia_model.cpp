@@ -125,10 +125,10 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     QString full_web_address = (web_address + start_time + "&" + end_time);
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
+    QString fmi = " https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man";
+    data_reader_->requestUrl(fmi, header);
 
-    QString fmi_test_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::hourly::simple&place=Tampere&starttime=2021-01-19T09:00:00Z&endtime=2021-01-19T14:00:00Z&parameters=TA_PT1H_AVG,TA_PT1H_MAX,TA_PT1H_MIN";
-   // data_reader_->requestUrl(fmi_test_address, "");
-    data_reader_->requestUrl(full_web_address, header);
+  //  data_reader_->requestUrl(full_web_address, header);
 
     QString currently_showing = default_text + energy_info;
 
@@ -145,6 +145,66 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
         view_->setPrintData(print_data_);
     }
     */
+}
+
+QString Saagia_model::construct_url(QString start_time, QString end_time, int case_variable, QString place)
+{
+    QString web_address = "";
+    QString url = "";
+    QString energy_info = "";
+
+    switch(case_variable) {
+        case 0 :
+            break;
+
+        case 1 :
+            // Energy consumption in Finland (hourly)
+            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
+            url = web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
+
+            return url + header_;
+
+            break;
+
+        case 2 :
+            // Nuclear energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
+            return url + header_;
+            break;
+
+        case 3 :
+            // Hydro energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
+            return url + header_;
+            break;
+
+        case 4 :
+            // Optional
+            break;
+
+        case 5 :
+            // Any old weather data (temperature, wind, cloudiness)
+            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::hourly::simple";
+            url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
+            return url;
+
+            break;
+
+        case 6:
+            //Temperature or wind forecast
+            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::forecast::hirlam::surface::point::simple";
+            url = web_address + "&place=" + place + "&parameters=Temperature,WindSpeedMS";
+            return  url;
+            break;
+
+        default :
+            energy_info = "";
+            break;
+    }
+    return url;
+
 }
 
 void Saagia_model::save_to_map(QString stime, int value)
