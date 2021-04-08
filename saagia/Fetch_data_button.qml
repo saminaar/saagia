@@ -23,6 +23,31 @@ Button{
             border.width: 1
         }
 
+        /*
+        background: Rectangle {
+            implicitWidth: 100
+            implicitHeight: 35
+            //color: button.down ? "#d6d6d6" : "#090426"
+            color: button.hovered? "blue" : "red"
+            border.color: button.hovered ? "white" : "blue"
+            border.width: button.activeFocus ? 3 : 1
+            Behavior on border.color {
+                ColorAnimation{
+                    duration: 100
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            Behavior on border.color {
+                ColorAnimation{
+                    duration: 100
+                    easing.type: Easing.InOutQuad
+                }
+            }
+
+
+        }
+        */
+
 }
 
 

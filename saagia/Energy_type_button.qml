@@ -43,6 +43,7 @@ Rectangle {
     }
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: {
             energy_button.state == 'Active' ? energy_button.state = "" : energy_button.state = 'Active';
 
