@@ -16,6 +16,7 @@ public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
     void load_data(QString start_time, QString end_time, int variable);
+    QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
     void save_to_map(QString stime, int value);
 
     void set_chart_data();
@@ -40,6 +41,7 @@ private:
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_reader> data_reader_;
     QString print_data_;
+    const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
     std::map<int, std::map<QString, int>> times_;
     //std::map<QString, std::map<QString, int>> datastorage_;
