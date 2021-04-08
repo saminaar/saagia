@@ -13,6 +13,7 @@ SOURCES += \
         data_calculations.cpp \
         data_reader.cpp \
         database_handler.cpp \
+        datastructures.cpp \
         main.cpp \
         saagia_controller.cpp \
         saagia_model.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     data_calculations.h \
     data_reader.h \
     database_handler.h \
+    datastructures.hh \
     saagia_controller.h \
     saagia_model.h \
     saagia_view.h
