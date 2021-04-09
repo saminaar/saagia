@@ -126,9 +126,9 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
     QString fmi = " https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man";
-    data_reader_->requestUrl(fmi, header);
+    //data_reader_->requestUrl(fmi, header);
 
-  //  data_reader_->requestUrl(full_web_address, header);
+    data_reader_->requestUrl(full_web_address, header);
 
     QString currently_showing = default_text + energy_info;
 
