@@ -7,7 +7,7 @@ Rectangle {
 
     width: 500
     height: 70
-    color: "#1d1b29"
+    color: "#16141f"
 
     Button {
 
@@ -53,10 +53,10 @@ Rectangle {
 
     Text {
         id: case_title
-        x: 10
-        y: 5
-        width: 291
-        height: 54
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 10
+
         color: "#ffffff"
         text: saagia_view.active_data
         font.pixelSize: 15
@@ -64,10 +64,10 @@ Rectangle {
     }
     Text {
         id: energy_type
-        x: 10
-        y: 30
-        width: 291
-        height: 54
+        anchors.top: case_title.bottom
+        anchors.left: parent.left
+        anchors.margins: 10
+
         color: "#66ff99"
         text: saagia_view.current_text
         font.pixelSize: 15

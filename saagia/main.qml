@@ -5,8 +5,17 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
-    width: 1000
-    height: 780
+    width: 1130
+    height: 900
+
+    maximumHeight: height
+    maximumWidth: width
+
+    minimumHeight: height
+    minimumWidth: width
+
+
+
     visible: true
     color: "transparent"
     title: qsTr("Saagia - application for weather and energy analyzing")
@@ -126,8 +135,8 @@ ApplicationWindow {
         id: main_container
         x: 0
         y: 0
-        width: 1000
-        height: 780
+        width: parent.width
+        height: parent.height
         opacity: 0.9
         color: "#1d1b29"
 
@@ -135,68 +144,78 @@ ApplicationWindow {
             id: container
             x: 26
             y: 94
-            width: 948
-            height: 654
+            width: main_container.width - 50
+            height: main_container.height - 150
             opacity: 0.9
             color: "#3a3749"
 
             Column {
+
                 id: right_column
-                x: 344
+                anchors.right: parent.right
+                leftPadding: -10
                 y: 96
                 spacing: 20
-                width: 571
-                height: 531
+                width: 575
+                height: parent.height - 105
 
+                Rectangle {
+                    id: right_column_background
+                    width: parent.width
+                    height: parent.height
+                    opacity: 0.9
+                    color: "#1d1b29"
 
-                Chart_base_test {
-                    id: chart_base_test_real
+                    Text {
+
+                        text: qsTr("TITLE for the chart below")
+                        color: "white"
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                        anchors.bottomMargin: 10
+                        anchors.bottom: chart_base_test_real.top
+
+                    }
+
+                    Chart_base_test {
+                        id: chart_base_test_real
+                        width: parent.width - 20
+                        height: 400
+                        anchors.right: parent.right
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+
+                        anchors.rightMargin: 10
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 50
+                    }
+
+                    Energy_type_button_row{
+                        id: button_row
+                        width: right_column.width
+                        anchors.top: chart_base_test_real.bottom
+                        anchors.right: parent.right
+                        anchors.left: parent.left
+
+                        anchors.margins: 10
+
+                    }
                 }
 
-                Energy_type_button_row{
-                    id: button_row
-                    width: right_column.width
 
                 }
-            }
+
 
             Rectangle {
                 id: left_column_background
-                x: 17
-                y: 96
-                width: 314
-                height: 531
+                anchors.top: show_case.bottom
+                anchors.topMargin: 15
+                anchors.bottomMargin: 10
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.bottom: container.bottom
+                width: right_column.width - 100
                 color: "#1d1b29"
-
-                Column {
-                    id: left_column
-                    x: 9
-                    y: 8
-                    width: 297
-                    height: 515
-                }
-
-                Text {
-                    id: sub_title
-                    x: 29
-                    y: 220
-                    width: 196
-                    height: 25
-                    color: "#ffffff"
-                    text: qsTr("Debug console")
-                    font.pixelSize: 15
-                    font.italic: true
-                }
-
-                Output_area {
-                    id: output_area
-                    x: 24
-                    y: 251
-                    width: 268
-                    height: 258
-
-
-                }
 
                 New_data_load_popup {
                     id: new_data_load_popup
@@ -205,13 +224,98 @@ ApplicationWindow {
 
                 }
 
+                Text {
+
+                    text: qsTr("TITLE for the chart below")
+                    color: "white"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+                    anchors.bottomMargin: 10
+                    anchors.bottom: wind_background_1.top
+                    font.family: "Arial"
+                    font.bold: false
+
+
+                }
+
+                Rectangle {
+
+                    id: wind_background_1
+
+                    width: 400
+                    height: 250
+                    color: "#060317"
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
+                    anchors.topMargin: 50
+
+
+
+                    Wind_chart_base {
+                        id: wind_chart_base
+
+                        anchors.leftMargin: -2
+                        anchors.rightMargin: -2
+                        anchors.topMargin: -2
+                        anchors.bottomMargin: -2
+
+                    }
+
+                }
+
+                Text {
+
+                    text: qsTr("TITLE for the chart below")
+                    color: "white"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+                    anchors.bottomMargin: 10
+                    anchors.bottom: wind_background_2.top
+
+
+                }
+
+                Rectangle {
+
+                    id: wind_background_2
+
+                    width: 400
+                    height: 250
+                    color: "#060317"
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.top: wind_background_1.bottom
+                    anchors.topMargin: 50
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
+                    anchors.bottomMargin: 10
+
+                    Wind_chart_base {
+                        id: wind_chart_base_2
+                        anchors.leftMargin: -2
+                        anchors.rightMargin: -2
+                        anchors.topMargin: -2
+                        anchors.bottomMargin: -2
+
+
+
+                    }
+                }
+
             }
 
             Currently_showing_box{
                 id: show_case
-                x: 15
-                y: 15
-                width: 900
+
+                y: 10
+                x: 10
+                width: parent.width - 20
+
+
 
                 Fetch_data_button {
 
@@ -235,55 +339,75 @@ ApplicationWindow {
 
         }
 
-        Item {
+        Rectangle {
             id: top_bar
-            x: 0
-            y: 0
-            width: 1000
+            width: parent.width
             height: 92
+            color: "transparent"
 
-            /*Text {
-                x: 569
-                y: 35
-                id: load_button_text
-                color: "#ffffff"
-                text: qsTr("LOAD DATA")
-                font.pixelSize: 20
-            }
 
-            Text {
-                x: 416
-                y: 35
-                id: save_button_text
-                color: "#ffffff"
-                text: qsTr("SAVE DATA")
-                font.pixelSize: 20
-            }*/
             Title_text{
-                x: 25
-                y: 26
+
+                anchors.left: parent.left
+                anchors.leftMargin: 25
+                anchors.top: parent.top
+                anchors.topMargin: 25
             }
 
             Text {
                 id: city
-                x: 431
-                y: 35
-                text: qsTr("Current city/region: Tampere")
-                font.pixelSize: 20
+                text: qsTr("<b>Location:</b> <i>City name here</i>")
+                font.pixelSize: 15
                 color: "#ffffff"
+                anchors.right: text_input_bar.right
+                anchors.top: top_bar.top
+                anchors.topMargin: 10
             }
 
             Text_input_bar {
                 id: text_input_bar
-                x: 727
-                y: 25
-                width: 247
-                height: 52
+
+                anchors.right: parent.right
+                anchors.rightMargin: 25
+
+                anchors.top: city.bottom
+                anchors.topMargin: 10
+
             }
 
 
         }
     }
+
+    Rectangle {
+
+        height: 25
+        width: parent.width
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        color: "#16141f"
+
+        Output_area {
+            id: output_area
+            width: parent.width
+            height: parent.width
+
+        }
+
+
+        Rectangle {
+
+            height: 1
+            width: parent.width
+            color: "orange"
+            anchors.top: parent.top
+
+        }
+
+    }
+
 
 }
 
@@ -291,6 +415,6 @@ ApplicationWindow {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:29}
+    D{i:0;formeditorZoom:0.66}
 }
 ##^##*/

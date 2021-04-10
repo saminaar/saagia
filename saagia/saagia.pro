@@ -48,10 +48,12 @@ DISTFILES += \
     Fetch_data_button.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
+    Program_status_bar.qml \
     Save_data_button.qml \
     Text_input_bar.qml \
     Time_input.qml \
     Title_text.qml \
+    Wind_chart_base.qml \
     Window_bar_menu.qml \
     energy_type_button.qml \
     Output_area.qml

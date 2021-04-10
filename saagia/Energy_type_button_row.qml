@@ -4,45 +4,34 @@ import QtQuick.Controls 2.14
 Rectangle {
     id: energy_button
     height: 60
-    color: "#1d1b29"
+    color: "#16141f"
+
 
     Row {
-        id: row
-        x: 35
+
+        id: row_
         anchors.verticalCenterOffset: 2
         anchors.horizontalCenterOffset: 156
         spacing: 20
         anchors.centerIn: parent
 
-        Energy_type_button {
-            id: button_1
-            buttonIcon: "wind"
-            x: 0
-            y: 0
+        Component.onCompleted: create_new_button()
 
-        }
-        Energy_type_button {
-            id: button_2
-            buttonIcon: "nuclear"
-            x: 0
-            y: 0
 
-        }
-        Energy_type_button {
-            id: button_3
-            buttonIcon: "hydro"
-            x: 0
-            y: 0
+    function create_new_button(){
 
-        }
-        Energy_type_button {
-            id: button_4
-            buttonIcon: "electricity"
-            x: 0
-            y: 0
+        var list = ["\"wind\"", "\"electricity\"", "\"hydro\"", "\"nuclear\""];
+
+        // number of displayed energytypes
+        var i;
+
+        for (i = 0; i < 4; i++) {
+            var newObject = Qt.createQmlObject('import QtQuick 2.0; Energy_type_button {buttonIcon: ' + list[i] +'}',
+                                               row_);
 
         }
 
     }
+}
 }
 

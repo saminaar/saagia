@@ -5,8 +5,7 @@ import QtQuick.Controls 2.0
 Rectangle {
 
     id: background_rect
-    width: 570
-    height: 400
+
     color: "#060317"
 
     ChartView {

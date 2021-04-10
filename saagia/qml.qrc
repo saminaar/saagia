@@ -17,5 +17,7 @@
         <file>Date_input.qml</file>
         <file>Time_input.qml</file>
         <file>Fetch_data_button.qml</file>
+        <file>Wind_chart_base.qml</file>
+        <file>Program_status_bar.qml</file>
     </qresource>
 </RCC>

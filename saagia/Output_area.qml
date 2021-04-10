@@ -6,11 +6,7 @@ import QtQuick.Layouts 1.15
 Rectangle {
     id: text_output
 
-    color: "black"
-    border.color: "#1d1b29"
-    border.width: 3
-    width: 350
-    height: 200
+    color: "transparent"
 
         Flickable {
             id: flickable

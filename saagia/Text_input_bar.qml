@@ -4,14 +4,15 @@ import QtQuick.Layouts 1.14
 
 RowLayout {
     id: searchBar
-    width: 350
+    width: 280
     height: 40
 
     TextField {
         id: searchText
         property bool ignoreTextChange: false
         font.italic: true
-        font.pointSize: 9
+        font.pointSize: 10
+        height: searchBar.height
         placeholderText: qsTr("Enter a city or region...")
         Layout.fillWidth: true
 /**        onTextChanged: {
