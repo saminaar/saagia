@@ -11,6 +11,7 @@ Rectangle {
 
     Button {
 
+        id: button
         anchors.right: parent.right
         anchors.rightMargin: 13
         anchors.left: parent.left
@@ -18,10 +19,12 @@ Rectangle {
         y: 25
 
         background: Rectangle {
+
+                id: button_bg
                 color: "#090426"
                 implicitWidth: 35
                 implicitHeight: 35
-                border.width: control.activeFocus ? 2 : 1
+                border.width: 1
                 border.color: "#fff"
 
             }
@@ -46,7 +49,58 @@ Rectangle {
         ToolTip.visible: hovered
         ToolTip.text: qsTr("Save the current chart")
 
-        onClicked: saagia_controller.save_chart_image()
+        states: [
+            State {
+                name: "Hovering"
+                PropertyChanges {
+                    target: button_bg
+                    color: "#252145"
+                }
+            },
+            State {
+                name: "Pressed"
+                PropertyChanges {
+                    target: button_bg
+                    color: "orange"
+                }
+            }
+        ]
+
+        //define transmission for the states
+        transitions: [
+            Transition {
+                from: ""; to: "Hovering"
+                ColorAnimation { duration: 10 }
+            },
+            Transition {
+                from: "*"; to: "Pressed"
+                ColorAnimation { duration: 10 }
+            }
+        ]
+
+        //Mouse area to react on click events
+        MouseArea {
+            hoverEnabled: true
+            anchors.fill: button_bg
+
+            onEntered: { button.state='Hovering'}
+            onExited: { button.state=''}
+
+            onPressed: { button.state="Pressed" }
+
+            onReleased: {
+                if (containsMouse)
+                  button.state="Hovering";
+                else
+                  button.state="";
+            }
+
+            onClicked: saagia_controller.save_chart_image()
+
+
+        }
+
+
 
     }
 
