@@ -62,6 +62,18 @@ void Saagia_controller::save_data()
     model_->save_data();
 }
 
+/*
+void Saagia_controller::energy_form_selected()
+{
+
+// Modulaarisuuden lisäämiseksi napeille tulisi tehdä
+funktio, joka napin sisällön perusteella pistää asian
+eteenpäin, eli EI silleen että jokaiselle napille
+oma funktio
+
+}
+*/
+
 void Saagia_controller::energy_form_1_selected()
 {
     model_->energy_form_1_selected();
@@ -88,32 +100,23 @@ void Saagia_controller::check_input()
     bool status = true;
 
     if((start_time == "") or (end_time == "")){
-        qDebug() << "Something wrong with the dates";
         status = false;
     }
 
     if (start_time > end_time){
-        qDebug() << "Start time later than end time!";
         status = false;
     }
 
     if (start_time == end_time && start_hours_min > end_hours_min){
-        qDebug() << "Start time later than end time!";
         status = false;
     }
 
     if(energy_type == 0){
-        qDebug() << "Energy type not set";
         status = false;
     }
 
     model_->check_input(status);
 
-   // model_->check_input();
-
-    // check if all the required things are done:
-    // One of the types checked
-    // Date selected
 }
 
 void Saagia_controller::set_the_visible_date()

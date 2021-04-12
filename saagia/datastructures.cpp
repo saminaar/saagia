@@ -40,6 +40,7 @@ std::map<Type, std::map<QString, int> > Datastructures::get_energy_structure()
 {
 
     return data_1;
+
 }
 
 

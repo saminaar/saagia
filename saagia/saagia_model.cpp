@@ -234,8 +234,6 @@ void Saagia_model::save_to_map(QString stime, int value)
 void Saagia_model::set_chart_data()
 {
     // Function for changing the displayed chart data
-
-    qDebug() << "CALLED THIS";
     view_->clear_chart_data(energy_type_);
 
     std::map<int, std::map<QString, int>>::iterator it;
@@ -304,7 +302,6 @@ void Saagia_model::set_new_data_content(int value, QString date, int type)
 
 void Saagia_model::energy_form_1_selected()
 {
-    qDebug() << "Energiamuoto 1 valittu";
     //view_->display_energy_form_1
 
     print_data_ = "Energiamuoto 1 valittu";
@@ -319,8 +316,6 @@ void Saagia_model::energy_form_1_selected()
 
 void Saagia_model::energy_form_2_selected()
 {
-    qDebug() << "Energiamuoto 2 valittu";
-
     print_data_ = "Energiamuoto 2 valittu";
 
     if (view_ != nullptr)
@@ -347,7 +342,6 @@ void Saagia_model::energy_form_3_selected()
 
 void Saagia_model::energy_form_4_selected()
 {
-    qDebug() << "Energiamuoto 4 valittu";
 
     print_data_ = "Energiamuoto 4 valittu";
 
@@ -368,7 +362,6 @@ void Saagia_model::check_input(bool status)
 
 void Saagia_model::save_data()
 {
-    qDebug() << "Tietojen tallennus onnistui";
     //view_->display_saved_data
 
     print_data_ = "Tietojen tallennus onnistui";

@@ -50,6 +50,7 @@ DISTFILES += \
     New_data_load_popup.qml \
     Program_status_bar.qml \
     Save_data_button.qml \
+    Test_file.qml \
     Text_input_bar.qml \
     Time_input.qml \
     Title_text.qml \

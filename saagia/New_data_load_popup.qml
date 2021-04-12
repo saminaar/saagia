@@ -185,17 +185,18 @@ Popup {
         }
 
         Connections {
+
             target: saagia_view
-            onInputCheckOk: {
+
+            function onInputCheckOk() {
                 send_request()
             }
-            onInputCheckNotOk: {
 
+            function onInputCheckNotOk(){
                 error_message.visible = true;
                 error_animation.running = true;
-
-
             }
+
         }
 }
 

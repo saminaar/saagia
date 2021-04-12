@@ -35,7 +35,6 @@ QString Saagia_view::getChartData() const
 
 void Saagia_view::setChartData(int value, QString date, int type)
 {
-    qDebug() << "HERE?";
 
     emit sendChartData(value, date, type);
 

@@ -19,5 +19,6 @@
         <file>Fetch_data_button.qml</file>
         <file>Wind_chart_base.qml</file>
         <file>Program_status_bar.qml</file>
+        <file>Test_file.qml</file>
     </qresource>
 </RCC>
