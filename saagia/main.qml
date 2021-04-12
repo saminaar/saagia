@@ -224,6 +224,7 @@ ApplicationWindow {
 
                 }
 
+
                 Text {
 
                     text: qsTr("TITLE for the chart below")

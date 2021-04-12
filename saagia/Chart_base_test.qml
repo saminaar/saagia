@@ -8,6 +8,7 @@ Rectangle {
 
     color: "#060317"
 
+
     ChartView {
 
         id: chart
@@ -48,18 +49,51 @@ Rectangle {
         }
 
         // The X-axis of the chart
-        DateTimeAxis {
+         DateTimeAxis {
             id: axisX
             gridVisible: true
-            format: "hh:mm"
+            format: "dd.MM hh:mm" //"dd-MM
 
-            min: new Date(2021, 1, 1, 0, 0, 0)
-            max: new Date(2021, 1, 1, 12, 30, 30)
+            //roperty real minValue: new Date(2021, 1, 1, 0, 0, 0)
+            //property real maxValue: new Date(2021, 1, 5, 12, 30, 30)
+            property real range: 100
 
-            tickCount: 7
+           // min: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
+            //max: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
+
+            min: new Date(2021, 0, 1, 0, 0, 0)
+            max: new Date(2021, 0, 1, 12, 30, 30)
+
+            tickCount: 4
         }
 
 
+    }
+
+    Rectangle {
+        id: horizontalScrollMask
+        visible: false
+    }
+
+    MouseArea {
+        id: chart_area
+        anchors.fill: chart
+        acceptedButtons: Qt.LeftButton
+
+        onMouseXChanged: {
+            if ((mouse.buttons & Qt.LeftButton) == Qt.LeftButton) {
+                chart.scrollLeft(mouseX - horizontalScrollMask.x);
+                horizontalScrollMask.x = mouseX;
+            }
+
+            console.log(chart.s)
+
+        }
+        onPressed: {
+            if (mouse.button == Qt.LeftButton) {
+                horizontalScrollMask.x = mouseX;
+            }
+        }
     }
 
     /*
@@ -91,7 +125,7 @@ Rectangle {
         var line = chart.createSeries(ChartView.SeriesTypeLine, type.toString(), axisX, axisY);
 
     }
-
+    /*
     function set_min_and_max(){
 
         e1 = chart.series("1").visible;
@@ -113,7 +147,7 @@ Rectangle {
 
 
     }
-
+*/
     function set_visibility(line)
     {
 
@@ -139,6 +173,8 @@ Rectangle {
 
     function parseReceivedData(value, start_time, type) {
 
+        console.log("Here: ", value, start_time, type)
+
         // Before parsing: "2021-01-01T01:00:00+0000"
         var parsed_time = start_time.split('T');
 
@@ -146,7 +182,7 @@ Rectangle {
         var date = parsed_time[0].split('-')
 
         var year = date[0]
-        var month = date[1]
+        var month = date[1] - 1 // Javascript starts indexing at 0
         var day = date[2]
 
 
@@ -159,22 +195,27 @@ Rectangle {
 
         // Create a new datetime for the X-axis
         var new_date = new Date(year, month, day, hours, mins, ms)
-        chart.dates.push(new_date)
-        chart.energy_values.push(value)
 
+        chart.dates.push(new_date)
+
+        chart.energy_values.push(value)
+        /*
         if (type === 1){
             chart.electricity_values.push(value)
-        }
+        }*/
 
         // Add the X,Y point to the chart
-        chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value);
+
+        chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value)
 
         // Set the min and max values for both axes.
         axisX.min = chart.dates[0]
-        axisX.max = chart.dates[chart.dates.length - 1]
+        axisX.max = chart.dates[7]
 
         axisY.max = Math.max.apply(Math, chart.energy_values) + 500
         axisY.min =  Math.min.apply(Math, chart.energy_values)
+
+
 
 
     }
@@ -188,16 +229,18 @@ Rectangle {
 
     Connections {
         target: saagia_view
-        onSendChartData:  {
+
+        function onSendChartData(value, date, type) {
             parseReceivedData(value, date, type)
         }
-        onClearChartData: {
+        function onClearChartData(type) {
             clear_previous_data(type)
         }
-        onSetLineVisibility: {
+        function onSetLineVisibility(type) {
             set_visibility(type)
-
         }
+
+
     }
 
 }
