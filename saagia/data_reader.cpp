@@ -56,6 +56,7 @@ void Data_reader::requestUrl(const QString &url, const QString &header)
     QNetworkRequest request{ url };
 
     // the header parameter is assumed to be in format "<header_name>:<header_value>"
+    header_ = header;
     if (header != "")
     {
         QStringList headerParts{ header.split(":") };
@@ -101,9 +102,14 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
     //model_->set_new_data_content(currentContent_);
-
+    if (header_ != "") {
+        parseJson(currentContent_);
+    }
+    else {
+        parseXML(currentContent_);
+    }
    // parseXML(currentContent_);
-    parseJson(currentContent_);
+   // parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 
 }
@@ -172,7 +178,7 @@ void Data_reader::parseXML(QString content)
             latest_type = str;
         }
         else if (reader.name() == "ParameterValue"){
-           // model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
+            model_->save_to_map(time, reader.readElementText().toInt());
             /*
             for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {

@@ -47,6 +47,7 @@ private:
     int currentStatuscode_;
     QString currentContent_;
     std::shared_ptr<Saagia_model> model_;
+    QString header_;
 
 };
 

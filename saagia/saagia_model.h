@@ -15,7 +15,7 @@ class Saagia_model
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-    void load_data(QString start_time, QString end_time, int variable);
+    void load_data(QString start_time, QString end_time, int variable, QString place = "Tampere");
     QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
     void save_to_map(QString stime, int value);
 

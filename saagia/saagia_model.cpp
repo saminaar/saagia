@@ -27,7 +27,23 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 
 */
 
-void Saagia_model::load_data(QString stime, QString etime, int variable)
+//https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
+
+void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
+{
+    QString url = construct_url(start_time, end_time, variable, place);
+    if (variable == 5 | variable == 6) {
+        data_reader_->requestUrl(url, "");
+    }
+    else {
+        data_reader_->requestUrl(url, header_);
+    }
+}
+
+
+
+/*
+void Saagia_model::load_data(QString stime, QString etime, int variable, QString place)
 {
     QString web_address = "";
     QString start_time = "";
@@ -134,7 +150,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     view_->set_the_type_data(currently_showing);
 
-    /*
+
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
@@ -144,8 +160,10 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     {
         view_->setPrintData(print_data_);
     }
-    */
+
 }
+
+*/
 
 QString Saagia_model::construct_url(QString start_time, QString end_time, int case_variable, QString place)
 {
@@ -156,28 +174,27 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
     switch(case_variable) {
         case 0 :
             break;
-
+        //https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
         case 1 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
-            url = web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-
-            return url + header_;
+            url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
 
             break;
 
         case 2 :
             // Nuclear energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-            return url + header_;
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
             break;
 
         case 3 :
             // Hydro energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-            return url + header_;
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
             break;
 
         case 4 :
