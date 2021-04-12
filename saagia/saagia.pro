@@ -12,8 +12,8 @@ CONFIG += c++11
 SOURCES += \
         data_calculations.cpp \
         data_reader.cpp \
+        data_structures.cpp \
         database_handler.cpp \
-        datastructures.cpp \
         main.cpp \
         saagia_controller.cpp \
         saagia_model.cpp \
@@ -62,8 +62,8 @@ DISTFILES += \
 HEADERS += \
     data_calculations.h \
     data_reader.h \
+    data_structures.h \
     database_handler.h \
-    datastructures.hh \
     saagia_controller.h \
     saagia_model.h \
     saagia_view.h

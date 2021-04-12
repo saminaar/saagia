@@ -7,7 +7,8 @@
 #include <QUrl>
 
 class QNetworkAccessManager;
-class Saagia_model;
+//class Saagia_model;
+class Data_structures;
 
 class Data_reader: public QObject
 {
@@ -18,7 +19,7 @@ class Data_reader: public QObject
     Q_PROPERTY(QString currentContent READ getCurrentContent NOTIFY currentContentChanged)
 
 public:
-    explicit Data_reader(std::shared_ptr<Saagia_model> model, QObject* parent = nullptr);
+    explicit Data_reader(std::shared_ptr<Data_structures> data_structures, QObject* parent = nullptr);
     ~Data_reader();
 
     QUrl getCurrentUrl() const;
@@ -27,6 +28,8 @@ public:
 
     // HTTP request can contain multiple custom headers but support just one in this case
     Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
+
+    void set_data_type(int data_type);
 
     void parseJson(QString content);
 
@@ -40,14 +43,17 @@ signals:
     void currentContentChanged();
 
 private:
+    std::shared_ptr<Data_structures> data_structures_;
     void parseXML(QString content);
 
     QNetworkAccessManager* network_;
     QUrl currentUrl_;
     int currentStatuscode_;
     QString currentContent_;
-    std::shared_ptr<Saagia_model> model_;
+    //std::shared_ptr<Saagia_model> model_;
+
     QString header_;
+    int data_type_;
 
 };
 
