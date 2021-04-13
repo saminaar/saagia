@@ -1,5 +1,6 @@
 #include "data_reader.h"
 #include "saagia_model.h"
+#include "data_structures.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -14,13 +15,15 @@
 #include <QXmlStreamReader>
 #include <map>
 
-Data_reader::Data_reader(std::shared_ptr<Saagia_model> model, QObject *parent) :
+Data_reader::Data_reader(std::shared_ptr<Data_structures> data_structures, QObject *parent) :
     QObject( parent ),
+    data_structures_{ data_structures },
     network_{ new QNetworkAccessManager(this) },
     currentUrl_( "" ),
     currentStatuscode_{ 0 },
     currentContent_{ "" },
-    model_{ model }
+    data_type_{ 0 } /*
+    model_{ model }*/
 {
     // connect the "finished" signal from the network to the requestCompleted function
     connect(network_, &QNetworkAccessManager::finished, this, &Data_reader::requestCompleted);
@@ -56,6 +59,7 @@ void Data_reader::requestUrl(const QString &url, const QString &header)
     QNetworkRequest request{ url };
 
     // the header parameter is assumed to be in format "<header_name>:<header_value>"
+    header_ = header;
     if (header != "")
     {
         QStringList headerParts{ header.split(":") };
@@ -87,6 +91,12 @@ void Data_reader::requestUrl(const QString &url, const QString &header)
     qDebug() << "Request:" << request.url() << "headers:" << request.rawHeaderList();
 }
 
+void Data_reader::set_data_type(int data_type)
+{
+    data_type_ = data_type;
+    qDebug() << "data reader test print for data type" << data_type_;
+}
+
 void Data_reader::requestCompleted(QNetworkReply *networkReply)
 {
     currentUrl_ = networkReply->url();
@@ -101,9 +111,14 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     // normally the parsing of the response would be done here, in this case just show the raw content
     //emit currentContentChanged();
     //model_->set_new_data_content(currentContent_);
-
+    if (header_ != "") {
+        parseJson(currentContent_);
+    }
+    else {
+        parseXML(currentContent_);
+    }
    // parseXML(currentContent_);
-    parseJson(currentContent_);
+   // parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 
 }
@@ -117,7 +132,8 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 
 void Data_reader::parseJson(QString content)
 {
-    model_->clear_database();
+    //model_->clear_database();
+    data_structures_->clear_data_structures();
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
 
@@ -134,11 +150,13 @@ void Data_reader::parseJson(QString content)
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
 
-        model_->save_to_map(start_time, kvalue);
+        //model_->save_to_map(start_time, kvalue);
+        data_structures_->append_to_data_structure(start_time, data_type_, kvalue);
 
     }
 
-    model_->set_chart_data();
+    data_structures_->test_print();
+    //model_->set_chart_data();
 }
 
 void Data_reader::parseXML(QString content)
@@ -172,7 +190,7 @@ void Data_reader::parseXML(QString content)
             latest_type = str;
         }
         else if (reader.name() == "ParameterValue"){
-           // model_->save_to_map(latest_type, time, 0, reader.readElementText().toInt());
+            //model_->save_to_map(time, reader.readElementText().toInt());
             /*
             for (std::pair<QString, std::map<QString, QString>>& v : datas) {
                 if (v.first == latest_type) {

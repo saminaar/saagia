@@ -6,8 +6,9 @@
 
 class Saagia_view;
 class Data_calculations;
-class Database_handler;
 class Data_reader;
+class Database_handler;
+class Data_structures;
 
 class Saagia_model
 {
@@ -15,7 +16,7 @@ class Saagia_model
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-    void load_data(QString start_time, QString end_time, int variable);
+    void load_data(QString start_time, QString end_time, int variable, QString place = "Tampere");
     QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
     void save_to_map(QString stime, int value);
 
@@ -39,6 +40,7 @@ public:
 
 private:
     std::shared_ptr<Saagia_view> view_;
+    std::shared_ptr<Data_structures> data_structures_;
     std::shared_ptr<Data_reader> data_reader_;
     QString print_data_;
     const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";

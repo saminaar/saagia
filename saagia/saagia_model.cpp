@@ -1,10 +1,14 @@
 #include "saagia_model.h"
 #include "saagia_view.h"
+#include "data_calculations.h"
 #include "data_reader.h"
+#include "database_handler.h"
+#include "data_structures.h"
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
-    data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Saagia_model>( this ) ) },
+    data_structures_{ std::make_shared<Data_structures>() },
+    data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     print_data_{},
     times_{},
     energy_type_{0}
@@ -27,7 +31,26 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 
 */
 
-void Saagia_model::load_data(QString stime, QString etime, int variable)
+//https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
+
+void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
+{
+    QString url = construct_url(start_time, end_time, variable, place);
+    if (variable == 5 | variable == 6) {
+        data_reader_->requestUrl(url, "");
+    }
+
+    else {
+        data_reader_->requestUrl(url, header_);
+    }
+
+    set_chart_data();
+}
+
+
+
+/*
+void Saagia_model::load_data(QString stime, QString etime, int variable, QString place)
 {
     QString web_address = "";
     QString start_time = "";
@@ -134,7 +157,7 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
 
     view_->set_the_type_data(currently_showing);
 
-    /*
+
     qDebug() << "Tietojen haku onnistui";
 
     print_data_ = "Tietojen haku onnistui";
@@ -144,8 +167,10 @@ void Saagia_model::load_data(QString stime, QString etime, int variable)
     {
         view_->setPrintData(print_data_);
     }
-    */
+
 }
+
+*/
 
 QString Saagia_model::construct_url(QString start_time, QString end_time, int case_variable, QString place)
 {
@@ -156,28 +181,27 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
     switch(case_variable) {
         case 0 :
             break;
-
+        //https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
         case 1 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
-            url = web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-
-            return url + header_;
+            url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
 
             break;
 
         case 2 :
             // Nuclear energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-            return url + header_;
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
             break;
 
         case 3 :
             // Hydro energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time" + end_time;
-            return url + header_;
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            return url;
             break;
 
         case 4 :
@@ -207,6 +231,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
 
 }
 
+/*
 void Saagia_model::save_to_map(QString stime, int value)
 {
 
@@ -230,7 +255,58 @@ void Saagia_model::save_to_map(QString stime, int value)
     }
 
 }
+*/
 
+void Saagia_model::set_chart_data()
+{
+    // Function for changing the displayed chart data
+    view_->clear_chart_data(energy_type_);
+
+    std::map<int, std::map<QString, int>>::iterator it;
+
+    // Parseri tähän joka kattoo ettei oo liikaa tavaraa..
+    if (energy_type_ != 1){
+
+
+        int i = 0;
+        for (auto energy_type : data_structures_->get_energy_structure() )
+        {
+
+            // Enter another map
+            for (auto key_value : energy_type.second){
+
+
+                if (i == 20){
+
+                    set_new_data_content(key_value.second, key_value.first, energy_type_);
+                    i = 0;
+                }
+                else{
+                    i += 1;
+                }
+
+
+            }
+
+        }
+
+    }
+
+    else{
+
+        for (auto energy_type : data_structures_->get_energy_structure() )
+        {
+            for (auto key_value : energy_type.second){
+
+                set_new_data_content(key_value.second, key_value.first, energy_type_);
+            }
+
+        }
+    }
+
+}
+
+/*
 void Saagia_model::set_chart_data()
 {
     // Function for changing the displayed chart data
@@ -279,18 +355,22 @@ void Saagia_model::set_chart_data()
     }
 
 }
+*/
 
 void Saagia_model::set_energy_type(int type)
 {
     energy_type_ = type;
+    data_reader_->set_data_type(type);
 }
 
+/*
 void Saagia_model::clear_database()
 {
 
     times_.clear();
 
 }
+*/
 
 void Saagia_model::set_new_data_content(int value, QString date, int type)
 {
