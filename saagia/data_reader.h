@@ -7,7 +7,6 @@
 #include <QUrl>
 
 class QNetworkAccessManager;
-//class Saagia_model;
 class Data_structures;
 
 class Data_reader: public QObject
@@ -50,7 +49,6 @@ private:
     QUrl currentUrl_;
     int currentStatuscode_;
     QString currentContent_;
-    //std::shared_ptr<Saagia_model> model_;
 
     QString header_;
     int data_type_;

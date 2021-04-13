@@ -16,7 +16,7 @@ public:
 
     Q_INVOKABLE void set_energy_type(int variable);
     Q_INVOKABLE void load_data();
-    Q_INVOKABLE void save_data();
+    Q_INVOKABLE void save_data(QString start_time, int data_type);
     Q_INVOKABLE void set_the_selected_date(int type, QString date);
     Q_INVOKABLE void energy_form_1_selected();
     Q_INVOKABLE void energy_form_2_selected();

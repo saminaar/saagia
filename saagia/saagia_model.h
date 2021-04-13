@@ -34,7 +34,7 @@ public:
 
     void check_input(bool status);
 
-    void save_data();
+    void save_data(QString start_time, int data_type);
     void save_graph_as_image();
     void set_visible_date(QString stime, QString etime, QString shours, QString ehours);
 
@@ -42,11 +42,11 @@ private:
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_structures> data_structures_;
     std::shared_ptr<Data_reader> data_reader_;
+    std::shared_ptr<Database_handler> database_handler_;
     QString print_data_;
     const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
     std::map<int, std::map<QString, int>> times_;
-    //std::map<QString, std::map<QString, int>> datastorage_;
 
     int energy_type_;
 

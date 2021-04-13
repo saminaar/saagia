@@ -1,5 +1,4 @@
 #include "data_reader.h"
-#include "saagia_model.h"
 #include "data_structures.h"
 
 #include <QNetworkAccessManager>
@@ -22,8 +21,7 @@ Data_reader::Data_reader(std::shared_ptr<Data_structures> data_structures, QObje
     currentUrl_( "" ),
     currentStatuscode_{ 0 },
     currentContent_{ "" },
-    data_type_{ 0 } /*
-    model_{ model }*/
+    data_type_{ 0 }
 {
     // connect the "finished" signal from the network to the requestCompleted function
     connect(network_, &QNetworkAccessManager::finished, this, &Data_reader::requestCompleted);

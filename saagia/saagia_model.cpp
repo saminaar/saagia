@@ -9,8 +9,8 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
     data_structures_{ std::make_shared<Data_structures>() },
     data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
+    database_handler_{ std::make_shared<Database_handler>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     print_data_{},
-    times_{},
     energy_type_{0}
 {
 }
@@ -46,7 +46,6 @@ void Saagia_model::load_data(QString start_time, QString end_time, int variable,
 
     set_chart_data();
 }
-
 
 
 /*
@@ -187,7 +186,6 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             return url;
-
             break;
 
         case 2 :
@@ -231,32 +229,6 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
 
 }
 
-/*
-void Saagia_model::save_to_map(QString stime, int value)
-{
-
-    std::map<int, std::map<QString, int>>::iterator itr = times_.find(energy_type_);
-
-    // Check if the energy type is already in the database
-    if(itr != times_.end()){
-
-        // Energy-type was already in map, append values
-        times_[energy_type_][stime] = value;
-
-    }
-
-    else{
-
-        // Energy-type was not yet found in the map, add it
-        std::map<QString, int> new_map;
-        new_map[stime] = value;
-
-        times_[energy_type_] = new_map;
-    }
-
-}
-*/
-
 void Saagia_model::set_chart_data()
 {
     // Function for changing the displayed chart data
@@ -305,72 +277,12 @@ void Saagia_model::set_chart_data()
     }
 
 }
-
-/*
-void Saagia_model::set_chart_data()
-{
-    // Function for changing the displayed chart data
-    view_->clear_chart_data(energy_type_);
-
-    std::map<int, std::map<QString, int>>::iterator it;
-
-    // Parseri tähän joka kattoo ettei oo liikaa tavaraa..
-    if (energy_type_ != 1){
-
-
-        int i = 0;
-        for (auto energy_type : times_)
-        {
-
-            // Enter another map
-            for (auto key_value : energy_type.second){
-
-
-                if (i == 20){
-
-                    set_new_data_content(key_value.second, key_value.first, energy_type_);
-                    i = 0;
-                }
-                else{
-                    i += 1;
-                }
-
-
-            }
-
-        }
-
-    }
-
-    else{
-
-        for (auto energy_type : times_)
-        {
-            for (auto key_value : energy_type.second){
-
-                set_new_data_content(key_value.second, key_value.first, energy_type_);
-            }
-
-        }
-    }
-
-}
-*/
 
 void Saagia_model::set_energy_type(int type)
 {
     energy_type_ = type;
     data_reader_->set_data_type(type);
 }
-
-/*
-void Saagia_model::clear_database()
-{
-
-    times_.clear();
-
-}
-*/
 
 void Saagia_model::set_new_data_content(int value, QString date, int type)
 {
@@ -440,8 +352,12 @@ void Saagia_model::check_input(bool status)
 
 }
 
-void Saagia_model::save_data()
+void Saagia_model::save_data(QString start_time, int data_type)
 {
+
+    database_handler_->save_data(start_time, data_type);
+
+    /*
     //view_->display_saved_data
 
     print_data_ = "Tietojen tallennus onnistui";
@@ -451,6 +367,7 @@ void Saagia_model::save_data()
         view_->setPrintData(print_data_);
         view_->setVisibility(energy_type_);
     }
+    */
 }
 
 void Saagia_model::save_graph_as_image()
@@ -458,6 +375,7 @@ void Saagia_model::save_graph_as_image()
     qDebug() << "Save graph as image.. to be implemented";
 
 }
+
 void Saagia_model::set_visible_date(QString stime, QString etime, QString shours, QString ehours)
 {
 

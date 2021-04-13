@@ -57,9 +57,9 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
 
 }
 
-void Saagia_controller::save_data()
+void Saagia_controller::save_data(QString start_time, int data_type)
 {
-    model_->save_data();
+    model_->save_data(start_time, data_type);
 }
 
 /*
