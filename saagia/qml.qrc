@@ -20,5 +20,7 @@
         <file>Wind_chart_base.qml</file>
         <file>Program_status_bar.qml</file>
         <file>Test_file.qml</file>
+        <file>Preferences_button.qml</file>
+        <file>Preferences.qml</file>
     </qresource>
 </RCC>

@@ -17,5 +17,6 @@
         <file>images/left-arrow.png</file>
         <file>images/cancel.png</file>
         <file>images/refresh.png</file>
+        <file>images/heart_outline.png</file>
     </qresource>
 </RCC>

@@ -1,0 +1,142 @@
+import QtQuick 2.12
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.15
+
+Popup {
+
+        signal dateChange(string start, string end)
+
+        property color background_level_0: "#16141f"
+        property color background_level_1: "#302c40"
+        property color background_level_2: "#dbd6f9"
+        property color accent_color: "#ffa500" // orange
+        property color text_color: "#cdcdcd" // grey-ish
+
+        property string title_text: qsTr("Preferences")
+        property string subtitle_text: qsTr("Energy type(s) to show..")
+        property string error_msg: qsTr("Error: check your input and try again!")
+
+        property Currently_showing_box show_case
+
+        id: popup
+
+        property date start_date;
+        property date end_date;
+
+        background: Rectangle {
+            height: 150
+            color: background_level_0
+            opacity: 0.9
+            implicitWidth: 400
+            implicitHeight: 300
+            border.color: "grey"
+            border.width: 1
+        }
+
+
+
+        width: 300
+        height: 150
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+        enter: Transition {
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+        }
+        exit: Transition {
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+        }
+
+        Text {
+            id: window_title_text
+            x: 10
+            y: 4
+            color: accent_color
+            font.bold: true
+            font.pixelSize: 15
+            text: title_text
+        }
+
+        ComboBox {
+
+            id: combobox
+            anchors.top: window_title_text.bottom
+            anchors.left: window_title_text.left
+            anchors.topMargin: 10
+
+            width: 200
+            model: [ "Saved preference 1", "Saved preference 2", "Saved preference 3" ]
+        }
+
+
+        Button{
+
+                anchors.top: combobox.bottom
+                anchors.topMargin: 10
+                anchors.left: combobox.left
+
+                id: load
+                text: "<font color='#ffffff'>" + "Load settings" + "</font>"
+                font.pixelSize: 13
+
+                icon.source: "images/refresh.png"
+                icon.color: "#d6d6d6"
+                icon.width: 15
+                icon.height: 15
+
+
+                background: Rectangle {
+                    implicitWidth: 50
+                    implicitHeight: 35
+                    color: "#090426"
+                    border.color: "white"
+                    border.width: 1
+                }
+
+        }
+
+        Button{
+
+                anchors.top: combobox.bottom
+                anchors.topMargin: 10
+
+                anchors.left: load.right
+                anchors.leftMargin: 5
+
+                id: save
+                text: "<font color='#ffffff'>" + "Save settings" + "</font>"
+                font.pixelSize: 13
+
+                icon.source: "images/save_icon.png"
+                icon.color: "#d6d6d6"
+                icon.width: 15
+                icon.height: 15
+
+
+                background: Rectangle {
+                    implicitWidth: 50
+                    implicitHeight: 35
+                    color: "#090426"
+                    border.color: "white"
+                    border.width: 1
+                }
+        }
+
+        Image {
+            id: exit_window
+            width: 15
+            height: 15
+            anchors.right: parent.right
+            source: "qrc:/images/cancel.png"
+
+
+            MouseArea {
+
+                anchors.fill: parent
+                onClicked: {
+                    popup.close()
+                }
+            }
+        }
+}

@@ -25,7 +25,7 @@ Popup {
         property date end_date;
 
         background: Rectangle {
-            height: 310
+            height: 315
             color: background_level_0
             opacity: 0.9
             implicitWidth: 400
@@ -169,7 +169,42 @@ Popup {
 
         }
 
-    }
+
+
+        Rectangle {
+
+            height: 1
+            color: "orange"
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
+
+        Preferences_button {
+
+            anchors.top: bottom_line.bottom
+            anchors.left: bottom_line.left
+            anchors.leftMargin: -5
+
+            onClicked: {
+                var component = Qt.createComponent("Preferences.qml")
+                var object = component.createObject(back);
+                object.open()
+            }
+        }
+
+        Rectangle {
+
+            id: bottom_line
+
+            height: 1
+            color: "orange"
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
+        }
+
 
         function check_input(){
 

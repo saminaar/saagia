@@ -48,6 +48,8 @@ DISTFILES += \
     Fetch_data_button.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
+    Preferences.qml \
+    Preferences_button.qml \
     Program_status_bar.qml \
     Save_data_button.qml \
     Test_file.qml \
