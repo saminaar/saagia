@@ -23,9 +23,7 @@ void Saagia_view::setPrintData(const QString &newValue)
 
 void Saagia_view::setVisibility(int type)
 {
-
     emit setLineVisibility(type);
-
 }
 
 QString Saagia_view::getChartData() const
@@ -35,33 +33,28 @@ QString Saagia_view::getChartData() const
 
 void Saagia_view::setChartData(int value, QString date, int type)
 {
-
     emit sendChartData(value, date, type);
-
 }
-
 
 void Saagia_view::set_the_visible_date(const QString &stime)
 {
     active_date_ = stime;
     emit dateChanged();
-
 }
 
-void Saagia_view::set_location(QString location){
+void Saagia_view::set_location(QString location)
+{
     this->location = location;
 }
 
 QString Saagia_view::get_location(){
-return this->location;
+    return this->location;
 }
 
 void Saagia_view::set_the_type_data(const QString& energy_type)
 {
-
     title_of_shown_data_ = energy_type;
     emit currentlyShownChanged();
-
 }
 
 QString Saagia_view::getTypeData() const
@@ -89,4 +82,3 @@ void Saagia_view::input_checked(bool status)
     }
 
 }
-

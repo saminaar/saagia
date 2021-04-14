@@ -175,8 +175,8 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
     QString web_address = "";
     QString url = "";
     QString energy_info = "";
-    QString formated_start_time  ;
-    QString formated_end_time  ;
+    QString formatted_start_time  ;
+    QString formatted_end_time  ;
 
     switch(case_variable) {
         case 0 :
