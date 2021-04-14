@@ -66,10 +66,9 @@ void Database_handler::write(QJsonObject &json) const
 
 }
 
-
 std::vector<std::string> Database_handler::read_municipalities(){
     QString data;
-    QString fileName("qrc:/settings/municipalities.txt");
+    QString fileName(":/settings/municipalities.txt");
 
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly)) {
@@ -83,57 +82,14 @@ std::vector<std::string> Database_handler::read_municipalities(){
 
     file.close();
 
-    qDebug()<<data;
+    QStringList data_splitted = data.split( "," );
 
     std::vector<std::string> municipalities;
 
-    std::string line;
-    //std::getline(m, line);
-    std::stringstream iss(line);
-    while( iss.good() )
-    {
-        std::string substr;
-        getline( iss, substr, ',' );
-        municipalities.push_back( substr );
+    for( QString str : data_splitted ) {
+        municipalities.push_back(str.toStdString());
     }
+
     return municipalities;
 }
-
-/*
-std::vector<std::string> Database_handler::read_municipalities(){
-    std::ifstream m (":/settings/municipalities.txt");
-    std::vector<std::string> municipalities;
-    std::string line;
-    std::getline(m, line);
-    std::stringstream iss(line);
-    while( iss.good() )
-    {
-        std::string substr;
-        getline( iss, substr, ',' );
-        municipalities.push_back( substr );
-    }
-    return municipalities;
-}
-*/
-
-/*
-QString data;
-QString fileName("qrc:/settings/municipalities.txt");
-
-QFile file(fileName);
-if(!file.open(QIODevice::ReadOnly)) {
-    qDebug()<<"filenot opened"<<endl;
-}
-else
-{
-    qDebug()<<"file opened"<<endl;
-    data = file.readAll();
-}
-
-file.close();
-
-qDebug()<<data<<endl;
-*/
-
-
 
