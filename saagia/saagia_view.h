@@ -33,6 +33,10 @@ public:
 
     QString getActiveDate() const;
 
+    void set_location(QString location);
+
+    QString get_location();
+
     void clear_chart_data(int type);
 
     void input_checked(bool status);
@@ -63,6 +67,7 @@ private:
     QString chart_data_;
     QString active_date_;
     QString title_of_shown_data_;
+    QString location = "Tampere";
 
 };
 

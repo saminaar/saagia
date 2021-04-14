@@ -357,7 +357,7 @@ ApplicationWindow {
 
             Text {
                 id: city
-                text: qsTr("<b>Location:</b> <i>City name here</i>")
+                text: qsTr("<b>Location:</b>")
                 font.pixelSize: 15
                 color: "#ffffff"
                 anchors.right: text_input_bar.right
