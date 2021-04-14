@@ -2,6 +2,7 @@
 #define DATABASE_HANDLER_H
 
 #include <QString>
+#include <memory>
 
 class Data_structures;
 
