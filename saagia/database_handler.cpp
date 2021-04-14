@@ -67,7 +67,7 @@ void Database_handler::write(QJsonObject &json) const
 }
 
 std::vector<std::string> Database_handler::read_municipalities(){
-    std::ifstream m ("municipalities.txt", std::ifstream::in);
+    std::ifstream m ("municipalities.txt");
     std::vector<std::string> municipalities;
     std::string line;
     std::getline(m, line);

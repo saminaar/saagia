@@ -358,7 +358,7 @@ void Saagia_model::load_municipalities(){
 }
 
 bool Saagia_model::check_placeinput(QString text){
-    load_municipalities();
+    if (data_structures_->get_municipalities().size() == 0) load_municipalities();
     std::string stext = text.toStdString();
     std::vector<std::string> places = data_structures_->get_municipalities();
     for (int i = 0; i < places.size(); ++i){
