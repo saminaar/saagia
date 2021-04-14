@@ -37,7 +37,7 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 1 | variable == 6) {
+    if (variable == 5 | variable == 6) {
         data_reader_->requestUrl(url, "");
     }
 
@@ -184,7 +184,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
         case 0 :
             break;
         //https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
-        case 5 :
+        case 1 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
@@ -209,7 +209,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             // Optional
             break;
 
-        case 1 :
+        case 5 :
             // Any old weather data (temperature, wind, cloudiness)
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
@@ -353,6 +353,20 @@ void Saagia_model::check_input(bool status)
 
     view_->input_checked(status);
 
+}
+
+void Saagia_model::load_municipalities(){
+    data_structures_->set_municipalities(database_handler_->read_municipalities());
+}
+
+bool Saagia_model::check_placeinput(QString text){
+    if (data_structures_->get_municipalities().size() == 0) load_municipalities();
+    std::string stext = text.toStdString();
+    std::vector<std::string> places = data_structures_->get_municipalities();
+    for (int i = 0; i < places.size(); ++i){
+        if (places[i] == stext){ place_ = text; qDebug() << place_; return true;}
+    }
+    return false;
 }
 
 void Saagia_model::save_data(QString start_time, int data_type)

@@ -37,6 +37,8 @@ public:
     void save_data(QString start_time, int data_type);
     void save_graph_as_image();
     void set_visible_date(QString stime, QString etime, QString shours, QString ehours);
+    void load_municipalities();
+    bool check_placeinput(QString text);
 
 private:
     std::shared_ptr<Saagia_view> view_;
@@ -50,7 +52,7 @@ private:
     std::map<int, std::map<QString, int>> times_;
 
     int energy_type_;
-
+    QString place_ = "Tampere";
 };
 
 #endif // SAAGIA_MODEL_H

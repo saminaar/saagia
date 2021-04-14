@@ -34,7 +34,6 @@ void Data_structures::append_energy_data(QString start_time, int data_type, int 
 
 void Data_structures::append_weather_data(QString time, weather_data data)
 {
-    qDebug() << "Pääsin structureen! " << time;
     std::map<QString, weather_data>::iterator iter = weather_data_.begin();
     while (iter != weather_data_.end()) {
         if (iter->first == time) {
@@ -66,6 +65,14 @@ void Data_structures::clear_data_structures()
     energy_data_.clear();
     //data_2.clear();
 
+}
+
+void Data_structures::set_municipalities(std::vector<std::string> new_m){
+    this->municipalities = new_m;
+}
+
+std::vector<std::string> Data_structures::get_municipalities(){
+    return this->municipalities;
 }
 
 std::map<int, std::map<QString, int> > Data_structures::get_energy_structure()

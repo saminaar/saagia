@@ -20,7 +20,8 @@ SOURCES += \
         saagia_view.cpp
 
 RESOURCES += qml.qrc \
-    image_resources.qrc
+    image_resources.qrc \
+    settings.qrc
 PACKAGECONFIG_append = "gif"
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -59,7 +60,8 @@ DISTFILES += \
     Wind_chart_base.qml \
     Window_bar_menu.qml \
     energy_type_button.qml \
-    Output_area.qml
+    Output_area.qml \
+    settings/municipalities.txt
 
 HEADERS += \
     data_calculations.h \

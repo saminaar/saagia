@@ -15,11 +15,8 @@ RowLayout {
         height: searchBar.height
         placeholderText: qsTr("Enter a city or region...")
         Layout.fillWidth: true
-/**        onTextChanged: {
-            if (!ignoreTextChange)
-                searchTextChanged(text)
-        }
-        onAccepted: doSearch(searchText.text)**/
+
+        onAccepted: saagia_controller.check_place(searchText.text)
     }
 
     Rectangle {
@@ -34,6 +31,8 @@ RowLayout {
         //Also clears the textfield
 
 
+
+
         Image {
             id: search_button_image
             width: 20
@@ -42,6 +41,13 @@ RowLayout {
             fillMode: Image.Stretch
             source: "qrc:/images/search_icon.png"
 
+            MouseArea{
+                            anchors.fill: parent
+                            onClicked:{
+                                if (searchText.text != null)
+                                    saagia_controller.check_place(searchText.text);
+                            }
+                        }
     }
     }
 }
