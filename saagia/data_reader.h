@@ -9,6 +9,8 @@
 class QNetworkAccessManager;
 class Data_structures;
 
+
+
 class Data_reader: public QObject
 {
     Q_OBJECT
@@ -32,6 +34,8 @@ public:
 
     void parseJson(QString content);
 
+    const float NO_VALUE = 9999;
+
 private Q_SLOTS:
     void requestCompleted(QNetworkReply* networkReply);
     void requestError(QNetworkReply::NetworkError errorCode);
@@ -52,7 +56,7 @@ private:
 
     QString header_;
     int data_type_;
-    const float NO_VALUE = 99999;
+
 
 };
 

@@ -1,5 +1,6 @@
 #ifndef DATA_STRUCTURES_H
 #define DATA_STRUCTURES_H
+#include "data_reader.h"
 #include <map>
 #include <vector>
 #include <QString>
@@ -18,7 +19,7 @@ struct weather_data{
 
     float temperature;    
     float wind_speed;
-    QString cloudines = "NaN";
+    float cloudines;
 };
 
 
@@ -43,8 +44,6 @@ private:
     std::map<int, std::map<QString, int>> energy_data_;
     std::map<QString, weather_data> weather_data_;
     std::vector<std::string> municipalities;
-
-    //std::map<Päivämäärä, structi tuulen statseista> data_2;
 
 
 };

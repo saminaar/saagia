@@ -158,13 +158,12 @@ void Data_reader::parseJson(QString content)
 void Data_reader::parseXML(QString content)
 {
     QXmlStreamReader reader(content);
-    // bool type_exists;
+
     QString latest_type;
     QString time = "";
-    QString temp;
-    QString w_speed;
-    QString cloudines;
-    weather_data data;
+    float temp = NO_VALUE;
+    float w_speed = NO_VALUE;
+    float cloudines = NO_VALUE;
 
     while (!reader.atEnd()) {
         //In the XML there are allways forst "Time", then "ParameterName" and finally "ParameterValue"
@@ -176,12 +175,8 @@ void Data_reader::parseXML(QString content)
                 time = next_time;
             }
             //when time advances, weather data for old time point is transferred and saved
-            if (next_time != time) {
-                data.temperature = temp.toFloat();
-                data.wind_speed = w_speed.toFloat();
-                data.cloudines = cloudines;
-                qDebug() << "Tallennan sään: lämpö" << temp << " tuuli: " << w_speed << " pilvi: " << cloudines;
-                data_structures_->append_weather_data(time, data);
+            if (next_time != time ) {
+                data_structures_->append_weather_data(time, {temp, w_speed, cloudines});
                 time = next_time;
             }
 
@@ -191,13 +186,21 @@ void Data_reader::parseXML(QString content)
         }
         //ParameterValue can be either temperature, wind speed or cloudines
         else if (reader.name() == "ParameterValue"){
-            QString value = reader.readElementText();
+            QString XMLvalue = reader.readElementText();
+            float value;
+            if (XMLvalue == "NaN") {
+                value = NO_VALUE;
+            }
+            else {
+                value = XMLvalue.toFloat();
+            }
+
             //Temperature
-            if (latest_type == "t2m") {
+            if (latest_type == "t2m" || latest_type == "Temperature") {
                 temp = value;
             }
             //Wind speed
-            else if (latest_type == "ws_10min") {
+            else if (latest_type == "ws_10min" || latest_type == "WindSpeedMS") {
                 w_speed = value;
             }
             //Cloudines

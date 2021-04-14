@@ -32,8 +32,6 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 
 */
 
-//https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
-
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
@@ -220,7 +218,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
         case 6:
             //Temperature or wind forecast
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::forecast::hirlam::surface::point::simple";
-            url = web_address + "&place=" + place + "&parameters=Temperature,WindSpeedMS";
+            url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=Temperature,WindSpeedMS";
             return  url;
             break;
 
