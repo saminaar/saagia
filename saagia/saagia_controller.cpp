@@ -23,14 +23,16 @@ void Saagia_controller::set_energy_type(int variable)
 void Saagia_controller::load_data()
 {
 
-    QString formatted_start_hours = start_hours_min.replace(":", "\%3A");
-    QString formatted_end_hours = end_hours_min.replace(":", "\%3A");
+    QString formatted_start_hours = start_hours_min.replace("\%3A", ":");
+    QString formatted_end_hours = end_hours_min.replace("\%3A", ":");
 
     QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
     QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
 
     model_->load_data(start_time_ready, end_time_ready, energy_type);
-
+   // qDebug() <<"START TIME: " << start_time << " END TIME: " << end_time ;
+   // qDebug() << "START TIME: " << formatted_start_hours << " END TIME: " << end_hours_min;
+   // model_->load_data(start_time, end_time, energy_type);
 }
 
 void Saagia_controller::set_the_selected_date(int type, QString date)

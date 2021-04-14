@@ -1,20 +1,23 @@
 #include "data_structures.h"
 
+
 Data_structures::Data_structures()
 {
+    energy_data_ = {};
+    weather_data_ = {};
 
 }
 
-void Data_structures::append_to_data_structure(QString start_time, int data_type, int value)
+void Data_structures::append_energy_data(QString start_time, int data_type, int value)
 {
 
-    std::map<int, std::map<QString, int>>::iterator itr = data_1.find(data_type);
+    std::map<int, std::map<QString, int>>::iterator itr = energy_data_.find(data_type);
 
     // Check if the energy type is already in the database
-    if(itr != data_1.end()){
+    if(itr != energy_data_.end()){
 
         // Energy-type was already in map, append values
-        data_1[data_type][start_time] = value;
+        energy_data_[data_type][start_time] = value;
 
     }
 
@@ -24,8 +27,24 @@ void Data_structures::append_to_data_structure(QString start_time, int data_type
         std::map<QString, int> new_map;
         new_map[start_time] = value;
 
-        data_1[data_type] = new_map;
+        energy_data_[data_type] = new_map;
     }
+
+}
+
+void Data_structures::append_weather_data(QString time, weather_data data)
+{
+    qDebug() << "Pääsin structureen! " << time;
+    std::map<QString, weather_data>::iterator iter = weather_data_.begin();
+    while (iter != weather_data_.end()) {
+        if (iter->first == time) {
+            qDebug() << "Time already exists in datastructure";
+            return;
+        }
+        iter++;
+    }
+    weather_data_[time] = data;
+    qDebug() << "Tallennettu structureen: " << time << " : " << data.temperature << "...";
 
 }
 
@@ -33,7 +52,7 @@ void Data_structures::test_print()
 {
     qDebug() << "Test print for data structures";
     std::map<int, std::map<QString, int>>::iterator it;
-    for (it = data_1.begin(); it != data_1.end(); it++)
+    for (it = energy_data_.begin(); it != energy_data_.end(); it++)
     {
         qDebug() << it->first << " Key";
         qDebug() << it->second;
@@ -44,7 +63,7 @@ void Data_structures::test_print()
 
 void Data_structures::clear_data_structures()
 {
-    data_1.clear();
+    energy_data_.clear();
     //data_2.clear();
 
 }
@@ -52,7 +71,7 @@ void Data_structures::clear_data_structures()
 std::map<int, std::map<QString, int> > Data_structures::get_energy_structure()
 {
 
-    return data_1;
+    return energy_data_;
 
 }
 

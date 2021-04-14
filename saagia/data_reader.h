@@ -52,6 +52,7 @@ private:
 
     QString header_;
     int data_type_;
+    const float NO_VALUE = 99999;
 
 };
 

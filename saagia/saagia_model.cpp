@@ -37,7 +37,7 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 5 | variable == 6) {
+    if (variable == 1 | variable == 6) {
         data_reader_->requestUrl(url, "");
     }
 
@@ -177,12 +177,14 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
     QString web_address = "";
     QString url = "";
     QString energy_info = "";
+    QString formated_start_time  ;
+    QString formated_end_time  ;
 
     switch(case_variable) {
         case 0 :
             break;
         //https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
-        case 1 :
+        case 5 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
@@ -207,9 +209,9 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             // Optional
             break;
 
-        case 5 :
+        case 1 :
             // Any old weather data (temperature, wind, cloudiness)
-            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::hourly::simple";
+            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
             return url;
 

@@ -1,5 +1,6 @@
 #ifndef DATA_CALCULATIONS_H
 #define DATA_CALCULATIONS_H
+#include <memory>
 
 #include <QString>
 

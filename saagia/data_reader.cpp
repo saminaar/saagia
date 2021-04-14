@@ -135,7 +135,7 @@ void Data_reader::parseJson(QString content)
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
 
-    qDebug() << jsonResponse;
+    // qDebug() << jsonResponse;
 
     QJsonArray jsonArray = jsonResponse.array();
 
@@ -149,10 +149,8 @@ void Data_reader::parseJson(QString content)
         QString end_time = (obj["end_time"].toString());
 
         //model_->save_to_map(start_time, kvalue);
-        data_structures_->append_to_data_structure(start_time, data_type_, kvalue);
-
+        data_structures_->append_energy_data(start_time, data_type_, kvalue);
     }
-
     data_structures_->test_print();
     //model_->set_chart_data();
 }
@@ -160,43 +158,52 @@ void Data_reader::parseJson(QString content)
 void Data_reader::parseXML(QString content)
 {
     QXmlStreamReader reader(content);
-  //  std::vector<std::pair<QString, std::map<QString, QString>>> datas;
-    std::map<QString, std::map<QString, QString>> datatypes;
     // bool type_exists;
     QString latest_type;
-    QString time;
+    QString time = "";
+    QString temp;
+    QString w_speed;
+    QString cloudines;
+    weather_data data;
 
     while (!reader.atEnd()) {
+        //In the XML there are allways forst "Time", then "ParameterName" and finally "ParameterValue"
+        //in this order for one specific point of data
         if (reader.name() == "Time"){
-            time = reader.readElementText();
-        }
-        if (reader.name() == "ParameterName"){
-            QString str = reader.readElementText();
-           /*
-            type_exists = false;
-            for (std::pair<QString, std::map<QString, QString>>& v : datas){
-                if  (v.first == str) {
-                   type_exists = true;
-                }
-               }
+            QString next_time = reader.readElementText();
+            //First time point is handled separately
+            if (time == "") {
+                time = next_time;
+            }
+            //when time advances, weather data for old time point is transferred and saved
+            if (next_time != time) {
+                data.temperature = temp.toFloat();
+                data.wind_speed = w_speed.toFloat();
+                data.cloudines = cloudines;
+                qDebug() << "Tallennan sään: lämpö" << temp << " tuuli: " << w_speed << " pilvi: " << cloudines;
+                data_structures_->append_weather_data(time, data);
+                time = next_time;
+            }
 
-            if (type_exists == false) {
-                std::map<QString, QString> m = {};
-                datas.push_back(std::make_pair(str, m));
-            }
-            */
-            latest_type = str;
+        }       
+        else if (reader.name() == "ParameterName"){
+            latest_type = reader.readElementText();
         }
+        //ParameterValue can be either temperature, wind speed or cloudines
         else if (reader.name() == "ParameterValue"){
-            //model_->save_to_map(time, reader.readElementText().toInt());
-            /*
-            for (std::pair<QString, std::map<QString, QString>>& v : datas) {
-                if (v.first == latest_type) {
-                    QString value = reader.readElementText();
-                    v.second.insert(std::pair<QString, QString> (time, value));
-                }
+            QString value = reader.readElementText();
+            //Temperature
+            if (latest_type == "t2m") {
+                temp = value;
             }
-            */
+            //Wind speed
+            else if (latest_type == "ws_10min") {
+                w_speed = value;
+            }
+            //Cloudines
+            else if (latest_type == "n_man") {
+                cloudines = value;
+            }
         }
         reader.readNext();
     }
