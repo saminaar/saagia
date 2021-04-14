@@ -48,6 +48,14 @@ void Saagia_view::set_the_visible_date(const QString &stime)
 
 }
 
+void Saagia_view::set_location(QString location){
+    this->location = location;
+}
+
+QString Saagia_view::get_location(){
+return this->location;
+}
+
 void Saagia_view::set_the_type_data(const QString& energy_type)
 {
 

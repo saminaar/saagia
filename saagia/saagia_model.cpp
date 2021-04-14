@@ -362,7 +362,7 @@ bool Saagia_model::check_placeinput(QString text){
     std::string stext = text.toStdString();
     std::vector<std::string> places = data_structures_->get_municipalities();
     for (int i = 0; i < places.size(); ++i){
-        if (places[i] == stext){ place_ = text; qDebug() << place_; return true;}
+        if (places[i] == stext){ place_ = text; qDebug() << place_; view_->set_location(text); return true;}
     }
     return false;
 }

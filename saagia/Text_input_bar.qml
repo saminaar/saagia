@@ -16,7 +16,11 @@ RowLayout {
         placeholderText: qsTr("Enter a city or region...")
         Layout.fillWidth: true
 
-        onAccepted: saagia_controller.check_place(searchText.text)
+        onAccepted:{
+            saagia_controller.check_place(searchText.text)
+            searchText.clear()
+
+        }
     }
 
     Rectangle {
