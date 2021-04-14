@@ -11,7 +11,7 @@ class Database_handler
 public:
     Database_handler(std::shared_ptr<Data_structures> data_structures);
 
-    void save_data(QString start_time, int data_type_);
+    void save_data(QString start_time, int data_type);
 
     void load_data();
 

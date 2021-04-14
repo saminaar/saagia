@@ -7,7 +7,7 @@ Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structu
 
 }
 
-void Database_handler::save_data(QString start_time, int data_type_)
+void Database_handler::save_data(QString start_time, int data_type)
 {
 
 }

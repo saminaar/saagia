@@ -5,10 +5,10 @@
 #include <QDebug>
 
 class Saagia_view;
-class Data_calculations;
+class Data_structures;
 class Data_reader;
 class Database_handler;
-class Data_structures;
+class Data_calculations;
 
 class Saagia_model
 {
@@ -43,6 +43,7 @@ private:
     std::shared_ptr<Data_structures> data_structures_;
     std::shared_ptr<Data_reader> data_reader_;
     std::shared_ptr<Database_handler> database_handler_;
+    std::shared_ptr<Data_calculations> data_calculations_;
     QString print_data_;
     const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 

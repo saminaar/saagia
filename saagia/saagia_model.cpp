@@ -1,15 +1,16 @@
 #include "saagia_model.h"
 #include "saagia_view.h"
-#include "data_calculations.h"
+#include "data_structures.h"
 #include "data_reader.h"
 #include "database_handler.h"
-#include "data_structures.h"
+#include "data_calculations.h"
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
     data_structures_{ std::make_shared<Data_structures>() },
     data_reader_{ std::make_shared<Data_reader>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     database_handler_{ std::make_shared<Database_handler>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
+    data_calculations_{ std::make_shared<Data_calculations>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     print_data_{},
     energy_type_{0}
 {
