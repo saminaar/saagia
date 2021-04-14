@@ -119,6 +119,13 @@ void Saagia_controller::check_input()
 
 }
 
+bool Saagia_controller::check_place(QString text)
+{
+    text = text.toLower();
+    bool checked = model_->check_placeinput(text);
+    if (checked == true) qDebug() << "Location changed.";
+}
+
 void Saagia_controller::set_the_visible_date()
 {
 

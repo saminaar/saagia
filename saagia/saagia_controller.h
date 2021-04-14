@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE void energy_form_4_selected();
 
     Q_INVOKABLE void check_input();
+    Q_INVOKABLE bool check_place(QString qtext);
 
     Q_INVOKABLE void set_the_visible_date();
 

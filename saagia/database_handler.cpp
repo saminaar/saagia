@@ -1,5 +1,8 @@
 #include "database_handler.h"
 #include "data_structures.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include <QCborMap>
 #include <QFile>
@@ -61,4 +64,19 @@ void Database_handler::read(const QJsonObject &json)
 void Database_handler::write(QJsonObject &json) const
 {
 
+}
+
+std::vector<std::string> Database_handler::read_municipalities(){
+    std::ifstream m ("municipalities.txt", std::ifstream::in);
+    std::vector<std::string> municipalities;
+    std::string line;
+    std::getline(m, line);
+    std::stringstream iss(line);
+    while( iss.good() )
+    {
+        std::string substr;
+        getline( iss, substr, ',' );
+        municipalities.push_back( substr );
+    }
+    return municipalities;
 }

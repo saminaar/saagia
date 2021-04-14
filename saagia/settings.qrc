@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/settings"/>
+    <qresource prefix="/">
+        <file>settings/municipalities.txt</file>
+    </qresource>
+</RCC>

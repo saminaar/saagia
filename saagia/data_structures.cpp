@@ -49,6 +49,14 @@ void Data_structures::clear_data_structures()
 
 }
 
+void Data_structures::set_municipalities(std::vector<std::string> new_m){
+    this->municipalities = new_m;
+}
+
+std::vector<std::string> Data_structures::get_municipalities(){
+    return this->municipalities;
+}
+
 std::map<int, std::map<QString, int> > Data_structures::get_energy_structure()
 {
 

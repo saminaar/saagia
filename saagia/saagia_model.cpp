@@ -353,6 +353,20 @@ void Saagia_model::check_input(bool status)
 
 }
 
+void Saagia_model::load_municipalities(){
+    data_structures_->set_municipalities(database_handler_->read_municipalities());
+}
+
+bool Saagia_model::check_placeinput(QString text){
+    load_municipalities();
+    std::string stext = text.toStdString();
+    std::vector<std::string> places = data_structures_->get_municipalities();
+    for (int i = 0; i < places.size(); ++i){
+        if (places[i] == stext){ place_ = text; qDebug() << place_; return true;}
+    }
+    return false;
+}
+
 void Saagia_model::save_data(QString start_time, int data_type)
 {
 
