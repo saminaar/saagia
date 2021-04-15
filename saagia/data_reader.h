@@ -32,7 +32,7 @@ public:
 
     void set_data_type(int data_type);
 
-    void parseJson(QString content);
+
 
     const float NO_VALUE = 9999;
 
@@ -47,6 +47,7 @@ signals:
 
 private:
     std::shared_ptr<Data_structures> data_structures_;
+    void parseJson(QString content);
     void parseXML(QString content);
 
     QNetworkAccessManager* network_;

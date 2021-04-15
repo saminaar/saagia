@@ -17,7 +17,7 @@ public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
     void load_data(QString start_time, QString end_time, int variable, QString place = "Pirkkala");
-    QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
+
     void save_to_map(QString stime, int value);
 
     void set_chart_data();
@@ -41,6 +41,8 @@ public:
     bool check_placeinput(QString text);
 
 private:
+    QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
+
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_structures> data_structures_;
     std::shared_ptr<Data_reader> data_reader_;

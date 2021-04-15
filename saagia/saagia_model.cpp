@@ -28,13 +28,13 @@ o   Tuulienergian tuotantoennuste seur. 36h, 245 (päivitetään tunneittain)
 o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
     -	vesivoiman tuotanto:  3min välein, 191
     -	tuulivoiman tuotanto:  3min välein, 181
-    - 	ydinvoiman tuotanto:  3min välein, 188
+    -ydinvoiman tuotanto:  3min välein, 188
 
 */
 
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
-    QString url = construct_url(start_time, end_time, variable, place_);
+    QString url = construct_url(start_time, end_time, variable, place);
     if (variable == 5 | variable == 6) {
         data_reader_->requestUrl(url, "");
     }

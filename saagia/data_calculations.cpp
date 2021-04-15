@@ -6,3 +6,8 @@ Data_calculations::Data_calculations(std::shared_ptr<Data_structures> data_struc
 {
 
 }
+
+float Data_calculations::average_temp_of_month(Data_calculations::month month, int year)
+{
+
+}
