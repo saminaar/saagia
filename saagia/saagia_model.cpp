@@ -34,7 +34,7 @@ o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
 
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
-    QString url = construct_url(start_time, end_time, variable, place);
+    QString url = construct_url(start_time, end_time, variable, place_);
     if (variable == 5 | variable == 6) {
         data_reader_->requestUrl(url, "");
     }
@@ -362,7 +362,12 @@ bool Saagia_model::check_placeinput(QString text){
     std::string stext = text.toStdString();
     std::vector<std::string> places = data_structures_->get_municipalities();
     for (int i = 0; i < places.size(); ++i){
-        if (places[i] == stext){ place_ = text; qDebug() << place_; view_->set_location(text); return true;}
+        if (places[i] == stext){
+            place_ = text; qDebug() << place_;
+            text[0] = text[0].toUpper();
+            view_->set_location(text);
+            return true;
+        }
     }
     return false;
 }

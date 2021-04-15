@@ -357,12 +357,21 @@ ApplicationWindow {
 
             Text {
                 id: city
-                text: qsTr("<b>Location:</b>")
+                property string location: "Tampere"
+                objectName: "city"
+                text: qsTr("<b>Location: </b>" + location)
                 font.pixelSize: 15
                 color: "#ffffff"
                 anchors.right: text_input_bar.right
                 anchors.top: top_bar.top
                 anchors.topMargin: 10
+
+                Connections{
+                    target: saagia_view
+                    onLocationChanged: city.location = s
+
+                }
+
             }
 
             Text_input_bar {
