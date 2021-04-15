@@ -4,7 +4,6 @@ import QtQuick.Controls.Styles 1.4
 
 Button{
 
-        id: button
         text: "<font color='#cccccc'>" + "Preferences" + "</font>"
         font.pixelSize: 13
 
@@ -14,12 +13,13 @@ Button{
         icon.height: 15
 
 
-        background: Rectangle {
-            id: button_bg
-            implicitWidth: 100
-            implicitHeight: 35
-            color: "transparent"
-        }
+
+        property string chosen_start_date: "hey"
+        //property string chosen_end_date: "hi"
+        //property string chosen_start_time: "hullo"
+        //property string chosen_end_time: "yap"
+
+        property string testeri: ""
 
         //change the color of the button in different button states
         states: [
@@ -51,28 +51,13 @@ Button{
             }
         ]
 
-        //Mouse area to react on click events
-        MouseArea {
-            hoverEnabled: true
-            anchors.fill: button_bg
 
-            onEntered: { button.state='Hovering'}
-            onExited: { button.state=''}
-
-            onPressed: { button.state="Pressed" }
-
-            onReleased: {
-                if (containsMouse)
-                  button.state="Hovering";
-                else
-                  button.state="";
-            }
-
-            onClicked: {
-                var component = Qt.createComponent("Preferences.qml")
-                var object = component.createObject(left_column_background);
-                object.open()
-            }
-
+        Connections {
+          target: popup
+          function onForwardParameters(txt) {
+              testeri = txt
+          }
         }
+
+
     }

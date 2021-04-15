@@ -40,9 +40,17 @@ bool Database_handler::load_data()
     return true;
 }
 
-bool Database_handler::save_data(QString start_time, int data_type) const
+bool Database_handler::save_data(QString filename) const
 {
-    QFile saveFile(QStringLiteral("save.json"));
+
+    // Nimi tulee qml:puolelta muodossa file:///.../filename
+
+    QStringList list = filename.split(QLatin1Char('/'));
+    QString name = list[list.size() -1];
+
+    name = name + ".json";
+
+    QFile saveFile(name);
 
     if ( !saveFile.open(QIODevice::WriteOnly) ) {
         qWarning("Couldn't open save file.");
@@ -66,8 +74,8 @@ void Database_handler::write(QJsonObject &json) const
 
 }
 
-std::vector<std::string> Database_handler::read_municipalities()
-{
+std::vector<std::string> Database_handler::read_municipalities(){
+
     QString data;
     QString fileName(":/settings/municipalities.txt");
 

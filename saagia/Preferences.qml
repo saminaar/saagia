@@ -2,9 +2,10 @@ import QtQuick 2.12
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15
 
+
 Popup {
 
-        signal dateChange(string start, string end)
+        id: popup
 
         property color background_level_0: "#16141f"
         property color background_level_1: "#302c40"
@@ -13,15 +14,12 @@ Popup {
         property color text_color: "#cdcdcd" // grey-ish
 
         property string title_text: qsTr("Preferences")
-        property string subtitle_text: qsTr("Energy type(s) to show..")
-        property string error_msg: qsTr("Error: check your input and try again!")
 
-        property Currently_showing_box show_case
-
-        id: popup
-
-        property date start_date;
-        property date end_date;
+        property string testeri: ""
+        property string chosen_start_date: ""
+        property string chosen_end_date: ""
+        property string chosen_start_time: ""
+        property string chosen_end_time: ""
 
         background: Rectangle {
             height: 150
@@ -32,7 +30,6 @@ Popup {
             border.color: "grey"
             border.width: 1
         }
-
 
 
         width: 300
@@ -69,6 +66,12 @@ Popup {
             model: [ "Saved preference 1", "Saved preference 2", "Saved preference 3" ]
         }
 
+        Save_file_dialog {
+            id: save_dialog
+            dialog_type: 1
+
+        }
+
 
         Button{
 
@@ -93,6 +96,11 @@ Popup {
                     border.color: "white"
                     border.width: 1
                 }
+
+                onClicked: {
+
+                    console.log(popup.testeri)}
+                    // Palauta asetukset popupille
 
         }
 
@@ -121,6 +129,12 @@ Popup {
                     border.color: "white"
                     border.width: 1
                 }
+
+                onClicked: {
+                    save_dialog.open()
+                }
+
+
         }
 
         Image {
@@ -139,4 +153,13 @@ Popup {
                 }
             }
         }
+
+
+        Connections {
+          target: button
+          function onSend(txt) {
+              testeri = txt
+          }
+        }
+
 }

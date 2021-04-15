@@ -18,7 +18,8 @@ public:
     Database_handler(std::shared_ptr<Data_structures> data_structures);
 
     bool load_data();
-    bool save_data(QString start_time, int data_type) const;
+    bool save_data(QString filename) const;
+    //bool save_data(QString start_time, int data_type) const;
 
     void read(const QJsonObject &json);
     void write(QJsonObject &json) const;

@@ -372,10 +372,11 @@ bool Saagia_model::check_placeinput(QString text){
     return false;
 }
 
-void Saagia_model::save_data(QString start_time, int data_type)
+void Saagia_model::save_data(QString filename)
 {
 
-    database_handler_->save_data(start_time, data_type);
+    database_handler_->save_data(filename);
+    // database_handler_->save_data(start_time, data_type);
 
     /*
     //view_->display_saved_data

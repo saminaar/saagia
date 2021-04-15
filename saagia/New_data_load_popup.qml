@@ -19,6 +19,8 @@ Popup {
 
         property Currently_showing_box show_case
 
+        signal forwardParameters(string test)
+
         id: popup
 
         property date start_date;
@@ -182,15 +184,50 @@ Popup {
 
         Preferences_button {
 
+            id: button
+            signal send(string txt)
+
             anchors.top: bottom_line.bottom
             anchors.left: bottom_line.left
             anchors.leftMargin: -5
 
-            onClicked: {
-                var component = Qt.createComponent("Preferences.qml")
-                var object = component.createObject(back);
-                object.open()
+            testeri: "Send this message forward"
+
+            background: Rectangle {
+                id: button_bg
+                implicitWidth: 100
+                implicitHeight: 35
+                color: "transparent"
             }
+
+            //Mouse area to react on click events
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: button_bg
+
+                onEntered: { button.state='Hovering'}
+                onExited: { button.state=''}
+
+                onPressed: { button.state="Pressed" }
+
+                onReleased: {
+                    if (containsMouse)
+                      button.state="Hovering";
+                    else
+                      button.state="";
+                }
+
+                onClicked: {
+                    var component = Qt.createComponent("Preferences.qml")
+                    var object = component.createObject(left_column_background);
+                    button.send(button.testeri)
+                    object.open()
+                }
+
+            }
+
+
+
         }
 
         Rectangle {

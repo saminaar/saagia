@@ -22,5 +22,7 @@
         <file>Test_file.qml</file>
         <file>Preferences_button.qml</file>
         <file>Preferences.qml</file>
+        <file>File_dialog.qml</file>
+        <file>Save_file_dialog.qml</file>
     </qresource>
 </RCC>

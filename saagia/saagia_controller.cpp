@@ -61,7 +61,8 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
 
 void Saagia_controller::save_data(QString start_time, int data_type)
 {
-    model_->save_data(start_time, data_type);
+    /*
+    model_->save_data(start_time, data_type);*/
 }
 
 /*
@@ -159,5 +160,20 @@ void Saagia_controller::save_chart_image()
 {
     model_->save_graph_as_image();
 }
+
+void Saagia_controller::load_from_file(QString filename)
+{
+
+
+}
+
+void Saagia_controller::save_to_file(QString filename)
+{
+    qDebug() << "Sending to model";
+    qDebug() << filename;
+    model_->save_data(filename);
+
+}
+
 // NOTE: no nullptr checks for model_ at all here!
 

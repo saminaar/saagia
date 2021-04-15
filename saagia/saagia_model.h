@@ -34,7 +34,8 @@ public:
 
     void check_input(bool status);
 
-    void save_data(QString start_time, int data_type);
+    // void save_data(QString start_time, int data_type);
+    void save_data(QString filename);
     void save_graph_as_image();
     void set_visible_date(QString stime, QString etime, QString shours, QString ehours);
     void load_municipalities();

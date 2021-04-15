@@ -4,6 +4,7 @@ QT += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+QT += quickcontrols2
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -47,6 +48,7 @@ DISTFILES += \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Fetch_data_button.qml \
+    File_dialog.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
     Preferences.qml \
