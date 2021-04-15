@@ -22,7 +22,7 @@ bool Database_handler::load_data()
 {
     QFile loadFile(QStringLiteral("save.json"));
 
-    if (!loadFile.open(QIODevice::ReadOnly)) {
+    if ( !loadFile.open(QIODevice::ReadOnly) ) {
         qWarning("Couldn't open save file.");
         return false;
     }
@@ -44,7 +44,7 @@ bool Database_handler::save_data(QString start_time, int data_type) const
 {
     QFile saveFile(QStringLiteral("save.json"));
 
-    if (!saveFile.open(QIODevice::WriteOnly)) {
+    if ( !saveFile.open(QIODevice::WriteOnly) ) {
         qWarning("Couldn't open save file.");
         return false;
     }
@@ -66,12 +66,13 @@ void Database_handler::write(QJsonObject &json) const
 
 }
 
-std::vector<std::string> Database_handler::read_municipalities(){
+std::vector<std::string> Database_handler::read_municipalities()
+{
     QString data;
     QString fileName(":/settings/municipalities.txt");
 
     QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly)) {
+    if( !file.open(QIODevice::ReadOnly) ) {
         qDebug()<<"file not opened";
     }
     else
@@ -86,8 +87,8 @@ std::vector<std::string> Database_handler::read_municipalities(){
 
     std::vector<std::string> municipalities;
 
-    for( QString str : data_splitted ) {
-        municipalities.push_back(str.toStdString());
+    for( int i=0; i<data_splitted.size(); i++ ) {
+        municipalities.push_back(data_splitted[i].toStdString());
     }
 
     return municipalities;
