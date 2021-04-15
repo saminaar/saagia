@@ -87,8 +87,8 @@ std::vector<std::string> Database_handler::read_municipalities()
 
     std::vector<std::string> municipalities;
 
-    for( int i=0; i<data_splitted.size(); i++ ) {
-        municipalities.push_back(data_splitted[i].toStdString());
+    for( auto& str : data_splitted ) {
+        municipalities.push_back(str.toStdString());
     }
 
     return municipalities;
