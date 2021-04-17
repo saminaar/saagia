@@ -97,6 +97,7 @@ void Saagia_controller::energy_form_4_selected()
     model_->energy_form_4_selected();
 }
 
+/*
 void Saagia_controller::check_input()
 {
 
@@ -121,6 +122,31 @@ void Saagia_controller::check_input()
     model_->check_input(status);
 
 }
+*/
+
+bool Saagia_controller::check_input()
+{
+
+    if((start_time == "") or (end_time == "")){
+        return false;
+    }
+
+    if (start_time > end_time){
+        return false;
+    }
+
+    if (start_time == end_time && start_hours_min > end_hours_min){
+        return false;
+    }
+
+    if(energy_type == 0){
+        return false;
+    }
+
+    return true;
+
+}
+
 
 bool Saagia_controller::check_place(QString text)
 {

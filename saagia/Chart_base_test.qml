@@ -86,7 +86,7 @@ Rectangle {
                 horizontalScrollMask.x = mouseX;
             }
 
-            console.log(chart.s)
+            //console.log(chart.s)
 
         }
         onPressed: {

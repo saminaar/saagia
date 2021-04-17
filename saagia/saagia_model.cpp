@@ -235,7 +235,7 @@ void Saagia_model::energy_form_4_selected()
 void Saagia_model::check_input(bool status)
 {
 
-    view_->input_checked(status);
+    //view_->input_checked(status);
 
 }
 

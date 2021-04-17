@@ -40,7 +40,7 @@ public:
 
     void clear_chart_data(int type);
 
-    void input_checked(bool status);
+    //void input_checked(bool status);
 
 
 signals:
@@ -56,9 +56,9 @@ signals:
 
     void clearChartData(int type);
 
-    void inputCheckOk();
+    //void inputCheckOk();
 
-    void inputCheckNotOk();
+    //void inputCheckNotOk();
 
 
 private:
