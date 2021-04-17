@@ -24,8 +24,7 @@ ApplicationWindow {
 
     Rectangle {
         id: main_container
-        x: 0
-        y: 0
+
         width: parent.width
         height: parent.height
         opacity: 0.9
@@ -34,7 +33,7 @@ ApplicationWindow {
         Rectangle {
             id: container
             x: 26
-            y: 94
+            y: 100
             width: main_container.width - 50
             height: main_container.height - 150
             opacity: 0.9
@@ -45,13 +44,14 @@ ApplicationWindow {
                 id: right_column
                 anchors.right: parent.right
                 leftPadding: -10
-                y: 96
+                y: 75
                 spacing: 20
                 width: 575
-                height: parent.height - 105
+                height: parent.height - 85
 
                 Rectangle {
                     id: right_column_background
+                    y: 80
                     width: parent.width
                     height: parent.height
                     opacity: 0.9
@@ -207,23 +207,6 @@ ApplicationWindow {
                 x: 10
                 width: parent.width - 20
 
-
-
-                Fetch_data_button {
-
-                    y: 25
-                    anchors.left: parent.right
-                    anchors.right: parent.right
-                    anchors.leftMargin: -213
-                    anchors.rightMargin: 64
-                    hoverEnabled: false
-                    id: retrieve_button
-                    onClicked: {
-                        saagia_controller.set_energy_type(0)
-                        var component = Qt.createComponent("New_data_load_popup.qml")
-                        var object = component.createObject(left_column_background);
-                        object.open()
-                    }
                 }
 
             }
@@ -277,7 +260,7 @@ ApplicationWindow {
             }
 
 
-        }
+
     }
 
     Rectangle {

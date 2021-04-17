@@ -14,7 +14,7 @@ Button{
 
 
 
-        property string chosen_start_date: "hey"
+        property string chosen_start_date: "test"
         //property string chosen_end_date: "hi"
         //property string chosen_start_time: "hullo"
         //property string chosen_end_time: "yap"
@@ -51,6 +51,9 @@ Button{
             }
         ]
 
+        onClicked: {
+            console.log(testeri)
+        }
 
         Connections {
           target: popup

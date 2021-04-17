@@ -6,7 +6,7 @@ Rectangle {
     id: show_case
 
     width: 500
-    height: 70
+    height: 50
     color: "#16141f"
 
     Button {
@@ -17,6 +17,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: parent.width - 50
         y: 25
+        anchors.verticalCenter: parent.verticalCenter
 
         background: Rectangle {
 
@@ -28,8 +29,6 @@ Rectangle {
                 border.color: "#fff"
 
             }
-
-
 
         Image {
 
@@ -99,33 +98,78 @@ Rectangle {
 
 
         }
-
-
-
     }
 
 
-    Text {
-        id: case_title
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 10
+        Fetch_data_button {
 
-        color: "#ffffff"
-        text: saagia_view.active_data
-        font.pixelSize: 15
+            anchors.verticalCenter: button.verticalCenter
+            anchors.right: button.left
+            anchors.rightMargin: 5
 
-    }
+            hoverEnabled: false
+            id: retrieve_button
+            onClicked: {
+                saagia_controller.set_energy_type(0)
+                var component = Qt.createComponent("New_data_load_popup.qml")
+                var object = component.createObject();
+                object.open()
+            }
+
+
+
+        }
+
+        Rectangle {
+            width: 100
+            height: 50
+            color: "transparent"
+
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+
+            anchors.leftMargin: 10
+
+            Image {
+
+                anchors.verticalCenter: parent.verticalCenter
+                id: calendar_logo
+                width: 20
+                height: 20
+
+
+                source: "qrc:/images/calendar.png"
+
+            }
+
+
+            Text {
+                id: case_title
+                anchors.left: calendar_logo.right
+                anchors.leftMargin: 5
+                anchors.verticalCenter: parent.verticalCenter
+
+                color: "#ffffff"
+                text: saagia_view.active_data
+                font.pixelSize: 15
+
+            }
+        }
+
+
+
+
+/*
     Text {
         id: energy_type
         anchors.top: case_title.bottom
         anchors.left: parent.left
-        anchors.margins: 10
+        anchors.margins: 0
 
         color: "#66ff99"
         text: saagia_view.current_text
         font.pixelSize: 15
     }
-
+*/
 
 }

@@ -99,7 +99,7 @@ Popup {
 
                 onClicked: {
 
-                    console.log(popup.testeri)}
+                    console.log(testeri)
                     // Palauta asetukset popupille
 
         }
@@ -132,6 +132,9 @@ Popup {
 
                 onClicked: {
                     save_dialog.open()
+
+
+                    // Save dialogille settingsit tähän mukaan!
                 }
 
 
@@ -161,5 +164,6 @@ Popup {
               testeri = txt
           }
         }
+
 
 }

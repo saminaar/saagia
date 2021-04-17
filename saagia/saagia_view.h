@@ -60,6 +60,8 @@ signals:
 
     //void inputCheckNotOk();
 
+    void sendWeatherData(int value, int year, int month, int day, int hour, int minute, int type);
+
 
 private:
     // with the push MVC, the component that communicates the values to the QML side,

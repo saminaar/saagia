@@ -86,9 +86,8 @@ Rectangle {
                 horizontalScrollMask.x = mouseX;
             }
 
-            //console.log(chart.s)
-
         }
+
         onPressed: {
             if (mouse.button == Qt.LeftButton) {
                 horizontalScrollMask.x = mouseX;
@@ -111,11 +110,16 @@ Rectangle {
     function clear_previous_data(type){
 
         //chart.removeAllSeries()
-        //chart.dates = []
-        //chart.energy_values = []
+        chart.dates = []
+        chart.energy_values = []
 
-        console.log("Created a new type! ", type)
-        add_a_new_line(type)
+        if (chart.series(type) === null){
+            add_a_new_line(type)
+        }
+        else{
+            chart.removeSeries(type)
+            add_a_new_line(type)
+        }
 
     }
 
@@ -165,15 +169,9 @@ Rectangle {
                 chart.series(line.toString()).visible = true;
             }
         }
-
-        // Work in progress:
-        //set_min_and_max()
-
     }
 
     function parseReceivedData(value, start_time, type) {
-
-        console.log("Here: ", value, start_time, type)
 
         // Before parsing: "2021-01-01T01:00:00+0000"
         var parsed_time = start_time.split('T');
@@ -191,6 +189,7 @@ Rectangle {
 
         var hours = time_hh_mm_ms[0]
         var mins = time_hh_mm_ms[1]
+
         var ms = time_hh_mm_ms[2]
 
         // Create a new datetime for the X-axis
@@ -206,7 +205,10 @@ Rectangle {
 
         // Add the X,Y point to the chart
 
-        chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value)
+        if (chart.series(type.toString()) !== null){
+            chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value)
+
+        }
 
         // Set the min and max values for both axes.
         axisX.min = chart.dates[0]
@@ -214,9 +216,6 @@ Rectangle {
 
         axisY.max = Math.max.apply(Math, chart.energy_values) + 500
         axisY.min =  Math.min.apply(Math, chart.energy_values)
-
-
-
 
     }
 

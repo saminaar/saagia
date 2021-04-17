@@ -56,6 +56,7 @@ DISTFILES += \
     Preferences_button.qml \
     Program_status_bar.qml \
     Save_data_button.qml \
+    Save_file_dialog.qml \
     Save_file_popup.qml \
     Test_file.qml \
     Text_input_bar.qml \

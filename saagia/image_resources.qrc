@@ -18,5 +18,6 @@
         <file>images/cancel.png</file>
         <file>images/refresh.png</file>
         <file>images/heart_outline.png</file>
+        <file>images/calendar.png</file>
     </qresource>
 </RCC>

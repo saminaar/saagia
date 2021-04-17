@@ -126,14 +126,12 @@ void Saagia_model::set_chart_data()
     // Parseri tähän joka kattoo ettei oo liikaa tavaraa..
     if (energy_type_ != 1){
 
-
         int i = 0;
         for (auto energy_type : data_structures_->get_energy_structure() )
         {
 
             // Enter another map
             for (auto key_value : energy_type.second){
-
 
                 if (i == 20){
 
@@ -143,7 +141,6 @@ void Saagia_model::set_chart_data()
                 else{
                     i += 1;
                 }
-
 
             }
 
@@ -164,6 +161,7 @@ void Saagia_model::set_chart_data()
     }
 
 }
+
 
 void Saagia_model::set_energy_type(int type)
 {
@@ -296,7 +294,14 @@ void Saagia_model::set_visible_date(QString stime, QString etime, QString shours
     QString emonth = end_date.mid(5,2);
     QString eday = end_date.mid(8, 2);
 
-    QString starting = "Timeframe: " + day + "." + month + "." + year + ", " + shours.replace("\%3A", ":") + " - " + eday + "." + emonth + "." + eyear + ", " + ehours.replace("\%3A", ":");
+    shours = shours.replace("\%3A", ":");
+    shours = shours.mid(0, shours.length() - 3);
+
+    ehours = ehours.replace("\%3A", ":");
+    ehours = ehours.mid(0, ehours.length() - 3);
+
+
+    QString starting = "<b>Current timeframe: </b>" + day + "." + month + "." + year + ", " + shours + " <b>-</b> " + eday + "." + emonth + "." + eyear + ", " + ehours;
 
     if(view_ != nullptr )
     {

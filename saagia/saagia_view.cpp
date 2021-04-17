@@ -5,7 +5,7 @@ Saagia_view::Saagia_view(QObject *parent) :
     QObject{ parent },
     print_data_{ "The program will print out stuff here. . ." },
     chart_data_{},
-    active_date_{"Timeframe: "},
+    active_date_{"<b>Current timeframe:</b> <i>No timeframe selected </i>"},
     title_of_shown_data_{"Currently displayed: "}
 {
 }
@@ -33,7 +33,9 @@ QString Saagia_view::getChartData() const
 
 void Saagia_view::setChartData(int value, QString date, int type)
 {
+
     emit sendChartData(value, date, type);
+
 }
 
 void Saagia_view::set_the_visible_date(const QString &stime)
