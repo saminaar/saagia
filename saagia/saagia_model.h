@@ -28,6 +28,8 @@ public:
 
     void set_chart_data();
 
+    void set_weather_chart_data();
+
     void set_energy_type(int type);
 
     void clear_database();

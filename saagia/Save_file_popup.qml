@@ -2,10 +2,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15
 
-
 Popup {
-
-        signal dateChange(string start, string end)
 
         property color background_level_0: "#16141f"
         property color background_level_1: "#302c40"
@@ -13,13 +10,12 @@ Popup {
         property color accent_color: "#ffa500" // orange
         property color text_color: "#cdcdcd" // grey-ish
 
-        property string title_text: qsTr("Retrieve new datasets")
-        property string subtitle_text: qsTr("Energy type(s) to show..")
-        property string error_msg: qsTr("<b>Error:</b> check your input and try again!")
+        property string title_text: qsTr("Save dataset(s)")
+        property string subtitle_text: qsTr("Dataset(s) to save..")
+
+        property string error_msg: qsTr("Error: check your input and try again!")
 
         property Currently_showing_box show_case
-
-        signal forwardParameters(string test)
 
         id: popup
 
@@ -47,6 +43,10 @@ Popup {
         }
         exit: Transition {
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+        }
+
+        Save_file_dialog {
+            id: save_dialog
         }
 
         Text {
@@ -86,7 +86,7 @@ Popup {
         Text {
             id: window_subtitle_text
             x: 10
-            y: 10
+            y: 5
             color: text_color
             font.pixelSize: 13
             text: subtitle_text
@@ -102,23 +102,22 @@ Popup {
         Date_input {
 
             x: 10
-            y: 105
+            y: 100
 
         }
 
         Time_input {
-            x: 14
+            x: 10
             y: 164
 
         }
 
         Text {
             id: error_message
-            anchors.right: parent.right
-
-            y: 245
+            x: 0
+            y: 240
             visible: false
-            color: "#ff4d4d"
+            color: accent_color
             font.pixelSize: 13
             minimumPointSize: 10
             minimumPixelSize: 10
@@ -134,7 +133,10 @@ Popup {
                 duration: 4000
             }
 
+
+
         }
+
 
 
 
@@ -145,7 +147,6 @@ Popup {
             anchors.rightMargin: 10
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 10
-
 
             height: 40
             width: height
@@ -170,7 +171,7 @@ Popup {
                     height: 20
                     anchors.centerIn: parent
                     fillMode: Image.Stretch
-                    source: "qrc:/images/refresh.png"
+                    source: "qrc:/images/save_icon.png"
 
 
             }
@@ -180,7 +181,7 @@ Popup {
             ToolTip.delay: 500
             ToolTip.timeout: 5000
             ToolTip.visible: hovered
-            ToolTip.text: qsTr("Load selected data")
+            ToolTip.text: qsTr("Save selected data")
 
             states: [
                 State {
@@ -227,16 +228,16 @@ Popup {
                     else
                       updatebutton.state="";
                 }
+
                 onClicked: {
 
-                     check_input()
+                    save_dialog.open()
+
                 }
 
-            }
-
-
-
         }
+        }
+
 
 
         Rectangle {
@@ -247,51 +248,6 @@ Popup {
             anchors.left: parent.left
             anchors.right: parent.right
         }
-
-        Preferences_button {
-
-            id: button
-            signal send(string txt)
-
-            anchors.top: bottom_line.bottom
-            anchors.left: bottom_line.left
-            anchors.leftMargin: -5
-
-            testeri: "Send this message forward"
-
-            background: Rectangle {
-                id: button_bg
-                implicitWidth: 100
-                implicitHeight: 35
-                color: "transparent"
-            }
-
-            //Mouse area to react on click events
-            MouseArea {
-                hoverEnabled: true
-                anchors.fill: button_bg
-
-                onEntered: { button.state='Hovering'}
-                onExited: { button.state=''}
-
-                onPressed: { button.state="Pressed" }
-
-                onReleased: {
-                    if (containsMouse)
-                      button.state="Hovering";
-                    else
-                      button.state="";
-                }
-
-                onClicked: {
-                    var component = Qt.createComponent("Preferences.qml")
-                    var object = component.createObject(left_column_background);
-                    button.send(button.testeri)
-                    object.open()
-                }
-
-            }
-
 
 
         }
@@ -306,14 +262,8 @@ Popup {
             anchors.left: parent.left
             anchors.right: parent.right
         }
-        }
 
 
-        function check_input(){
-
-            saagia_controller.check_input()
-
-        }
 
         function send_request(){
 
@@ -337,5 +287,3 @@ Popup {
 
         }
 }
-
-

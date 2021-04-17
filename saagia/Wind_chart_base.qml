@@ -9,11 +9,7 @@ ChartView {
         anchors.fill: parent
         antialiasing: true
 
-        property var dates: []
-        property var energy_values: []
-        property var electricity_values: []
-
-        legend.visible: false
+        legend.visible: true
         theme: ChartView.ChartThemeDark
         //animationOptions: ChartView.GridAxisAnimations
 
@@ -23,10 +19,13 @@ ChartView {
         margins.right: 30
 
         // Default grid display seen when launching the software
-        LineSeries {
-            axisX: axisX
-            axisY: axisY
 
+        BarSeries {
+            id: mySeries
+            axisX: BarCategoryAxis { categories: ["2007", "2008", "2009", "2010", "2011", "2012" ] }
+            BarSet { label: "Cloudiness"; values: [2, 2, 3, 4, 5, 6] }
+            BarSet { label: "Temperature"; values: [5, 1, 2, 4, 1, 7] }
+            BarSet { label: "Other"; values: [3, 5, 8, 13, 5, 8] }
         }
 
         // The Y-axis of the chart

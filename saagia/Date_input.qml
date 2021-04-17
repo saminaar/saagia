@@ -15,7 +15,7 @@ Rectangle {
         color: "#cdcdcd"
         font.bold: true
         text: qsTr("Start date")
-        font.pointSize: 10
+        font.pointSize: 9
         font.family: "Segoe UI"
         font.strikeout: false
         font.italic: false
@@ -36,8 +36,9 @@ Rectangle {
 
         Text {
             id: start_time
-            padding: 5
+            anchors.margins: 7
             anchors.fill: start_time_rect
+            font.pointSize: 10
             text: qsTr("")
 
 
@@ -105,8 +106,9 @@ Rectangle {
 
         Text {
             id: end_time
-            padding: 5
             anchors.fill: end_time_rect
+            anchors.margins: 7
+            font.pointSize: 10
             text: qsTr("")
 
 
