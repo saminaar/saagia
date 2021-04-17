@@ -2,6 +2,7 @@
 #define DATA_READER_H
 
 #include "data_structures.h"
+#include "data_calculations.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>

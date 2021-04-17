@@ -204,6 +204,7 @@ void Data_reader::parseXML(QString content)
         }
         reader.readNext();
     }
+
 }
 
 

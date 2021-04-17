@@ -16,7 +16,7 @@ class Data_calculations
 public:
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
 
-    float average_temp_of_month(month month, int year);
+    float average_temp_of_month(int month, int year);
    // float percentage_of_all_energy_prod(int energy_type);
 
 
@@ -27,6 +27,7 @@ private:
     std::shared_ptr<Data_structures> data_structures_;
 
     //starting and ending dates for all months
+   /*
     std::map<month, std::pair<QString, QString>> dates_of_months_ =
     {
        { JANUARY, {"01-01", "01-31"} },
@@ -42,6 +43,7 @@ private:
        { NOVEMBER, {"11-01", "11-30"} },
        { DECEMBER, {"12-01", "12-31"} }
     };
+    */
 
 
 };

@@ -22,7 +22,7 @@ void Saagia_model::load_data(QString start_time, QString end_time, int variable,
     else {
         data_reader_->requestUrl(url, header_);
     }
-
+    data_calculations_->average_temp_of_month(2, 2021);
     set_chart_data();
 }
 
