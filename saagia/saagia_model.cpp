@@ -16,22 +16,6 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 {
 }
 
-/*
-
-    Fingrid variable id:t
-
-Suomen sähkön kulutus: tunneittain: 124, 3min välein: 193
-o   Suomen sähköntuotanto:  74, päivit. tunneittain
-o   Tulevan vuorokauden sähkönkulutusennuste: 166, päivitetään tunneittain
-o   Tulevan vuorokauden sähköntuotanto ennuste: 242, päivit. tunneittain
-o   Tuulienergian tuotantoennuste seur. 36h, 245 (päivitetään tunneittain)
-o   Tuuli-, vesi- ja ydinvoiman osuudet kokonaistuotannosta
-    -	vesivoiman tuotanto:  3min välein, 191
-    -	tuulivoiman tuotanto:  3min välein, 181
-    -ydinvoiman tuotanto:  3min välein, 188
-
-*/
-
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
@@ -46,186 +30,92 @@ void Saagia_model::load_data(QString start_time, QString end_time, int variable,
     set_chart_data();
 }
 
-
-/*
-void Saagia_model::load_data(QString stime, QString etime, int variable, QString place)
-{
-    QString web_address = "";
-    QString start_time = "";
-    QString end_time = "";
-    QString default_text = "Currently displayed: ";
-    QString energy_info = "";
-
-    switch(variable) {
-        case 0 :
-            break;
-
-        case 1 :
-            // Energy consumption in Finland (hourly)
-            web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
-            qDebug() << variable;
-            qDebug() << "Energy consumption in Finland selected";
-            energy_info = "Electricity consumption in Finland (MWh/h)";
-
-            // Start time is spelled "start_time"
-            start_time = "start_time=" + stime;
-            qDebug() << start_time;
-
-            // End time is spelled "end_time"
-            end_time = "end_time=" + etime;
-            qDebug() << end_time;
-
-            break;
-
-        case 2 :
-            // Wind data from FMI
-            web_address = "https://opendata.fmi.fi/wfs?"
-                          "request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple"
-                          "&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man&";
-            qDebug() << variable;
-            qDebug() << "Wind data from FMI selected";
-            energy_info = "Wind data from FMI";
-
-            // Start time is spelled "starttime"
-            start_time = "starttime=" + stime;
-            qDebug() << start_time;
-
-            // End time is spelled "endtime"
-            end_time = "endtime=" + etime;
-            qDebug() << end_time;
-
-            break;
-
-        case 3 :
-            // Nuclear energy production (3 min interval)
-            web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
-            qDebug() << variable;
-            qDebug() << "Nuclear energy selected";
-            energy_info = "Nuclear energy production in Finland (MWh/h)";
-
-            // Start time is spelled "start_time"
-            start_time = "start_time=" + stime;
-            qDebug() << start_time;
-
-            // End time is spelled "end_time"
-            end_time = "end_time=" + etime;
-            qDebug() << end_time;
-
-            break;
-
-        case 4 :
-            // Hydro energy production (3 min interval)
-            web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
-            qDebug() << variable;
-            qDebug() << "Hydro energy selected";
-            energy_info = "Hydro energy production in Finland (MWh/h)";
-
-            // Start time is spelled "start_time"
-            start_time = "start_time=" + stime;
-            qDebug() << start_time;
-
-            // End time is spelled "end_time"
-            end_time = "end_time=" + etime;
-            qDebug() << end_time;
-
-            break;
-
-        case 5 :
-            // Optional
-
-            break;
-
-        default :
-            energy_info = "";
-            break;
-    }
-
-
-    // Rakennetaan tässä www-osoite valmiiksi ja käytetään sitä haussa
-    // Build the complete web address and use it for fetching data
-    QString full_web_address = (web_address + start_time + "&" + end_time);
-
-    QString header = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
-    QString fmi = " https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple&place=Pirkkala&timestep=30&parameters=t2m,ws_10min,n_man";
-    //data_reader_->requestUrl(fmi, header);
-
-    data_reader_->requestUrl(full_web_address, header);
-
-    QString currently_showing = default_text + energy_info;
-
-    view_->set_the_type_data(currently_showing);
-
-
-    qDebug() << "Tietojen haku onnistui";
-
-    print_data_ = "Tietojen haku onnistui";
-    //set_chart_data();
-
-    if (view_ != nullptr)
-    {
-        view_->setPrintData(print_data_);
-    }
-
-}
-
-*/
-
 QString Saagia_model::construct_url(QString start_time, QString end_time, int case_variable, QString place)
 {
     QString web_address = "";
     QString url = "";
-    QString energy_info = "";
-    QString formatted_start_time  ;
-    QString formatted_end_time  ;
+    QString data_info = "";
 
     switch(case_variable) {
         case 0 :
             break;
-        //https://api.fingrid.fi/v1/variable/188/events/csv?start_time=2021-01-18T22:00:00Z&end_time=2021-01-19T04:00:00Z
+
         case 1 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
-            return url;
+            data_info = "Electricity consumption in Finland (MWh/h)";
             break;
 
         case 2 :
-            // Nuclear energy production (3 min interval)
-            web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
-            return url;
+            // Energy production in Finland (hourly)
+            web_address = "https://api.fingrid.fi/v1/variable/74/events/json?";
+            url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Electricity production in Finland (MWh/h)";
             break;
 
         case 3 :
-            // Hydro energy production (3 min interval)
-            web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
+            // Nuclear energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
-            return url;
+            data_info = "Nuclear energy production in Finland (MWh/h)";
             break;
 
         case 4 :
-            // Optional
+            // Hydro energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Hydro energy production in Finland (MWh/h)";
             break;
 
         case 5 :
+            // Wind energy production (3 min interval)
+            web_address = "https://api.fingrid.fi/v1/variable/181/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Wind energy production in Finland (MWh/h)";
+            break;
+
+        case 6 :
+            // Energy consumption forecast 24h
+            web_address = "https://api.fingrid.fi/v1/variable/166/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Energy consumption forecast for next 24 hours (MWh/h";
+            break;
+
+
+        case 7 :
+            //Energy production forecast 24h
+            web_address = "https://api.fingrid.fi/v1/variable/242/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Energy production forecast for next 24 hours (MWh/h";
+            break;
+
+        case 8 :
+            // Wind production forecast 36h
+            web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
+            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            data_info = "Wind production forecast for next 36h (MWh/h)";
+        break;
+
+
+        case 9 :
             // Any old weather data (temperature, wind, cloudiness)
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
-            return url;
-
+            data_info = "Weather data from past";
             break;
 
-        case 6:
-            //Temperature or wind forecast
+        case 10 :
+            //Temperature and wind forecast
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::forecast::hirlam::surface::point::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=Temperature,WindSpeedMS";
-            return  url;
+            data_info = "Weather forecast";
             break;
 
-        default :
-            energy_info = "";
-            break;
     }
+    QString default_text = "Currently displayed: ";
+    QString info_text = default_text + data_info;
+    view_->set_the_type_data(info_text);
     return url;
 
 }

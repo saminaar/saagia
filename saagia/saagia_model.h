@@ -56,6 +56,7 @@ private:
 
     int energy_type_;
     QString place_ = "Tampere";
+
 };
 
 #endif // SAAGIA_MODEL_H
