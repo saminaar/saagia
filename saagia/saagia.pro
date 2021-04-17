@@ -39,6 +39,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     ../../../chart_example.gif \
     ../../../single-line-chart.png \
+    About_popup.qml \
     Calendar_model.qml \
     Chart_base_beta.qml \
     Chart_base_test.qml \
@@ -55,6 +56,7 @@ DISTFILES += \
     Preferences_button.qml \
     Program_status_bar.qml \
     Save_data_button.qml \
+    Save_file_popup.qml \
     Test_file.qml \
     Text_input_bar.qml \
     Time_input.qml \

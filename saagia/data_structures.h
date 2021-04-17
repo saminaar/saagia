@@ -31,7 +31,7 @@ enum month {
 
 struct weather_data{
 
-    float temperature;    
+    float temperature;
     float wind_speed;
     float cloudines;
 };

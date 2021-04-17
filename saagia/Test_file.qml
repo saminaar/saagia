@@ -1,116 +1,166 @@
-import QtQuick 2.11
-import QtCharts 2.2
-import QtQuick.Window 2.11
-import QtCharts 2.3
-import QtQuick.Controls 2.0
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 
-Window {
-    id: root
-    visible: true
-    width: 640
-    height: 480
-    title: qsTr("Hello World")
+ColumnLayout {
 
-    property real epochCreated :  new Date(Date.now()).valueOf();
-    property real chartAge     : Date.now() - root.epochCreated;
-    property real tzMs: ((new Date().getTimezoneOffset()) * 60000); // returns minuites not MS so we need to convert down
+    id: layout
+    width: 310
+    height: 70
 
-    property real spanMs: 120000; // 2 min in ms
+    RadioButton {
+        id: button_1
+        text: qsTr("Electricity production")
 
-    //function updateTimeAxis(chartTimeMin, chartTimeMax, memoryAddress){ // cpp remote control calls me
+        anchors.top: layout.top
+        anchors.left: layout.left
 
-    ChartView {
-        id: chartView
-        width: root.width
-        height: root.height
-        antialiasing: true
-        legend.visible: false
+        indicator: Rectangle {
+            implicitWidth: 20
+            implicitHeight: 20
+            x: button_1.leftPadding
+            y: parent.height / 2 - height / 2
+            radius: 12
+            border.color: button_1.down ? "#ff9933" : "#e67300"
 
-        ValueAxis {
-            id: valueAxis
-            min: 0
-            max: 20
-            tickCount: 10
-            minorTickCount: 2
-        }
-
-        DateTimeAxis {// move with slider
-            id: dateTimeAxisVisible;
-            visible: true;
-            format: "mm.ss"
-            min: new Date(root.chartAge - dateTimeAxis.max.valueOf()); // init
-            max: new Date(root.chartAge - dateTimeAxis.min.valueOf()); // init
-        }
-
-        LineSeries {
-            id: nothingSeries
-            useOpenGL: true
-            axisX: dateTimeAxisVisible
-            axisY: valueAxis
-            XYPoint { x:  new Date(Date.now()).getTime(); y: 0 }
-        }
-
-        DateTimeAxis {
-            id: dateTimeAxis
-            visible: false;
-        }
-        LineSeries {
-            id: lineSeries
-            name: "Line Series"
-            axisXTop: dateTimeAxis
-            axisY   : valueAxis
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs      ; y:0;    }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +1500; y:1.1;  }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +2000; y:10.9; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +2500; y:2.1;  }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +3100; y:20.9; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +3500; y:3.4;  }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +4000; y:4.1;  }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +4500; y:10;   }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +5000; y:19.1; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +5500; y:11.9; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +6000; y:16.1; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +6500; y:12.9; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +7000; y:13.4; }
-            XYPoint { x: (new Date(Date.now())).getTime() + root.tzMs +7500; y:14.1; }
-        }
-    }
-
-    Rectangle {
-        id: horizontalScrollMask
-        visible: false
-    }
-
-    MouseArea {
-        id: chart_area
-        anchors.fill: chartView
-        acceptedButtons: Qt.LeftButton
-
-        onMouseXChanged: {
-            if ((mouse.buttons & Qt.LeftButton) == Qt.LeftButton) {
-                chartView.scrollLeft(mouseX - horizontalScrollMask.x);
-                horizontalScrollMask.x = mouseX;
-            }
-
-            console.log(chart.s)
-
-        }
-        onPressed: {
-            if (mouse.button == Qt.LeftButton) {
-                horizontalScrollMask.x = mouseX;
+            Rectangle {
+                width: 10
+                height: 10
+                x: 5
+                y: 5
+                radius: 7
+                color: button_1.down ? "#ff9933" : "#e67300"
+                visible: button_1.checked
             }
         }
+
+        contentItem: Text {
+            text: button_1.text
+            font.pointSize: 9
+            opacity: enabled ? 1.0 : 0.3
+            color: button_1.down ? "#ff9933" : "#ffe6cc"
+            verticalAlignment: Text.AlignVCenter
+            leftPadding: button_1.indicator.width + button_1.spacing
+        }
+
+        onToggled: saagia_controller.set_energy_type(1)
     }
 
+    RadioButton {
+        id: button_2
+        text: qsTr("Nuclear production")
 
-    function updateTimeAxis()// chartTimeMin, chartTimeMax){
-    {
-    //    root.chartAge = Date.now() - root.epochCreated; // update age
-        var now = Date.now();
-        dateTimeAxis.min = new Date((now - root.spanMs) + root.tzMs); //chartTimeMin);
-        dateTimeAxis.max = new Date( now                + root.tzMs); //chartTimeMax);
+        anchors.top: button_1.bottom
+        anchors.left: button_1.left
+        anchors.right: button_1.right
 
-   //     dateTimeAxisVisible.min = new Date(root.chartAge - dateTimeAxis.max.valueOf());
-   //     dateTimeAxisVisible.max = new Date(root.chartAge - dateTimeAxis.min.valueOf());
+        indicator: Rectangle {
+            implicitWidth: 20
+            implicitHeight: 20
+            x: button_2.leftPadding
+            y: parent.height / 2 - height / 2
+            radius: 12
+            border.color: button_2.down ? "#ff9933" : "#e67300"
+
+            Rectangle {
+                width: 10
+                height: 10
+                x: 5
+                y: 5
+                radius: 7
+                color: button_2.down ? "#ff9933" : "#e67300"
+                visible: button_2.checked
+            }
+        }
+
+        contentItem: Text {
+            text: button_2.text
+            font.pointSize: 9
+            opacity: enabled ? 1.0 : 0.3
+            color: button_2.down ? "#ff9933" : "#ffe6cc"
+            verticalAlignment: Text.AlignVCenter
+            leftPadding: button_2.indicator.width + button_2.spacing
+        }
+
+        onToggled: saagia_controller.set_energy_type(3)
     }
+
+    RadioButton {
+        id: button_3
+        text: qsTr("Hydro production")
+
+        anchors.top: layout.top
+        anchors.right: layout.right
+
+        indicator: Rectangle {
+            implicitWidth: 20
+            implicitHeight: 20
+            x: button_3.leftPadding
+            y: parent.height / 2 - height / 2
+            radius: 12
+            border.color: button_3.down ? "#ff9933" : "#e67300"
+
+            Rectangle {
+                width: 10
+                height: 10
+                x: 5
+                y: 5
+                radius: 7
+                color: button_3.down ? "#ff9933" : "#e67300"
+                visible: button_3.checked
+            }
+        }
+
+        contentItem: Text {
+            text: button_3.text
+            font.pointSize: 9
+            opacity: enabled ? 1.0 : 0.3
+            color: button_3.down ? "#ff9933" : "#ffe6cc"
+            verticalAlignment: Text.AlignVCenter
+            leftPadding: button_3.indicator.width + button_3.spacing
+        }
+
+        onToggled: saagia_controller.set_energy_type(4)
+    }
+
+    RadioButton {
+        id: button_4
+        text: qsTr("Wind data")
+
+        anchors.top: button_3.bottom
+        anchors.left: button_3.left
+        anchors.right: button_3.right
+
+        indicator: Rectangle {
+            implicitWidth: 20
+            implicitHeight: 20
+            x: button_4.leftPadding
+            y: parent.height / 2 - height / 2
+            radius: 12
+            border.color: button_4.down ? "#ff9933" : "#e67300"
+
+            Rectangle {
+                width: 10
+                height: 10
+                x: 5
+                y: 5
+                radius: 7
+                color: button_4.down ? "#ff9933" : "#e67300"
+                visible: button_4.checked
+            }
+        }
+
+        contentItem: Text {
+            text: button_4.text
+            font.pointSize: 9
+            opacity: enabled ? 1.0 : 0.3
+            color: button_4.down ? "#ff9933" : "#ffe6cc"
+            verticalAlignment: Text.AlignVCenter
+            leftPadding: button_4.indicator.width + button_4.spacing
+        }
+
+        onToggled: saagia_controller.set_energy_type(2)
+    }
+
 }

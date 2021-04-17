@@ -40,7 +40,13 @@ MenuBar {
 
             Action {
                 text: qsTr("Save data...")
-                onTriggered: save_file.open()
+
+                onTriggered: {
+
+                    var component = Qt.createComponent("Save_file_popup.qml")
+                    var object = component.createObject(menu_bar);
+                    object.open()
+                }
 
             }
 
@@ -80,13 +86,23 @@ MenuBar {
 
         Menu {
             title: qsTr("Help")
-            Action { text: qsTr("About...") }
+            Action {
+                text: qsTr("About...")
+
+                onTriggered: {
+
+                    var component = Qt.createComponent("About_popup.qml")
+                    var object = component.createObject(menu_bar);
+                    object.open()
+                }
+
+            }
 
             // Menu item dropdown style
             delegate: MenuItem {
                 id: menuItem_2
                 implicitWidth: 100
-                implicitHeight: 30
+                implicitHeight: 40
 
 
                 contentItem: Text {
