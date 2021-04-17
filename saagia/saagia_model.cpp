@@ -1,9 +1,5 @@
 #include "saagia_model.h"
-#include "saagia_view.h"
-#include "data_structures.h"
-#include "data_reader.h"
-#include "database_handler.h"
-#include "data_calculations.h"
+
 
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
@@ -19,7 +15,7 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 5 | variable == 6) {
+    if (variable == 9 | variable == 10) {
         data_reader_->requestUrl(url, "");
     }
 

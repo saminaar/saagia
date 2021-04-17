@@ -1,5 +1,8 @@
 #ifndef DATA_CALCULATIONS_H
 #define DATA_CALCULATIONS_H
+
+#include "data_structures.h"
+
 #include <memory>
 #include <map>
 
@@ -9,20 +12,6 @@ class Data_structures;
 
 class Data_calculations
 {
-    enum month {
-        JANUARY,
-        FEBRUARY,
-        MARCH,
-        APRIL,
-        MAY,
-        JUNE,
-        JULY,
-        AUGUST,
-        SEPTEMBER,
-        OCTOBER,
-        NOVEMBER,
-        DECEMBER
-    };
 
 public:
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
@@ -38,7 +27,7 @@ private:
     std::shared_ptr<Data_structures> data_structures_;
 
     //starting and ending dates for all months
-    std::map<month, std::pair<QString, QString>> months_ =
+    std::map<month, std::pair<QString, QString>> dates_of_months_ =
     {
        { JANUARY, {"01-01", "01-31"} },
        { FEBRUARY, {"02-01", "02-28"} },

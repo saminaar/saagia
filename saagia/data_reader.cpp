@@ -1,18 +1,5 @@
 #include "data_reader.h"
-#include "data_structures.h"
 
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QStringList>
-#include <QNetworkReply>
-#include <QVariant>
-#include <QByteArray>
-#include <QDebug>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QXmlStreamReader>
-#include <map>
 
 Data_reader::Data_reader(std::shared_ptr<Data_structures> data_structures, QObject *parent) :
     QObject( parent ),
@@ -128,6 +115,7 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
     qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
 }
 
+
 void Data_reader::parseJson(QString content)
 {
     //model_->clear_database();
@@ -176,7 +164,13 @@ void Data_reader::parseXML(QString content)
             }
             //when time advances, weather data for old time point is transferred and saved
             if (next_time != time ) {
-                data_structures_->append_weather_data(time, {temp, w_speed, cloudines});
+                //
+                int year = time.mid(0, 4).toInt();
+                int month = time.mid(5, 2).toInt();
+                int day = time.mid(8, 2).toInt();
+                int hour = time.mid(11, 2).toInt();
+                int minute = time.mid(14, 2).toInt();
+                data_structures_->append_weather_data({year, month, day, hour, minute}, {temp, w_speed, cloudines});
                 time = next_time;
             }
 
@@ -211,6 +205,8 @@ void Data_reader::parseXML(QString content)
         reader.readNext();
     }
 }
+
+
 
 
 

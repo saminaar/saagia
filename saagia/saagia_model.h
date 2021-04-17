@@ -1,6 +1,12 @@
 #ifndef SAAGIA_MODEL_H
 #define SAAGIA_MODEL_H
 
+#include "saagia_view.h"
+#include "data_structures.h"
+#include "data_reader.h"
+#include "database_handler.h"
+#include "data_calculations.h"
+
 #include <memory>
 #include <QDebug>
 

@@ -1,7 +1,21 @@
 #ifndef DATA_READER_H
 #define DATA_READER_H
 
+#include "data_structures.h"
+
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QStringList>
 #include <QNetworkReply>
+#include <QVariant>
+#include <QByteArray>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QXmlStreamReader>
+#include <map>
+
 #include <QObject>
 #include <QString>
 #include <QUrl>
@@ -46,10 +60,14 @@ signals:
     void currentContentChanged();
 
 private:
-    std::shared_ptr<Data_structures> data_structures_;
+
+
     void parseJson(QString content);
     void parseXML(QString content);
+ //   Data_structures::time construct_time(QString time_as_string);
 
+
+    std::shared_ptr<Data_structures> data_structures_;
     QNetworkAccessManager* network_;
     QUrl currentUrl_;
     int currentStatuscode_;
