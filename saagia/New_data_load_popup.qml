@@ -228,8 +228,7 @@ Popup {
                       updatebutton.state="";
                 }
                 onClicked: {
-
-                     check_input()
+                    check_input()
                 }
 
             }
@@ -292,8 +291,6 @@ Popup {
 
             }
 
-
-
         }
 
         Rectangle {
@@ -308,20 +305,28 @@ Popup {
         }
         }
 
-
         function check_input(){
 
-            saagia_controller.check_input()
+            if ( saagia_controller.check_input() ) {
+                send_request()
+            }
+            else
+            {
+                error_message.visible = true;
+                error_animation.running = true;
+            }
 
         }
 
         function send_request(){
 
             saagia_controller.load_data("","")
+            console.log("Send request qml:stä")
             saagia_controller.set_the_visible_date()
             popup.close()
         }
 
+        /*
         Connections {
 
             target: saagia_view
@@ -336,6 +341,5 @@ Popup {
             }
 
         }
+        */
 }
-
-

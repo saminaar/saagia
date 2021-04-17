@@ -73,6 +73,7 @@ void Saagia_view::clear_chart_data(int type)
     emit clearChartData(type);
 }
 
+/*
 void Saagia_view::input_checked(bool status)
 {
     if(status){
@@ -83,3 +84,4 @@ void Saagia_view::input_checked(bool status)
     }
 
 }
+*/
