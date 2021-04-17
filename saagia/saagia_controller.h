@@ -23,6 +23,7 @@ public:
     Q_INVOKABLE void energy_form_3_selected();
     Q_INVOKABLE void energy_form_4_selected();
 
+    Q_INVOKABLE void reset_input();
     Q_INVOKABLE bool check_input();
     Q_INVOKABLE bool check_place(QString qtext);
 
