@@ -11,8 +11,8 @@ FileDialog {
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: {
             console.log("Opened data: send this forward to datareader!")
-            console.log(loadDialog.fileUrls)
-
+            console.log(loadDialog.fileUrl)
+            saagia_controller.load_from_file(loadDialog.fileUrl)
             // Tästä tieto eteenpäin databasehandlerille!
         }
 

@@ -36,9 +36,9 @@ public:
 
     Q_INVOKABLE void save_chart_image();
 
-    Q_INVOKABLE void load_from_file(QString filename);
+    Q_INVOKABLE void load_from_file(QString file);
 
-    Q_INVOKABLE void save_to_file(QString filename);
+    Q_INVOKABLE void save_to_file();
 
     Q_INVOKABLE void fetch_forecast(int data_type);
 

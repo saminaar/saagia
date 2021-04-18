@@ -22,6 +22,7 @@ SOURCES += \
 
 RESOURCES += qml.qrc \
     image_resources.qrc \
+    saved_data.qrc \
     settings.qrc
 PACKAGECONFIG_append = "gif"
 

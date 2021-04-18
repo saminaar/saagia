@@ -6,9 +6,9 @@
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
-#include <QStringList>
+//#include <QStringList> tarvitaanko?
 #include <QNetworkReply>
-#include <QVariant>
+//#include <QVariant> tarvitaanko?
 #include <QByteArray>
 #include <QDebug>
 #include <QJsonDocument>
@@ -36,17 +36,47 @@ class Data_reader: public QObject
 
 public:
     explicit Data_reader(std::shared_ptr<Data_structures> data_structures, QObject* parent = nullptr);
+
     ~Data_reader();
 
+    /**
+     * @brief getCurrentUrl
+     * @return
+     */
     QUrl getCurrentUrl() const;
+
+    /**
+     * @brief getCurrentStatuscode
+     * @return
+     */
     int getCurrentStatuscode() const;
+
+    /**
+     * @brief getCurrentContent
+     * @return
+     */
     QString getCurrentContent() const;
 
-    // HTTP request can contain multiple custom headers but support just one in this case
+
+
+    /**
+     * @brief requestUrl: Constructs and executes a request to external API
+     * @param url: Url address for HTTP request
+     * @param header: Header for HTTP request. Only one is needed this time
+     */
     Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
 
+    /**
+     * @brief set_data_type
+     * @param data_type
+     */
     void set_data_type(int data_type);
 
+    /**
+     * @brief parseJson: Parser for JSON-style of data from Fingrid
+     * @param content: JSON text to be parsed
+     */
+    void parseJson(QString content);
 
 
 
@@ -64,18 +94,31 @@ signals:
 private:
 
 
-    void parseJson(QString content);
+    /**
+     * @brief parseXML: Parser for XML-style of data from FMI
+     * @param content: XML text to be parsed
+     */
     void parseXML(QString content);
- //   Data_structures::time construct_time(QString time_as_string);
 
-
+    //Pointer to Data_structures object for related operations
     std::shared_ptr<Data_structures> data_structures_;
+
+    //Pointer to QNetworkAccessManager for use with API requests
     QNetworkAccessManager* network_;
+
+    //Url address to be used with requests
     QUrl currentUrl_;
+
+
     int currentStatuscode_;
+
+    //Text gotten from requests
     QString currentContent_;
 
+    //Save point for the header used in requests
     QString header_;
+
+    //Number corresponding a data type
     int data_type_;
 
 

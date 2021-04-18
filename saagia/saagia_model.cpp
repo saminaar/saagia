@@ -10,12 +10,13 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     print_data_{},
     energy_type_{0}
 {
+
 }
 
-void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place, QString month, QString year)
+void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 9 | variable == 10) {
+    if (variable == 9 || variable == 10 || variable == 11) {
         data_reader_->requestUrl(url, "");
     }
 
@@ -85,7 +86,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             break;
 
         case 8 :
-            // Wind production forecast 36h
+            // Wind production forecast max 36h
             web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             data_info = "Wind production forecast for next 36h (MWh/h)";
@@ -112,6 +113,8 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
 
             break;
 
+
+
     }
     QString default_text = "Currently displayed: ";
     QString info_text = default_text + data_info;
@@ -125,7 +128,7 @@ void Saagia_model::set_chart_data()
     // Function for changing the displayed chart data
     view_->clear_chart_data();
 
-    std::map<int, std::map<QString, int>>::iterator it;
+    std::map<int, std::map<Time, int>>::iterator it;
 
     for (auto energy_type : data_structures_->get_energy_structure() )
     {
@@ -134,7 +137,7 @@ void Saagia_model::set_chart_data()
         // Enter another map
         for (auto key_value : energy_type.second){
 
-             set_new_data_content(key_value.second, key_value.first, energy_type.first);
+        //     set_new_data_content(key_value.second, key_value.first, energy_type.first);
 
     }
     }
@@ -209,18 +212,22 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
-void Saagia_model::check_input(bool status)
-{
-
-    //view_->input_checked(status);
-
-}
-
 void Saagia_model::load_municipalities()
 {
     data_structures_->set_municipalities(database_handler_->read_municipalities());
 }
 
+void Saagia_model::load_from_file(QString file){
+    file = file.remove(0,8);
+    if (database_handler_->load_data(file) == "false") return;
+    QString data1 = database_handler_->load_data(file);
+    //energy_type_ = setti.split(" ")[0].toInt();
+    energy_type_ = data1.split("\n")[0].toInt();
+    data_reader_->set_data_type(data1.split("\n")[0].toInt());
+    data1.remove(0,2);
+    data_reader_->parseJson(data1);
+    set_chart_data();
+}
 
 bool Saagia_model::check_placeinput(QString text){
     if (data_structures_->get_municipalities().size() == 0) load_municipalities();
@@ -261,10 +268,15 @@ void Saagia_model::average_temps(int month, int year, QString place)
 
 }
 
-void Saagia_model::save_data(QString filename)
+void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 {
 
-    database_handler_->save_data(filename);
+}
+
+void Saagia_model::save_data()
+{
+
+    database_handler_->save_data();
     // database_handler_->save_data(start_time, data_type);
 
     /*
@@ -283,7 +295,7 @@ void Saagia_model::save_data(QString filename)
 void Saagia_model::save_graph_as_image()
 {
     qDebug() << "Save graph as image.. to be implemented";
-
+    //set_chart_data();
 }
 
 void Saagia_model::set_visible_date(QString stime, QString etime, QString shours, QString ehours)

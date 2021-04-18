@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/saved_data"/>
+    <qresource prefix="/">
+        <file>saved_data/saved_data.json</file>
+    </qresource>
+</RCC>

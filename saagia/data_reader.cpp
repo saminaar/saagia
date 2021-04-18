@@ -142,10 +142,15 @@ void Data_reader::parseJson(QString content)
         int kvalue = (obj["value"].toInt());
 
         QString start_time = (obj["start_time"].toString());
+        int year = start_time.mid(0, 4).toInt();
+        int month = start_time.mid(5, 2).toInt();
+        int day = start_time.mid(8, 2).toInt();
+        int hour = start_time.mid(11, 2).toInt();
+        int minute = start_time.mid(14, 2).toInt();
         QString end_time = (obj["end_time"].toString());
 
         //model_->save_to_map(start_time, kvalue);
-        data_structures_->append_energy_data(start_time, data_type_, kvalue);
+        data_structures_->append_energy_data({year, month, day, hour, minute}, data_type_, kvalue);
     }
 
 
