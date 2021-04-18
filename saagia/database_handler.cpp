@@ -20,10 +20,14 @@ Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structu
 
 QString Database_handler::load_data(QString file)
 {
-    QFile loadFile(file);
+    QString path_start = "/";
+    QString path = path_start + file;
+    qDebug() << path;
+
+    QFile loadFile(path);
 
     if ( !loadFile.open(QIODevice::ReadOnly) ) {
-        qWarning("Couldn't open save file.");
+        qWarning("Couldn't load file.");
         return "false";
     }
 
@@ -38,7 +42,13 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     qDebug() << savefile;
     // Nimi tulee qml:puolelta muodossa file:///.../filename
 
-    QFile saveFile(savefile);
+    QString path_start = "/";
+    QString file_extension = ".json";
+    QString path = path_start + savefile + file_extension;
+
+    qDebug() << path;
+
+    QFile saveFile(path);
 
     if ( !saveFile.open(QIODevice::WriteOnly) ) {
         qWarning("Couldn't open save file.");
