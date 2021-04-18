@@ -6,7 +6,7 @@ import QtQuick.Dialogs 1.0
 
 FileDialog {
         id: loadDialog
-        nameFilters: "*.csv , *.txt"
+        nameFilters: "*.json , *.txt"
         selectMultiple: false
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         onAccepted: {
