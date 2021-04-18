@@ -228,6 +228,7 @@ void Saagia_controller::fetch_forecast(int data_type)
     QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
     QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
 
+    // Fetching wanted forecast of the next 24h
     model_->load_data(starting_time, ending_time, data_type);
 }
 

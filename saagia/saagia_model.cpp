@@ -112,10 +112,8 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             url = web_address + "&place=" + place_ + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
 
             break;
-
-
-
     }
+
     QString default_text = "Currently displayed: ";
     QString info_text = default_text + data_info;
     view_->set_the_type_data(info_text);

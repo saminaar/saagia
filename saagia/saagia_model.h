@@ -5,9 +5,9 @@
  * Course: Software Design, Spring 2021, mandatory group project
  *
  * Summary of this file:
- *
- *
- *
+ * This class is the heart of the back end. Model executes all the commands given to it by saagia_controller
+ * with the help of multiple other classes. Model also sends the prosessed data to saagia_view to
+ * be showed to the user in ui.
  *
  */
 
