@@ -51,6 +51,7 @@ DISTFILES += \
     Energy_type_button_row.qml \
     Fetch_data_button.qml \
     File_dialog.qml \
+    Forecast_radio_buttons.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
     Preferences.qml \

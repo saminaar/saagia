@@ -71,13 +71,13 @@ public:
 
     Data_structures();
 
-    void append_energy_data(QString start_time, int data_type, int value);
+    void append_energy_data(Time start_time, int data_type, int value);
     void append_weather_data(Time time, weather_data);
     void test_print();
     void clear_data_structures();
     std::vector<std::string> get_municipalities();
     void set_municipalities(std::vector<std::string> new_m);
-    std::map<int, std::map<QString, int>> get_energy_structure();
+    std::map<int, std::map<Time, int> > get_energy_structure();
     std::map<Time, weather_data> get_weather_data();
     std::map<QString, int> get_data_type(int type);
 
@@ -88,7 +88,7 @@ public:
 private:
 
     int hours_of_date(Time t);
-    std::map<int, std::map<QString, int>> energy_data_;
+    std::map<int, std::map<Time, int>> energy_data_;
     std::map<Time, weather_data> weather_data_;
     std::vector<std::string> municipalities;
     const std::vector<int> days_of_months_ = {

@@ -88,7 +88,9 @@ ApplicationWindow {
                         anchors.right: parent.right
                         anchors.left: parent.left
 
-                        anchors.margins: 10
+                        anchors.rightMargin: 10
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 20
 
                     }
                 }

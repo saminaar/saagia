@@ -7,8 +7,9 @@ Rectangle {
     height: 40
     color: "#090426"
     border.width: 2
-    border.color: "white"
+    border.color: "grey"
     property string buttonIcon: "default"
+
 
     Image {
         id: button_image
@@ -31,9 +32,18 @@ Rectangle {
                 case "electricity":
                     "qrc:/images/lighting.png"
                     break;
+                case "electricity_consumption":
+                    "qrc:/images/plug.png"
+                    break;
+                case "wind_speed":
+                    "qrc:/images/wind_speed.png"
+                    break;
+                case "temperature":
+                    "qrc:/images/celsius.png"
+                    break;
                 default:
-                    // Default, if no other is used
-                    "qrc:/images/lighting.png"
+                    break;
+
                 }
 
 
@@ -50,7 +60,7 @@ Rectangle {
             switch (buttonIcon) {
                 case "wind":
                     console.log("Clicked > windy wind button!")
-                    saagia_controller.energy_form_4_selected()
+                    saagia_controller.energy_form_2_selected()
                     break;
                 case "nuclear":
                     console.log("Clicked > nuclear button")
@@ -58,7 +68,7 @@ Rectangle {
                     break;
                 case "hydro":
                     console.log("Clicked > water button")
-                    saagia_controller.energy_form_2_selected()
+                    saagia_controller.energy_form_4_selected()
                     break;
                 case "electricity":
                     console.log("Clicked > lightning button")

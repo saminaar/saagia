@@ -8,39 +8,32 @@ Data_structures::Data_structures()
 
 }
 
-void Data_structures::append_energy_data(QString start_time, int data_type, int value)
+void Data_structures::append_energy_data(Time start_time, int data_type, int value)
 {
-
-
-    std::map<int, std::map<QString, int>>::iterator itr = energy_data_.find(data_type);
+    std::map<int, std::map<Time, int>>::iterator itr = energy_data_.find(data_type);
 
     // Check if the energy type is already in the database
-    if(itr != energy_data_.end()){
-
-        std::map<QString, int>::iterator itr_2 = energy_data_[data_type].find(start_time);
-
-
-        if (itr_2 == energy_data_[data_type].end()){
-
-            // Energy-type was already in map, append values
-            energy_data_[data_type][start_time] = value;
+    if(itr != energy_data_.end()) {
+        std::map<Time, int>::iterator itr_2 = energy_data_[data_type].begin();
+        while (itr_2 != energy_data_[data_type].end()) {
+            if (itr_2->first == start_time) {
+                qDebug() << "Time already exists in datastructure. Tried: " << start_time.month << start_time.day << start_time.hour << start_time.minute;
+                qDebug() << "Existing time: " << itr_2->first.month << itr_2->first.day << itr_2->first.hour << itr_2->first.minute;
+                return;
+            }
+            itr_2++;
         }
-
-        else {
-
-            qDebug() << "There were values already in the starttime!";
-        }
-
+        // Energy-type was already in map, append values
+        energy_data_[data_type][start_time] = value;
+        qDebug() << "Data saved: " << start_time.year << "-" << start_time.month << "-" << start_time.day << " : " << start_time.hour << ":" << start_time.minute;
     }
 
     else{
-
-        qDebug() << "ADDED";
+        qDebug() << "Added new data type";
 
         // Energy-type was not yet found in the map, add it
-        std::map<QString, int> new_map;
+        std::map<Time, int> new_map;
         new_map[start_time] = value;
-
         energy_data_[data_type] = new_map;
     }
 
@@ -66,11 +59,13 @@ void Data_structures::append_weather_data(Time time, weather_data data)
 void Data_structures::test_print()
 {
     qDebug() << "Test print for data structures";
-    std::map<int, std::map<QString, int>>::iterator it;
+    std::map<int, std::map<Time, int>>::iterator it;
     for (it = energy_data_.begin(); it != energy_data_.end(); it++)
     {
+        /*
         qDebug() << it->first << " Key";
         qDebug() << it->second;
+        */
 
     }
 
@@ -91,7 +86,7 @@ std::vector<std::string> Data_structures::get_municipalities(){
     return this->municipalities;
 }
 
-std::map<int, std::map<QString, int> > Data_structures::get_energy_structure()
+std::map<int, std::map<Time, int> > Data_structures::get_energy_structure()
 {
 
     return energy_data_;
