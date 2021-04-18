@@ -27,5 +27,7 @@
         <file>Save_file_popup.qml</file>
         <file>About_popup.qml</file>
         <file>images/calendar.png</file>
+        <file>images/plug.png</file>
+        <file>Forecast_radio_buttons.qml</file>
     </qresource>
 </RCC>

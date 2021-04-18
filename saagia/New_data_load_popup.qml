@@ -27,7 +27,7 @@ Popup {
         property date end_date;
 
         background: Rectangle {
-            height: 315
+            height: 470
             color: background_level_0
             opacity: 0.9
             implicitWidth: 400
@@ -77,9 +77,10 @@ Popup {
 
         Rectangle {
 
+            id: background_2
             color: background_level_1
             width: parent.width - 20
-            height: parent.height - 40
+            height: parent.height + 110
             x: 10
             y: 30
 
@@ -95,20 +96,57 @@ Popup {
 
         Test_file {
 
+            id: radio_buttons
             x: 10
-            y: 40
+            y: 30
         }
+
+        Rectangle {
+
+            height: 1
+            color: "grey"
+            x: 10
+            y: 105
+            width: parent.width - 20
+
+        }
+
+        Text {
+
+            x: 10
+            y: 120
+            color: text_color
+            font.pixelSize: 13
+            text: "Forecast(s) to show.."
+
+        }
+
+        Forecast_radio_buttons {
+            x: 10
+            y: 140
+        }
+
+        Rectangle {
+
+            height: 1
+            color: "grey"
+            x: 10
+            y: 245
+            width: parent.width - 20
+
+        }
+
 
         Date_input {
 
             x: 10
-            y: 105
+            y: 255
 
         }
 
         Time_input {
             x: 14
-            y: 164
+            y: 315
 
         }
 
@@ -116,7 +154,7 @@ Popup {
             id: error_message
             anchors.right: parent.right
 
-            y: 245
+            y: 395
             visible: false
             color: "#ff4d4d"
             font.pixelSize: 13

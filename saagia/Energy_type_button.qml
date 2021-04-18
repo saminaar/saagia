@@ -7,8 +7,9 @@ Rectangle {
     height: 40
     color: "#090426"
     border.width: 2
-    border.color: "white"
+    border.color: "grey"
     property string buttonIcon: "default"
+
 
     Image {
         id: button_image
@@ -31,9 +32,18 @@ Rectangle {
                 case "electricity":
                     "qrc:/images/lighting.png"
                     break;
+                case "electricity_consumption":
+                    "qrc:/images/plug.png"
+                    break;
+                case "wind_speed":
+                    "qrc:/images/wind_speed.png"
+                    break;
+                case "temperature":
+                    "qrc:/images/celsius.png"
+                    break;
                 default:
-                    // Default, if no other is used
-                    "qrc:/images/lighting.png"
+                    break;
+
                 }
 
 

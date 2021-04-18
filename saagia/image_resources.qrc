@@ -19,5 +19,8 @@
         <file>images/refresh.png</file>
         <file>images/heart_outline.png</file>
         <file>images/calendar.png</file>
+        <file>images/plug.png</file>
+        <file>images/celsius.png</file>
+        <file>images/wind_speed.png</file>
     </qresource>
 </RCC>
