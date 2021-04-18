@@ -10,12 +10,13 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     print_data_{},
     energy_type_{0}
 {
+
 }
 
-void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place, QString month, QString year)
+void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 9 | variable == 10) {
+    if (variable == 9 || variable == 10 || variable == 11) {
         data_reader_->requestUrl(url, "");
     }
 
@@ -85,7 +86,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             break;
 
         case 8 :
-            // Wind production forecast 36h
+            // Wind production forecast max 36h
             web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             data_info = "Wind production forecast for next 36h (MWh/h)";
@@ -111,6 +112,8 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             url = web_address + "&place=" + place_ + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
 
             break;
+
+
 
     }
     QString default_text = "Currently displayed: ";
@@ -269,6 +272,11 @@ void Saagia_model::average_temps(int month, int year, QString place)
     std::vector<float> temps = data_calculations_->average_temp_of_month(month, year);
 
     qDebug() << "av min temp: " << temps.at(1) << "av max temp: " << temps.at(2) << "av temp: " << temps.at(0);
+
+}
+
+void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
+{
 
 }
 

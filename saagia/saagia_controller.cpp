@@ -212,6 +212,7 @@ void Saagia_controller::save_to_file()
 
 void Saagia_controller::fetch_forecast(int data_type)
 {
+    // Creating starting and ending points for forecasts 24h appart
     QString start_date = clock_->currentDateTime().addSecs(3600).toString(Qt::ISODate);
     QString start_year = start_date.mid(0,4);
     QString start_month = start_date.mid(5,2);
@@ -225,7 +226,7 @@ void Saagia_controller::fetch_forecast(int data_type)
     QString end_hour = end_date.mid(11,2);
 
     QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
-    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":00:00Z";
+    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
 
     model_->load_data(starting_time, ending_time, data_type);
 }
