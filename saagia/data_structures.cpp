@@ -98,6 +98,11 @@ std::map<int, std::map<QString, int> > Data_structures::get_energy_structure()
 
 }
 
+std::map<QString, int> Data_structures::get_data_type(int type)
+{
+    return energy_data_[type];
+}
+
 std::map<Time, weather_data> Data_structures::get_weather_data()
 {
     return weather_data_;

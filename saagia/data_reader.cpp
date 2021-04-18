@@ -123,6 +123,25 @@ void Data_reader::sslErrors_appeared(QNetworkReply *reply)
     qDebug() << "SSL error occured";
 }
 
+QString Data_reader::parsedData(std::map<QString, int> data){
+    QString parsed;
+    QJsonArray arr;
+    parsed.append(QString::number(data_type_) + "\n");
+    std::map<QString, int>::iterator it = data.begin();
+    while (it != data.end()){
+        QJsonObject obj;
+        obj.insert("start_time", it->first);
+        obj.insert("value", it->second);
+        arr.push_back(obj);
+        it++;
+    }
+
+    QJsonDocument doc;
+    doc.setArray(arr);
+    parsed.append(doc.toJson(QJsonDocument::Compact));
+    qDebug() << parsed;
+    return parsed;
+}
 
 void Data_reader::parseJson(QString content)
 {
@@ -142,7 +161,7 @@ void Data_reader::parseJson(QString content)
         int kvalue = (obj["value"].toInt());
 
         QString start_time = (obj["start_time"].toString());
-        QString end_time = (obj["end_time"].toString());
+        //QString end_time = (obj["end_time"].toString());
 
         //model_->save_to_map(start_time, kvalue);
         data_structures_->append_energy_data(start_time, data_type_, kvalue);

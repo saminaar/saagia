@@ -46,7 +46,7 @@ MenuBar {
                     //var component = Qt.createComponent("Save_file_popup.qml")
                     //var object = component.createObject(menu_bar);
                     //object.open()
-                    saagia_controller.save_to_file();
+                    save_file.open()
                 }
 
             }
@@ -55,7 +55,6 @@ MenuBar {
             Action {
                 text: qsTr("Load data...")
                 onTriggered: file_dialog.open()
-                //onTriggered: saagia_controller.load_from_file();
             }
 
             // Menu item dropdown style

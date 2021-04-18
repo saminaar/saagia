@@ -203,10 +203,10 @@ void Saagia_controller::save_chart_image()
 
 
 
-void Saagia_controller::save_to_file()
+void Saagia_controller::save_to_file(QString filename)
 {
     qDebug() << "Sending to model";
-    model_->save_data();
+    model_->save_data(filename);
 
 }
 

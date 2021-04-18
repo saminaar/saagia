@@ -46,6 +46,7 @@ public:
     Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
 
     void set_data_type(int data_type);
+    QString parsedData(std::map<QString, int> data);
     void parseJson(QString content);
 
 
