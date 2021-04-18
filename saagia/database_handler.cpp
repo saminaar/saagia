@@ -21,11 +21,11 @@ Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structu
 QString Database_handler::load_data(QString file)
 {
 
-    const char path_start =
+    const QString path_start =
     #ifdef _WIN32
-        '';
+        "";
     #else
-        '/';
+        "/";
     #endif
 
     //QString path_start = "/";
@@ -50,11 +50,11 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     qDebug() << savefile;
     // Nimi tulee qml:puolelta muodossa file:///.../filename
 
-    const char path_start =
+    const QString path_start =
     #ifdef _WIN32
-        '';
+        "";
     #else
-        '/';
+        "/";
     #endif
 
     //QString path_start = "/";
