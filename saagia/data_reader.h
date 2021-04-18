@@ -46,7 +46,7 @@ public:
     Q_INVOKABLE void requestUrl(const QString& url, const QString& header = "");
 
     void set_data_type(int data_type);
-
+    void parseJson(QString content);
 
 
 
@@ -64,7 +64,7 @@ signals:
 private:
 
 
-    void parseJson(QString content);
+
     void parseXML(QString content);
  //   Data_structures::time construct_time(QString time_as_string);
 

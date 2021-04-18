@@ -18,48 +18,36 @@ Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structu
 
 // This is copied from savegame example, has to be modified further for our use
 
-bool Database_handler::load_data()
+QString Database_handler::load_data(QString file)
 {
-    QFile loadFile(QStringLiteral("save.json"));
+    QFile loadFile(file);
 
     if ( !loadFile.open(QIODevice::ReadOnly) ) {
         qWarning("Couldn't open save file.");
-        return false;
+        return "false";
     }
 
-    QByteArray saveData = loadFile.readAll();
+    QString data1 = loadFile.readAll();
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
-
-    read(loadDoc.object());
-
-    QTextStream(stdout) << "Loaded save for "
-                        << loadDoc["player"]["name"].toString()
-                        << " using "
-                        << "JSON" << "...\n";
-    return true;
+    return data1;
 }
 
-bool Database_handler::save_data(QString filename) const
+bool Database_handler::save_data() const
 {
 
     // Nimi tulee qml:puolelta muodossa file:///.../filename
 
-    QStringList list = filename.split(QLatin1Char('/'));
-    QString name = list[list.size() -1];
-
-    name = name + ".json";
-
-    QFile saveFile(name);
+    QFile saveFile(":/saved_data/saved_data.json");
 
     if ( !saveFile.open(QIODevice::WriteOnly) ) {
         qWarning("Couldn't open save file.");
         return false;
     }
+    else
+    {
+        qDebug() << "paskaa";
+    }
 
-    QJsonObject gameObject;
-    write(gameObject);
-    saveFile.write(QJsonDocument(gameObject).toJson());
 
     return true;
 }

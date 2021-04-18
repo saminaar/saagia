@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <QIODevice>
 
 class Data_structures;
 
@@ -20,8 +21,8 @@ public:
 
     Database_handler(std::shared_ptr<Data_structures> data_structures);
 
-    bool load_data();
-    bool save_data(QString filename) const;
+    QString load_data(QString file);
+    bool save_data() const;
     //bool save_data(QString start_time, int data_type) const;
 
     void read(const QJsonObject &json);
