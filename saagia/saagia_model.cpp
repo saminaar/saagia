@@ -239,6 +239,18 @@ void Saagia_model::load_municipalities()
     data_structures_->set_municipalities(database_handler_->read_municipalities());
 }
 
+void Saagia_model::load_from_file(QString file){
+    file = file.remove(0,8);
+    if (database_handler_->load_data(file) == "false") return;
+    QString data1 = database_handler_->load_data(file);
+    //energy_type_ = setti.split(" ")[0].toInt();
+    energy_type_ = data1.split("\n")[0].toInt();
+    data_reader_->set_data_type(data1.split("\n")[0].toInt());
+    data1.remove(0,2);
+    data_reader_->parseJson(data1);
+    qDebug() << "success";
+    set_chart_data();
+}
 
 bool Saagia_model::check_placeinput(QString text){
     if (data_structures_->get_municipalities().size() == 0) load_municipalities();
@@ -279,10 +291,10 @@ void Saagia_model::average_temps(int month, int year, QString place)
 
 }
 
-void Saagia_model::save_data(QString filename)
+void Saagia_model::save_data()
 {
 
-    database_handler_->save_data(filename);
+    database_handler_->save_data();
     // database_handler_->save_data(start_time, data_type);
 
     /*

@@ -201,17 +201,12 @@ void Saagia_controller::save_chart_image()
     model_->save_graph_as_image();
 }
 
-void Saagia_controller::load_from_file(QString filename)
-{
 
 
-}
-
-void Saagia_controller::save_to_file(QString filename)
+void Saagia_controller::save_to_file()
 {
     qDebug() << "Sending to model";
-    qDebug() << filename;
-    model_->save_data(filename);
+    model_->save_data();
 
 }
 
@@ -239,6 +234,10 @@ void Saagia_controller::get_average_temp(int month, int year)
 {
 
 
+}
+
+void Saagia_controller::load_from_file(QString file){
+    model_->load_from_file(file);
 }
 
 // NOTE: no nullptr checks for model_ at all here!
