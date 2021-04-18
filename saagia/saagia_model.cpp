@@ -230,7 +230,6 @@ void Saagia_model::load_from_file(QString file){
     data_reader_->set_data_type(data1.split("\n")[0].toInt());
     data1.remove(0,2);
     data_reader_->parseJson(data1);
-    qDebug() << "success";
     set_chart_data();
 }
 
