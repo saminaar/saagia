@@ -17,7 +17,6 @@ Rectangle {
 
         property var dates: []
         property var energy_values: []
-        property var electricity_values: []
 
         legend.visible: false
         theme: ChartView.ChartThemeDark
@@ -54,8 +53,6 @@ Rectangle {
             gridVisible: true
             format: "dd.MM hh:mm" //"dd-MM
 
-            //roperty real minValue: new Date(2021, 1, 1, 0, 0, 0)
-            //property real maxValue: new Date(2021, 1, 5, 12, 30, 30)
             property real range: 100
 
            // min: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
@@ -95,33 +92,16 @@ Rectangle {
         }
     }
 
-    /*
-    Timer {
-        interval: 100000
-        repeat: true
-        triggeredOnStart: true
-        running: true
 
-        onTriggered: {
+    function clear_previous_data(){
 
-        }
-    }*/
-
-    function clear_previous_data(type){
-
-        //chart.removeAllSeries()
+        chart.removeAllSeries()
         chart.dates = []
         chart.energy_values = []
 
-        if (chart.series(type) === null){
-            add_a_new_line(type)
-        }
-        else{
-            chart.removeSeries(type)
-            add_a_new_line(type)
-        }
-
     }
+
+
 
     function add_a_new_line(type)
     {
@@ -129,29 +109,7 @@ Rectangle {
         var line = chart.createSeries(ChartView.SeriesTypeLine, type.toString(), axisX, axisY);
 
     }
-    /*
-    function set_min_and_max(){
 
-        e1 = chart.series("1").visible;
-        h1 = chart.series("2").visible;
-        w1 = chart.series("3").visible;
-        n1 = chart.series("4").visible;
-
-        // Kaikki on visible
-        if (e1 && h1 && w1 && n1){
-
-        }
-        // Vain electricity
-        else if(e1 && !h1 && !w1 && !n1){
-
-            axisY.max = Math.max.apply(Math, chart.electricity_values) + 500
-            axisY.min =  Math.min.apply(Math, chart.electricity_values)
-
-        }
-
-
-    }
-*/
     function set_visibility(line)
     {
 
@@ -206,6 +164,7 @@ Rectangle {
         // Add the X,Y point to the chart
 
         if (chart.series(type.toString()) !== null){
+
             chart.series(type.toString()).append(toMsecsSinceEpoch(new_date), value)
 
         }
@@ -237,6 +196,9 @@ Rectangle {
         }
         function onSetLineVisibility(type) {
             set_visibility(type)
+        }
+        function onAddChartLine(type) {
+            add_a_new_line(type)
         }
 
 

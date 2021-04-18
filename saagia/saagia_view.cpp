@@ -70,9 +70,14 @@ QString Saagia_view::getActiveDate() const
     return active_date_;
 }
 
-void Saagia_view::clear_chart_data(int type)
+void Saagia_view::clear_chart_data()
 {
-    emit clearChartData(type);
+    emit clearChartData();
+}
+
+void Saagia_view::add_chart_line(int type){
+
+    emit addChartLine(type);
 }
 
 /*

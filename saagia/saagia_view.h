@@ -38,7 +38,9 @@ public:
 
     QString get_location();
 
-    void clear_chart_data(int type);
+    void clear_chart_data();
+
+    void add_chart_line(int type);
 
     //void input_checked(bool status);
 
@@ -54,7 +56,8 @@ signals:
 
     void sendChartData(int value, QString date, int type);
 
-    void clearChartData(int type);
+    void clearChartData();
+    void addChartLine(int type);
 
     //void inputCheckOk();
 
