@@ -1,3 +1,16 @@
+/* File: data_calculations.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ * Class for more complex calculations needed in the software.
+ *
+ */
+
+
+
 #ifndef DATA_CALCULATIONS_H
 #define DATA_CALCULATIONS_H
 
@@ -17,6 +30,13 @@ class Data_calculations
 public:
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
 
+
+    /**
+     * @brief average_temp_of_month: Calculates average average-, minimum and maximum temeperatures of given month
+     * @param month: Desired month
+     * @param year: Desired year
+     * @return: vector with average average, average minimum and average maximum temps
+     */
     std::vector<float> average_temp_of_month(int month, int year);
    // float percentage_of_all_energy_prod(int energy_type);
 
@@ -25,27 +45,9 @@ public:
 
 
 private:
+
+    //Poinetr to Data_structures object to access data
     std::shared_ptr<Data_structures> data_structures_;
-
-    //starting and ending dates for all months
-   /*
-    std::map<month, std::pair<QString, QString>> dates_of_months_ =
-    {
-       { JANUARY, {"01-01", "01-31"} },
-       { FEBRUARY, {"02-01", "02-28"} },
-       { MARCH, {"03-01", "03-31"} },
-       { APRIL, {"04-01", "04-30"} },
-       { MAY, {"05-01", "05-31"} },
-       { JUNE, {"06-01", "06-30"} },
-       { JULY, {"07-01", "07-31"} },
-       { AUGUST, {"08-01", "08-31"} },
-       { SEPTEMBER, {"09-01", "09-30"} },
-       { OCTOBER, {"10-01", "10-31"} },
-       { NOVEMBER, {"11-01", "11-30"} },
-       { DECEMBER, {"12-01", "12-31"} }
-    };
-    */
-
 
 };
 

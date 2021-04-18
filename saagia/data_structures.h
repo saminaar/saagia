@@ -1,3 +1,17 @@
+/* File: data_structures.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ * This class houses containers to store weather and energy data and functions
+ * used to store the data into those containers and access it later.
+ * Also contains the implementations of Weather_data and Time structs and some operators
+ * for those structs.
+ *
+ */
+
 #ifndef DATA_STRUCTURES_H
 #define DATA_STRUCTURES_H
 #include "data_reader.h"
@@ -79,6 +93,7 @@ public:
     void set_municipalities(std::vector<std::string> new_m);
     std::map<int, std::map<Time, int> > get_energy_structure();
     std::map<Time, weather_data> get_weather_data();
+    std::map<Time, int> get_data_type(int type);
 
     int calc_time_diff(Time t1, Time t2);
     std::vector<int> get_days_of_months();
