@@ -47,6 +47,19 @@ Rectangle {
             max: 10
         }
 
+        // The Y-axis of the chart
+        /*ValueAxis {
+            id: axisYRight
+            gridVisible: true
+
+            // Determines the visible grid's ticks
+            tickCount: 7
+
+            // Set minimum and maximum from the start
+            min: 0
+            max: 10
+        }*/
+
         // The X-axis of the chart
          DateTimeAxis {
             id: axisX
@@ -129,10 +142,10 @@ Rectangle {
         }
     }
 
-    function parseReceivedData(value, start_time, type) {
+    function parseReceivedData(value, year, month, day, hours, mins, type) {
 
         // Before parsing: "2021-01-01T01:00:00+0000"
-        var parsed_time = start_time.split('T');
+        /*var parsed_time = start_time.split('T');
 
         // Before parsing: "2021-01-01"
         var date = parsed_time[0].split('-')
@@ -148,10 +161,10 @@ Rectangle {
         var hours = time_hh_mm_ms[0]
         var mins = time_hh_mm_ms[1]
 
-        var ms = time_hh_mm_ms[2]
+        var ms = time_hh_mm_ms[2]*/
 
         // Create a new datetime for the X-axis
-        var new_date = new Date(year, month, day, hours, mins, ms)
+        var new_date = new Date(year, month, day, hours, mins)
 
         chart.dates.push(new_date)
 
@@ -188,8 +201,8 @@ Rectangle {
     Connections {
         target: saagia_view
 
-        function onSendChartData(value, date, type) {
-            parseReceivedData(value, date, type)
+        function onSendChartData(value, year, month, day, hour, min, type) {
+            parseReceivedData(value, year, month, day, hour, min, type)
         }
         function onClearChartData(type) {
             clear_previous_data(type)

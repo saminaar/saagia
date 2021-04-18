@@ -4,6 +4,10 @@
 #include <memory>
 #include <QObject>
 #include <QString>
+#include "data_structures.h"
+#include "data_reader.h"
+#include "database_handler.h"
+#include "data_calculations.h"
 
 class Saagia_view : public QObject
 {
@@ -24,7 +28,7 @@ public:
 
     QString getChartData() const;
 
-    void setChartData(int value, QString date, int type);
+    void setChartData(int value, Time date, int type);
 
     void set_the_visible_date(const QString& stime);
 
@@ -54,7 +58,7 @@ signals:
 
     void setLineVisibility(int type);
 
-    void sendChartData(int value, QString date, int type);
+    void sendChartData(int value, int year, int month, int day, int hours, int min, int type);
 
     void clearChartData();
     void addChartLine(int type);
