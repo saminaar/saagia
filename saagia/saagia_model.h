@@ -22,12 +22,35 @@
 
 #include <memory>
 #include <QDebug>
+#include <QDateTime>
 
 class Saagia_view;
 class Data_structures;
 class Data_reader;
 class Database_handler;
 class Data_calculations;
+
+
+/* Datasets:
+ * 1 = Energy consumption
+ * 2 = Energy production
+ * 3 = Nuclear energy prod
+ * 4 = Hydro energy prod
+ * 5 = wind energy prod
+ * 6 = Electricity consumption forecast
+ * 7 = Electricity production forecast
+ * 8 = Wind energy production forecast
+ * 9 = Old temeprature data
+ * 10 = Old wind speed data
+ * 11 = Old cloudines data
+ * 12 = Temperature forecast
+ * 13 = Wind speed forecast
+ * 14 = Average temperature of a month
+ * 15 = Average minimum temperature of month
+ * 16 = Average maximum temperature of month
+ */
+
+
 
 class Saagia_model
 {
@@ -118,6 +141,8 @@ public:
      */
     bool check_placeinput(QString text);
 
+
+    void fetch_forecast(int data_type);
     /**
      * @brief load_from_file
      * @param file
@@ -139,6 +164,8 @@ public:
      * @param energy_type: Chosen energy type ie. wind power
      */
     void calc_percentage_of_energy_prod(int energy_type);
+
+
 
 private:
     /**
@@ -177,6 +204,9 @@ private:
 
     //Location for weather data. Is set to pirkkala by default
     QString place_ = "Pirkkala";
+
+    //QDateTime object used to get system clock
+    QDateTime* clock_;
 
 };
 

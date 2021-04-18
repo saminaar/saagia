@@ -90,7 +90,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             data_info = "Wind production forecast for next 36h (MWh/h)";
-        break;
+            break;
 
         case 9 :
             // Any old weather data (temperature, wind, cloudiness)
@@ -128,16 +128,13 @@ void Saagia_model::set_chart_data()
 
     std::map<int, std::map<Time, int>>::iterator it;
 
-    for (auto energy_type : data_structures_->get_energy_structure() )
-    {
+    for (std::pair<int, std::map<Time, int>> energy_type : data_structures_->get_energy_structure() ) {
          view_->add_chart_line(energy_type.first);
 
         // Enter another map
         for (auto key_value : energy_type.second){
-
-          set_new_data_content(key_value.second, key_value.first, energy_type.first);
-
-    }
+            set_new_data_content(key_value.second, key_value.first, energy_type.first);
+        }
     }
 }
 
@@ -231,7 +228,7 @@ bool Saagia_model::check_placeinput(QString text){
     if (data_structures_->get_municipalities().size() == 0) load_municipalities();
     std::string stext = text.toStdString();
     std::vector<std::string> places = data_structures_->get_municipalities();
-    for (int i = 0; i < places.size(); ++i){
+    for (std::vector<std::string>::size_type i = 0; i < places.size(); ++i){
         if (places[i] == stext){
             place_ = text; qDebug() << place_;
             text[0] = text[0].toUpper();
@@ -240,6 +237,40 @@ bool Saagia_model::check_placeinput(QString text){
         }
     }
     return false;
+}
+
+void Saagia_model::fetch_forecast(int data_type)
+{
+    // Creating starting and ending points for forecasts 24h appart
+    QString start_date = clock_->currentDateTime().addSecs(3600).toString(Qt::ISODate);
+    QString start_year = start_date.mid(0,4);
+    QString start_month = start_date.mid(5,2);
+    QString start_day = start_date.mid(8,2);
+    QString start_hour = start_date.mid(11,2);
+
+    QString end_date = clock_->currentDateTime().addDays(1).addSecs(3600).toString(Qt::ISODate);
+    QString end_year = end_date.mid(0,4);
+    QString end_month = end_date.mid(5,2);
+    QString end_day = end_date.mid(8,2);
+    QString end_hour = end_date.mid(11,2);
+
+    QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
+    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
+
+    QString url;
+    QString header;
+
+    //One url fetces all weather forecast data
+    if (data_type == 12 || data_type == 13 ){
+        url = construct_url(starting_time, ending_time, 10);
+        header = "";
+    }
+    else {
+        url = construct_url(starting_time, ending_time, data_type);
+        header = header_;
+    }
+    data_reader_->requestUrl(url, header);
+
 }
 
 void Saagia_model::average_temps(int month, int year, QString place)
@@ -269,6 +300,33 @@ void Saagia_model::average_temps(int month, int year, QString place)
 
 void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 {
+    // Creating starting and ending points for forecasts 24h appart
+    QString start_date = clock_->currentDateTime().addSecs(-360).toString(Qt::ISODate);
+    QString start_year = start_date.mid(0,4);
+    QString start_month = start_date.mid(5,2);
+    QString start_day = start_date.mid(8,2);
+    QString start_hour = start_date.mid(11,2);
+
+    QString end_date = clock_->currentDateTime().toString(Qt::ISODate);
+    QString end_year = end_date.mid(0,4);
+    QString end_month = end_date.mid(5,2);
+    QString end_day = end_date.mid(8,2);
+    QString end_hour = end_date.mid(11,2);
+
+    QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
+    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
+
+    qDebug() << "alku: " << starting_time << " loppu: " << ending_time;
+
+    //Fetching total energy production data to datastructure
+    QString total_prod_url = construct_url(starting_time, ending_time, 2);
+    data_reader_->set_data_type(2);
+    data_reader_->requestUrl(total_prod_url, header_);
+
+    //Fetching given energy type's production data to datastructure
+    QString energy_type_prod_url = construct_url(starting_time, ending_time, energy_type);
+    data_reader_->set_data_type(energy_type);
+    data_reader_->requestUrl(energy_type_prod_url, header_);
 
 }
 

@@ -65,7 +65,7 @@ private:
 
     QString start_hours_min;
     QString end_hours_min;
-    QDateTime* clock_;
+
 
     int energy_type;
 };

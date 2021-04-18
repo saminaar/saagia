@@ -41,3 +41,38 @@ std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
    return average_temps;
 
 }
+
+float Data_calculations::percentage_of_all_energy_prod(int energy_type)
+{
+    //Finding the newest datapoint of total energy production and corresponding value
+    std::map<Time, int> total_prod = data_structures_->get_data_type(2);
+    std::map<Time, int>::iterator iter = total_prod.begin();
+    Time total_prod_latest_time = iter->first;
+    int total_prod_value = iter->second;
+    iter++;
+    while (iter != total_prod.end()) {
+        if (total_prod_latest_time < iter->first) {
+            total_prod_latest_time = iter->first;
+            total_prod_value = iter->second;
+        }
+        iter++;
+    }
+
+    //Finding the newest datapoint of chosen energy type production and corresponding value
+    std::map<Time, int> energy_type_prod = data_structures_->get_data_type(energy_type);
+    std::map<Time, int>::iterator iter2 = energy_type_prod.begin();
+    Time latest_time = iter2->first;
+    int value = iter2->second;
+    iter2++;
+    while (iter2 != energy_type_prod.end()) {
+        if (latest_time < iter2->first) {
+            latest_time = iter2->first;
+            value = iter2->second;
+        }
+        iter++;
+    }
+
+    float percentage = (value / total_prod_value) * 100;
+    return percentage;
+
+}

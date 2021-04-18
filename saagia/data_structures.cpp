@@ -56,6 +56,7 @@ void Data_structures::append_weather_data(Time time, weather_data data)
 
 }
 
+
 void Data_structures::test_print()
 {
     qDebug() << "Test print for data structures";
@@ -66,37 +67,38 @@ void Data_structures::test_print()
         qDebug() << it->first << " Key";
         qDebug() << it->second;
         */
-
     }
-
 }
+
 
 void Data_structures::clear_data_structures()
 {
     //energy_data_.clear();
     //data_2.clear();
-
 }
+
 
 void Data_structures::set_municipalities(std::vector<std::string> new_m){
     this->municipalities = new_m;
 }
 
+
 std::vector<std::string> Data_structures::get_municipalities(){
     return this->municipalities;
 }
 
+
 std::map<int, std::map<Time, int> > Data_structures::get_energy_structure()
 {
-
     return energy_data_;
-
 }
+
 
 std::map<Time, int> Data_structures::get_data_type(int type)
 {
     return energy_data_[type];
 }
+
 
 std::map<Time, weather_data> Data_structures::get_weather_data()
 {
@@ -109,10 +111,12 @@ int Data_structures::calc_time_diff(Time t1, Time t2)
     return hours_of_date(t2) - hours_of_date(t1);
 }
 
+
 std::vector<int> Data_structures::get_days_of_months()
 {
     return days_of_months_;
 }
+
 
 int Data_structures::hours_of_date(Time t)
 {

@@ -28,21 +28,6 @@ enum Type {
     wind = 4
 };
 
-enum month {
-    JANUARY,
-    FEBRUARY,
-    MARCH,
-    APRIL,
-    MAY,
-    JUNE,
-    JULY,
-    AUGUST,
-    SEPTEMBER,
-    OCTOBER,
-    NOVEMBER,
-    DECEMBER
-};
-
 struct weather_data{
 
     float temperature;
@@ -105,6 +90,7 @@ private:
     std::map<int, std::map<Time, int>> energy_data_;
     std::map<Time, weather_data> weather_data_;
     std::vector<std::string> municipalities;
+
     const std::vector<int> days_of_months_ = {
         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };

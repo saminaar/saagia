@@ -1,7 +1,7 @@
 #include "saagia_controller.h"
 #include "saagia_model.h"
 #include <QDebug>
-#include <QDateTime>
+
 
 Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
                                      QObject *parent) :
@@ -11,8 +11,7 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
     end_time( "" ),
     start_hours_min("00:00:00"),
     end_hours_min("00:00:00"),
-    energy_type( 0 ),
-    clock_()
+    energy_type( 0 )
 {
 
 }
@@ -25,7 +24,6 @@ void Saagia_controller::set_energy_type(int variable)
 
 void Saagia_controller::load_data()
 {
-
     get_average_temp(3, 2021);
     QString formatted_start_hours = start_hours_min.replace("\%3A", ":");
     QString formatted_end_hours = end_hours_min.replace("\%3A", ":");
@@ -34,17 +32,11 @@ void Saagia_controller::load_data()
     QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
 
     model_->load_data(start_time_ready, end_time_ready, energy_type);
-   // qDebug() <<"START TIME: " << start_time << " END TIME: " << end_time ;
-   // qDebug() << "START TIME: " << formatted_start_hours << " END TIME: " << end_hours_min;
-   // model_->load_data(start_time, end_time, energy_type);
-
 }
 
 void Saagia_controller::set_the_selected_date(int type, QString date)
 {
-
     switch(type){
-
         // Start date
         case 0 :
             start_time = date;
@@ -59,9 +51,7 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
             start_time = "";
             end_time = "";
             break;
-
     }
-
 }
 
 void Saagia_controller::save_data(QString start_time, int data_type)
@@ -212,24 +202,7 @@ void Saagia_controller::save_to_file(QString filename)
 
 void Saagia_controller::fetch_forecast(int data_type)
 {
-    // Creating starting and ending points for forecasts 24h appart
-    QString start_date = clock_->currentDateTime().addSecs(3600).toString(Qt::ISODate);
-    QString start_year = start_date.mid(0,4);
-    QString start_month = start_date.mid(5,2);
-    QString start_day = start_date.mid(8,2);
-    QString start_hour = start_date.mid(11,2);
 
-    QString end_date = clock_->currentDateTime().addDays(1).addSecs(3600).toString(Qt::ISODate);
-    QString end_year = end_date.mid(0,4);
-    QString end_month = end_date.mid(5,2);
-    QString end_day = end_date.mid(8,2);
-    QString end_hour = end_date.mid(11,2);
-
-    QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
-    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
-
-    // Fetching wanted forecast of the next 24h
-    model_->load_data(starting_time, ending_time, data_type);
 }
 
 void Saagia_controller::get_average_temp(int month, int year)

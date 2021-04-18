@@ -38,7 +38,7 @@ public:
      * @return: vector with average average, average minimum and average maximum temps
      */
     std::vector<float> average_temp_of_month(int month, int year);
-   // float percentage_of_all_energy_prod(int energy_type);
+    float percentage_of_all_energy_prod(int energy_type);
 
 
 
