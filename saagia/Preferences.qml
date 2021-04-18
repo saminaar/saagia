@@ -101,6 +101,7 @@ Popup {
 
                     console.log(testeri)
                     // Palauta asetukset popupille
+                }
 
         }
 
