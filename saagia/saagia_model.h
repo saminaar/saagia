@@ -64,6 +64,7 @@ public:
     void energy_form_3_selected();
     void energy_form_4_selected();
 
+
     /**
      * @brief check_input
      * @param status

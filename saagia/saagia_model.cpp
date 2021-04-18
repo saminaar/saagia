@@ -212,13 +212,6 @@ void Saagia_model::energy_form_4_selected()
 
 }
 
-void Saagia_model::check_input(bool status)
-{
-
-    //view_->input_checked(status);
-
-}
-
 void Saagia_model::load_municipalities()
 {
     data_structures_->set_municipalities(database_handler_->read_municipalities());
@@ -302,7 +295,7 @@ void Saagia_model::save_data()
 void Saagia_model::save_graph_as_image()
 {
     qDebug() << "Save graph as image.. to be implemented";
-
+    //set_chart_data();
 }
 
 void Saagia_model::set_visible_date(QString stime, QString etime, QString shours, QString ehours)
