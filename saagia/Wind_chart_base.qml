@@ -82,7 +82,6 @@ ChartView {
 
         function parseReceivedData(value, start_time, type) {
 
-
             // Create a new datetime for the X-axis
             var new_date = new Date(year, month, day, hours, mins, ms)
 
@@ -116,13 +115,13 @@ ChartView {
             var msecs = date.getTime();
             return msecs;
         }
-
+/*
         Connections {
             target: saagia_view
 
             function onSendChartData(value, date, type) {
                 parseReceivedData(value, date, type)
             }
-        }
+        }*/
 }
 

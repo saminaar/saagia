@@ -123,41 +123,23 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
 void Saagia_model::set_chart_data()
 {
     // Function for changing the displayed chart data
-    view_->clear_chart_data(energy_type_);
+    view_->clear_chart_data();
 
     std::map<int, std::map<QString, int>>::iterator it;
 
-    // Parseri tähän joka kattoo ettei oo liikaa tavaraa..
-    if (energy_type_ != 1){
+    for (auto energy_type : data_structures_->get_energy_structure() )
+    {
+         view_->add_chart_line(energy_type.first);
 
-        int i = 0;
-        for (auto energy_type : data_structures_->get_energy_structure() )
-        {
-            // Enter another map
-            for (auto key_value : energy_type.second){
+        // Enter another map
+        for (auto key_value : energy_type.second){
 
-                if (i == 20){
+             set_new_data_content(key_value.second, key_value.first, energy_type.first);
 
-                    set_new_data_content(key_value.second, key_value.first, energy_type_);
-                    i = 0;
-                }
-                else{
-                    i += 1;
-                }
-            }
-        }
     }
-    else{
-
-        for (auto energy_type : data_structures_->get_energy_structure() )
-        {
-            for (auto key_value : energy_type.second){
-
-                set_new_data_content(key_value.second, key_value.first, energy_type_);
-            }
-        }
     }
 }
+
 
 
 void Saagia_model::set_energy_type(int type)

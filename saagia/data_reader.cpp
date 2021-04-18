@@ -147,7 +147,11 @@ void Data_reader::parseJson(QString content)
         //model_->save_to_map(start_time, kvalue);
         data_structures_->append_energy_data(start_time, data_type_, kvalue);
     }
+
+
     data_structures_->test_print();
+
+    // PIIRTO TÄHÄN KOHTAAN!
     //model_->set_chart_data();
 }
 
