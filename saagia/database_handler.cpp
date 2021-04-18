@@ -20,7 +20,15 @@ Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structu
 
 QString Database_handler::load_data(QString file)
 {
-    QString path_start = "/";
+
+    const char path_start =
+    #ifdef _WIN32
+        '';
+    #else
+        '/';
+    #endif
+
+    //QString path_start = "/";
     QString path = path_start + file;
     qDebug() << path;
 
@@ -42,7 +50,14 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     qDebug() << savefile;
     // Nimi tulee qml:puolelta muodossa file:///.../filename
 
-    QString path_start = "/";
+    const char path_start =
+    #ifdef _WIN32
+        '';
+    #else
+        '/';
+    #endif
+
+    //QString path_start = "/";
     QString file_extension = ".json";
     QString path = path_start + savefile + file_extension;
 
