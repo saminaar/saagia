@@ -244,8 +244,9 @@ ApplicationWindow {
 
                 Connections{
                     target: saagia_view
-                    onLocationChanged: city.location = s
-
+                    function onLocationChanged(s) {
+                        city.location = s
+                    }
                 }
 
             }

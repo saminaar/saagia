@@ -67,7 +67,7 @@ public:
      * @param date
      * @param type
      */
-    void set_new_data_content(int value, QString date, int type);
+    void set_new_data_content(int value, Time date, int type);
 
     /**
      * @brief energy_form_1_selected

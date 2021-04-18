@@ -135,7 +135,7 @@ void Saagia_model::set_chart_data()
         // Enter another map
         for (auto key_value : energy_type.second){
 
-        //     set_new_data_content(key_value.second, key_value.first, energy_type.first);
+          set_new_data_content(key_value.second, key_value.first, energy_type.first);
 
     }
     }
@@ -149,7 +149,7 @@ void Saagia_model::set_energy_type(int type)
     data_reader_->set_data_type(type);
 }
 
-void Saagia_model::set_new_data_content(int value, QString date, int type)
+void Saagia_model::set_new_data_content(int value, Time date, int type)
 {
     if (view_ != nullptr)
     {

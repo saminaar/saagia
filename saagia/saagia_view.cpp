@@ -31,10 +31,10 @@ QString Saagia_view::getChartData() const
     return chart_data_;
 }
 
-void Saagia_view::setChartData(int value, QString date, int type)
+void Saagia_view::setChartData(int value, Time date, int type)
 {
 
-    emit sendChartData(value, date, type);
+    emit sendChartData(value, date.year, date.month, date.day, date.hour, date.minute, type);
 
 }
 
