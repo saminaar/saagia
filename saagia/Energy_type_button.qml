@@ -50,7 +50,7 @@ Rectangle {
             switch (buttonIcon) {
                 case "wind":
                     console.log("Clicked > windy wind button!")
-                    saagia_controller.energy_form_4_selected()
+                    saagia_controller.energy_form_2_selected()
                     break;
                 case "nuclear":
                     console.log("Clicked > nuclear button")
@@ -58,7 +58,7 @@ Rectangle {
                     break;
                 case "hydro":
                     console.log("Clicked > water button")
-                    saagia_controller.energy_form_2_selected()
+                    saagia_controller.energy_form_4_selected()
                     break;
                 case "electricity":
                     console.log("Clicked > lightning button")
