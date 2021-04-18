@@ -10,6 +10,9 @@
 
 class Data_structures;
 
+// default municipalities file
+const QString DEFAULT_MUNICIPALITIES_FILE = ":/settings/municipalities.txt";
+
 class Database_handler
 {
 
