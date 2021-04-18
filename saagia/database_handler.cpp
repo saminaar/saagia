@@ -32,12 +32,13 @@ QString Database_handler::load_data(QString file)
     return data1;
 }
 
-bool Database_handler::save_data() const
+bool Database_handler::save_data(QString savefile, QString parsedData) const
 {
-
+    savefile = savefile.remove(0,8);
+    qDebug() << savefile;
     // Nimi tulee qml:puolelta muodossa file:///.../filename
 
-    QFile saveFile(":/saved_data/saved_data.json");
+    QFile saveFile(savefile);
 
     if ( !saveFile.open(QIODevice::WriteOnly) ) {
         qWarning("Couldn't open save file.");
@@ -45,7 +46,8 @@ bool Database_handler::save_data() const
     }
     else
     {
-        qDebug() << "paskaa";
+        saveFile.write(parsedData.toUtf8());
+        saveFile.close();
     }
 
 
