@@ -268,19 +268,17 @@ void Saagia_model::average_temps(int month, int year, QString place)
 
 }
 
-<<<<<<< HEAD
-void Saagia_model::save_data(QString filename)
-=======
+
 void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 {
 
 }
 
-void Saagia_model::save_data()
->>>>>>> 81bd464e4efdf7a321d6f1a518ccd94d590f4fe7
+void Saagia_model::save_data(QString filename)
+
 {
 
-    database_handler_->save_data(filename, data_reader_->parsedData(data_structures_->get_data_type(energy_type_)));
+    database_handler_->save_data(filename, data_reader_->parsedData(energy_type_));
     // database_handler_->save_data(start_time, data_type);
 
     /*

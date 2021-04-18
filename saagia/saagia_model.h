@@ -84,10 +84,9 @@ public:
      */
     void check_input(bool status);
 
-<<<<<<< HEAD
     // void save_data(QString start_time, int data_type);
     void save_data(QString filename);
-=======
+
     /**
      * @brief save_data
      */
@@ -96,7 +95,6 @@ public:
     /**
      * @brief save_graph_as_image
      */
->>>>>>> 81bd464e4efdf7a321d6f1a518ccd94d590f4fe7
     void save_graph_as_image();
 
     /**

@@ -123,18 +123,57 @@ void Data_reader::sslErrors_appeared(QNetworkReply *reply)
     qDebug() << "SSL error occured";
 }
 
-QString Data_reader::parsedData(std::map<QString, int> data){
+QString Data_reader::parsedData(int energy_type)
+{
+    std::map<int, std::map<Time, int>> data = data_structures_->get_energy_structure();
+    std::map<int, std::map<Time, int>>::iterator iter = data.find(energy_type);
     QString parsed;
     QJsonArray arr;
     parsed.append(QString::number(data_type_) + "\n");
-    std::map<QString, int>::iterator it = data.begin();
-    while (it != data.end()){
+    std::map<Time, int>::iterator it = iter->second.begin();
+    while (it != iter->second.end()){
+        QString year = QString::number(it->first.year);
+        QString month;
+        if (it->first.month < 10) {
+            month = "0" + QString::number(it->first.month);
+        }
+        else {
+            month = QString::number(it->first.month);
+        }
+
+        QString day;
+        if (it->first.day < 10) {
+            day = "0" + QString::number(it->first.day);
+        }
+        else {
+            day = QString::number(it->first.day);
+        }
+
+        QString hour;
+        if (it->first.hour < 10) {
+            hour = "0" + QString::number(it->first.hour);
+        }
+        else {
+            hour = QString::number(it->first.hour);
+        }
+
+        QString minute;
+        if (it->first.minute < 10) {
+            minute = "0" + QString::number(it->first.minute);
+        }
+        else {
+            minute = QString::number(it->first.minute);
+        }
+
+
+        QString date_and_time = year + "-"+month+"-"+day+"T"+hour+":"+minute +":00Z";
         QJsonObject obj;
-        obj.insert("start_time", it->first);
+        obj.insert("start_time", date_and_time);
         obj.insert("value", it->second);
         arr.push_back(obj);
         it++;
     }
+
 
     QJsonDocument doc;
     doc.setArray(arr);
@@ -161,18 +200,15 @@ void Data_reader::parseJson(QString content)
         int kvalue = (obj["value"].toInt());
 
         QString start_time = (obj["start_time"].toString());
-<<<<<<< HEAD
+
         //QString end_time = (obj["end_time"].toString());
-=======
         int year = start_time.mid(0, 4).toInt();
         int month = start_time.mid(5, 2).toInt();
         int day = start_time.mid(8, 2).toInt();
         int hour = start_time.mid(11, 2).toInt();
         int minute = start_time.mid(14, 2).toInt();
         QString end_time = (obj["end_time"].toString());
->>>>>>> 81bd464e4efdf7a321d6f1a518ccd94d590f4fe7
 
-        //model_->save_to_map(start_time, kvalue);
         data_structures_->append_energy_data({year, month, day, hour, minute}, data_type_, kvalue);
     }
 

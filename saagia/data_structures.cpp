@@ -93,7 +93,7 @@ std::map<int, std::map<Time, int> > Data_structures::get_energy_structure()
 
 }
 
-std::map<QString, int> Data_structures::get_data_type(int type)
+std::map<Time, int> Data_structures::get_data_type(int type)
 {
     return energy_data_[type];
 }

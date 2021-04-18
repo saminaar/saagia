@@ -93,7 +93,7 @@ public:
     void set_municipalities(std::vector<std::string> new_m);
     std::map<int, std::map<Time, int> > get_energy_structure();
     std::map<Time, weather_data> get_weather_data();
-    std::map<QString, int> get_data_type(int type);
+    std::map<Time, int> get_data_type(int type);
 
     int calc_time_diff(Time t1, Time t2);
     std::vector<int> get_days_of_months();

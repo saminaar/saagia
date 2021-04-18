@@ -84,15 +84,14 @@ public:
      * @param data_type
      */
     void set_data_type(int data_type);
-<<<<<<< HEAD
-    QString parsedData(std::map<QString, int> data);
-=======
+
+    QString parsedData(int energy_type);
+
 
     /**
      * @brief parseJson: Parser for JSON-style of data from Fingrid
      * @param content: JSON text to be parsed
      */
->>>>>>> 81bd464e4efdf7a321d6f1a518ccd94d590f4fe7
     void parseJson(QString content);
 
 
