@@ -1,3 +1,16 @@
+/* File: data_reader.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ * Class for executing HTTP request and for parsing the information gotten from those requests.
+ * Houses functions for creating the requests and separate parsers for JSON data from Fingrid
+ * and XML data from FMI.
+ *
+ */
+
 #ifndef DATA_READER_H
 #define DATA_READER_H
 

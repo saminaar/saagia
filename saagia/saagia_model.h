@@ -1,3 +1,16 @@
+/* File: saagia_model.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ *
+ *
+ *
+ *
+ */
+
 #ifndef SAAGIA_MODEL_H
 #define SAAGIA_MODEL_H
 

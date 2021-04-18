@@ -1,3 +1,13 @@
+/* File: database_handler.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ * Class for handling all external saving to and reading from, files.
+ */
+
 #ifndef DATABASE_HANDLER_H
 #define DATABASE_HANDLER_H
 #include <memory>

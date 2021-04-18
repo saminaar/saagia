@@ -1,3 +1,16 @@
+/* File: saagia_controller.h
+ *
+ * Authors: Niilo Rannikko, Linnea Viitanen, Sami Naarminen, Mikko Tuovinen
+ * Last changed: 18.4.2021
+ * Course: Software Design, Spring 2021, mandatory group project
+ *
+ * Summary of this file:
+ * This class is responsible for guiding commands from ui and user to the program. The program uses model-view-contorller model
+ * and this is the controller. Functions in this class represent the different opeartions the user can
+ * ask from ui as well as some small functions to set the parameters right.
+ *
+ */
+
 #ifndef SAAGIA_CONTROLLER_H
 #define SAAGIA_CONTROLLER_H
 
