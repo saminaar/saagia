@@ -22,7 +22,7 @@ class Saagia_model
 public:
     Saagia_model(std::shared_ptr<Saagia_view> view);
 
-    void load_data(QString start_time, QString end_time, int variable, QString place = "Pirkkala");
+    void load_data(QString start_time, QString end_time, int variable, QString place = "Pirkkala", QString month = "", QString year = "");
 
     void save_to_map(QString stime, int value);
 
@@ -49,8 +49,10 @@ public:
     void load_municipalities();
     bool check_placeinput(QString text);
 
+    void average_temps(int month, int year, QString place = "");
+
 private:
-    QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "");
+    QString construct_url(QString start_time, QString end_time, int case_variable, QString place = "Pirkkala");
 
     std::shared_ptr<Saagia_view> view_;
     std::shared_ptr<Data_structures> data_structures_;
@@ -63,7 +65,7 @@ private:
     std::map<int, std::map<QString, int>> times_;
 
     int energy_type_;
-    QString place_ = "Tampere";
+    QString place_ = "Pirkkala";
 
 };
 

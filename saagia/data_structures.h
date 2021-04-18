@@ -34,6 +34,8 @@ struct weather_data{
     float temperature;
     float wind_speed;
     float cloudines;
+    float max_temp;
+    float min_temp;
 };
 
 struct Time {
@@ -77,13 +79,21 @@ public:
     void set_municipalities(std::vector<std::string> new_m);
     std::map<int, std::map<QString, int>> get_energy_structure();
     std::map<Time, weather_data> get_weather_data();
-   // time construct_time_struct(QString time_in_str);
+
+    int calc_time_diff(Time t1, Time t2);
+    std::vector<int> get_days_of_months();
+
 
 private:
 
+    int hours_of_date(Time t);
     std::map<int, std::map<QString, int>> energy_data_;
     std::map<Time, weather_data> weather_data_;
     std::vector<std::string> municipalities;
+    const std::vector<int> days_of_months_ = {
+        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    };
+
 
 
 };

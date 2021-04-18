@@ -89,3 +89,35 @@ std::map<Time, weather_data> Data_structures::get_weather_data()
     return weather_data_;
 }
 
+
+int Data_structures::calc_time_diff(Time t1, Time t2)
+{
+    return hours_of_date(t2) - hours_of_date(t1);
+}
+
+std::vector<int> Data_structures::get_days_of_months()
+{
+    return days_of_months_;
+}
+
+int Data_structures::hours_of_date(Time t)
+{
+    int hours_of_year = ((t.year - 1900) * 365 * 24);
+    int hours_of_month = 0;
+    int i = 0;
+    if (t.month > 1) {
+        while (i < t.month - 1) {
+            hours_of_month += days_of_months_.at(i) * 24;
+            i++;
+        }
+    }
+    int hours_of_days = 0;
+    if (t.day > 1) {
+        hours_of_days = (t.day - 1) * 24;
+    }
+
+    int hours = hours_of_year + hours_of_month + hours_of_days + t.hour;
+    return hours;
+
+}
+

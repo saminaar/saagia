@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <QObject>
+#include <vector>
 
 class Saagia_model;
 
@@ -38,7 +39,9 @@ public:
 
     Q_INVOKABLE void save_to_file(QString filename);
 
+    Q_INVOKABLE void fetch_forecast(int data_type);
 
+    Q_INVOKABLE void get_average_temp(int month, int year);
 
 private:
     std::shared_ptr<Saagia_model> model_;
@@ -48,6 +51,7 @@ private:
 
     QString start_hours_min;
     QString end_hours_min;
+    QDateTime* clock_;
 
     int energy_type;
 };

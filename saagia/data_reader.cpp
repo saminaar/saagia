@@ -12,6 +12,7 @@ Data_reader::Data_reader(std::shared_ptr<Data_structures> data_structures, QObje
 {
     // connect the "finished" signal from the network to the requestCompleted function
     connect(network_, &QNetworkAccessManager::finished, this, &Data_reader::requestCompleted);
+    connect(network_, &QNetworkAccessManager::sslErrors, this, &Data_reader::sslErrors_appeared);
 }
 
 Data_reader::~Data_reader()
@@ -37,14 +38,13 @@ QString Data_reader::getCurrentContent() const
 void Data_reader::requestUrl(const QString &url, const QString &header)
 {
     qDebug() << "<> <> <> <>";
-
+    qDebug() << "url: " << url << "header: " << header;
     if (url == "")
     {
         return;
     }
 
     QNetworkRequest request{ url };
-
     // the header parameter is assumed to be in format "<header_name>:<header_value>"
     header_ = header;
     if (header != "")
@@ -86,6 +86,7 @@ void Data_reader::set_data_type(int data_type)
 
 void Data_reader::requestCompleted(QNetworkReply *networkReply)
 {
+    qDebug() << "Request finished";
     currentUrl_ = networkReply->url();
     emit currentUrlChanged();
 
@@ -104,8 +105,6 @@ void Data_reader::requestCompleted(QNetworkReply *networkReply)
     else {
         parseXML(currentContent_);
     }
-   // parseXML(currentContent_);
-   // parseJson(currentContent_);
     qDebug() << "Reply to" << networkReply->url() << "with status code:" << statuscodeVariant.toInt();
 
 }
@@ -115,6 +114,11 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
     qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
+}
+
+void Data_reader::sslErrors_appeared(QNetworkReply *reply)
+{
+    qDebug() << "SSL error occured";
 }
 
 
@@ -154,6 +158,8 @@ void Data_reader::parseXML(QString content)
     float temp = NO_VALUE;
     float w_speed = NO_VALUE;
     float cloudines = NO_VALUE;
+    float max_temp = NO_VALUE;
+    float min_temp = NO_VALUE;
 
     while (!reader.atEnd()) {
         //In the XML there are allways forst "Time", then "ParameterName" and finally "ParameterValue"
@@ -172,17 +178,24 @@ void Data_reader::parseXML(QString content)
                 int day = time.mid(8, 2).toInt();
                 int hour = time.mid(11, 2).toInt();
                 int minute = time.mid(14, 2).toInt();
-                data_structures_->append_weather_data({year, month, day, hour, minute}, {temp, w_speed, cloudines});
+                data_structures_->append_weather_data({year, month, day, hour, minute},
+                                                      {temp, w_speed, cloudines, max_temp, min_temp});
                 time = next_time;
+                temp = NO_VALUE;
+                w_speed = NO_VALUE;
+                cloudines = NO_VALUE;
+                max_temp = NO_VALUE;
+                min_temp = NO_VALUE;
             }
 
         }       
         else if (reader.name() == "ParameterName"){
             latest_type = reader.readElementText();
         }
-        //ParameterValue can be either temperature, wind speed or cloudines
+        //ParameterValue can be either temperature, wind speed, cloudines, minimum temperature or maximum temperature
         else if (reader.name() == "ParameterValue"){
             QString XMLvalue = reader.readElementText();
+            qDebug() << XMLvalue;
             float value;
             if (XMLvalue == "NaN") {
                 value = NO_VALUE;
@@ -192,7 +205,7 @@ void Data_reader::parseXML(QString content)
             }
 
             //Temperature
-            if (latest_type == "t2m" || latest_type == "Temperature") {
+            if (latest_type == "t2m" || latest_type == "Temperature" || latest_type == "tday") {
                 temp = value;
             }
             //Wind speed
@@ -202,6 +215,16 @@ void Data_reader::parseXML(QString content)
             //Cloudines
             else if (latest_type == "n_man") {
                 cloudines = value;
+            }
+            //Maximum temperature of the day
+            else if (latest_type == "tmax") {
+                qDebug() << "Maksimilämpö löytyi!";
+                max_temp = value;
+            }
+            //Minimum temperature of the day
+            else if (latest_type == "tmin") {
+                qDebug() << "Minilämpö löytyi!";
+                min_temp = value;
             }
         }
         reader.readNext();

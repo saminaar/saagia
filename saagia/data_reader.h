@@ -24,7 +24,7 @@
 class QNetworkAccessManager;
 class Data_structures;
 
-
+const float NO_VALUE = 9999;
 
 class Data_reader: public QObject
 {
@@ -49,11 +49,12 @@ public:
 
 
 
-    const float NO_VALUE = 9999;
+
 
 private Q_SLOTS:
     void requestCompleted(QNetworkReply* networkReply);
     void requestError(QNetworkReply::NetworkError errorCode);
+    void sslErrors_appeared(QNetworkReply* reply);
 
 signals:
     void currentUrlChanged();

@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <map>
+#include <vector>
 
 #include <QString>
 
@@ -16,7 +17,7 @@ class Data_calculations
 public:
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
 
-    float average_temp_of_month(int month, int year);
+    std::vector<float> average_temp_of_month(int month, int year);
    // float percentage_of_all_energy_prod(int energy_type);
 
 

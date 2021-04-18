@@ -12,7 +12,7 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 {
 }
 
-void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
+void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place, QString month, QString year)
 {
     QString url = construct_url(start_time, end_time, variable, place);
     if (variable == 9 | variable == 10) {
@@ -22,7 +22,6 @@ void Saagia_model::load_data(QString start_time, QString end_time, int variable,
     else {
         data_reader_->requestUrl(url, header_);
     }
-    data_calculations_->average_temp_of_month(2, 2021);
     set_chart_data();
 }
 
@@ -72,15 +71,14 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             break;
 
         case 6 :
-            // Energy consumption forecast 24h
-            web_address = "https://api.fingrid.fi/v1/variable/166/events/json?";
+            // Electricity consumption forecast 24h
+            web_address = "https://api.fingrid.fi/v1/variable/165/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             data_info = "Energy consumption forecast for next 24 hours (MWh/h";
             break;
 
-
         case 7 :
-            //Energy production forecast 24h
+            // Energy production forecast 24h
             web_address = "https://api.fingrid.fi/v1/variable/242/events/json?";
             url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
             data_info = "Energy production forecast for next 24 hours (MWh/h";
@@ -93,7 +91,6 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             data_info = "Wind production forecast for next 36h (MWh/h)";
         break;
 
-
         case 9 :
             // Any old weather data (temperature, wind, cloudiness)
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
@@ -102,10 +99,17 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
             break;
 
         case 10 :
-            //Temperature and wind forecast
+            // Temperature and wind forecast
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::forecast::hirlam::surface::point::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=Temperature,WindSpeedMS";
             data_info = "Weather forecast";
+            break;
+
+        case 11 :
+            // Fetch data to calculate average minimum, maximum and average temperature of a month
+            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::daily::simple";
+            url = web_address + "&place=" + place_ + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
+
             break;
 
     }
@@ -126,14 +130,11 @@ void Saagia_model::set_chart_data()
     // Parseri tähän joka kattoo ettei oo liikaa tavaraa..
     if (energy_type_ != 1){
 
-
         int i = 0;
         for (auto energy_type : data_structures_->get_energy_structure() )
         {
-
             // Enter another map
             for (auto key_value : energy_type.second){
-
 
                 if (i == 20){
 
@@ -143,14 +144,9 @@ void Saagia_model::set_chart_data()
                 else{
                     i += 1;
                 }
-
-
             }
-
         }
-
     }
-
     else{
 
         for (auto energy_type : data_structures_->get_energy_structure() )
@@ -159,10 +155,8 @@ void Saagia_model::set_chart_data()
 
                 set_new_data_content(key_value.second, key_value.first, energy_type_);
             }
-
         }
     }
-
 }
 
 void Saagia_model::set_energy_type(int type)
@@ -239,9 +233,11 @@ void Saagia_model::check_input(bool status)
 
 }
 
-void Saagia_model::load_municipalities(){
+void Saagia_model::load_municipalities()
+{
     data_structures_->set_municipalities(database_handler_->read_municipalities());
 }
+
 
 bool Saagia_model::check_placeinput(QString text){
     if (data_structures_->get_municipalities().size() == 0) load_municipalities();
@@ -256,6 +252,30 @@ bool Saagia_model::check_placeinput(QString text){
         }
     }
     return false;
+}
+
+void Saagia_model::average_temps(int month, int year, QString place)
+{
+    QString month_str;
+    if (month < 10) {
+        month_str = "0" + QString::number(month);
+    }
+    else {
+        month_str = QString::number(month);
+    }
+    QString starting_date = QString::number(year) + "-" + month_str + "-01T00:00:00Z";
+    int number_of_days_in_month = data_structures_->get_days_of_months().at(month-1);
+
+    QString ending_date = QString::number(year) + "-" + month_str + "-" +
+            QString::number(number_of_days_in_month) + "T23:00:00Z";
+
+    QString url = construct_url(starting_date, ending_date, 11, place);
+    data_reader_->requestUrl(url, "");
+
+    std::vector<float> temps = data_calculations_->average_temp_of_month(month, year);
+
+    qDebug() << "av min temp: " << temps.at(1) << "av max temp: " << temps.at(2) << "av temp: " << temps.at(0);
+
 }
 
 void Saagia_model::save_data(QString filename)
