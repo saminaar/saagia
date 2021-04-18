@@ -38,8 +38,6 @@ public:
     void energy_form_3_selected();
     void energy_form_4_selected();
 
-    void check_input(bool status);
-
     // void save_data(QString start_time, int data_type);
     void save_data();
     void save_graph_as_image();
