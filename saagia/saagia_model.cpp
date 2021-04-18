@@ -125,7 +125,7 @@ void Saagia_model::set_chart_data()
     // Function for changing the displayed chart data
     view_->clear_chart_data();
 
-    std::map<int, std::map<QString, int>>::iterator it;
+    std::map<int, std::map<Time, int>>::iterator it;
 
     for (auto energy_type : data_structures_->get_energy_structure() )
     {
@@ -134,7 +134,7 @@ void Saagia_model::set_chart_data()
         // Enter another map
         for (auto key_value : energy_type.second){
 
-             set_new_data_content(key_value.second, key_value.first, energy_type.first);
+        //     set_new_data_content(key_value.second, key_value.first, energy_type.first);
 
     }
     }
