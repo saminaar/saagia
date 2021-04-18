@@ -32,7 +32,7 @@ FileDialog {
                 }
                 else{
 
-                    console.log("TODO: Lähetä eteenpäin tieto preferences tiedoston tallentamisesta")
+                    console.log("Save_file_dialog.qml: TODO: Lähetä eteenpäin tieto preferences tiedoston tallentamisesta")
                 }
 
             }

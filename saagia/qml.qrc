@@ -26,5 +26,6 @@
         <file>Save_file_dialog.qml</file>
         <file>Save_file_popup.qml</file>
         <file>About_popup.qml</file>
+        <file>images/calendar.png</file>
     </qresource>
 </RCC>

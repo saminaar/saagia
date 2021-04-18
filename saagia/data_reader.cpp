@@ -37,8 +37,10 @@ QString Data_reader::getCurrentContent() const
 
 void Data_reader::requestUrl(const QString &url, const QString &header)
 {
+
     qDebug() << "<> <> <> <>";
     qDebug() << "url: " << url << "header: " << header;
+
     if (url == "")
     {
         return;

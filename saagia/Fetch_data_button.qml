@@ -71,7 +71,7 @@ Button{
             }
 
             onClicked: {
-                 saagia_controller.set_energy_type(0)
+                 saagia_controller.reset_input()
                  var component = Qt.createComponent("New_data_load_popup.qml")
                  var object = component.createObject(left_column_background);
                  object.open()
@@ -79,5 +79,4 @@ Button{
 
         }
     }
-
 

@@ -250,8 +250,6 @@ Popup {
         }
 
 
-        }
-
         Rectangle {
 
             id: bottom_line
@@ -261,6 +259,7 @@ Popup {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
+        }
         }
 
 

@@ -77,9 +77,9 @@ void Database_handler::write(QJsonObject &json) const
 std::vector<std::string> Database_handler::read_municipalities(){
 
     QString data;
-    QString fileName(":/settings/municipalities.txt");
+    //QString fileName(":/settings/municipalities.txt");
 
-    QFile file(fileName);
+    QFile file(DEFAULT_MUNICIPALITIES_FILE);
     if( !file.open(QIODevice::ReadOnly) ) {
         qDebug()<<"file not opened";
     }

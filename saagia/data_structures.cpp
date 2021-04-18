@@ -11,17 +11,31 @@ Data_structures::Data_structures()
 void Data_structures::append_energy_data(QString start_time, int data_type, int value)
 {
 
+
     std::map<int, std::map<QString, int>>::iterator itr = energy_data_.find(data_type);
 
     // Check if the energy type is already in the database
     if(itr != energy_data_.end()){
 
-        // Energy-type was already in map, append values
-        energy_data_[data_type][start_time] = value;
+        std::map<QString, int>::iterator itr_2 = energy_data_[data_type].find(start_time);
+
+
+        if (itr_2 == energy_data_[data_type].end()){
+
+            // Energy-type was already in map, append values
+            energy_data_[data_type][start_time] = value;
+        }
+
+        else {
+
+            qDebug() << "There were values already in the starttime!";
+        }
 
     }
 
     else{
+
+        qDebug() << "ADDED";
 
         // Energy-type was not yet found in the map, add it
         std::map<QString, int> new_map;
@@ -64,7 +78,7 @@ void Data_structures::test_print()
 
 void Data_structures::clear_data_structures()
 {
-    energy_data_.clear();
+    //energy_data_.clear();
     //data_2.clear();
 
 }
