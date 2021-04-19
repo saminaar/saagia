@@ -216,7 +216,7 @@ Rectangle {
             leftPadding: button_11.indicator.width + button_11.spacing
         }
 
-        onToggled: saagia_controller.set_data_type(10)
+        onToggled: saagia_controller.set_data_type(1)
     }
 
     Rectangle {
