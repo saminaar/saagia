@@ -8,8 +8,8 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
     model_{ model },
     start_time_( "" ),
     end_time_( "" ),
-    start_hours_min_("00:00:00"),
-    end_hours_min_("00:00:00"),
+    start_hours_min_( "00:00:00" ),
+    end_hours_min_( "00:00:00" ),
     data_type_( 0 )
 {
 }

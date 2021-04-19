@@ -201,14 +201,14 @@ private:
     //
     QString print_data_;
 
-    // Header used for Fingrid api with API-key
+    // Header used for Fingrid api with API key
     const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
     //
     int data_type_;
 
     // Location for weather data. Is set to Pirkkala by default
-    QString place_ = "Pirkkala";
+    QString place_;
 
     // QDateTime object used to get system clock
     QDateTime* clock_;

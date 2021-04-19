@@ -7,7 +7,8 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     database_handler_{ std::make_shared<Database_handler>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     data_calculations_{ std::make_shared<Data_calculations>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     print_data_{},
-    data_type_{0}
+    data_type_{0},
+    place_{"Pirkkala"}
 {
 }
 
@@ -176,7 +177,7 @@ void Saagia_model::dataset_1_selected()
 
 void Saagia_model::dataset_2_selected()
 {
-    print_data_ = "Datasetti 2 valittu";
+    print_data_ = "Electricity production in Finland";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -186,7 +187,7 @@ void Saagia_model::dataset_2_selected()
 
 void Saagia_model::dataset_3_selected()
 {
-    print_data_ = "Datasetti 3 valittu";
+    print_data_ = "Nuclear energy production";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -196,7 +197,7 @@ void Saagia_model::dataset_3_selected()
 
 void Saagia_model::dataset_4_selected()
 {
-    print_data_ = "Datasetti 4 valittu";
+    print_data_ = "Hydro energy production";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -206,7 +207,7 @@ void Saagia_model::dataset_4_selected()
 
 void Saagia_model::dataset_5_selected()
 {
-    print_data_ = "Datasetti 5 valittu";
+    print_data_ = "Wind energy production";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -216,7 +217,7 @@ void Saagia_model::dataset_5_selected()
 
 void Saagia_model::dataset_6_selected()
 {
-    print_data_ = "Datasetti 6 valittu";
+    print_data_ = "Electricity consumption forecast";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -226,7 +227,7 @@ void Saagia_model::dataset_6_selected()
 
 void Saagia_model::dataset_7_selected()
 {
-    print_data_ = "Datasetti 7 valittu";
+    print_data_ = "Electricity production forecast";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -236,7 +237,7 @@ void Saagia_model::dataset_7_selected()
 
 void Saagia_model::dataset_8_selected()
 {
-    print_data_ = "Datasetti 8 valittu";
+    print_data_ = "Wind energy production forecast";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -246,7 +247,7 @@ void Saagia_model::dataset_8_selected()
 
 void Saagia_model::dataset_9_selected()
 {
-    print_data_ = "Datasetti 9 valittu";
+    print_data_ = "Temperature forecast";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -256,7 +257,7 @@ void Saagia_model::dataset_9_selected()
 
 void Saagia_model::dataset_10_selected()
 {
-    print_data_ = "Datasetti 10 valittu";
+    print_data_ = "Wind speed forecast";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -298,7 +299,7 @@ bool Saagia_model::check_placeinput(QString text){
 
 void Saagia_model::fetch_forecast(int data_type)
 {
-    // Creating starting and ending points for forecasts 24h appart
+    // Creating starting and ending points for forecasts 24h apart
     QString start_date = clock_->currentDateTime().toString(Qt::ISODate);
     QString start_year = start_date.mid(0,4);
     QString start_month = start_date.mid(5,2);
@@ -319,7 +320,7 @@ void Saagia_model::fetch_forecast(int data_type)
     QString url;
     QString header;
 
-    //One url fetces all weather forecast data
+    //One url fetches all weather forecast data
     if ( data_type == 9 || data_type == 10 ) {
         url = construct_url(starting_time, ending_time, 10);
         header = "";

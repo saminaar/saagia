@@ -233,7 +233,7 @@ ApplicationWindow {
 
             Text {
                 id: city
-                property string location: "Tampere"
+                property string location: "Pirkkala"
                 objectName: "city"
                 text: qsTr("<b>Location: </b>" + location)
                 font.pixelSize: 15
@@ -261,8 +261,6 @@ ApplicationWindow {
                 anchors.topMargin: 10
 
             }
-
-
 
     }
 
