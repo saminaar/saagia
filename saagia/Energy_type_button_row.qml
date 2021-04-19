@@ -26,7 +26,7 @@ Rectangle {
         id: energy_buttons
         height: 100
         color: "#16141f"
-        width: parent.width/2 - 30
+        width: parent.width/2 - 5
         anchors.right: parent.right
         anchors.leftMargin: 5
         anchors.bottom: parent.bottom
@@ -52,7 +52,7 @@ Rectangle {
 
         Row {
 
-            spacing: 15
+            spacing: 10
             id: button_row_1
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 10
@@ -88,7 +88,7 @@ Rectangle {
         id: forecast_buttons
         height: 100
         color: "#16141f"
-        width: parent.width/2 + 20
+        width: parent.width/2
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -20
 
@@ -118,7 +118,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 15
+            spacing: 10
             Component.onCompleted: create_new_button()
 
 

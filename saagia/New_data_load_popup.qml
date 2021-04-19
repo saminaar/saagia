@@ -14,7 +14,6 @@ Popup {
         property color text_color: "#cdcdcd" // grey-ish
 
         property string title_text: qsTr("Retrieve new datasets")
-        property string subtitle_text: qsTr("Energy type(s) to show..")
         property string error_msg: qsTr("<b>Error:</b> check your input and try again!")
 
         property Currently_showing_box show_case
@@ -27,17 +26,17 @@ Popup {
         property date end_date;
 
         background: Rectangle {
-            height: 470
+            height: 545
             color: background_level_0
             opacity: 0.9
             implicitWidth: 400
-            implicitHeight: 300
+            implicitHeight: 430
             border.color: "grey"
             border.width: 1
         }
 
-        width: 400
-        height: 300
+        width: 420
+        height: 380
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -84,69 +83,24 @@ Popup {
             x: 10
             y: 30
 
-        Text {
-            id: window_subtitle_text
-            x: 10
-            y: 10
-            color: text_color
-            font.pixelSize: 13
-            text: subtitle_text
-
-        }
-
         Test_file {
 
             id: radio_buttons
-            x: 10
-            y: 30
-        }
-
-        Rectangle {
-
-            height: 1
-            color: "grey"
-            x: 10
-            y: 105
-            width: parent.width - 20
-
-        }
-
-        Text {
-
-            x: 10
-            y: 120
-            color: text_color
-            font.pixelSize: 13
-            text: "Forecast(s) to show.."
-
-        }
-
-        Forecast_radio_buttons {
-            x: 10
-            y: 140
-        }
-
-        Rectangle {
-
-            height: 1
-            color: "grey"
-            x: 10
-            y: 245
-            width: parent.width - 20
-
+            x: 5
+            y: 5
         }
 
 
         Date_input {
 
-            x: 10
-            y: 255
+            x: 5
+            y: 330
 
         }
 
         Time_input {
-            x: 14
-            y: 315
+            x: 9
+            y: 390
 
         }
 
@@ -154,7 +108,7 @@ Popup {
             id: error_message
             anchors.right: parent.right
 
-            y: 395
+            y: 475
             visible: false
             color: "#ff4d4d"
             font.pixelSize: 13
