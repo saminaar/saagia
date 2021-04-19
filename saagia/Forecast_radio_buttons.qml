@@ -44,7 +44,7 @@ ColumnLayout {
             leftPadding: button_1.indicator.width + button_1.spacing
         }
 
-        onToggled: saagia_controller.set_energy_type(1)
+        onToggled: saagia_controller.set_data_type(7)
     }
 
     RadioButton {
@@ -83,7 +83,7 @@ ColumnLayout {
             leftPadding: button_2.indicator.width + button_2.spacing
         }
 
-        onToggled: saagia_controller.set_energy_type(3)
+        onToggled: saagia_controller.set_data_type(8)
     }
 
     RadioButton {
@@ -122,7 +122,7 @@ ColumnLayout {
             leftPadding: button_3.indicator.width + button_3.spacing + 30
         }
 
-        onToggled: saagia_controller.set_energy_type(4)
+        onToggled: saagia_controller.set_data_type(6)
     }
 
     RadioButton {
@@ -161,7 +161,7 @@ ColumnLayout {
             leftPadding: button_4.indicator.width + button_4.spacing + 30
         }
 
-        onToggled: saagia_controller.set_energy_type(2)
+        onToggled: saagia_controller.set_data_type(9)
     }
 
     RadioButton {
@@ -200,7 +200,7 @@ ColumnLayout {
             leftPadding: button_5.indicator.width + button_5.spacing
         }
 
-        onToggled: saagia_controller.set_energy_type(2)
+        onToggled: saagia_controller.set_data_type(10)
     }
 
 }
