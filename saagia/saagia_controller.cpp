@@ -2,7 +2,6 @@
 #include "saagia_model.h"
 #include <QDebug>
 
-
 Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
                                      QObject *parent) :
     QObject{parent},
@@ -13,7 +12,6 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
     end_hours_min("00:00:00"),
     energy_type( 0 )
 {
-
 }
 
 void Saagia_controller::set_energy_type(int variable)
@@ -54,22 +52,19 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
     }
 }
 
+/*
 void Saagia_controller::save_data(QString start_time, int data_type)
 {
-    /*
-    model_->save_data(start_time, data_type);*/
+
+    model_->save_data(start_time, data_type);
 }
+*/
 
 /*
-void Saagia_controller::energy_form_selected()
-{
-
-// Modulaarisuuden lisäämiseksi napeille tulisi tehdä
+Modulaarisuuden lisäämiseksi napeille tulisi tehdä
 funktio, joka napin sisällön perusteella pistää asian
 eteenpäin, eli EI silleen että jokaiselle napille
 oma funktio
-
-}
 */
 
 void Saagia_controller::energy_form_1_selected()
@@ -101,74 +96,42 @@ void Saagia_controller::reset_input()
     end_hours_min = "00:00:00";
 }
 
-/*
-void Saagia_controller::check_input()
-{
-
-    bool status = true;
-
-    if((start_time == "") or (end_time == "")){
-        status = false;
-    }
-
-    if (start_time > end_time){
-        status = false;
-    }
-
-    if (start_time == end_time && start_hours_min > end_hours_min){
-        status = false;
-    }
-
-    if(energy_type == 0){
-        status = false;
-    }
-
-    model_->check_input(status);
-
-}
-*/
-
 bool Saagia_controller::check_input()
 {
-
-    if ((start_time == "") or (end_time == "")){
+    if ( (start_time == "") or (end_time == "") ) {
         return false;
     }
 
-    if (start_time > end_time){
+    if ( start_time > end_time ) {
         return false;
     }
 
-    if (start_time == end_time && start_hours_min > end_hours_min){
+    if ( start_time == end_time && start_hours_min > end_hours_min ) {
         return false;
     }
 
-    if (energy_type == 0){
+    if ( energy_type == 0 ) {
         return false;
     }
 
     return true;
-
 }
-
 
 bool Saagia_controller::check_place(QString text)
 {
     text = text.toLower();
     bool checked = model_->check_placeinput(text);
-    if (checked == true) qDebug() << "Location changed.";
+    if ( checked == true ) qDebug() << "Location changed.";
 }
 
 void Saagia_controller::set_the_visible_date()
 {
-
-    model_->set_visible_date(start_time, end_time, start_hours_min, end_hours_min);
-
+    model_->set_visible_date(start_time, end_time, start_hours_min,
+                             end_hours_min);
 }
 
 void Saagia_controller::set_the_selected_time(int type, QString time)
 {
-
     switch(type){
         case 0 :
             start_hours_min = time;
@@ -183,7 +146,6 @@ void Saagia_controller::set_the_selected_time(int type, QString time)
             end_hours_min = "00:00:00";
             break;
     }
-
 }
 
 void Saagia_controller::save_chart_image()
@@ -191,13 +153,10 @@ void Saagia_controller::save_chart_image()
     model_->save_graph_as_image();
 }
 
-
-
 void Saagia_controller::save_to_file(QString filename)
 {
     qDebug() << "Sending to model";
     model_->save_data(filename);
-
 }
 
 void Saagia_controller::fetch_forecast(int data_type)
@@ -208,7 +167,6 @@ void Saagia_controller::fetch_forecast(int data_type)
 void Saagia_controller::get_average_temp(int month, int year)
 {
 
-
 }
 
 void Saagia_controller::load_from_file(QString file){
@@ -216,4 +174,3 @@ void Saagia_controller::load_from_file(QString file){
 }
 
 // NOTE: no nullptr checks for model_ at all here!
-

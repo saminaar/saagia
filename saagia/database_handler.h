@@ -5,7 +5,7 @@
  * Course: Software Design, Spring 2021, mandatory group project
  *
  * Summary of this file:
- * Class for handling all external saving to and reading from, files.
+ * Class for handling all external saving to and reading from files.
  */
 
 #ifndef DATABASE_HANDLER_H
@@ -43,6 +43,7 @@ public:
     bool save_to_file();
 
 private:
+
     std::shared_ptr<Data_structures> data_structures_;
 
 };

@@ -33,9 +33,8 @@ QString Saagia_view::getChartData() const
 
 void Saagia_view::setChartData(int value, Time date, int type)
 {
-
-    emit sendChartData(value, date.year, date.month, date.day, date.hour, date.minute, type);
-
+    emit sendChartData(value, date.year, date.month, date.day, date.hour,
+                       date.minute, type);
 }
 
 void Saagia_view::set_the_visible_date(const QString &stime)
@@ -50,7 +49,8 @@ void Saagia_view::set_location(QString locationn)
     emit locationChanged(locationn);
 }
 
-QString Saagia_view::get_location(){
+QString Saagia_view::get_location()
+{
     return location;
 }
 
@@ -75,20 +75,7 @@ void Saagia_view::clear_chart_data()
     emit clearChartData();
 }
 
-void Saagia_view::add_chart_line(int type){
-
+void Saagia_view::add_chart_line(int type)
+{
     emit addChartLine(type);
 }
-
-/*
-void Saagia_view::input_checked(bool status)
-{
-    if(status){
-        emit inputCheckOk();
-    }
-    else{
-        emit inputCheckNotOk();
-    }
-
-}
-*/

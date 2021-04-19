@@ -7,8 +7,8 @@
  * Summary of this file:
  * This class houses containers to store weather and energy data and functions
  * used to store the data into those containers and access it later.
- * Also contains the implementations of Weather_data and Time structs and some operators
- * for those structs.
+ * Also contains the implementations of Weather_data and Time structs and some
+ * operators for those structs.
  *
  */
 
@@ -21,7 +21,6 @@
 #include <QDebug>
 
 enum Type {
-
     electricity = 1,
     nuclear = 2,
     hydro = 3,
@@ -29,7 +28,6 @@ enum Type {
 };
 
 struct weather_data{
-
     float temperature;
     float wind_speed;
     float cloudines;
@@ -44,27 +42,30 @@ struct Time {
     int hour;
     int minute;
 };
+
 inline bool operator<(Time t1, Time t2)
 {
-    if (t1.year < t2.year) { return true; }
-    else if (t1.month < t2.month) { return true; }
-    else if (t1.day < t2.day) { return true; }
-    else if (t1.hour < t2.hour) { return true; }
-    else if (t1.minute < t2.minute) { return true; }
+    if ( t1.year < t2.year ) { return true; }
+    else if ( t1.month < t2.month ) { return true; }
+    else if ( t1.day < t2.day ) { return true; }
+    else if ( t1.hour < t2.hour ) { return true; }
+    else if ( t1.minute < t2.minute ) { return true; }
     else { return false; }
 }
 
 inline bool operator==(Time t1, Time t2)
 {
-    if (t1.year == t2.year && t1.month == t2.month && t1.day == t2.day && t1.hour == t2.hour && t1.minute == t2.minute) {
+    if ( t1.year == t2.year && t1.month == t2.month && t1.day == t2.day &&
+            t1.hour == t2.hour && t1.minute == t2.minute ) {
         return true;
     }
-    else { return false; }
+    else {
+        return false;
+    }
 }
 
 class Data_structures
 {
-
 
 public:
 
@@ -83,7 +84,6 @@ public:
     int calc_time_diff(Time t1, Time t2);
     std::vector<int> get_days_of_months();
 
-
 private:
 
     int hours_of_date(Time t);
@@ -92,10 +92,7 @@ private:
     std::vector<std::string> municipalities;
 
     const std::vector<int> days_of_months_ = {
-        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-    };
-
-
+        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 };
 

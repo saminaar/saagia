@@ -1,15 +1,12 @@
 #include "data_calculations.h"
 
-
 Data_calculations::Data_calculations(std::shared_ptr<Data_structures> data_structures) :
     data_structures_{ data_structures }
 {
-
 }
 
 std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
 {
-
    std::vector<float> average_temps = {};
    std::map<Time, weather_data> data = data_structures_->get_weather_data();
    std::map<Time, weather_data>::iterator iter = data.begin();
@@ -26,7 +23,6 @@ std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
                sum_of_max_temps += iter->second.max_temp;
                i++;
            }
-
        }
        iter++;
    }
@@ -39,12 +35,12 @@ std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
    average_temps.push_back(av_max_temp);
 
    return average_temps;
-
 }
 
 float Data_calculations::percentage_of_all_energy_prod(int energy_type)
 {
-    //Finding the newest datapoint of total energy production and corresponding value
+    // Finding the newest datapoint of total energy production and
+    // corresponding value
     std::map<Time, int> total_prod = data_structures_->get_data_type(2);
     std::map<Time, int>::iterator iter = total_prod.begin();
     Time total_prod_latest_time = iter->first;
@@ -58,7 +54,8 @@ float Data_calculations::percentage_of_all_energy_prod(int energy_type)
         iter++;
     }
 
-    //Finding the newest datapoint of chosen energy type production and corresponding value
+    // Finding the newest datapoint of chosen energy type production and
+    // corresponding value
     std::map<Time, int> energy_type_prod = data_structures_->get_data_type(energy_type);
     std::map<Time, int>::iterator iter2 = energy_type_prod.begin();
     Time latest_time = iter2->first;
@@ -74,5 +71,4 @@ float Data_calculations::percentage_of_all_energy_prod(int energy_type)
 
     float percentage = (value / total_prod_value) * 100;
     return percentage;
-
 }

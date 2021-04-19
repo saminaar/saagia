@@ -13,14 +13,10 @@
 Database_handler::Database_handler(std::shared_ptr<Data_structures> data_structures) :
     data_structures_{ data_structures }
 {
-
 }
-
-// This is copied from savegame example, has to be modified further for our use
 
 QString Database_handler::load_data(QString file)
 {
-
     const QString path_start =
     #ifdef _WIN32
         "";
@@ -28,7 +24,6 @@ QString Database_handler::load_data(QString file)
         "/";
     #endif
 
-    //QString path_start = "/";
     QString path = path_start + file;
     qDebug() << path;
 
@@ -40,6 +35,7 @@ QString Database_handler::load_data(QString file)
     }
 
     QString data1 = loadFile.readAll();
+    loadFile.close();
 
     return data1;
 }
@@ -48,7 +44,6 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
 {
     savefile = savefile.remove(0,8);
     qDebug() << savefile;
-    // Nimi tulee qml:puolelta muodossa file:///.../filename
 
     const QString path_start =
     #ifdef _WIN32
@@ -57,8 +52,7 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
         "/";
     #endif
 
-    //QString path_start = "/";
-    QString file_extension = ".json";
+    QString file_extension = ".txt";
     QString path = path_start + savefile + file_extension;
 
     qDebug() << path;
@@ -69,12 +63,10 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
         qWarning("Couldn't open save file.");
         return false;
     }
-    else
-    {
+    else {
         saveFile.write(parsedData.toUtf8());
         saveFile.close();
     }
-
 
     return true;
 }
@@ -92,15 +84,13 @@ void Database_handler::write(QJsonObject &json) const
 std::vector<std::string> Database_handler::read_municipalities(){
 
     QString data;
-    //QString fileName(":/settings/municipalities.txt");
 
     QFile file(DEFAULT_MUNICIPALITIES_FILE);
-    if( !file.open(QIODevice::ReadOnly) ) {
-        qDebug()<<"file not opened";
+    if ( !file.open(QIODevice::ReadOnly) ) {
+        qDebug() << "file not opened";
     }
-    else
-    {
-        qDebug()<<"file opened";
+    else {
+        qDebug() << "file opened";
         data = file.readAll();
     }
 
@@ -116,4 +106,3 @@ std::vector<std::string> Database_handler::read_municipalities(){
 
     return municipalities;
 }
-

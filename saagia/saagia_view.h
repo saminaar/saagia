@@ -29,7 +29,9 @@ class Saagia_view : public QObject
     Q_PROPERTY(QString current_text READ getTypeData WRITE set_the_type_data NOTIFY currentlyShownChanged)
     Q_PROPERTY(QString current_location READ get_location WRITE set_location NOTIFY locationChanged)
     //Q_PROPERTY(QString chart_data READ getChartData WRITE setChartData NOTIFY chartDataChanged)
+
 public:
+
     explicit Saagia_view(QObject *parent = nullptr);
 
     QString getPrintData() const;
@@ -58,10 +60,8 @@ public:
 
     void add_chart_line(int type);
 
-    //void input_checked(bool status);
-
-
 signals:
+
     void printDataChanged();
     void chartDataChanged();
     void dateChanged();
@@ -70,22 +70,20 @@ signals:
 
     void setLineVisibility(int type);
 
-    void sendChartData(int value, int year, int month, int day, int hours, int min, int type);
+    void sendChartData(int value, int year, int month, int day, int hours,
+                       int min, int type);
 
     void clearChartData();
     void addChartLine(int type);
 
-    //void inputCheckOk();
-
-    //void inputCheckNotOk();
-
-    void sendWeatherData(int value, int year, int month, int day, int hour, int minute, int type);
-
+    void sendWeatherData(int value, int year, int month, int day, int hour,
+                         int minute, int type);
 
 private:
-    // with the push MVC, the component that communicates the values to the QML side,
-    // must have the actual values (because the view has no information about the model),
-    // so they are also stored here
+
+    // with the push MVC, the component that communicates the values to the QML
+    // side must have the actual values (because the view has no information
+    // about the model), so they are also stored here
     QString print_data_;
     QString chart_data_;
     QString active_date_;

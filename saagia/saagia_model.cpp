@@ -1,6 +1,5 @@
 #include "saagia_model.h"
 
-
 Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     view_{ view },
     data_structures_{ std::make_shared<Data_structures>() },
@@ -10,10 +9,10 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     print_data_{},
     energy_type_{0}
 {
-
 }
 
-void Saagia_model::load_data(QString start_time, QString end_time, int variable, QString place)
+void Saagia_model::load_data(QString start_time, QString end_time, int variable,
+                             QString place)
 {
     QString url = construct_url(start_time, end_time, variable, place);
     if (variable == 9 || variable == 10 || variable == 11) {
@@ -23,10 +22,11 @@ void Saagia_model::load_data(QString start_time, QString end_time, int variable,
     else {
         data_reader_->requestUrl(url, header_);
     }
-    set_chart_data();
+    //set_chart_data();
 }
 
-QString Saagia_model::construct_url(QString start_time, QString end_time, int case_variable, QString place)
+QString Saagia_model::construct_url(QString start_time, QString end_time,
+                                    int case_variable, QString place)
 {
     QString web_address = "";
     QString url = "";
@@ -39,77 +39,89 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
         case 1 :
             // Energy consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
-            url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url = web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Electricity consumption in Finland (MWh/h)";
             break;
 
         case 2 :
             // Energy production in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/74/events/json?";
-            url = web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url = web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Electricity production in Finland (MWh/h)";
             break;
 
         case 3 :
             // Nuclear energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/188/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Nuclear energy production in Finland (MWh/h)";
             break;
 
         case 4 :
             // Hydro energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/191/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Hydro energy production in Finland (MWh/h)";
             break;
 
         case 5 :
             // Wind energy production (3 min interval)
             web_address = "https://api.fingrid.fi/v1/variable/181/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Wind energy production in Finland (MWh/h)";
             break;
 
         case 6 :
             // Electricity consumption forecast 24h
             web_address = "https://api.fingrid.fi/v1/variable/165/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Energy consumption forecast for next 24 hours (MWh/h";
             break;
 
         case 7 :
             // Energy production forecast 24h
             web_address = "https://api.fingrid.fi/v1/variable/242/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Energy production forecast for next 24 hours (MWh/h";
             break;
 
         case 8 :
             // Wind production forecast max 36h
             web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
-            url =  web_address + "start_time=" + start_time + "&" + "end_time=" + end_time;
+            url =  web_address + "start_time=" + start_time + "&" +
+                    "end_time=" + end_time;
             data_info = "Wind production forecast for next 36h (MWh/h)";
             break;
 
         case 9 :
             // Any old weather data (temperature, wind, cloudiness)
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
-            url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
+            url = web_address + "&place=" + place + "&starttime=" + start_time +
+                    "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
             data_info = "Weather data from past";
             break;
 
         case 10 :
             // Temperature and wind forecast
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::forecast::hirlam::surface::point::simple";
-            url = web_address + "&place=" + place + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=Temperature,WindSpeedMS";
+            url = web_address + "&place=" + place + "&starttime=" + start_time +
+                    "&endtime=" + end_time + "&parameters=Temperature,WindSpeedMS";
             data_info = "Weather forecast";
             break;
 
         case 11 :
-            // Fetch data to calculate average minimum, maximum and average temperature of a month
+            // Fetch data to calculate average minimum, maximum and average
+            // temperature of a month
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::daily::simple";
-            url = web_address + "&place=" + place_ + "&starttime=" + start_time + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
+            url = web_address + "&place=" + place_ + "&starttime=" + start_time
+                    + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
 
             break;
     }
@@ -118,7 +130,6 @@ QString Saagia_model::construct_url(QString start_time, QString end_time, int ca
     QString info_text = default_text + data_info;
     view_->set_the_type_data(info_text);
     return url;
-
 }
 
 void Saagia_model::set_chart_data()
@@ -128,17 +139,17 @@ void Saagia_model::set_chart_data()
 
     std::map<int, std::map<Time, int>>::iterator it;
 
-    for (std::pair<int, std::map<Time, int>> energy_type : data_structures_->get_energy_structure() ) {
+    for ( std::pair<int, std::map<Time, int>> energy_type :
+         data_structures_->get_energy_structure() ) {
          view_->add_chart_line(energy_type.first);
 
         // Enter another map
-        for (auto key_value : energy_type.second){
-            set_new_data_content(key_value.second, key_value.first, energy_type.first);
+        for ( auto key_value : energy_type.second ) {
+            set_new_data_content(key_value.second, key_value.first,
+                                 energy_type.first);
         }
     }
 }
-
-
 
 void Saagia_model::set_energy_type(int type)
 {
@@ -148,36 +159,29 @@ void Saagia_model::set_energy_type(int type)
 
 void Saagia_model::set_new_data_content(int value, Time date, int type)
 {
-    if (view_ != nullptr)
-    {
+    if ( view_ != nullptr ) {
         view_->setChartData(value, date, type);
     }
 }
 
 void Saagia_model::energy_form_1_selected()
 {
-    //view_->display_energy_form_1
-
     print_data_ = "Energiamuoto 1 valittu";
 
-    if (view_ != nullptr)
-    {
+    if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
         view_->setVisibility(1);
     }
-
 }
 
 void Saagia_model::energy_form_2_selected()
 {
     print_data_ = "Energiamuoto 2 valittu";
 
-    if (view_ != nullptr)
-    {
+    if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
         view_->setVisibility(2);
     }
-
 }
 
 void Saagia_model::energy_form_3_selected()
@@ -186,25 +190,20 @@ void Saagia_model::energy_form_3_selected()
 
     print_data_ = "Energiamuoto 3 valittu";
 
-    if (view_ != nullptr)
-    {
+    if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
         view_->setVisibility(3);
     }
-
 }
 
 void Saagia_model::energy_form_4_selected()
 {
-
     print_data_ = "Energiamuoto 4 valittu";
 
-    if (view_ != nullptr)
-    {
+    if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
         view_->setVisibility(4);
     }
-
 }
 
 void Saagia_model::load_municipalities()
@@ -214,7 +213,7 @@ void Saagia_model::load_municipalities()
 
 void Saagia_model::load_from_file(QString file){
     file = file.remove(0,8);
-    if (database_handler_->load_data(file) == "false") return;
+    if ( database_handler_->load_data(file) == "false" ) return;
     QString data1 = database_handler_->load_data(file);
     //energy_type_ = setti.split(" ")[0].toInt();
     energy_type_ = data1.split("\n")[0].toInt();
@@ -225,11 +224,11 @@ void Saagia_model::load_from_file(QString file){
 }
 
 bool Saagia_model::check_placeinput(QString text){
-    if (data_structures_->get_municipalities().size() == 0) load_municipalities();
+    if ( data_structures_->get_municipalities().size() == 0 ) load_municipalities();
     std::string stext = text.toStdString();
     std::vector<std::string> places = data_structures_->get_municipalities();
-    for (std::vector<std::string>::size_type i = 0; i < places.size(); ++i){
-        if (places[i] == stext){
+    for ( std::vector<std::string>::size_type i = 0; i < places.size(); ++i ) {
+        if ( places[i] == stext ) {
             place_ = text; qDebug() << place_;
             text[0] = text[0].toUpper();
             view_->set_location(text);
@@ -254,14 +253,16 @@ void Saagia_model::fetch_forecast(int data_type)
     QString end_day = end_date.mid(8,2);
     QString end_hour = end_date.mid(11,2);
 
-    QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
-    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
+    QString starting_time = start_year + "-" + start_month + "-" + start_day +
+            "T" + start_hour + ":00:00Z";
+    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" +
+            end_hour + ":59:00Z";
 
     QString url;
     QString header;
 
     //One url fetces all weather forecast data
-    if (data_type == 12 || data_type == 13 ){
+    if ( data_type == 12 || data_type == 13 ) {
         url = construct_url(starting_time, ending_time, 10);
         header = "";
     }
@@ -270,19 +271,19 @@ void Saagia_model::fetch_forecast(int data_type)
         header = header_;
     }
     data_reader_->requestUrl(url, header);
-
 }
 
 void Saagia_model::average_temps(int month, int year, QString place)
 {
     QString month_str;
-    if (month < 10) {
+    if ( month < 10 ) {
         month_str = "0" + QString::number(month);
     }
     else {
         month_str = QString::number(month);
     }
-    QString starting_date = QString::number(year) + "-" + month_str + "-01T00:00:00Z";
+    QString starting_date = QString::number(year) + "-" +
+            month_str + "-01T00:00:00Z";
     int number_of_days_in_month = data_structures_->get_days_of_months().at(month-1);
 
     QString ending_date = QString::number(year) + "-" + month_str + "-" +
@@ -293,14 +294,13 @@ void Saagia_model::average_temps(int month, int year, QString place)
 
     std::vector<float> temps = data_calculations_->average_temp_of_month(month, year);
 
-    qDebug() << "av min temp: " << temps.at(1) << "av max temp: " << temps.at(2) << "av temp: " << temps.at(0);
-
+    qDebug() << "av min temp: " << temps.at(1) << "av max temp: " << temps.at(2)
+             << "av temp: " << temps.at(0);
 }
-
 
 void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 {
-    // Creating starting and ending points for forecasts 24h appart
+    // Creating starting and ending points for forecasts 24h apart
     QString start_date = clock_->currentDateTime().addSecs(-360).toString(Qt::ISODate);
     QString start_year = start_date.mid(0,4);
     QString start_month = start_date.mid(5,2);
@@ -313,8 +313,10 @@ void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
     QString end_day = end_date.mid(8,2);
     QString end_hour = end_date.mid(11,2);
 
-    QString starting_time = start_year + "-" + start_month + "-" + start_day + "T" + start_hour + ":00:00Z";
-    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" + end_hour + ":59:00Z";
+    QString starting_time = start_year + "-" + start_month + "-" + start_day +
+            "T" + start_hour + ":00:00Z";
+    QString ending_time = end_year+ "-" + end_month + "-" + end_day + "T" +
+            end_hour + ":59:00Z";
 
     qDebug() << "alku: " << starting_time << " loppu: " << ending_time;
 
@@ -324,16 +326,14 @@ void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
     data_reader_->requestUrl(total_prod_url, header_);
 
     //Fetching given energy type's production data to datastructure
-    QString energy_type_prod_url = construct_url(starting_time, ending_time, energy_type);
+    QString energy_type_prod_url = construct_url(starting_time, ending_time,
+                                                 energy_type);
     data_reader_->set_data_type(energy_type);
     data_reader_->requestUrl(energy_type_prod_url, header_);
-
 }
 
 void Saagia_model::save_data(QString filename)
-
 {
-
     database_handler_->save_data(filename, data_reader_->parsedData(energy_type_));
     // database_handler_->save_data(start_time, data_type);
 
@@ -353,10 +353,11 @@ void Saagia_model::save_data(QString filename)
 void Saagia_model::save_graph_as_image()
 {
     qDebug() << "Save graph as image.. to be implemented";
-    //set_chart_data();
+    set_chart_data();
 }
 
-void Saagia_model::set_visible_date(QString stime, QString etime, QString shours, QString ehours)
+void Saagia_model::set_visible_date(QString stime, QString etime,
+                                    QString shours, QString ehours)
 {
 
     QString start_date = stime.mid(0, stime.length()-14);
@@ -375,13 +376,11 @@ void Saagia_model::set_visible_date(QString stime, QString etime, QString shours
     ehours = ehours.replace("\%3A", ":");
     ehours = ehours.mid(0, ehours.length() - 3);
 
+    QString starting = "<b>Current timeframe: </b>" + day + "." + month + "." +
+            year + ", " + shours + " <b>-</b> " + eday + "." + emonth + "." +
+            eyear + ", " + ehours;
 
-    QString starting = "<b>Current timeframe: </b>" + day + "." + month + "." + year + ", " + shours + " <b>-</b> " + eday + "." + emonth + "." + eyear + ", " + ehours;
-
-    if(view_ != nullptr )
-    {
+    if ( view_ != nullptr ) {
         view_->set_the_visible_date(starting);
     }
-
 }
-

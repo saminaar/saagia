@@ -9,8 +9,6 @@
  *
  */
 
-
-
 #ifndef DATA_CALCULATIONS_H
 #define DATA_CALCULATIONS_H
 
@@ -28,25 +26,29 @@ class Data_calculations
 {
 
 public:
+
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
 
-
     /**
-     * @brief average_temp_of_month: Calculates average average-, minimum and maximum temeperatures of given month
+     * @brief average_temp_of_month: Calculates average average-, minimum and
+     * maximum temperatures of given month
      * @param month: Desired month
      * @param year: Desired year
-     * @return: vector with average average, average minimum and average maximum temps
+     * @return: vector with average average, average minimum and average
+     * maximum temps
      */
     std::vector<float> average_temp_of_month(int month, int year);
+
+    /**
+     * @brief percentage_of_all_energy_prod
+     * @param energy_type
+     * @return percentage
+     */
     float percentage_of_all_energy_prod(int energy_type);
-
-
-
-
 
 private:
 
-    //Poinetr to Data_structures object to access data
+    //Pointer to Data_structures object for accessing data
     std::shared_ptr<Data_structures> data_structures_;
 
 };
