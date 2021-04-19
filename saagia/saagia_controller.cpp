@@ -15,13 +15,19 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
 {
 
 }
-
+/**
+ * @brief Saagia_controller::set_energy_type: sets the current energy type to match retrieved data type
+ * @param variable: retrieved datatype
+ */
 void Saagia_controller::set_energy_type(int variable)
 {
     energy_type = variable;
     model_->set_energy_type(variable);
 }
 
+/**
+ * @brief Saagia_controller::load_data: Formats the times for the data search
+ */
 void Saagia_controller::load_data()
 {
     get_average_temp(3, 2021);
@@ -34,6 +40,11 @@ void Saagia_controller::load_data()
     model_->load_data(start_time_ready, end_time_ready, energy_type);
 }
 
+/**
+ * @brief Saagia_controller::set_the_selected_date: Sets the start time or end time to match the selected date
+ * @param type: data type
+ * @param date: date to be set
+ */
 void Saagia_controller::set_the_selected_date(int type, QString date)
 {
     switch(type){

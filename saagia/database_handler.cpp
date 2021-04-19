@@ -58,8 +58,7 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     #endif
 
     //QString path_start = "/";
-    QString file_extension = ".json";
-    QString path = path_start + savefile + file_extension;
+    QString path = path_start + savefile;
 
     qDebug() << path;
 
