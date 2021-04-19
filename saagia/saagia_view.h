@@ -5,8 +5,8 @@
  * Course: Software Design, Spring 2021, mandatory group project
  *
  * Summary of this file:
- * This class is resposible for the things shown to the user. The functions in this class are used to
- * controll the ui.
+ * This class is resposible for the things shown to the user. The functions
+ * in this class are used to control the ui.
  *
  */
 

@@ -20,16 +20,9 @@
 #include <QString>
 #include <QDebug>
 
-enum Type {
-    electricity = 1,
-    nuclear = 2,
-    hydro = 3,
-    wind = 4
-};
-
-
 /**
- * @brief The weather_data struct: STruct to store all weather related data of some time point
+ * @brief The weather_data struct: Struct to store all weather related data
+ * of some time point
  */
 struct weather_data{
     float temperature;
@@ -80,7 +73,6 @@ public:
 
     Data_structures();
 
-
     /**
      * @brief append_energy_data: Function for storing energy data
      * @param start_time: Time point of data
@@ -97,7 +89,8 @@ public:
     void append_weather_data(Time time, weather_data wd);
 
     /**
-     * @brief test_print: Test function used in development to check what is stored
+     * @brief test_print: Test function used in development to check what
+     * is stored
      */
     void test_print();
 
@@ -138,7 +131,8 @@ public:
     std::map<Time, int> get_data_type(int type);
 
     /**
-     * @brief calc_time_diff: Calculates hour difference between two Time structures
+     * @brief calc_time_diff: Calculates hour difference between
+     * two Time structures
      * @param t1: first Time structure
      * @param t2: second Time structure
      * @return
@@ -146,7 +140,8 @@ public:
     int calc_time_diff(Time t1, Time t2);
 
     /**
-     * @brief get_days_of_months: returns vector with the amount of days in each month
+     * @brief get_days_of_months: returns vector with the amount
+     * of days in each month
      * @return
      */
     std::vector<int> get_days_of_months();
@@ -154,7 +149,8 @@ public:
 private:
 
     /**
-     * @brief hours_of_date: Function that calculates the amount of hours a Time point has
+     * @brief hours_of_date: Function that calculates the amount
+     * of hours a Time point has
      * @param t: Time point to be calculated
      * @return: Amount of hours as int
      */
@@ -169,8 +165,8 @@ private:
     // Vector of municipalities
     std::vector<std::string> municipalities_;
 
-
-    // Vector that has in order the amount of days a corresponding month would have
+    // Vector that has in order the amount of days
+    // a corresponding month would have
     const std::vector<int> days_of_months_ = {
         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 

@@ -44,7 +44,6 @@ void Data_structures::append_energy_data(Time start_time, int data_type, int val
         new_map[start_time] = value;
         energy_data_[data_type] = new_map;
     }
-
 }
 
 void Data_structures::append_weather_data(Time time, weather_data wd)
