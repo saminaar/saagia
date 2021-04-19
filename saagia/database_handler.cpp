@@ -52,13 +52,8 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
         "/";
     #endif
 
-<<<<<<< HEAD
     QString file_extension = ".txt";
     QString path = path_start + savefile + file_extension;
-=======
-    //QString path_start = "/";
-    QString path = path_start + savefile;
->>>>>>> 7de9cfc3b10fa22ed73b0355db3f868998649e3d
 
     qDebug() << path;
 
