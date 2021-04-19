@@ -73,11 +73,11 @@ private:
 
     std::shared_ptr<Saagia_model> model_;
 
-    QString start_time;
-    QString end_time;
+    QString start_time_;
+    QString end_time_;
 
-    QString start_hours_min;
-    QString end_hours_min;
+    QString start_hours_min_;
+    QString end_hours_min_;
 
     int data_type_;
 

@@ -6,7 +6,8 @@ Saagia_view::Saagia_view(QObject *parent) :
     print_data_{ "The program will print out stuff here. . ." },
     chart_data_{},
     active_date_{"<b>Current timeframe:</b> <i>No timeframe selected </i>"},
-    title_of_shown_data_{"Currently displayed: "}
+    title_of_shown_data_{"Currently displayed: "},
+    location_{"Tampere"}
 {
 }
 
@@ -45,13 +46,13 @@ void Saagia_view::set_the_visible_date(const QString &stime)
 
 void Saagia_view::set_location(QString locationn)
 {
-    location = locationn;
+    location_ = locationn;
     emit locationChanged(locationn);
 }
 
 QString Saagia_view::get_location()
 {
-    return location;
+    return location_;
 }
 
 void Saagia_view::set_the_type_data(const QString& energy_type)

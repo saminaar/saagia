@@ -6,10 +6,10 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
                                      QObject *parent) :
     QObject{parent},
     model_{ model },
-    start_time( "" ),
-    end_time( "" ),
-    start_hours_min("00:00:00"),
-    end_hours_min("00:00:00"),
+    start_time_( "" ),
+    end_time_( "" ),
+    start_hours_min_("00:00:00"),
+    end_hours_min_("00:00:00"),
     data_type_( 0 )
 {
 }
@@ -24,11 +24,11 @@ void Saagia_controller::load_data()
 {
     if ( data_type_ < 6 ) {
         get_average_temp(3, 2021);
-        QString formatted_start_hours = start_hours_min.replace("\%3A", ":");
-        QString formatted_end_hours = end_hours_min.replace("\%3A", ":");
+        QString formatted_start_hours = start_hours_min_.replace("\%3A", ":");
+        QString formatted_end_hours = end_hours_min_.replace("\%3A", ":");
 
-        QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
-        QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
+        QString start_time_ready = start_time_ + "T" + formatted_start_hours + "Z";
+        QString end_time_ready = end_time_ + "T" + formatted_end_hours + "Z";
         model_->load_data(start_time_ready, end_time_ready, data_type_);
     }
 
@@ -48,17 +48,17 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
     switch(type){
         // Start date
         case 0 :
-            start_time = date;
+            start_time_ = date;
             break;
 
         // End date
         case 1 :
-            end_time = date;
+            end_time_ = date;
             break;
 
         default:
-            start_time = "";
-            end_time = "";
+            start_time_ = "";
+            end_time_ = "";
             break;
     }
 }
@@ -131,10 +131,10 @@ void Saagia_controller::dataset_10_selected()
 void Saagia_controller::reset_input()
 {
     data_type_ = 0;
-    start_time = "";
-    end_time = "";
-    start_hours_min = "00:00:00";
-    end_hours_min = "00:00:00";
+    start_time_ = "";
+    end_time_ = "";
+    start_hours_min_ = "00:00:00";
+    end_hours_min_ = "00:00:00";
 }
 
 bool Saagia_controller::check_input()
@@ -143,15 +143,15 @@ bool Saagia_controller::check_input()
         return true;
     }
 
-    if ( (start_time == "") or (end_time == "") ) {
+    if ( (start_time_ == "") or (end_time_ == "") ) {
         return false;
     }
 
-    if ( start_time > end_time ) {
+    if ( start_time_ > end_time_ ) {
         return false;
     }
 
-    if ( start_time == end_time && start_hours_min > end_hours_min ) {
+    if ( start_time_ == end_time_ && start_hours_min_ > end_hours_min_ ) {
         return false;
     }
 
@@ -171,24 +171,24 @@ void Saagia_controller::check_place(QString text)
 
 void Saagia_controller::set_the_visible_date()
 {
-    model_->set_visible_date(start_time, end_time, start_hours_min,
-                             end_hours_min);
+    model_->set_visible_date(start_time_, end_time_, start_hours_min_,
+                             end_hours_min_);
 }
 
 void Saagia_controller::set_the_selected_time(int type, QString time)
 {
     switch(type){
         case 0 :
-            start_hours_min = time;
+            start_hours_min_ = time;
             break;
 
         case 1 :
-            end_hours_min = time;
+            end_hours_min_ = time;
             break;
 
         default:
-            start_hours_min = "00:00:00";
-            end_hours_min = "00:00:00";
+            start_hours_min_ = "00:00:00";
+            end_hours_min_ = "00:00:00";
             break;
     }
 }

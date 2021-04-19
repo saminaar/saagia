@@ -88,7 +88,7 @@ private:
     QString chart_data_;
     QString active_date_;
     QString title_of_shown_data_;
-    QString location = "Tampere";
+    QString location_;
 
 };
 

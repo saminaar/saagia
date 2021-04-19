@@ -167,7 +167,7 @@ private:
     std::map<Time, weather_data> weather_data_;
 
     // Vector of municipalities
-    std::vector<std::string> municipalities;
+    std::vector<std::string> municipalities_;
 
 
     // Vector that has in order the amount of days a corresponding month would have
