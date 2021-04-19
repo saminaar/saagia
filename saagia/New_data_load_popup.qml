@@ -197,7 +197,7 @@ Popup {
                     border.width: 1
                     border.color: accent_color
 
-                }
+            }
 
 
 
@@ -209,7 +209,6 @@ Popup {
                     anchors.centerIn: parent
                     fillMode: Image.Stretch
                     source: "qrc:/images/refresh.png"
-
 
             }
 
@@ -270,8 +269,6 @@ Popup {
                 }
 
             }
-
-
 
         }
 
@@ -341,6 +338,7 @@ Popup {
             anchors.left: parent.left
             anchors.right: parent.right
         }
+
         }
 
         function check_input(){
@@ -348,8 +346,7 @@ Popup {
             if ( saagia_controller.check_input() ) {
                 send_request()
             }
-            else
-            {
+            else {
                 error_message.visible = true;
                 error_animation.running = true;
             }
@@ -358,26 +355,11 @@ Popup {
 
         function send_request(){
 
-            saagia_controller.load_data("","")
+            saagia_controller.load_data()
             console.log("Send request qml:stä")
             saagia_controller.set_the_visible_date()
             popup.close()
-        }
-
-        /*
-        Connections {
-
-            target: saagia_view
-
-            function onInputCheckOk() {
-                send_request()
-            }
-
-            function onInputCheckNotOk(){
-                error_message.visible = true;
-                error_animation.running = true;
-            }
 
         }
-        */
+
 }

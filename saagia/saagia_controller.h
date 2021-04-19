@@ -31,23 +31,40 @@ public:
     explicit Saagia_controller(std::shared_ptr<Saagia_model> model,
                                QObject *parent = nullptr);
 
-    Q_INVOKABLE void set_energy_type(int variable);
+    /**
+     * @brief Saagia_controller::set_data_type: sets the current data type to
+     * match retrieved data type
+     * @param variable: retrieved data type
+     */
+    Q_INVOKABLE void set_data_type(int variable);
+
+    /**
+     * @brief Saagia_controller::load_data: Formats the times for the data search
+     */
     Q_INVOKABLE void load_data();
+
     //Q_INVOKABLE void save_data(QString start_time, int data_type);
+
     Q_INVOKABLE void set_the_selected_date(int type, QString date);
-    Q_INVOKABLE void energy_form_1_selected();
-    Q_INVOKABLE void energy_form_2_selected();
-    Q_INVOKABLE void energy_form_3_selected();
-    Q_INVOKABLE void energy_form_4_selected();
+    Q_INVOKABLE void dataset_1_selected();
+    Q_INVOKABLE void dataset_2_selected();
+    Q_INVOKABLE void dataset_3_selected();
+    Q_INVOKABLE void dataset_4_selected();
+    Q_INVOKABLE void dataset_5_selected();
+    Q_INVOKABLE void dataset_6_selected();
+    Q_INVOKABLE void dataset_7_selected();
+    Q_INVOKABLE void dataset_8_selected();
+    Q_INVOKABLE void dataset_9_selected();
+    Q_INVOKABLE void dataset_10_selected();
     Q_INVOKABLE void reset_input();
     Q_INVOKABLE bool check_input();
-    Q_INVOKABLE bool check_place(QString qtext);
+    Q_INVOKABLE void check_place(QString qtext);
     Q_INVOKABLE void set_the_visible_date();
     Q_INVOKABLE void set_the_selected_time(int type, QString time);
     Q_INVOKABLE void save_chart_image();
     Q_INVOKABLE void load_from_file(QString file);
     Q_INVOKABLE void save_to_file(QString filename);
-    Q_INVOKABLE void fetch_forecast(int data_type);
+    Q_INVOKABLE void fetch_forecast();
     Q_INVOKABLE void get_average_temp(int month, int year);
 
 private:
@@ -60,7 +77,7 @@ private:
     QString start_hours_min;
     QString end_hours_min;
 
-    int energy_type;
+    int data_type;
 
 };
 

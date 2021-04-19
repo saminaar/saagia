@@ -63,13 +63,17 @@ Rectangle {
 
         function create_new_button(){
 
-            var list = ["\"wind\"", "\"electricity\"", "\"hydro\"", "\"nuclear\""];
+            var list = ["\"electricity_consumption\"",
+                        "\"electricity_production\"", "\"wind\"",
+                         "\"hydro\"",
+                        "\"nuclear\""];
 
-            // number of displayed energytypes
+            // number of displayed energy types
             var i;
 
-            for (i = 0; i < 4; i++) {
-                var newObject = Qt.createQmlObject('import QtQuick 2.0; Energy_type_button {buttonIcon: ' + list[i] +'}',
+            for (i = 0; i < 5; i++) {
+                var newObject = Qt.createQmlObject('import QtQuick 2.0;
+                            Energy_type_button {buttonIcon: ' + list[i] +'}',
                                                    button_row_1);
 
             }
@@ -121,14 +125,18 @@ Rectangle {
         function create_new_button(){
 
 
-            var list = [ "\"electricity\"", "\"electricity_consumption\"", "\"wind\"", "\"temperature\"", "\"wind_speed\""];
+            var list = ["\"electricity_consumption_forecast\"",
+                        "\"electricity_production_forecast\"",
+                        "\"wind_energy_production_forecast\"",
+                        "\"temperature_forecast\"", "\"wind_speed_forecast\""];
 
 
-            // number of displayed energytypes
+            // number of displayed energy types
             var i;
 
             for (i = 0; i < 5; i++) {
-                var newObject = Qt.createQmlObject('import QtQuick 2.0; Energy_type_button {buttonIcon: ' + list[i] +'}',
+                var newObject = Qt.createQmlObject('import QtQuick 2.0;
+                            Energy_type_button {buttonIcon: ' + list[i] +'}',
                                                    button_row_2);
 
             }

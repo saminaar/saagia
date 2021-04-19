@@ -10,23 +10,16 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
     end_time( "" ),
     start_hours_min("00:00:00"),
     end_hours_min("00:00:00"),
-    energy_type( 0 )
+    data_type( 0 )
 {
-}
-/**
- * @brief Saagia_controller::set_energy_type: sets the current energy type to
- * match retrieved data type
- * @param variable: retrieved datatype
- */
-void Saagia_controller::set_energy_type(int variable)
-{
-    energy_type = variable;
-    model_->set_energy_type(variable);
 }
 
-/**
- * @brief Saagia_controller::load_data: Formats the times for the data search
- */
+void Saagia_controller::set_data_type(int variable)
+{
+    data_type = variable;
+    model_->set_data_type(variable);
+}
+
 void Saagia_controller::load_data()
 {
     get_average_temp(3, 2021);
@@ -36,7 +29,7 @@ void Saagia_controller::load_data()
     QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
     QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
 
-    model_->load_data(start_time_ready, end_time_ready, energy_type);
+    model_->load_data(start_time_ready, end_time_ready, data_type);
 }
 
 /**
@@ -80,29 +73,59 @@ eteenpäin, eli EI silleen että jokaiselle napille
 oma funktio
 */
 
-void Saagia_controller::energy_form_1_selected()
+void Saagia_controller::dataset_1_selected()
 {
-    model_->energy_form_1_selected();
+    model_->dataset_1_selected();
 }
 
-void Saagia_controller::energy_form_2_selected()
+void Saagia_controller::dataset_2_selected()
 {
-    model_->energy_form_2_selected();
+    model_->dataset_2_selected();
 }
 
-void Saagia_controller::energy_form_3_selected()
+void Saagia_controller::dataset_3_selected()
 {
-    model_->energy_form_3_selected();
+    model_->dataset_3_selected();
 }
 
-void Saagia_controller::energy_form_4_selected()
+void Saagia_controller::dataset_4_selected()
 {
-    model_->energy_form_4_selected();
+    model_->dataset_4_selected();
+}
+
+void Saagia_controller::dataset_5_selected()
+{
+    model_->dataset_5_selected();
+}
+
+void Saagia_controller::dataset_6_selected()
+{
+    model_->dataset_6_selected();
+}
+
+void Saagia_controller::dataset_7_selected()
+{
+    model_->dataset_7_selected();
+}
+
+void Saagia_controller::dataset_8_selected()
+{
+    model_->dataset_8_selected();
+}
+
+void Saagia_controller::dataset_9_selected()
+{
+    model_->dataset_9_selected();
+}
+
+void Saagia_controller::dataset_10_selected()
+{
+    model_->dataset_10_selected();
 }
 
 void Saagia_controller::reset_input()
 {
-    energy_type = 0;
+    data_type = 0;
     start_time = "";
     end_time = "";
     start_hours_min = "00:00:00";
@@ -123,14 +146,14 @@ bool Saagia_controller::check_input()
         return false;
     }
 
-    if ( energy_type == 0 ) {
+    if ( data_type == 0 ) {
         return false;
     }
 
     return true;
 }
 
-bool Saagia_controller::check_place(QString text)
+void Saagia_controller::check_place(QString text)
 {
     text = text.toLower();
     bool checked = model_->check_placeinput(text);
@@ -172,9 +195,9 @@ void Saagia_controller::save_to_file(QString filename)
     model_->save_data(filename);
 }
 
-void Saagia_controller::fetch_forecast(int data_type)
+void Saagia_controller::fetch_forecast()
 {
-
+    model_->fetch_forecast(data_type);
 }
 
 void Saagia_controller::get_average_temp(int month, int year)

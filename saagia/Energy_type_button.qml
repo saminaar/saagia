@@ -20,8 +20,11 @@ Rectangle {
         source: {
 
             switch (buttonIcon) {
-                case "wind":
-                      "qrc:/images/wind-power.png"
+                case "electricity_consumption":
+                    "qrc:/images/plug.png"
+                    break;
+                case "electricity_production":
+                    "qrc:/images/lighting.png"
                     break;
                 case "nuclear":
                      "qrc:/images/nuclear-energy"
@@ -29,23 +32,29 @@ Rectangle {
                 case "hydro":
                      "qrc:/images/hydro-power.png"
                     break;
-                case "electricity":
-                    "qrc:/images/lighting.png"
+                case "wind":
+                    "qrc:/images/wind-power.png"
                     break;
-                case "electricity_consumption":
+                case "electricity_consumption_forecast":
                     "qrc:/images/plug.png"
                     break;
-                case "wind_speed":
-                    "qrc:/images/wind_speed.png"
+                case "electricity_production_forecast":
+                    "qrc:/images/lighting.png"
                     break;
-                case "temperature":
+                case "wind_energy_production_forecast":
+                    "qrc:/images/wind-power.png"
+                    break;
+                case "temperature_forecast":
                     "qrc:/images/celsius.png"
                     break;
+                case "wind_speed_forecast":
+                    "qrc:/images/wind_speed.png"
+                    break;
+
                 default:
                     break;
 
                 }
-
 
     }
 
@@ -58,22 +67,37 @@ Rectangle {
             energy_button.state == 'Active' ? energy_button.state = "" : energy_button.state = 'Active';
 
             switch (buttonIcon) {
-                case "wind":
-                    console.log("Clicked > windy wind button!")
-                    saagia_controller.energy_form_2_selected()
+                case "electricity_consumption":
+                    saagia_controller.dataset_1_selected()
+                    break;
+                case "electricity_production":
+                    saagia_controller.dataset_2_selected()
                     break;
                 case "nuclear":
-                    console.log("Clicked > nuclear button")
-                    saagia_controller.energy_form_3_selected()
+                    saagia_controller.dataset_3_selected()
                     break;
                 case "hydro":
-                    console.log("Clicked > water button")
-                    saagia_controller.energy_form_4_selected()
+                    saagia_controller.dataset_4_selected()
                     break;
-                case "electricity":
-                    console.log("Clicked > lightning button")
-                    saagia_controller.energy_form_1_selected()
+                case "wind":
+                    saagia_controller.dataset_5_selected()
                     break;
+                case "electricity_consumption_forecast":
+                    saagia_controller.dataset_6_selected()
+                    break;
+                case "electricity_production_forecast":
+                    saagia_controller.dataset_7_selected()
+                    break;
+                case "wind_energy_production_forecast":
+                    saagia_controller.dataset_8_selected()
+                    break;
+                case "temperature_forecast":
+                    saagia_controller.dataset_9_selected()
+                    break;
+                case "wind_speed_forecast":
+                    saagia_controller.dataset_10_selected()
+                    break;
+
                 default:
                     // Default, if no other is used
                     console.log("Button not specified")

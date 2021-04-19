@@ -21,7 +21,7 @@ QString Database_handler::load_data(QString file)
     #ifdef _WIN32
         "";
     #else
-        "/";
+        "/"; // MacOS requires this
     #endif
 
     QString path = path_start + file;
@@ -49,7 +49,7 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     #ifdef _WIN32
         "";
     #else
-        "/";
+        "/"; // MacOS requires this
     #endif
 
     QString file_extension = ".txt";
@@ -73,12 +73,12 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
 
 void Database_handler::read(const QJsonObject &json)
 {
-
+    // is this needed?
 }
 
 void Database_handler::write(QJsonObject &json) const
 {
-
+    // is this needed?
 }
 
 std::vector<std::string> Database_handler::read_municipalities(){

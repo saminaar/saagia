@@ -121,13 +121,11 @@ RowLayout {
 
             onClicked:{
                 if (searchText.text != null)
-                    saagia_controller.check_place(searchText.text);
+                    saagia_controller.check_place(searchText.text)
+                    searchText.clear()
             }
 
-
         }
-
-
 
     }
 }

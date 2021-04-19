@@ -7,7 +7,7 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
     database_handler_{ std::make_shared<Database_handler>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     data_calculations_{ std::make_shared<Data_calculations>( std::shared_ptr<Data_structures> ( data_structures_ ) ) },
     print_data_{},
-    energy_type_{0}
+    data_type_{0}
 {
 }
 
@@ -37,7 +37,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time,
             break;
 
         case 1 :
-            // Energy consumption in Finland (hourly)
+            // Electricity consumption in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/124/events/json?";
             url = web_address + "start_time=" + start_time + "&" +
                     "end_time=" + end_time;
@@ -45,7 +45,7 @@ QString Saagia_model::construct_url(QString start_time, QString end_time,
             break;
 
         case 2 :
-            // Energy production in Finland (hourly)
+            // Electricity production in Finland (hourly)
             web_address = "https://api.fingrid.fi/v1/variable/74/events/json?";
             url = web_address + "start_time=" + start_time + "&" +
                     "end_time=" + end_time;
@@ -81,23 +81,23 @@ QString Saagia_model::construct_url(QString start_time, QString end_time,
             web_address = "https://api.fingrid.fi/v1/variable/165/events/json?";
             url =  web_address + "start_time=" + start_time + "&" +
                     "end_time=" + end_time;
-            data_info = "Energy consumption forecast for next 24 hours (MWh/h";
+            data_info = "Energy consumption forecast for next 24 hours (MWh/h)";
             break;
 
         case 7 :
-            // Energy production forecast 24h
+            // Electricity production forecast 24h
             web_address = "https://api.fingrid.fi/v1/variable/242/events/json?";
             url =  web_address + "start_time=" + start_time + "&" +
                     "end_time=" + end_time;
-            data_info = "Energy production forecast for next 24 hours (MWh/h";
+            data_info = "Electricity production forecast for next 24 hours (MWh/h)";
             break;
 
         case 8 :
-            // Wind production forecast max 36h
+            // Wind energy production forecast max 36h
             web_address = "https://api.fingrid.fi/v1/variable/245/events/json?";
             url =  web_address + "start_time=" + start_time + "&" +
                     "end_time=" + end_time;
-            data_info = "Wind production forecast for next 36h (MWh/h)";
+            data_info = "Wind energy production forecast for next 36h (MWh/h)";
             break;
 
         case 9 :
@@ -151,9 +151,9 @@ void Saagia_model::set_chart_data()
     }
 }
 
-void Saagia_model::set_energy_type(int type)
+void Saagia_model::set_data_type(int type)
 {
-    energy_type_ = type;
+    data_type_ = type;
     data_reader_->set_data_type(type);
 }
 
@@ -164,9 +164,9 @@ void Saagia_model::set_new_data_content(int value, Time date, int type)
     }
 }
 
-void Saagia_model::energy_form_1_selected()
+void Saagia_model::dataset_1_selected()
 {
-    print_data_ = "Energiamuoto 1 valittu";
+    print_data_ = "Electricity consumption in Finland";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -174,9 +174,9 @@ void Saagia_model::energy_form_1_selected()
     }
 }
 
-void Saagia_model::energy_form_2_selected()
+void Saagia_model::dataset_2_selected()
 {
-    print_data_ = "Energiamuoto 2 valittu";
+    print_data_ = "Datasetti 2 valittu";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -184,11 +184,9 @@ void Saagia_model::energy_form_2_selected()
     }
 }
 
-void Saagia_model::energy_form_3_selected()
+void Saagia_model::dataset_3_selected()
 {
-    qDebug() << "Energiamuoto 3 valittu";
-
-    print_data_ = "Energiamuoto 3 valittu";
+    print_data_ = "Datasetti 3 valittu";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
@@ -196,13 +194,73 @@ void Saagia_model::energy_form_3_selected()
     }
 }
 
-void Saagia_model::energy_form_4_selected()
+void Saagia_model::dataset_4_selected()
 {
-    print_data_ = "Energiamuoto 4 valittu";
+    print_data_ = "Datasetti 4 valittu";
 
     if ( view_ != nullptr ) {
         view_->setPrintData(print_data_);
         view_->setVisibility(4);
+    }
+}
+
+void Saagia_model::dataset_5_selected()
+{
+    print_data_ = "Datasetti 5 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(5);
+    }
+}
+
+void Saagia_model::dataset_6_selected()
+{
+    print_data_ = "Datasetti 6 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(6);
+    }
+}
+
+void Saagia_model::dataset_7_selected()
+{
+    print_data_ = "Datasetti 7 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(7);
+    }
+}
+
+void Saagia_model::dataset_8_selected()
+{
+    print_data_ = "Datasetti 8 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(8);
+    }
+}
+
+void Saagia_model::dataset_9_selected()
+{
+    print_data_ = "Datasetti 9 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(9);
+    }
+}
+
+void Saagia_model::dataset_10_selected()
+{
+    print_data_ = "Datasetti 10 valittu";
+
+    if ( view_ != nullptr ) {
+        view_->setPrintData(print_data_);
+        view_->setVisibility(10);
     }
 }
 
@@ -216,7 +274,7 @@ void Saagia_model::load_from_file(QString file){
     if ( database_handler_->load_data(file) == "false" ) return;
     QString data1 = database_handler_->load_data(file);
     //energy_type_ = setti.split(" ")[0].toInt();
-    energy_type_ = data1.split("\n")[0].toInt();
+    data_type_ = data1.split("\n")[0].toInt();
     data_reader_->set_data_type(data1.split("\n")[0].toInt());
     data1.remove(0,2);
     data_reader_->parseJson(data1);
@@ -334,7 +392,7 @@ void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 
 void Saagia_model::save_data(QString filename)
 {
-    database_handler_->save_data(filename, data_reader_->parsedData(energy_type_));
+    database_handler_->save_data(filename, data_reader_->parsedData(data_type_));
     // database_handler_->save_data(start_time, data_type);
 
     /*

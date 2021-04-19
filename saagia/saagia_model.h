@@ -32,23 +32,23 @@ class Database_handler;
 class Data_calculations;
 
 /* Datasets:
- * 1 = Energy consumption
- * 2 = Energy production
- * 3 = Nuclear energy prod
- * 4 = Hydro energy prod
- * 5 = wind energy prod
+ * 1 = Electricity consumption in Finland
+ * 2 = Electricity production in Finland
+ * 3 = Nuclear energy production
+ * 4 = Hydro energy production
+ * 5 = Wind energy production
  * 6 = Electricity consumption forecast
  * 7 = Electricity production forecast
  * 8 = Wind energy production forecast
- * 9 = Old temeprature data
- * 10 = Old wind speed data
- * 11 = Old cloudines data
- * 12 = Temperature forecast
- * 13 = Wind speed forecast
+ * 9 = Temperature forecast
+ * 10 = Wind speed forecast
+ * 11 = Old temperature data
+ * 12 = Old wind speed data
+ * 13 = Old cloudiness data
  * 14 = Average temperature of a month
  * 15 = Average minimum temperature of month
  * 16 = Average maximum temperature of month
- */
+*/
 
 class Saagia_model
 {
@@ -75,10 +75,10 @@ public:
     void set_chart_data();
 
     /**
-     * @brief set_energy_type: Sets the parameter energy_type_
-     * @param type: Type of energy to be set
+     * @brief set_data_type: Sets the parameter data_type_
+     * @param type: Type of data to be set
      */
-    void set_energy_type(int type);
+    void set_data_type(int type);
 
     /**
      * @brief clear_database: Erases all saved data
@@ -96,10 +96,16 @@ public:
     /**
      * @brief energy_form_1_selected
      */
-    void energy_form_1_selected();
-    void energy_form_2_selected();
-    void energy_form_3_selected();
-    void energy_form_4_selected();
+    void dataset_1_selected();
+    void dataset_2_selected();
+    void dataset_3_selected();
+    void dataset_4_selected();
+    void dataset_5_selected();
+    void dataset_6_selected();
+    void dataset_7_selected();
+    void dataset_8_selected();
+    void dataset_9_selected();
+    void dataset_10_selected();
 
     // void save_data(QString start_time, int data_type);
     void save_data(QString filename);
@@ -199,7 +205,7 @@ private:
     const QString header_ = "x-api-key:YR7mX5L1Hb4Xjn4PHq4mk1t2T6ToN6f92isw3ejP";
 
     //
-    int energy_type_;
+    int data_type_;
 
     // Location for weather data. Is set to Pirkkala by default
     QString place_ = "Pirkkala";
