@@ -103,9 +103,18 @@ public:
 
 private Q_SLOTS:
 
+    /**
+     * @brief requestCompleted: This funktion is called when HTML request is finished. Sends The reply to
+     * processing
+     * @param networkReply: Reply from request
+     */
     void requestCompleted(QNetworkReply* networkReply);
+
+    /**
+     * @brief requestError: Slot to be called when HTTP request receives error
+     * @param errorCode: Error code from the request
+     */
     void requestError(QNetworkReply::NetworkError errorCode);
-    void sslErrors_appeared(QNetworkReply* reply);
 
 signals:
 

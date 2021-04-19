@@ -11,7 +11,6 @@ Data_reader::Data_reader(std::shared_ptr<Data_structures> data_structures, QObje
 {
     // Connect the "finished" signal from the network to the requestCompleted function
     connect(network_, &QNetworkAccessManager::finished, this, &Data_reader::requestCompleted);
-    connect(network_, &QNetworkAccessManager::sslErrors, this, &Data_reader::sslErrors_appeared);
 }
 
 Data_reader::~Data_reader()
@@ -116,10 +115,6 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
     qDebug() << "Received error:" << errorCode << "for url:" << reply->url();
 }
 
-void Data_reader::sslErrors_appeared(QNetworkReply *reply)
-{
-    qDebug() << "SSL error occured";
-}
 
 QString Data_reader::parsedData(int energy_type)
 {
@@ -192,7 +187,7 @@ void Data_reader::parseJson(QString content)
     foreach ( const QJsonValue & value, jsonArray ) {
 
         QJsonObject obj = value.toObject();
-        int kvalue = (obj["value"].toInt());
+        int kvalue = (obj["value"].toDouble());
 
         QString start_time = (obj["start_time"].toString());
 
@@ -202,7 +197,6 @@ void Data_reader::parseJson(QString content)
         int day = start_time.mid(8, 2).toInt();
         int hour = start_time.mid(11, 2).toInt();
         int minute = start_time.mid(14, 2).toInt();
-        QString end_time = (obj["end_time"].toString());
 
         data_structures_->append_energy_data({year, month, day, hour, minute},
                                              data_type_, kvalue);
@@ -263,7 +257,6 @@ void Data_reader::parseXML(QString content)
         // minimum temperature or maximum temperature
         else if ( reader.name() == "ParameterValue" ) {
             QString XMLvalue = reader.readElementText();
-            qDebug() << XMLvalue;
             float value;
             if ( XMLvalue == "NaN" ) {
                 value = NO_VALUE;
@@ -288,12 +281,10 @@ void Data_reader::parseXML(QString content)
             }
             // Maximum temperature of the day
             else if ( latest_type == "tmax" ) {
-                qDebug() << "Maksimilämpö löytyi!";
                 max_temp = value;
             }
             // Minimum temperature of the day
             else if ( latest_type == "tmin" ) {
-                qDebug() << "Minilämpö löytyi!";
                 min_temp = value;
             }
         }

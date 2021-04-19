@@ -31,13 +31,38 @@ public:
 
     Database_handler(std::shared_ptr<Data_structures> data_structures);
 
+    /**
+     * @brief load_data
+     * @param file
+     * @return
+     */
     QString load_data(QString file);
+
+    /**
+     * @brief save_data
+     * @param filename
+     * @param parsedData
+     * @return
+     */
     bool save_data(QString filename, QString parsedData) const;
     //bool save_data(QString start_time, int data_type) const;
 
+    /**
+     * @brief read
+     * @param json
+     */
     void read(const QJsonObject &json);
+
+    /**
+     * @brief write
+     * @param json
+     */
     void write(QJsonObject &json) const;
 
+    /**
+     * @brief read_municipalities
+     * @return
+     */
     std::vector<std::string> read_municipalities();
 
     bool save_to_file();

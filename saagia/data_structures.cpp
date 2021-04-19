@@ -33,11 +33,11 @@ void Data_structures::append_energy_data(Time start_time, int data_type, int val
         energy_data_[data_type][start_time] = value;
         qDebug() << "Data saved: " << start_time.year << "-" << start_time.month
                  << "-" << start_time.day << " : " << start_time.hour
-                 << ":" << start_time.minute;
+                 << ":" << start_time.minute << " value: " << value;
     }
 
     else {
-        qDebug() << "Added new data type";
+        qDebug() << "Added new data type " << data_type;
 
         // Energy-type was not yet found in the map, add it
         std::map<Time, int> new_map;
@@ -47,7 +47,7 @@ void Data_structures::append_energy_data(Time start_time, int data_type, int val
 
 }
 
-void Data_structures::append_weather_data(Time time, weather_data data)
+void Data_structures::append_weather_data(Time time, weather_data wd)
 {
     std::map<Time, weather_data>::iterator iter = weather_data_.begin();
     // If data exists already, its not re saved
@@ -61,10 +61,10 @@ void Data_structures::append_weather_data(Time time, weather_data data)
         }
         iter++;
     }
-    weather_data_[time] = data;
+    weather_data_[time] = wd;
     qDebug() << "Tallennettu structureen: " << time.year << time.month
              << time.day << time.hour << time.minute << " : "
-             << data.temperature << "...";
+             << wd.temperature << "...";
 }
 
 void Data_structures::test_print()
@@ -118,6 +118,7 @@ std::vector<int> Data_structures::get_days_of_months()
 {
     return days_of_months_;
 }
+
 
 int Data_structures::hours_of_date(Time t)
 {

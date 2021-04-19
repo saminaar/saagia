@@ -22,14 +22,19 @@ void Saagia_controller::set_data_type(int variable)
 
 void Saagia_controller::load_data()
 {
-    get_average_temp(3, 2021);
-    QString formatted_start_hours = start_hours_min.replace("\%3A", ":");
-    QString formatted_end_hours = end_hours_min.replace("\%3A", ":");
+    if ( data_type_ < 6 ) {
+        get_average_temp(3, 2021);
+        QString formatted_start_hours = start_hours_min.replace("\%3A", ":");
+        QString formatted_end_hours = end_hours_min.replace("\%3A", ":");
 
-    QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
-    QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
+        QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
+        QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
+        model_->load_data(start_time_ready, end_time_ready, data_type_);
+    }
 
-    model_->load_data(start_time_ready, end_time_ready, data_type_);
+    if ( (data_type_ > 5) and (data_type_ < 11) ){
+       model_->fetch_forecast(data_type_);
+    }
 }
 
 /**
@@ -134,6 +139,10 @@ void Saagia_controller::reset_input()
 
 bool Saagia_controller::check_input()
 {
+    if ( (data_type_ >= 5) and (data_type_ <= 11) ){
+        return true;
+    }
+
     if ( (start_time == "") or (end_time == "") ) {
         return false;
     }
@@ -195,10 +204,12 @@ void Saagia_controller::save_to_file(QString filename)
     model_->save_data(filename);
 }
 
+/*
 void Saagia_controller::fetch_forecast()
 {
     model_->fetch_forecast(data_type_);
 }
+*/
 
 void Saagia_controller::get_average_temp(int month, int year)
 {

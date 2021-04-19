@@ -299,13 +299,13 @@ bool Saagia_model::check_placeinput(QString text){
 void Saagia_model::fetch_forecast(int data_type)
 {
     // Creating starting and ending points for forecasts 24h appart
-    QString start_date = clock_->currentDateTime().addSecs(3600).toString(Qt::ISODate);
+    QString start_date = clock_->currentDateTime().toString(Qt::ISODate);
     QString start_year = start_date.mid(0,4);
     QString start_month = start_date.mid(5,2);
     QString start_day = start_date.mid(8,2);
     QString start_hour = start_date.mid(11,2);
 
-    QString end_date = clock_->currentDateTime().addDays(1).addSecs(3600).toString(Qt::ISODate);
+    QString end_date = clock_->currentDateTime().addDays(1).toString(Qt::ISODate);
     QString end_year = end_date.mid(0,4);
     QString end_month = end_date.mid(5,2);
     QString end_day = end_date.mid(8,2);
@@ -320,7 +320,7 @@ void Saagia_model::fetch_forecast(int data_type)
     QString header;
 
     //One url fetces all weather forecast data
-    if ( data_type == 12 || data_type == 13 ) {
+    if ( data_type == 9 || data_type == 10 ) {
         url = construct_url(starting_time, ending_time, 10);
         header = "";
     }

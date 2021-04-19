@@ -27,6 +27,10 @@ enum Type {
     wind = 4
 };
 
+
+/**
+ * @brief The weather_data struct: STruct to store all weather related data of some time point
+ */
 struct weather_data{
     float temperature;
     float wind_speed;
@@ -35,6 +39,9 @@ struct weather_data{
     float min_temp;
 };
 
+/**
+ * @brief The Time struct: Struct for a point of time
+ */
 struct Time {
     int year;
     int month;
@@ -43,6 +50,7 @@ struct Time {
     int minute;
 };
 
+// "<" operator for Time structs
 inline bool operator<(Time t1, Time t2)
 {
     if ( t1.year < t2.year ) { return true; }
@@ -53,6 +61,7 @@ inline bool operator<(Time t1, Time t2)
     else { return false; }
 }
 
+// "==" operator for Time structs
 inline bool operator==(Time t1, Time t2)
 {
     if ( t1.year == t2.year && t1.month == t2.month && t1.day == t2.day &&
@@ -71,26 +80,97 @@ public:
 
     Data_structures();
 
+
+    /**
+     * @brief append_energy_data: Function for storing energy data
+     * @param start_time: Time point of data
+     * @param data_type: Which type of energy
+     * @param value: the value of data
+     */
     void append_energy_data(Time start_time, int data_type, int value);
-    void append_weather_data(Time time, weather_data);
+
+    /**
+     * @brief append_weather_data: Function for storing weather data
+     * @param time: Point of time
+     * @param wd: The weather data of a time point
+     */
+    void append_weather_data(Time time, weather_data wd);
+
+    /**
+     * @brief test_print: Test function used in development to check what is stored
+     */
     void test_print();
+
+    /**
+     * @brief clear_data_structures: Erases all saved data
+     */
     void clear_data_structures();
+
+    /**
+     * @brief get_municipalities:
+     * @return
+     */
     std::vector<std::string> get_municipalities();
+
+    /**
+     * @brief set_municipalities
+     * @param new_m
+     */
     void set_municipalities(std::vector<std::string> new_m);
+
+    /**
+     * @brief get_energy_structure: Returns all stored energy data
+     * @return
+     */
     std::map<int, std::map<Time, int> > get_energy_structure();
+
+    /**
+     * @brief get_weather_data: Returns all weather data
+     * @return
+     */
     std::map<Time, weather_data> get_weather_data();
+
+    /**
+     * @brief get_data_type: Returns a specific type of energy data
+     * @param type: wanted type of energy
+     * @return
+     */
     std::map<Time, int> get_data_type(int type);
 
+    /**
+     * @brief calc_time_diff: Calculates hour difference between two Time structures
+     * @param t1: first Time structure
+     * @param t2: second Time structure
+     * @return
+     */
     int calc_time_diff(Time t1, Time t2);
+
+    /**
+     * @brief get_days_of_months: returns vector with the amount of days in each month
+     * @return
+     */
     std::vector<int> get_days_of_months();
 
 private:
 
+    /**
+     * @brief hours_of_date: Function that calculates the amount of hours a Time point has
+     * @param t: Time point to be calculated
+     * @return: Amount of hours as int
+     */
     int hours_of_date(Time t);
+
+    // Container for all energy data
     std::map<int, std::map<Time, int>> energy_data_;
+
+    // Container for all weather data
     std::map<Time, weather_data> weather_data_;
+
+    // Vector of municipalities
     std::vector<std::string> municipalities;
 
+
+    // Vector that has in order the amount of days a corresponding month would have
     const std::vector<int> days_of_months_ = {
         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
