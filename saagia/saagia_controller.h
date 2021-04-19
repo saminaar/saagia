@@ -77,7 +77,7 @@ private:
     QString start_hours_min;
     QString end_hours_min;
 
-    int data_type;
+    int data_type_;
 
 };
 

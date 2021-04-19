@@ -10,13 +10,13 @@ Saagia_controller::Saagia_controller(std::shared_ptr<Saagia_model> model,
     end_time( "" ),
     start_hours_min("00:00:00"),
     end_hours_min("00:00:00"),
-    data_type( 0 )
+    data_type_( 0 )
 {
 }
 
 void Saagia_controller::set_data_type(int variable)
 {
-    data_type = variable;
+    data_type_ = variable;
     model_->set_data_type(variable);
 }
 
@@ -29,7 +29,7 @@ void Saagia_controller::load_data()
     QString start_time_ready = start_time + "T" + formatted_start_hours + "Z";
     QString end_time_ready = end_time + "T" + formatted_end_hours + "Z";
 
-    model_->load_data(start_time_ready, end_time_ready, data_type);
+    model_->load_data(start_time_ready, end_time_ready, data_type_);
 }
 
 /**
@@ -125,7 +125,7 @@ void Saagia_controller::dataset_10_selected()
 
 void Saagia_controller::reset_input()
 {
-    data_type = 0;
+    data_type_ = 0;
     start_time = "";
     end_time = "";
     start_hours_min = "00:00:00";
@@ -146,7 +146,7 @@ bool Saagia_controller::check_input()
         return false;
     }
 
-    if ( data_type == 0 ) {
+    if ( data_type_ == 0 ) {
         return false;
     }
 
@@ -197,7 +197,7 @@ void Saagia_controller::save_to_file(QString filename)
 
 void Saagia_controller::fetch_forecast()
 {
-    model_->fetch_forecast(data_type);
+    model_->fetch_forecast(data_type_);
 }
 
 void Saagia_controller::get_average_temp(int month, int year)
