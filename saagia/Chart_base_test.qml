@@ -144,6 +144,7 @@ Rectangle {
 
     function parseReceivedData(value, start_time, type) {
 
+        console.log(value, start_time)
         // Before parsing: "2021-01-01T01:00:00+0000"
         var parsed_time = start_time.split('T');
 

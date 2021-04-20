@@ -205,7 +205,7 @@ void Saagia_controller::erase_chart_and_data()
 
 void Saagia_controller::save_to_file(QString filename)
 {
-    qDebug() << "Sending to model";
+
     model_->save_data(filename);
 }
 

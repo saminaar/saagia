@@ -445,6 +445,10 @@ void Saagia_model::set_visible_date(QString stime, QString etime,
             year + ", " + shours + " <b>-</b> " + eday + "." + emonth + "." +
             eyear + ", " + ehours;
 
+    if (stime == ""){
+        starting = "<b>Current timeframe: </b> <i>Showing 24 hour forecast(s)";
+    }
+
     if ( view_ != nullptr ) {
         view_->set_the_visible_date(starting);
     }

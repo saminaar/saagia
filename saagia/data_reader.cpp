@@ -154,7 +154,7 @@ void Data_reader::parseJson(QString content)
     foreach (const QJsonValue & value, jsonArray) {
 
         QJsonObject obj = value.toObject();
-        int kvalue = (obj["value"].toInt());
+        int kvalue = (obj["value"].toDouble());
 
         QString start_time = (obj["start_time"].toString());
         QString end_time = (obj["end_time"].toString());
