@@ -138,9 +138,9 @@ void Saagia_model::set_chart_data()
     // Function for changing the displayed chart data
     view_->clear_chart_data();
 
-    std::map<int, std::map<Time, int>>::iterator it;
+    std::map<int, std::map<QString, int>>::iterator it;
 
-    for ( std::pair<int, std::map<Time, int>> energy_type :
+    for ( std::pair<int, std::map<QString, int>> energy_type :
          data_structures_->get_energy_structure() ) {
          view_->add_chart_line(energy_type.first);
 
@@ -158,7 +158,7 @@ void Saagia_model::set_data_type(int type)
     data_reader_->set_data_type(type);
 }
 
-void Saagia_model::set_new_data_content(int value, Time date, int type)
+void Saagia_model::set_new_data_content(int value, QString date, int type)
 {
     if ( view_ != nullptr ) {
         view_->setChartData(value, date, type);

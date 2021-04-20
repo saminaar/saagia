@@ -6,10 +6,10 @@ Data_calculations::Data_calculations(std::shared_ptr<Data_structures> data_struc
 }
 
 std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
-{
+{/*
    std::vector<float> average_temps = {};
-   std::map<Time, weather_data> data = data_structures_->get_weather_data();
-   std::map<Time, weather_data>::iterator iter = data.begin();
+   std::map<QString, weather_data> data = data_structures_->get_weather_data();
+   std::map<QString, weather_data>::iterator iter = data.begin();
    float sum_of_average_temps = 0;
    float sum_of_min_temps = 0;
    float sum_of_max_temps = 0;
@@ -34,16 +34,16 @@ std::vector<float> Data_calculations::average_temp_of_month(int month, int year)
    float av_max_temp = sum_of_max_temps / i;
    average_temps.push_back(av_max_temp);
 
-   return average_temps;
+   return average_temps;*/
 }
 
 float Data_calculations::percentage_of_all_energy_prod(int energy_type)
 {
     // Finding the newest datapoint of total energy production and
     // corresponding value
-    std::map<Time, int> total_prod = data_structures_->get_data_type(2);
-    std::map<Time, int>::iterator iter = total_prod.begin();
-    Time total_prod_latest_time = iter->first;
+    std::map<QString, int> total_prod = data_structures_->get_data_type(2);
+    std::map<QString, int>::iterator iter = total_prod.begin();
+    QString total_prod_latest_time = iter->first;
     int total_prod_value = iter->second;
     iter++;
     while (iter != total_prod.end()) {
@@ -56,9 +56,9 @@ float Data_calculations::percentage_of_all_energy_prod(int energy_type)
 
     // Finding the newest datapoint of chosen energy type production and
     // corresponding value
-    std::map<Time, int> energy_type_prod = data_structures_->get_data_type(energy_type);
-    std::map<Time, int>::iterator iter2 = energy_type_prod.begin();
-    Time latest_time = iter2->first;
+    std::map<QString, int> energy_type_prod = data_structures_->get_data_type(energy_type);
+    std::map<QString, int>::iterator iter2 = energy_type_prod.begin();
+    QString latest_time = iter2->first;
     int value = iter2->second;
     iter2++;
     while (iter2 != energy_type_prod.end()) {

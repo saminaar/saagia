@@ -29,5 +29,6 @@
         <file>images/calendar.png</file>
         <file>images/plug.png</file>
         <file>Forecast_radio_buttons.qml</file>
+        <file>images/draw_chart.png</file>
     </qresource>
 </RCC>

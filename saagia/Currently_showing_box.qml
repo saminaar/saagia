@@ -12,12 +12,11 @@ Rectangle {
     Button {
 
         id: button
-        anchors.right: parent.right
-        anchors.rightMargin: 13
-        anchors.left: parent.left
-        anchors.leftMargin: parent.width - 50
+        anchors.right: button_2.left
+        anchors.rightMargin: 5
         y: 25
         anchors.verticalCenter: parent.verticalCenter
+
 
         background: Rectangle {
 
@@ -30,6 +29,8 @@ Rectangle {
 
             }
 
+
+
         Image {
 
                 id: button_image
@@ -37,7 +38,7 @@ Rectangle {
                 height: 20
                 anchors.centerIn: parent
                 fillMode: Image.Stretch
-                source: "qrc:/images/save_icon"
+                source: "qrc:/images/draw_chart"
 
         }
 
@@ -93,6 +94,101 @@ Rectangle {
                 else
                   button.state="";
             }
+
+            onClicked: saagia_controller.save_chart_image()
+
+
+        }
+
+
+
+    }
+
+
+    Button {
+
+        id: button_2
+        y: 25
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+
+        background: Rectangle {
+
+                id: button_bg_2
+                color: "#090426"
+                implicitWidth: 35
+                implicitHeight: 35
+                border.width: 1
+                border.color: "#fff"
+
+            }
+
+        Image {
+
+                id: button_image_2
+                width: 20
+                height: 20
+                anchors.centerIn: parent
+                fillMode: Image.Stretch
+                source: "qrc:/images/clear"
+
+        }
+
+        hoverEnabled: true
+
+        ToolTip.delay: 500
+        ToolTip.timeout: 5000
+        ToolTip.visible: hovered
+        ToolTip.text: qsTr("Erase the chart")
+
+        states: [
+            State {
+                name: "Hovering"
+                PropertyChanges {
+                    target: button_bg_2
+                    color: "#252145"
+                }
+            },
+            State {
+                name: "Pressed"
+                PropertyChanges {
+                    target: button_bg_2
+                    color: "orange"
+                }
+            }
+        ]
+
+        //define transmission for the states
+        transitions: [
+            Transition {
+                from: ""; to: "Hovering"
+                ColorAnimation { duration: 10 }
+            },
+            Transition {
+                from: "*"; to: "Pressed"
+                ColorAnimation { duration: 10 }
+            }
+        ]
+
+        //Mouse area to react on click events
+        MouseArea {
+
+            anchors.fill: button_bg_2
+            hoverEnabled: true
+
+            onEntered: { button_2.state='Hovering'}
+            onExited: { button_2.state=''}
+
+            onPressed: { button_2.state="Pressed" }
+
+            onReleased: {
+                if (containsMouse)
+                  button_2.state="Hovering";
+                else
+                  button_2.state="";
+            }
+
 
             onClicked: saagia_controller.save_chart_image()
 

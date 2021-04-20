@@ -22,5 +22,7 @@
         <file>images/plug.png</file>
         <file>images/celsius.png</file>
         <file>images/wind_speed.png</file>
+        <file>images/draw_chart.png</file>
+        <file>images/clear.png</file>
     </qresource>
 </RCC>

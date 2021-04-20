@@ -118,12 +118,13 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 
 QString Data_reader::parsedData(int energy_type)
 {
-    std::map<int, std::map<Time, int>> data = data_structures_->get_energy_structure();
-    std::map<int, std::map<Time, int>>::iterator iter = data.find(energy_type);
+    /*
+    std::map<int, std::map<QString, int>> data = data_structures_->get_energy_structure();
+    std::map<int, std::map<QString, int>>::iterator iter = data.find(energy_type);
     QString parsed;
     QJsonArray arr;
     parsed.append(QString::number(data_type_) + "\n");
-    std::map<Time, int>::iterator it = iter->second.begin();
+    std::map<QString, int>::iterator it = iter->second.begin();
     while ( it != iter->second.end() ) {
         QString year = QString::number(it->first.year);
         QString month;
@@ -171,11 +172,13 @@ QString Data_reader::parsedData(int energy_type)
     doc.setArray(arr);
     parsed.append(doc.toJson(QJsonDocument::Compact));
     qDebug() << parsed;
-    return parsed;
+    return parsed;*/
 }
 
 void Data_reader::parseJson(QString content)
 {
+    data_structures_->clear_data_structures();
+
     data_structures_->clear_data_structures();
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
@@ -184,23 +187,22 @@ void Data_reader::parseJson(QString content)
 
     QJsonArray jsonArray = jsonResponse.array();
 
-    foreach ( const QJsonValue & value, jsonArray ) {
+
+    foreach (const QJsonValue & value, jsonArray) {
 
         QJsonObject obj = value.toObject();
-        int kvalue = (obj["value"].toDouble());
+        int kvalue = (obj["value"].toInt());
 
         QString start_time = (obj["start_time"].toString());
+        QString end_time = (obj["end_time"].toString());
 
-        //QString end_time = (obj["end_time"].toString());
-        int year = start_time.mid(0, 4).toInt();
-        int month = start_time.mid(5, 2).toInt();
-        int day = start_time.mid(8, 2).toInt();
-        int hour = start_time.mid(11, 2).toInt();
-        int minute = start_time.mid(14, 2).toInt();
-
-        data_structures_->append_energy_data({year, month, day, hour, minute},
-                                             data_type_, kvalue);
+        //model_->save_to_map(start_time, kvalue);
+        data_structures_->append_energy_data(start_time, data_type_, kvalue);
     }
+    data_structures_->test_print();
+    //model_->set_chart_data();
+
+
 
     data_structures_->test_print();
 

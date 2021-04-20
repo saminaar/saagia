@@ -142,10 +142,10 @@ Rectangle {
         }
     }
 
-    function parseReceivedData(value, year, month, day, hours, mins, type) {
+    function parseReceivedData(value, start_time, type) {
 
         // Before parsing: "2021-01-01T01:00:00+0000"
-        /*var parsed_time = start_time.split('T');
+        var parsed_time = start_time.split('T');
 
         // Before parsing: "2021-01-01"
         var date = parsed_time[0].split('-')
@@ -161,7 +161,7 @@ Rectangle {
         var hours = time_hh_mm_ms[0]
         var mins = time_hh_mm_ms[1]
 
-        var ms = time_hh_mm_ms[2]*/
+        var ms = time_hh_mm_ms[2]
 
         // Create a new datetime for the X-axis
         var new_date = new Date(year, month, day, hours, mins)
@@ -201,8 +201,8 @@ Rectangle {
     Connections {
         target: saagia_view
 
-        function onSendChartData(value, year, month, day, hour, min, type) {
-            parseReceivedData(value, year, month, day, hour, min, type)
+        function onSendChartData(value, start_time, type) {
+            parseReceivedData(value, start_time, type)
         }
         function onClearChartData(type) {
             clear_previous_data(type)

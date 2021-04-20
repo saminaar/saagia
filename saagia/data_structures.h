@@ -79,7 +79,7 @@ public:
      * @param data_type: Which type of energy
      * @param value: the value of data
      */
-    void append_energy_data(Time start_time, int data_type, int value);
+    void append_energy_data(QString start_time, int data_type, int value);
 
     /**
      * @brief append_weather_data: Function for storing weather data
@@ -115,7 +115,7 @@ public:
      * @brief get_energy_structure: Returns all stored energy data
      * @return
      */
-    std::map<int, std::map<Time, int> > get_energy_structure();
+    std::map<int, std::map<QString, int> > get_energy_structure();
 
     /**
      * @brief get_weather_data: Returns all weather data
@@ -128,7 +128,7 @@ public:
      * @param type: wanted type of energy
      * @return
      */
-    std::map<Time, int> get_data_type(int type);
+    std::map<QString, int> get_data_type(int type);
 
     /**
      * @brief calc_time_diff: Calculates hour difference between
@@ -157,7 +157,7 @@ private:
     int hours_of_date(Time t);
 
     // Container for all energy data
-    std::map<int, std::map<Time, int>> energy_data_;
+    std::map<int, std::map<QString, int>> energy_data_;
 
     // Container for all weather data
     std::map<Time, weather_data> weather_data_;
