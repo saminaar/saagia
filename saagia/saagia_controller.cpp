@@ -37,12 +37,6 @@ void Saagia_controller::load_data()
     }
 }
 
-/**
- * @brief Saagia_controller::set_the_selected_date: Sets the start time or end
- * time to match the selected date
- * @param type: data type
- * @param date: date to be set
- */
 void Saagia_controller::set_the_selected_date(int type, QString date)
 {
     switch(type){
@@ -62,14 +56,6 @@ void Saagia_controller::set_the_selected_date(int type, QString date)
             break;
     }
 }
-
-/*
-void Saagia_controller::save_data(QString start_time, int data_type)
-{
-
-    model_->save_data(start_time, data_type);
-}
-*/
 
 /*
 Modulaarisuuden lisäämiseksi napeille tulisi tehdä
@@ -205,24 +191,17 @@ void Saagia_controller::erase_chart_and_data()
 
 void Saagia_controller::save_to_file(QString filename)
 {
-
     model_->save_data(filename);
 }
 
-/*
-void Saagia_controller::fetch_forecast()
+void Saagia_controller::load_from_file(QString file)
 {
-    model_->fetch_forecast(data_type_);
+    model_->load_from_file(file);
 }
-*/
 
 void Saagia_controller::get_average_temp(int month, int year)
 {
 
-}
-
-void Saagia_controller::load_from_file(QString file){
-    model_->load_from_file(file);
 }
 
 // NOTE: no nullptr checks for model_ at all here!

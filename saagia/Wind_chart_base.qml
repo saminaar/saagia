@@ -101,9 +101,10 @@ Rectangle {
 
     }
 
-    function parseReceivedData(start_time, cloudiness, max_temp, min_temp, temperature, wind_speed) {
+    function parseReceivedData(start_time, cloudiness, max_temp, min_temp,
+                               temperature, wind_speed) {
 
-        console.log(start_time, max_temp, min_temp, temperature)
+        //console.log(start_time, max_temp, min_temp, temperature)
         // Before parsing: "2021-01-01T01:00:00+0000"
         var parsed_time = start_time.split('T');
 
@@ -155,8 +156,10 @@ Rectangle {
     Connections {
         target: saagia_view
 
-        function onSendWeatherData(start_time, cloudiness, max_temp, min_temp, temperature, wind_speed) {
-            parseReceivedData(start_time, cloudiness, max_temp, min_temp, temperature, wind_speed)
+        function onSendWeatherData(start_time, cloudiness, max_temp, min_temp,
+                                   temperature, wind_speed) {
+            parseReceivedData(start_time, cloudiness, max_temp, min_temp,
+                              temperature, wind_speed)
         }
         function onClearWeatherChartData() {
             clear_previous_data()

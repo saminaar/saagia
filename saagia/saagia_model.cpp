@@ -15,17 +15,14 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 void Saagia_model::load_data(QString start_time, QString end_time, int variable,
                              QString place)
 {
-
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 9 || variable == 11) {
+    if ( variable == 9 || variable == 11 ) {
         data_reader_->requestUrl(url, "");
     }
 
     else {
-
         data_reader_->requestUrl(url, header_);
     }
-
 }
 
 QString Saagia_model::construct_url(QString start_time, QString end_time,
@@ -157,17 +154,14 @@ void Saagia_model::set_chart_data()
     // Weather data
     std::map<QString, weather_data> data = data_structures_->get_weather_data();
 
-    if (data.size() > 0){
+    if ( data.size() > 0 ){
         view_->add_weather_chart_line();
 
-        for ( std::pair<QString, weather_data> weather_time : data) {
+        for ( std::pair<QString, weather_data> weather_time : data ) {
 
             set_weather_data_content(weather_time.first, weather_time.second);
-
         }
     }
-
-
 }
 
 void Saagia_model::set_data_type(int type)
@@ -419,19 +413,6 @@ void Saagia_model::calc_percentage_of_energy_prod(int energy_type)
 void Saagia_model::save_data(QString filename)
 {
     database_handler_->save_data(filename, data_reader_->parsedData(data_type_));
-    // database_handler_->save_data(start_time, data_type);
-
-    /*
-    //view_->display_saved_data
-
-    print_data_ = "Tietojen tallennus onnistui";
-
-    if (view_ != nullptr)
-    {
-        view_->setPrintData(print_data_);
-        view_->setVisibility(energy_type_);
-    }
-    */
 }
 
 void Saagia_model::save_graph_as_image()
@@ -443,13 +424,11 @@ void Saagia_model::erase_chart_and_data()
 {
     data_structures_->clear_data_structures();
     set_chart_data();
-
 }
 
 void Saagia_model::set_visible_date(QString stime, QString etime,
                                     QString shours, QString ehours)
 {
-
     QString start_date = stime.mid(0, stime.length()-14);
     QString year = start_date.mid(0,4);
     QString month = start_date.mid(5,2);
@@ -470,7 +449,7 @@ void Saagia_model::set_visible_date(QString stime, QString etime,
             year + ", " + shours + " <b>-</b> " + eday + "." + emonth + "." +
             eyear + ", " + ehours;
 
-    if (stime == ""){
+    if ( stime == "" ) {
         starting = "<b>Current timeframe: </b> <i>Showing 24 hour forecast(s)";
     }
 

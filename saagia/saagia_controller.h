@@ -43,9 +43,14 @@ public:
      */
     Q_INVOKABLE void load_data();
 
-    //Q_INVOKABLE void save_data(QString start_time, int data_type);
-
+    /**
+     * @brief Saagia_controller::set_the_selected_date: Sets the start time or end
+     * time to match the selected date
+     * @param type: data type
+     * @param date: date to be set
+     */
     Q_INVOKABLE void set_the_selected_date(int type, QString date);
+
     Q_INVOKABLE void dataset_1_selected();
     Q_INVOKABLE void dataset_2_selected();
     Q_INVOKABLE void dataset_3_selected();
@@ -63,10 +68,8 @@ public:
     Q_INVOKABLE void set_the_selected_time(int type, QString time);
     Q_INVOKABLE void save_chart_image();
     Q_INVOKABLE void erase_chart_and_data();
-    Q_INVOKABLE void load_from_file(QString file);
     Q_INVOKABLE void save_to_file(QString filename);
-
-    //Q_INVOKABLE void fetch_forecast();
+    Q_INVOKABLE void load_from_file(QString file);
 
     Q_INVOKABLE void get_average_temp(int month, int year);
 
