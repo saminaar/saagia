@@ -8,19 +8,12 @@ Rectangle {
 
     color: "transparent"
 
-        Flickable {
-            id: flickable
-            anchors.fill: parent
-            TextArea.flickable: TextArea {
+    Text {
                 text: saagia_view.print_data
                 color: "#fff"
-                wrapMode: TextArea.Wrap
-                placeholderTextColor: "#ffffff"
                 font.family: "consolas"
                 font.pixelSize: 13
-            }
-            ScrollBar.vertical: ScrollBar {
-                width: 40
-            }
+
         }
-        }
+}
+

@@ -118,7 +118,7 @@ void Data_reader::requestError(QNetworkReply::NetworkError errorCode)
 
 QString Data_reader::parsedData(int energy_type)
 {
-    /*
+
     std::map<int, std::map<QString, int>> data = data_structures_->get_energy_structure();
     std::map<int, std::map<QString, int>>::iterator iter = data.find(energy_type);
     QString parsed;
@@ -126,43 +126,9 @@ QString Data_reader::parsedData(int energy_type)
     parsed.append(QString::number(data_type_) + "\n");
     std::map<QString, int>::iterator it = iter->second.begin();
     while ( it != iter->second.end() ) {
-        QString year = QString::number(it->first.year);
-        QString month;
-        if ( it->first.month < 10 ) {
-            month = "0" + QString::number(it->first.month);
-        }
-        else {
-            month = QString::number(it->first.month);
-        }
 
-        QString day;
-        if ( it->first.day < 10 ) {
-            day = "0" + QString::number(it->first.day);
-        }
-        else {
-            day = QString::number(it->first.day);
-        }
-
-        QString hour;
-        if ( it->first.hour < 10 ) {
-            hour = "0" + QString::number(it->first.hour);
-        }
-        else {
-            hour = QString::number(it->first.hour);
-        }
-
-        QString minute;
-        if ( it->first.minute < 10 ) {
-            minute = "0" + QString::number(it->first.minute);
-        }
-        else {
-            minute = QString::number(it->first.minute);
-        }
-
-        QString date_and_time = year + "-" + month + "-" + day + "T" + hour +
-                ":" + minute + ":00Z";
         QJsonObject obj;
-        obj.insert("start_time", date_and_time);
+        obj.insert("start_time", it->first);
         obj.insert("value", it->second);
         arr.push_back(obj);
         it++;
@@ -172,7 +138,7 @@ QString Data_reader::parsedData(int energy_type)
     doc.setArray(arr);
     parsed.append(doc.toJson(QJsonDocument::Compact));
     qDebug() << parsed;
-    return parsed;*/
+    return parsed;
 }
 
 void Data_reader::parseJson(QString content)

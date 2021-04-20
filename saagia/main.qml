@@ -7,7 +7,7 @@ import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
     width: 1130
-    height: 900
+    height: 850
 
     maximumHeight: height
     maximumWidth: width
@@ -57,17 +57,6 @@ ApplicationWindow {
                     opacity: 0.9
                     color: "#1d1b29"
 
-                    Text {
-
-                        text: qsTr("TITLE for the chart below")
-                        color: "white"
-                        anchors.left: parent.left
-                        anchors.leftMargin: 10
-                        anchors.bottomMargin: 10
-                        anchors.bottom: chart_base_test_real.top
-
-                    }
-
                     Chart_base_test {
                         id: chart_base_test_real
                         width: parent.width - 20
@@ -78,7 +67,7 @@ ApplicationWindow {
 
                         anchors.rightMargin: 10
                         anchors.leftMargin: 10
-                        anchors.topMargin: 50
+                        anchors.topMargin: 10
                     }
 
                     Energy_type_button_row{
@@ -117,21 +106,6 @@ ApplicationWindow {
 
                 }
 
-
-                Text {
-
-                    text: qsTr("TITLE for the chart below")
-                    color: "white"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-                    anchors.bottomMargin: 10
-                    anchors.bottom: wind_background_1.top
-                    font.family: "Arial"
-                    font.bold: false
-
-
-                }
-
                 Rectangle {
 
                     id: wind_background_1
@@ -144,7 +118,7 @@ ApplicationWindow {
                     anchors.top: parent.top
                     anchors.leftMargin: 10
                     anchors.rightMargin: 10
-                    anchors.topMargin: 50
+                    anchors.topMargin: 10
 
 
 
@@ -160,18 +134,6 @@ ApplicationWindow {
 
                 }
 
-                Text {
-
-                    text: qsTr("TITLE for the chart below")
-                    color: "white"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-                    anchors.bottomMargin: 10
-                    anchors.bottom: wind_background_2.top
-
-
-                }
-
                 Rectangle {
 
                     id: wind_background_2
@@ -183,7 +145,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
                     anchors.top: wind_background_1.bottom
-                    anchors.topMargin: 50
+                    anchors.topMargin: 10
                     anchors.leftMargin: 10
                     anchors.rightMargin: 10
                     anchors.bottomMargin: 10
@@ -264,7 +226,8 @@ ApplicationWindow {
 
     }
 
-    Rectangle {
+        Rectangle {
+            id: rectangle
 
         height: 25
         width: parent.width
@@ -276,9 +239,12 @@ ApplicationWindow {
 
         Output_area {
             id: output_area
-            width: parent.width
-            height: parent.width
-
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 10
+            anchors.topMargin: 5
         }
 
 

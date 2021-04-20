@@ -47,7 +47,7 @@ Rectangle {
         ToolTip.delay: 500
         ToolTip.timeout: 5000
         ToolTip.visible: hovered
-        ToolTip.text: qsTr("Save the current chart")
+        ToolTip.text: qsTr("Draw the current data")
 
         states: [
             State {
@@ -140,7 +140,7 @@ Rectangle {
         ToolTip.delay: 500
         ToolTip.timeout: 5000
         ToolTip.visible: hovered
-        ToolTip.text: qsTr("Erase the chart")
+        ToolTip.text: qsTr("Erase the current data")
 
         states: [
             State {
