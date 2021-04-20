@@ -121,6 +121,11 @@ public:
     void save_graph_as_image();
 
     /**
+     * @brief erase_chart_and_data
+     */
+    void erase_chart_and_data();
+
+    /**
      * @brief set_visible_date
      * @param stime
      * @param etime

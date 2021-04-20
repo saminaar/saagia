@@ -177,9 +177,6 @@ QString Data_reader::parsedData(int energy_type)
 
 void Data_reader::parseJson(QString content)
 {
-    data_structures_->clear_data_structures();
-
-    data_structures_->clear_data_structures();
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(content.toUtf8());
 

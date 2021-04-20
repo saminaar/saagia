@@ -411,8 +411,14 @@ void Saagia_model::save_data(QString filename)
 
 void Saagia_model::save_graph_as_image()
 {
-    qDebug() << "Save graph as image.. to be implemented";
     set_chart_data();
+}
+
+void Saagia_model::erase_chart_and_data()
+{
+    data_structures_->clear_data_structures();
+    set_chart_data();
+
 }
 
 void Saagia_model::set_visible_date(QString stime, QString etime,

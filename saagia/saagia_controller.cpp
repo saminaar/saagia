@@ -198,6 +198,11 @@ void Saagia_controller::save_chart_image()
     model_->save_graph_as_image();
 }
 
+void Saagia_controller::erase_chart_and_data()
+{
+    model_->erase_chart_and_data();
+}
+
 void Saagia_controller::save_to_file(QString filename)
 {
     qDebug() << "Sending to model";

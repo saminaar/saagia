@@ -62,6 +62,7 @@ public:
     Q_INVOKABLE void set_the_visible_date();
     Q_INVOKABLE void set_the_selected_time(int type, QString time);
     Q_INVOKABLE void save_chart_image();
+    Q_INVOKABLE void erase_chart_and_data();
     Q_INVOKABLE void load_from_file(QString file);
     Q_INVOKABLE void save_to_file(QString filename);
 

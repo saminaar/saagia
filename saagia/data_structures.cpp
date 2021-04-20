@@ -66,7 +66,7 @@ void Data_structures::test_print()
 
 void Data_structures::clear_data_structures()
 {
-    //energy_data_.clear();
+    energy_data_.clear();
     //data_2.clear();
 }
 

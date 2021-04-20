@@ -190,7 +190,7 @@ Rectangle {
             }
 
 
-            onClicked: saagia_controller.save_chart_image()
+            onClicked: saagia_controller.erase_chart_and_data()
 
 
         }
