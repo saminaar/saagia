@@ -93,6 +93,8 @@ public:
      */
     void set_new_data_content(int value, QString date, int type);
 
+    void set_weather_data_content(QString date, weather_data data);
+
     /**
      * @brief energy_form_1_selected
      */

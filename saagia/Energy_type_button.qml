@@ -5,7 +5,7 @@ Rectangle {
 
     width: 40
     height: 40
-    color: "#090426"
+    color: "#2d384e"
     border.width: 2
     border.color: "grey"
     property string buttonIcon: "default"
@@ -117,7 +117,7 @@ Rectangle {
     states: [
         State {
             name: "Active"
-            PropertyChanges { target: energy_button; color: "orange" }
+            PropertyChanges { target: energy_button; color: "#131720" }
 
         }
     ]

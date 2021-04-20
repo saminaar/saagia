@@ -22,7 +22,7 @@ void Saagia_controller::set_data_type(int variable)
 
 void Saagia_controller::load_data()
 {
-    if ( data_type_ < 6 ) {
+    if ( (data_type_ < 6) or (data_type_ == 11)) {
         get_average_temp(3, 2021);
         QString formatted_start_hours = start_hours_min_.replace("\%3A", ":");
         QString formatted_end_hours = end_hours_min_.replace("\%3A", ":");

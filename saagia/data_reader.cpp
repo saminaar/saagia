@@ -36,7 +36,6 @@ QString Data_reader::getCurrentContent() const
 void Data_reader::requestUrl(const QString &url, const QString &header)
 {
 
-    qDebug() << "<> <> <> <>";
     qDebug() << "url: " << url << "header: " << header;
 
     if ( url == "" ) {
@@ -190,6 +189,7 @@ void Data_reader::parseXML(QString content)
         // finally "ParameterValue" in this order for one specific point of data
         if ( reader.name() == "Time" ) {
             QString next_time = reader.readElementText();
+
             //First time point is handled separately
             if ( time == "" ) {
                 time = next_time;
@@ -198,13 +198,9 @@ void Data_reader::parseXML(QString content)
             // is transferred and saved
             if ( next_time != time ) {
                 //
-                int year = time.mid(0, 4).toInt();
-                int month = time.mid(5, 2).toInt();
-                int day = time.mid(8, 2).toInt();
-                int hour = time.mid(11, 2).toInt();
-                int minute = time.mid(14, 2).toInt();
+                qDebug() << time;
                 data_structures_->append_weather_data(
-                            {year, month, day, hour, minute},
+                            time,
                             {temp, w_speed, cloudiness, max_temp, min_temp});
                 time = next_time;
                 temp = NO_VALUE;

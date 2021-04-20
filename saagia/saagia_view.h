@@ -44,6 +44,8 @@ public:
 
     void setChartData(int value, QString date, int type);
 
+    void setWeatherChartData(QString date, weather_data data);
+
     void set_the_visible_date(const QString& stime);
 
     void set_the_type_data(const QString& energy_type);
@@ -60,6 +62,8 @@ public:
 
     void add_chart_line(int type);
 
+    void add_weather_chart_line();
+
 signals:
 
     void printDataChanged();
@@ -73,10 +77,11 @@ signals:
     void sendChartData(int value, QString date, int type);
 
     void clearChartData();
+    void clearWeatherChartData();
     void addChartLine(int type);
 
-    void sendWeatherData(int value, int year, int month, int day, int hour,
-                         int minute, int type);
+    void sendWeatherData(QString date, float cloudines, float max_temp, float min_temp, float temperature, float wind_speed);
+    void addWeatherChartLine();
 
 private:
 

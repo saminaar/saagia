@@ -15,15 +15,17 @@ Saagia_model::Saagia_model(std::shared_ptr<Saagia_view> view) :
 void Saagia_model::load_data(QString start_time, QString end_time, int variable,
                              QString place)
 {
+
     QString url = construct_url(start_time, end_time, variable, place);
-    if (variable == 9 || variable == 10 || variable == 11) {
+    if (variable == 9 || variable == 11) {
         data_reader_->requestUrl(url, "");
     }
 
     else {
+
         data_reader_->requestUrl(url, header_);
     }
-    //set_chart_data();
+
 }
 
 QString Saagia_model::construct_url(QString start_time, QString end_time,
@@ -102,7 +104,8 @@ QString Saagia_model::construct_url(QString start_time, QString end_time,
             break;
 
         case 9 :
-            // Any old weather data (temperature, wind, cloudiness)
+        // Fetch data to calculate average minimum, maximum and average
+        // temperature of a month
             web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
             url = web_address + "&place=" + place + "&starttime=" + start_time +
                     "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
@@ -118,12 +121,12 @@ QString Saagia_model::construct_url(QString start_time, QString end_time,
             break;
 
         case 11 :
-            // Fetch data to calculate average minimum, maximum and average
-            // temperature of a month
-            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::daily::simple";
-            url = web_address + "&place=" + place_ + "&starttime=" + start_time
-                    + "&endtime=" + end_time + "&parameters=tday,tmin,tmax";
 
+            // Any old weather data (temperature, wind, cloudiness)
+            web_address = "https://opendata.fmi.fi/wfs?request=getFeature&version=2.0.0&storedquery_id=fmi::observations::weather::simple";
+            url = web_address + "&place=" + place + "&starttime=" + start_time +
+                    "&endtime=" + end_time + "&parameters=t2m,ws_10min,n_man";
+            data_info = "Weather data from past";
             break;
     }
 
@@ -150,6 +153,21 @@ void Saagia_model::set_chart_data()
                                  energy_type.first);
         }
     }
+
+    // Weather data
+    std::map<QString, weather_data> data = data_structures_->get_weather_data();
+
+    if (data.size() > 0){
+        view_->add_weather_chart_line();
+
+        for ( std::pair<QString, weather_data> weather_time : data) {
+
+            set_weather_data_content(weather_time.first, weather_time.second);
+
+        }
+    }
+
+
 }
 
 void Saagia_model::set_data_type(int type)
@@ -162,6 +180,13 @@ void Saagia_model::set_new_data_content(int value, QString date, int type)
 {
     if ( view_ != nullptr ) {
         view_->setChartData(value, date, type);
+    }
+}
+
+void Saagia_model::set_weather_data_content(QString date, weather_data data)
+{
+    if ( view_ != nullptr ) {
+        view_->setWeatherChartData(date, data);
     }
 }
 

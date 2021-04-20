@@ -31,24 +31,19 @@ void Data_structures::append_energy_data(QString start_time, int data_type, int 
 }
 
 
-void Data_structures::append_weather_data(Time time, weather_data wd)
+void Data_structures::append_weather_data(QString time, weather_data wd)
 {
-    std::map<Time, weather_data>::iterator iter = weather_data_.begin();
+    std::map<QString, weather_data>::iterator iter = weather_data_.find(time);
     // If data exists already, its not re saved
-    while ( iter != weather_data_.end() ) {
-        if ( iter->first == time ) {
-            qDebug() << "Time already exists in datastructure. Tried: "
-                    << time.month << time.day << time.hour << time.minute;
-            qDebug() << "Existing time: " << iter->first.month
-                     << iter->first.day << iter->first.hour << iter->first.minute;
-            return;
-        }
-        iter++;
+    if ( iter != weather_data_.end() ) {
+
     }
-    weather_data_[time] = wd;
-    qDebug() << "Tallennettu structureen: " << time.year << time.month
-             << time.day << time.hour << time.minute << " : "
-             << wd.temperature << "...";
+
+    else{
+
+        weather_data_[time] = wd;
+    }
+
 }
 
 void Data_structures::test_print()
@@ -67,7 +62,8 @@ void Data_structures::test_print()
 void Data_structures::clear_data_structures()
 {
     energy_data_.clear();
-    //data_2.clear();
+    weather_data_.clear();
+
 }
 
 void Data_structures::set_municipalities(std::vector<std::string> new_m){
@@ -88,7 +84,7 @@ std::map<QString, int> Data_structures::get_data_type(int type)
     return energy_data_[type];
 }
 
-std::map<Time, weather_data> Data_structures::get_weather_data()
+std::map<QString, weather_data> Data_structures::get_weather_data()
 {
     return weather_data_;
 }

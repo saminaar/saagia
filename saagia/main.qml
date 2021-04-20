@@ -106,19 +106,34 @@ ApplicationWindow {
 
                 }
 
+                Text {
+
+                    text: qsTr("<b>Temperature</b>")
+                    color: "white"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+                    anchors.bottomMargin: 10
+                    anchors.bottom: wind_background_1.top
+                    font.family: "Arial"
+                    font.bold: false
+
+
+                }
+
+
                 Rectangle {
 
                     id: wind_background_1
 
                     width: 400
-                    height: 250
+                    height: 260
                     color: "#060317"
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.leftMargin: 10
                     anchors.rightMargin: 10
-                    anchors.topMargin: 10
+                    anchors.topMargin: 40
 
 
 
@@ -145,7 +160,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
                     anchors.top: wind_background_1.bottom
-                    anchors.topMargin: 10
+                    anchors.topMargin: 20
                     anchors.leftMargin: 10
                     anchors.rightMargin: 10
                     anchors.bottomMargin: 10

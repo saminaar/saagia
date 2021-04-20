@@ -37,6 +37,13 @@ void Saagia_view::setChartData(int value, QString date, int type)
     emit sendChartData(value, date, type);
 }
 
+void Saagia_view::setWeatherChartData(QString date, weather_data data)
+{
+    emit sendWeatherData(date, data.cloudines, data.max_temp, data.min_temp, data.temperature, data.wind_speed);
+}
+
+
+
 void Saagia_view::set_the_visible_date(const QString &stime)
 {
     active_date_ = stime;
@@ -73,9 +80,15 @@ QString Saagia_view::getActiveDate() const
 void Saagia_view::clear_chart_data()
 {
     emit clearChartData();
+    emit clearWeatherChartData();
 }
 
 void Saagia_view::add_chart_line(int type)
 {
     emit addChartLine(type);
+}
+
+void Saagia_view::add_weather_chart_line()
+{
+    emit addWeatherChartLine();
 }

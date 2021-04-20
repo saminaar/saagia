@@ -86,7 +86,7 @@ public:
      * @param time: Point of time
      * @param wd: The weather data of a time point
      */
-    void append_weather_data(Time time, weather_data wd);
+    void append_weather_data(QString time, weather_data wd);
 
     /**
      * @brief test_print: Test function used in development to check what
@@ -121,7 +121,7 @@ public:
      * @brief get_weather_data: Returns all weather data
      * @return
      */
-    std::map<Time, weather_data> get_weather_data();
+    std::map<QString, weather_data> get_weather_data();
 
     /**
      * @brief get_data_type: Returns a specific type of energy data
@@ -160,7 +160,7 @@ private:
     std::map<int, std::map<QString, int>> energy_data_;
 
     // Container for all weather data
-    std::map<Time, weather_data> weather_data_;
+    std::map<QString, weather_data> weather_data_;
 
     // Vector of municipalities
     std::vector<std::string> municipalities_;
