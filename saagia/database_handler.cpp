@@ -52,8 +52,8 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
         "/"; // MacOS requires this
     #endif
 
-    QString file_extension = ".txt";
-    QString path = path_start + savefile + file_extension;
+    //QString file_extension = ".txt";
+    QString path = path_start + savefile;
 
     qDebug() << path;
 
