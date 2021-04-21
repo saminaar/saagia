@@ -27,6 +27,7 @@ class Data_calculations
 
 public:
 
+    // Pointer to Data_structures object for related operations
     Data_calculations(std::shared_ptr<Data_structures> data_structures);
 
     /**

@@ -50,7 +50,9 @@ public:
      * @param date: date to be set
      */
     Q_INVOKABLE void set_the_selected_date(int type, QString date);
-
+    /**
+     * @brief dataset_1_selected: changes the state of selection to the stated dataset
+     */
     Q_INVOKABLE void dataset_1_selected();
     Q_INVOKABLE void dataset_2_selected();
     Q_INVOKABLE void dataset_3_selected();
@@ -61,20 +63,52 @@ public:
     Q_INVOKABLE void dataset_8_selected();
     Q_INVOKABLE void dataset_9_selected();
     Q_INVOKABLE void dataset_10_selected();
+    /**
+     * @brief reset_input: resets the input of the settings
+     */
     Q_INVOKABLE void reset_input();
+    /**
+     * @brief check_input: checks if the settings are right for the data fetch
+     * @return boolean value of input correctness
+     */
     Q_INVOKABLE bool check_input();
+    /**
+     * @brief check_place
+     * @param qtext
+     */
     Q_INVOKABLE void check_place(QString qtext);
+    /**
+     * @brief set_the_visible_date: sets the date shown in UI based on the data
+     */
     Q_INVOKABLE void set_the_visible_date();
+    /**
+     * @brief set_the_selected_time: set the time to the UI based on the data
+     * @param type: type of current data
+     * @param time: time of the data
+     */
     Q_INVOKABLE void set_the_selected_time(int type, QString time);
     Q_INVOKABLE void save_chart_image();
     Q_INVOKABLE void erase_chart_and_data();
+    /**
+     * @brief save_to_file: saves the data to file
+     * @param filename: given filename
+     */
     Q_INVOKABLE void save_to_file(QString filename);
+    /**
+     * @brief load_from_file: loads data from a given file
+     * @param file: name of the file
+     */
     Q_INVOKABLE void load_from_file(QString file);
-
+    /**
+     * @brief get_average_temp: calculates the average temperature of a given year and month
+     * @param month: given month
+     * @param year: given year
+     */
     Q_INVOKABLE void get_average_temp(int month, int year);
 
 private:
 
+    // Pointer to Saagia_model object for related operations
     std::shared_ptr<Saagia_model> model_;
 
     QString start_time_;
