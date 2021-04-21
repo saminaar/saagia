@@ -48,18 +48,6 @@ public:
     //bool save_data(QString start_time, int data_type) const;
 
     /**
-     * @brief read
-     * @param json
-     */
-    void read(const QJsonObject &json);
-
-    /**
-     * @brief write
-     * @param json
-     */
-    void write(QJsonObject &json) const;
-
-    /**
      * @brief read_municipalities
      * @return
      */

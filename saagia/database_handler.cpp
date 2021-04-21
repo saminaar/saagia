@@ -71,16 +71,6 @@ bool Database_handler::save_data(QString savefile, QString parsedData) const
     return true;
 }
 
-void Database_handler::read(const QJsonObject &json)
-{
-    // is this needed?
-}
-
-void Database_handler::write(QJsonObject &json) const
-{
-    // is this needed?
-}
-
 std::vector<std::string> Database_handler::read_municipalities(){
 
     QString data;
