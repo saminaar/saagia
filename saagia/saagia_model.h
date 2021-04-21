@@ -96,7 +96,7 @@ public:
     void set_weather_data_content(QString date, weather_data data);
 
     /**
-     * @brief energy_form_1_selected
+     * @brief dataset_1_selected
      */
     void dataset_1_selected();
     void dataset_2_selected();

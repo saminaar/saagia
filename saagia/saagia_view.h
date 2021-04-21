@@ -88,6 +88,7 @@ private:
     // with the push MVC, the component that communicates the values to the QML
     // side must have the actual values (because the view has no information
     // about the model), so they are also stored here
+
     QString print_data_;
     QString chart_data_;
     QString active_date_;

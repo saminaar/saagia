@@ -57,6 +57,7 @@ public:
 
 private:
 
+    // Pointer to Data_structures object for related operations
     std::shared_ptr<Data_structures> data_structures_;
 
 };

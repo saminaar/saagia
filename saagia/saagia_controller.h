@@ -75,6 +75,7 @@ public:
 
 private:
 
+    // Pointer to Saagia_model object for related operations
     std::shared_ptr<Saagia_model> model_;
 
     QString start_time_;
