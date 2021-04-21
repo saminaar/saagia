@@ -44,23 +44,21 @@ DISTFILES += \
     Calendar_model.qml \
     Chart_base_beta.qml \
     Chart_base_test.qml \
-    Checkbox_column.qml \
     Currently_showing_box.qml \
     Date_input.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Fetch_data_button.qml \
     File_dialog.qml \
-    Forecast_radio_buttons.qml \
     Load_data_button.qml \
     New_data_load_popup.qml \
     Preferences.qml \
     Preferences_button.qml \
     Program_status_bar.qml \
+    Radio_buttons.qml \
     Save_data_button.qml \
     Save_file_dialog.qml \
     Save_file_popup.qml \
-    Test_file.qml \
     Text_input_bar.qml \
     Time_input.qml \
     Title_text.qml \

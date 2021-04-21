@@ -60,6 +60,7 @@ Rectangle {
         }
 
         onToggled: saagia_controller.set_data_type(2)
+
     }
 
     RadioButton {
@@ -125,6 +126,7 @@ Rectangle {
                 color: button_3.down ? "#ff9933" : "#e67300"
                 visible: button_3.checked
             }
+
         }
 
         contentItem: Text {

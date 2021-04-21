@@ -83,7 +83,7 @@ Popup {
             x: 10
             y: 30
 
-        Test_file {
+        Radio_buttons {
 
             id: radio_buttons
             x: 5
