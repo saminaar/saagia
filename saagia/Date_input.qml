@@ -60,15 +60,6 @@ Rectangle {
                         console.log("Clicked")
                         console.log(date)
 
-                        // Send the selected date to controller->model
-                        // Send the time selected separately to controller->model
-                        // Combine the two in model and send it forward
-                        // Profit???
-
-                        //console.log(Qt.formatDateTime(date, "dd/MM/yyyy hh:mm:ss"))
-                        //const json = JSON.stringify(date);
-
-                        //Send forward 2021-02-11 form
                         saagia_controller.set_the_selected_date(0, Qt.formatDateTime(date, "yyyy-MM-dd"))
                         calendarobject_2.close()
 

@@ -20,7 +20,6 @@ Rectangle {
 
         legend.visible: false
         theme: ChartView.ChartThemeDark
-        //animationOptions: ChartView.GridAxisAnimations
 
         margins.top: 0
         margins.bottom: 0
@@ -47,19 +46,6 @@ Rectangle {
             max: 10
         }
 
-        // The Y-axis of the chart
-        /*ValueAxis {
-            id: axisYRight
-            gridVisible: true
-
-            // Determines the visible grid's ticks
-            tickCount: 7
-
-            // Set minimum and maximum from the start
-            min: 0
-            max: 10
-        }*/
-
         // The X-axis of the chart
          DateTimeAxis {
             id: axisX
@@ -67,9 +53,6 @@ Rectangle {
             format: "dd.MM hh:mm" //"dd-MM
 
             property real range: 100
-
-           // min: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
-            //max: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
 
             min: new Date(2021, 0, 1, 0, 0, 0)
             max: new Date(2021, 0, 1, 12, 30, 30)

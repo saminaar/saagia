@@ -93,7 +93,7 @@ Popup {
 
         }
 
-        Test_file {
+        Radio_buttons {
 
             x: 10
             y: 40

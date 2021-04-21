@@ -57,8 +57,8 @@ ApplicationWindow {
                     opacity: 0.9
                     color: "#1d1b29"
 
-                    Chart_base_test {
-                        id: chart_base_test_real
+                    Energy_chart_base {
+                        id: energy_chart
                         width: parent.width - 20
                         height: 400
                         anchors.right: parent.right
@@ -73,7 +73,7 @@ ApplicationWindow {
                     Energy_type_button_row{
                         id: button_row
                         width: right_column.width
-                        anchors.top: chart_base_test_real.bottom
+                        anchors.top: energy_chart.bottom
                         anchors.right: parent.right
                         anchors.left: parent.left
 

@@ -48,19 +48,6 @@ Rectangle {
             max: 10
         }
 
-        // The Y-axis of the chart
-        /*ValueAxis {
-            id: axisYRight
-            gridVisible: true
-
-            // Determines the visible grid's ticks
-            tickCount: 7
-
-            // Set minimum and maximum from the start
-            min: 0
-            max: 10
-        }*/
-
         // The X-axis of the chart
          DateTimeAxis {
             id: axisX
@@ -68,9 +55,6 @@ Rectangle {
             format: "dd.MM hh:mm" //"dd-MM
 
             property real range: 100
-
-           // min: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
-            //max: minValue + sb.valueAt(sb.position) * (maxValue - minValue)
 
             min: new Date(2021, 0, 1, 0, 0, 0)
             max: new Date(2021, 0, 1, 12, 30, 30)
@@ -84,8 +68,6 @@ Rectangle {
 
 
     function clear_previous_data(){
-
-        console.log("CLEARED!")
 
         chart.removeAllSeries()
         chart.dates = []
@@ -104,7 +86,6 @@ Rectangle {
     function parseReceivedData(start_time, cloudiness, max_temp, min_temp,
                                temperature, wind_speed) {
 
-        //console.log(start_time, max_temp, min_temp, temperature)
         // Before parsing: "2021-01-01T01:00:00+0000"
         var parsed_time = start_time.split('T');
 
@@ -134,8 +115,6 @@ Rectangle {
         // Add the X,Y point to the chart
 
         chart.series(0).append(toMsecsSinceEpoch(new_date), temperature)
-
-
 
         // Set the min and max values for both axes.
         axisX.min = chart.dates[0]

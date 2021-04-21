@@ -4,11 +4,10 @@
         <file>Energy_type_button.qml</file>
         <file>Text_input_bar.qml</file>
         <file>Energy_type_button_row.qml</file>
-        <file>Load_data_button.qml</file>
         <file>Save_data_button.qml</file>
         <file>Output_area.qml</file>
         <file>Title_text.qml</file>
-        <file>Chart_base_test.qml</file>
+        <file>Energy_chart_base.qml</file>
         <file>Currently_showing_box.qml</file>
         <file>Window_bar_menu.qml</file>
         <file>New_data_load_popup.qml</file>

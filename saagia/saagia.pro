@@ -46,11 +46,11 @@ DISTFILES += \
     Chart_base_test.qml \
     Currently_showing_box.qml \
     Date_input.qml \
+    Energy_chart_base.qml \
     Energy_type_button.qml \
     Energy_type_button_row.qml \
     Fetch_data_button.qml \
     File_dialog.qml \
-    Load_data_button.qml \
     New_data_load_popup.qml \
     Preferences.qml \
     Preferences_button.qml \
